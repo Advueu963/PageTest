@@ -186,11 +186,6 @@
 <li class="toctree-l2"><a class="reference internal" href="subchapterTest/plot_classifier_comparison.html">Classifier comparison</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="subchapterTestMD/main.html">We have a big chapter with markdown as main page</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="subchapterTestMD/plot_adaboost_regression.html">Decision Tree Regression with AdaBoost Test</a></li>
-<li class="toctree-l2"><a class="reference internal" href="subchapterTestMD/plot_classifier_comparison.html">Classifier comparison Test</a></li>
-</ul>
-</li>
 </ul>
 
     </div>
@@ -441,7 +436,9 @@ If we want to add a new page, we simply add * - file &lt;path/filename&gt; * to 
 Thus when adding content we have the two options</p>
 <section id="option-1-use-mutliple-files">
 <h2>Option 1: Use mutliple files<a class="headerlink" href="#option-1-use-mutliple-files" title="Link to this heading">#</a></h2>
-<p>First put everthing nice and tight into a folder <em><folder></em>. Then create some kind of <mainPage> (markdown or jupyterNotebook does not really matter) for the chapter (probably explaining math stuff). Then create additionally files (probably jupyterBooks but really is not important) and add your content there.<br />
+<p>First put everthing nice and tight into a folder <em><folder></em>.<br />
+Then create some kind of <mainPage> (markdown or jupyterNotebook does not really matter. I recommend jupyterNoteBook) for the chapter (probably explaining math stuff). <br />
+Then create additionally files (probably jupyterBooks but really is not important) and add your content there.<br />
 Then you have to add the following to the _toc.yml file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">file</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">folder</span><span class="o">&gt;/&lt;</span><span class="n">mainPage</span><span class="o">&gt;</span>
   <span class="n">sections</span><span class="p">:</span>
@@ -455,9 +452,7 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
 </section>
 <section id="option-2-use-one-file-not-recommended-i-think">
 <h2>Option 2: Use one file (not recommended I think)<a class="headerlink" href="#option-2-use-one-file-not-recommended-i-think" title="Link to this heading">#</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Just write one big juypter file ()
-</pre></div>
-</div>
+<p>Just write one big juypter file and structure the chapters with <code class="docutils literal notranslate"><span class="pre">#</span></code> indicating the main page name. <code class="docutils literal notranslate"><span class="pre">##</span></code> and <code class="docutils literal notranslate"><span class="pre">###</span></code>for the supchapters.</p>
 </section>
 </section>
 
