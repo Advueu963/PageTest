@@ -181,6 +181,11 @@
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jupyter_try.html">We first need to gather the data</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="subchapterTest/bigChapter.html">We have a big chapter</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="subchapterTest/plot_adaboost_regression.html">Decision Tree Regression with AdaBoost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subchapterTest/plot_classifier_comparison.html">Classifier comparison</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -377,7 +382,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-run-locally">How to run locally</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file">Option 2: Use one file</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -394,12 +406,37 @@ document.write(`
 <h1>Requierements for the webpage to run locally<a class="headerlink" href="#requierements-for-the-webpage-to-run-locally" title="Link to this heading">#</a></h1>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- jupyter-book
 - ghp-import
+- matplotlib
+- numpy
+- (and various other machine learning packages)
 </pre></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="how-to-run-locally">
-<h1>How to run locally<a class="headerlink" href="#how-to-run-locally" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-view-locally-the-website">
+<h1>How to view locally the website<a class="headerlink" href="#how-to-view-locally-the-website" title="Link to this heading">#</a></h1>
 <p>open the <em>_build/htmtl/index.html</em> file from your favorite browser</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-build-a-new-page-and-push-to-public">
+<h1>How to build a new page and push to public<a class="headerlink" href="#how-to-build-a-new-page-and-push-to-public" title="Link to this heading">#</a></h1>
+<p>run <em>build.zsh</em> file
+<span style="color: red">
+General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-just-build-locally-and-not-push-to-public">
+<h1>How to just build locally and not push to public<a class="headerlink" href="#how-to-just-build-locally-and-not-push-to-public" title="Link to this heading">#</a></h1>
+<p>run <em>jupyter-book build .</em> <br />
+On how to run locally see top <br />
+<span style="color: red">
+General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-organize-chapters">
+<h1>How to organize Chapters<a class="headerlink" href="#how-to-organize-chapters" title="Link to this heading">#</a></h1>
+<section id="option-1-use-mutliple-files">
+<h2>Option 1: Use mutliple files<a class="headerlink" href="#option-1-use-mutliple-files" title="Link to this heading">#</a></h2>
+</section>
+<section id="option-2-use-one-file">
+<h2>Option 2: Use one file<a class="headerlink" href="#option-2-use-one-file" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -449,7 +486,14 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-run-locally">How to run locally</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file">Option 2: Use one file</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
