@@ -20,7 +20,14 @@ First a general explanation how jupyter-book works. The _toc.yml file is the org
  If we want to add a new page, we simply add * - file <path/filename> * to the end of the file ( where the other -file commands are). To have supchapters it is important to now that ```#``` are seen as big page titles whereas ```##``` are the "true" supchapters of a page. 
  Thus when adding content we have the two options
 ## Option 1: Use mutliple files
-First put everthing nice and tight into a folder. Then create some kind of main page (markdown or jupyterNotebook does not really matter) for the chapter (probably explaining math stuff). Then create additi
+First put everthing nice and tight into a folder. Then create some kind of main page (markdown or jupyterNotebook does not really matter) for the chapter (probably explaining math stuff). Then create additionally files (probably jupyterBooks but really is not important) and add your content there.\
+Then you have to add the following to the _toc.yml file:
+```
+- file: <folder>/<mainPage>
+  sections:
+  - file: subchapterTestMD/plot_adaboost_regression
+  - file: subchapterTestMD/plot_classifier_comparison
+```
 ## Option 2: Use one file
 
 

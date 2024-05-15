@@ -186,7 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="subchapterTest/plot_classifier_comparison.html">Classifier comparison</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="subchapterTestMD/main.html">We have a big chapter</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="subchapterTestMD/main.html">We have a big chapter with markdown as main page</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="subchapterTestMD/plot_adaboost_regression.html">Decision Tree Regression with AdaBoost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subchapterTestMD/plot_classifier_comparison.html">Classifier comparison</a></li>
 </ul>
@@ -441,7 +441,14 @@ If we want to add a new page, we simply add * - file &lt;path/filename&gt; * to 
 Thus when adding content we have the two options</p>
 <section id="option-1-use-mutliple-files">
 <h2>Option 1: Use mutliple files<a class="headerlink" href="#option-1-use-mutliple-files" title="Link to this heading">#</a></h2>
-<p>First put everthing nice and tight into a folder. Then create some kind of main page (markdown or jupyterNotebook does not really matter) for the chapter (probably explaining math stuff). Then create additi</p>
+<p>First put everthing nice and tight into a folder. Then create some kind of main page (markdown or jupyterNotebook does not really matter) for the chapter (probably explaining math stuff). Then create additionally files (probably jupyterBooks but really is not important) and add your content there.<br />
+Then you have to add the following to the _toc.yml file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">file</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">folder</span><span class="o">&gt;/&lt;</span><span class="n">mainPage</span><span class="o">&gt;</span>
+  <span class="n">sections</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">file</span><span class="p">:</span> <span class="n">subchapterTestMD</span><span class="o">/</span><span class="n">plot_adaboost_regression</span>
+  <span class="o">-</span> <span class="n">file</span><span class="p">:</span> <span class="n">subchapterTestMD</span><span class="o">/</span><span class="n">plot_classifier_comparison</span>
+</pre></div>
+</div>
 </section>
 <section id="option-2-use-one-file">
 <h2>Option 2: Use one file<a class="headerlink" href="#option-2-use-one-file" title="Link to this heading">#</a></h2>

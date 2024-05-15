@@ -1,4 +1,4 @@
-# We have a big chapter
+# We have a big chapter with markdown as main page
 Do some math stuff:
 $$ E = m*c^2$$
 Let us define a preference structure $\succ$ which depicts the choice of jupyterBook vs GitHup Pages. Thus we have
