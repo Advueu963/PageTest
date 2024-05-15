@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -184,6 +184,11 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="subchapterTest/bigChapter.html">We have a big chapter</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="subchapterTest/plot_adaboost_regression.html">Decision Tree Regression with AdaBoost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subchapterTest/plot_classifier_comparison.html">Classifier comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="subchapterTestMD/main.html">We have a big chapter</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="subchapterTestMD/plot_adaboost_regression.html">Decision Tree Regression with AdaBoost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subchapterTestMD/plot_classifier_comparison.html">Classifier comparison</a></li>
 </ul>
 </li>
 </ul>
@@ -431,8 +436,12 @@ General remark: It is important to run this with the activated python enviroment
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-organize-chapters">
 <h1>How to organize Chapters<a class="headerlink" href="#how-to-organize-chapters" title="Link to this heading">#</a></h1>
+<p>First a general explanation how jupyter-book works. The _toc.yml file is the organizer keeping everything at bay and defining the structure.<br />
+If we want to add a new page, we simply add * - file &lt;path/filename&gt; * to the end of the file ( where the other -file commands are). To have supchapters it is important to now that <code class="docutils literal notranslate"><span class="pre">#</span></code> are seen as big page titles whereas <code class="docutils literal notranslate"><span class="pre">##</span></code> are the “true” supchapters of a page.
+Thus when adding content we have the two options</p>
 <section id="option-1-use-mutliple-files">
 <h2>Option 1: Use mutliple files<a class="headerlink" href="#option-1-use-mutliple-files" title="Link to this heading">#</a></h2>
+<p>First put everthing nice and tight into a folder. Then create some kind of main page (markdown or jupyterNotebook does not really matter) for the chapter (probably explaining math stuff). Then create additi</p>
 </section>
 <section id="option-2-use-one-file">
 <h2>Option 2: Use one file<a class="headerlink" href="#option-2-use-one-file" title="Link to this heading">#</a></h2>

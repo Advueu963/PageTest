@@ -16,8 +16,11 @@ On how to run locally see top \
 <span style="color: red">
 General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span>
 # How to organize Chapters
+First a general explanation how jupyter-book works. The _toc.yml file is the organizer keeping everything at bay and defining the structure.\
+ If we want to add a new page, we simply add * - file <path/filename> * to the end of the file ( where the other -file commands are). To have supchapters it is important to now that ```#``` are seen as big page titles whereas ```##``` are the "true" supchapters of a page. 
+ Thus when adding content we have the two options
 ## Option 1: Use mutliple files
-
+First put everthing nice and tight into a folder. Then create some kind of main page (markdown or jupyterNotebook does not really matter) for the chapter (probably explaining math stuff). Then create additi
 ## Option 2: Use one file
 
 
