@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Requierements for the webpage to run locally via pip&lt;3&gt; install &#8212; My sample book</title>
+    <title>Requierements &#8212; My sample book</title>
   
   
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -405,7 +405,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Requierements for the webpage to run locally via pip<3> install</h1>
+    <h1>Requierements</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -415,11 +415,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally via <code class="docutils literal notranslate"><span class="pre">pip&lt;3&gt;</span> <span class="pre">install</span></code></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
 </ul>
@@ -436,32 +436,28 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="requierements-for-the-webpage-to-run-locally-via-pip-3-install">
-<h1>Requierements for the webpage to run locally via <code class="docutils literal notranslate"><span class="pre">pip&lt;3&gt;</span> <span class="pre">install</span></code><a class="headerlink" href="#requierements-for-the-webpage-to-run-locally-via-pip-3-install" title="Link to this heading">#</a></h1>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- jupyter-book
-- ghp-import
-- matplotlib
-- numpy
-- (and various other machine learning packages)
+  <section class="tex2jax_ignore mathjax_ignore" id="requierements">
+<h1>Requierements<a class="headerlink" href="#requierements" title="Link to this heading">#</a></h1>
+<p>Please see a detailed package list in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-just-build-locally-and-not-push-to-public">
-<h1>How to just build locally and not push to public<a class="headerlink" href="#how-to-just-build-locally-and-not-push-to-public" title="Link to this heading">#</a></h1>
-<p>run</p>
+<h1>How to just build locally and not push to public?<a class="headerlink" href="#how-to-just-build-locally-and-not-push-to-public" title="Link to this heading">#</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>On how to run locally see top <br />
+<p>On how to run locally see below <br />
 <span style="color: red">
 General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-view-locally-the-website">
-<h1>How to view locally the website<a class="headerlink" href="#how-to-view-locally-the-website" title="Link to this heading">#</a></h1>
-<p>open the line after <code class="docutils literal notranslate"><span class="pre">build/htmtl/index.html</span></code> in the terminal from your favorite browser</p>
+<h1>How to view locally the website?<a class="headerlink" href="#how-to-view-locally-the-website" title="Link to this heading">#</a></h1>
+<p>Please open/copy the link line after <code class="docutils literal notranslate"><span class="pre">build/htmtl/index.html</span></code> in the terminal from your favorite browser.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-build-a-new-page-and-push-to-public">
-<h1>How to build a new page and push to public<a class="headerlink" href="#how-to-build-a-new-page-and-push-to-public" title="Link to this heading">#</a></h1>
+<h1>How to build a new page and push to public?<a class="headerlink" href="#how-to-build-a-new-page-and-push-to-public" title="Link to this heading">#</a></h1>
 <p>run the following commands in the terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">build</span><span class="o">.</span><span class="n">zsh</span>
 <span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">zsh</span>
@@ -472,10 +468,13 @@ General remark: It is important to run this with the activated python enviroment
 General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-organize-chapters">
-<h1>How to organize Chapters<a class="headerlink" href="#how-to-organize-chapters" title="Link to this heading">#</a></h1>
-<p>First a general explanation how jupyter-book works. The _toc.yml file is the organizer keeping everything at bay and defining the structure.<br />
-If we want to add a new page, we simply add * - file &lt;path/filename&gt; * to the end of the file ( where the other -file commands are). To have supchapters it is important to now that <code class="docutils literal notranslate"><span class="pre">#</span></code> are seen as big page titles whereas <code class="docutils literal notranslate"><span class="pre">##</span></code> are the “true” supchapters of a page.
-Thus when adding content we have the two options</p>
+<h1>How to organize Chapters?<a class="headerlink" href="#how-to-organize-chapters" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>First a general explanation how jupyter-book works. The <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> file is the organizer keeping everything at bay and defining the structure.\</p></li>
+<li><p>If we want to add a new chapter page, we simply add * - file &lt;path/filename&gt; * to the end of the file (where the other -file commands are).</p></li>
+<li><p>To have supchapters it is important to now that <code class="docutils literal notranslate"><span class="pre">#</span></code> are seen as big page titles whereas <code class="docutils literal notranslate"><span class="pre">##</span></code> are the “true” supchapters of a page.</p></li>
+</ol>
+<p>Thus when adding content we have the two options:</p>
 <section id="option-1-use-mutliple-files">
 <h2>Option 1: Use mutliple files<a class="headerlink" href="#option-1-use-mutliple-files" title="Link to this heading">#</a></h2>
 <p>First put everthing nice and tight into a folder <em><folder></em>.<br />
@@ -544,11 +543,11 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally via <code class="docutils literal notranslate"><span class="pre">pip&lt;3&gt;</span> <span class="pre">install</span></code></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
 </ul>
@@ -593,8 +592,6 @@ By The Jupyter Book Community
     
 <div class="extra_footer">
   <section>
-        {{ content }}
-
         <div style="margin-top: 50px;" id="disqus_thread"></div>
 
         <script>
@@ -606,7 +603,7 @@ By The Jupyter Book Community
         })();
         </script>
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </section>  # Will be displayed underneath the footer.
+    </section> 
 
 </div>
   </div>
