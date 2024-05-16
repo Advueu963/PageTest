@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Requierements for the webpage to run locally &#8212; My sample book</title>
+    <title>Requierements for the webpage to run locally via pip&lt;3&gt; install &#8212; My sample book</title>
   
   
   
@@ -191,7 +191,9 @@
 <li class="toctree-l1"><a class="reference internal" href="chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-modelingAproxUncertainty/intro.html">Modelling Approximation Uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter-probabilityEstimation/intro.html">Probability Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter-pe-calibration/intro.html">Probability Estimation via Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter-pe-ensemble/intro.html">Probability Estimation via Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter-pe-scoring/intro.html">Probability Estimation via Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
@@ -403,7 +405,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Requierements for the webpage to run locally</h1>
+    <h1>Requierements for the webpage to run locally via pip<3> install</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -413,10 +415,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally via <code class="docutils literal notranslate"><span class="pre">pip&lt;3&gt;</span> <span class="pre">install</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
@@ -434,8 +436,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="requierements-for-the-webpage-to-run-locally">
-<h1>Requierements for the webpage to run locally<a class="headerlink" href="#requierements-for-the-webpage-to-run-locally" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="requierements-for-the-webpage-to-run-locally-via-pip-3-install">
+<h1>Requierements for the webpage to run locally via <code class="docutils literal notranslate"><span class="pre">pip&lt;3&gt;</span> <span class="pre">install</span></code><a class="headerlink" href="#requierements-for-the-webpage-to-run-locally-via-pip-3-install" title="Link to this heading">#</a></h1>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- jupyter-book
 - ghp-import
 - matplotlib
@@ -444,21 +446,28 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="how-to-view-locally-the-website">
-<h1>How to view locally the website<a class="headerlink" href="#how-to-view-locally-the-website" title="Link to this heading">#</a></h1>
-<p>open the <em>_build/htmtl/index.html</em> file from your favorite browser</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="how-to-build-a-new-page-and-push-to-public">
-<h1>How to build a new page and push to public<a class="headerlink" href="#how-to-build-a-new-page-and-push-to-public" title="Link to this heading">#</a></h1>
-<p>run <em>build.zsh</em> file <br />
-The changes will only be made public if <em>build.zsh</em> is called in the git <em>main</em> branch.
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-just-build-locally-and-not-push-to-public">
+<h1>How to just build locally and not push to public<a class="headerlink" href="#how-to-just-build-locally-and-not-push-to-public" title="Link to this heading">#</a></h1>
+<p>run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>On how to run locally see top <br />
 <span style="color: red">
 General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="how-to-just-build-locally-and-not-push-to-public">
-<h1>How to just build locally and not push to public<a class="headerlink" href="#how-to-just-build-locally-and-not-push-to-public" title="Link to this heading">#</a></h1>
-<p>run <em>jupyter-book build .</em> <br />
-On how to run locally see top <br />
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-view-locally-the-website">
+<h1>How to view locally the website<a class="headerlink" href="#how-to-view-locally-the-website" title="Link to this heading">#</a></h1>
+<p>open the line after <code class="docutils literal notranslate"><span class="pre">build/htmtl/index.html</span></code> in the terminal from your favorite browser</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-build-a-new-page-and-push-to-public">
+<h1>How to build a new page and push to public<a class="headerlink" href="#how-to-build-a-new-page-and-push-to-public" title="Link to this heading">#</a></h1>
+<p>run the following commands in the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">build</span><span class="o">.</span><span class="n">zsh</span>
+<span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">zsh</span>
+</pre></div>
+</div>
+<p>The changes will only be made public if <em>build.zsh</em> is called in the git <em>main</em> branch.
 <span style="color: red">
 General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
 </section>
@@ -535,10 +544,10 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements for the webpage to run locally via <code class="docutils literal notranslate"><span class="pre">pip&lt;3&gt;</span> <span class="pre">install</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
