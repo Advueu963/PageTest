@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Requierements &#8212; My sample book</title>
+    <title>Requirements &#8212; My sample book</title>
   
   
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -193,7 +193,7 @@
 <li class="toctree-l1"><a class="reference internal" href="chapter-modelingAproxUncertainty/intro.html">Modelling Approximation Uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-pe-calibration/intro.html">Probability Estimation via Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-pe-ensemble/intro.html">Probability Estimation via Ensemble</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter-pe-scoring/intro.html">Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
@@ -405,7 +405,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Requierements</h1>
+    <h1>Requirements</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -415,15 +415,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requirements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-without-pushing-to-public">How to just build locally without pushing to public?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public-with-gihub-workflow">How to build a new page and push to public with GiHub Workflow?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-explanation-what-is-happening">Technical explanation what is happening:</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-uniform-style-for-the-documentation">What is the uniform style for the documentation?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
 
             </nav>
@@ -436,36 +441,54 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="requierements">
-<h1>Requierements<a class="headerlink" href="#requierements" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h1>
 <p>Please see a detailed package list in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="how-to-just-build-locally-and-not-push-to-public">
-<h1>How to just build locally and not push to public?<a class="headerlink" href="#how-to-just-build-locally-and-not-push-to-public" title="Link to this heading">#</a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">.</span>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-just-build-locally-without-pushing-to-public">
+<h1>How to just build locally without pushing to public?<a class="headerlink" href="#how-to-just-build-locally-without-pushing-to-public" title="Link to this heading">#</a></h1>
+<p>Run the following command on your local branch !!<strong>not main</strong>!!.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">build</span><span class="o">.</span><span class="n">zsh</span>
 </pre></div>
 </div>
-<p>On how to run locally see below <br />
+<p>Alternatively:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">clean</span> <span class="o">.</span>
+<span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">.</span>
+</pre></div>
+</div>
 <span style="color: red">
-General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
+General remark: It is important to run this with the activated python environment you use to program the notebooks.</span>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-view-locally-the-website">
 <h1>How to view locally the website?<a class="headerlink" href="#how-to-view-locally-the-website" title="Link to this heading">#</a></h1>
 <p>Please open/copy the link line after <code class="docutils literal notranslate"><span class="pre">build/htmtl/index.html</span></code> in the terminal from your favorite browser.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="how-to-build-a-new-page-and-push-to-public">
-<h1>How to build a new page and push to public?<a class="headerlink" href="#how-to-build-a-new-page-and-push-to-public" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-build-a-new-page-and-push-to-public-with-gihub-workflow">
+<h1>How to build a new page and push to public with GiHub Workflow?<a class="headerlink" href="#how-to-build-a-new-page-and-push-to-public-with-gihub-workflow" title="Link to this heading">#</a></h1>
 <p>run the following commands in the terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">build</span><span class="o">.</span><span class="n">zsh</span>
 <span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">zsh</span>
 </pre></div>
 </div>
-<p>The changes will only be made public if <em>build.zsh</em> is called in the git <em>main</em> branch.
+<p>The changes will only be made public if <em>build.zsh</em> is called in the git <em>main</em> branch. \</p>
+<section id="technical-explanation-what-is-happening">
+<h2>Technical explanation what is happening:<a class="headerlink" href="#technical-explanation-what-is-happening" title="Link to this heading">#</a></h2>
+<p>The script runs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">clean</span> <span class="o">.</span>
+<span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>to build the book. Then the command <code class="docutils literal notranslate"><span class="pre">ghp-import</span> <span class="pre">-n</span> <span class="pre">-p</span> <span class="pre">-f</span> <span class="pre">_build/html</span></code> is executed.
+This will push the entire html files in <em>_build/html</em> to the <em>gh-pages</em> branch and GitHub will update the webpage based on that branch. <br />
+But this commands <strong>deletes</strong> everything that has prior been on the <em>gh-pages</em> branch. <br />
+That is the reason why I have written the <em>build.zsh</em> to only run the command when on the main branch.
+So our goal is to always have the desired content we want online, to be on the main branch.</p>
 <span style="color: red">
-General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span></p>
+General remark: It is important to run this with the activated python enviroment you use to program the notebooks.</span>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-organize-chapters">
 <h1>How to organize Chapters?<a class="headerlink" href="#how-to-organize-chapters" title="Link to this heading">#</a></h1>
@@ -495,6 +518,32 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
 <h2>Option 2: Use one file (not recommended I think)<a class="headerlink" href="#option-2-use-one-file-not-recommended-i-think" title="Link to this heading">#</a></h2>
 <p>Just write one big juypter file and structure the chapters with <code class="docutils literal notranslate"><span class="pre">#</span></code> indicating the main page name. <code class="docutils literal notranslate"><span class="pre">##</span></code> and <code class="docutils literal notranslate"><span class="pre">###</span></code>for the supchapters.</p>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-the-uniform-style-for-the-documentation">
+<h1>What is the uniform style for the documentation?<a class="headerlink" href="#what-is-the-uniform-style-for-the-documentation" title="Link to this heading">#</a></h1>
+<p>At least one example each chapter?</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="citation">
+<h1>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h1>
+<p>If you found this toolbox helpful, please cite the following <a class="reference external" href="https://link.springer.com/article/10.1007/s10994-021-05946-3"><em>Paper</em></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">DBLP</span><span class="p">:</span><span class="n">journals</span><span class="o">/</span><span class="n">ml</span><span class="o">/</span><span class="n">HullermeierW21</span><span class="p">,</span>
+  <span class="n">author</span>       <span class="o">=</span> <span class="p">{</span><span class="n">Eyke</span> <span class="n">H</span><span class="p">{</span>\<span class="s2">&quot;</span><span class="si">{u}</span><span class="s2">}llermeier and</span>
+                  <span class="n">Willem</span> <span class="n">Waegeman</span><span class="p">},</span>
+  <span class="n">title</span>        <span class="o">=</span> <span class="p">{</span><span class="n">Aleatoric</span> <span class="ow">and</span> <span class="n">epistemic</span> <span class="n">uncertainty</span> <span class="ow">in</span> <span class="n">machine</span> <span class="n">learning</span><span class="p">:</span> <span class="n">an</span> <span class="n">introduction</span>
+                  <span class="n">to</span> <span class="n">concepts</span> <span class="ow">and</span> <span class="n">methods</span><span class="p">},</span>
+  <span class="n">journal</span>      <span class="o">=</span> <span class="p">{</span><span class="n">Mach</span><span class="o">.</span> <span class="n">Learn</span><span class="o">.</span><span class="p">},</span>
+  <span class="n">volume</span>       <span class="o">=</span> <span class="p">{</span><span class="mi">110</span><span class="p">},</span>
+  <span class="n">number</span>       <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">},</span>
+  <span class="n">pages</span>        <span class="o">=</span> <span class="p">{</span><span class="mi">457</span><span class="o">--</span><span class="mi">506</span><span class="p">},</span>
+  <span class="n">year</span>         <span class="o">=</span> <span class="p">{</span><span class="mi">2021</span><span class="p">},</span>
+  <span class="n">url</span>          <span class="o">=</span> <span class="p">{</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">doi</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="mf">10.1007</span><span class="o">/</span><span class="n">s10994</span><span class="o">-</span><span class="mi">021</span><span class="o">-</span><span class="mi">05946</span><span class="o">-</span><span class="mi">3</span><span class="p">},</span>
+  <span class="n">doi</span>          <span class="o">=</span> <span class="p">{</span><span class="mf">10.1007</span><span class="o">/</span><span class="n">S10994</span><span class="o">-</span><span class="mi">021</span><span class="o">-</span><span class="mi">05946</span><span class="o">-</span><span class="mi">3</span><span class="p">},</span>
+  <span class="n">timestamp</span>    <span class="o">=</span> <span class="p">{</span><span class="n">Fri</span><span class="p">,</span> <span class="mi">14</span> <span class="n">May</span> <span class="mi">2021</span> <span class="mi">08</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">53</span> <span class="o">+</span><span class="mi">0200</span><span class="p">},</span>
+  <span class="n">biburl</span>       <span class="o">=</span> <span class="p">{</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dblp</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">rec</span><span class="o">/</span><span class="n">journals</span><span class="o">/</span><span class="n">ml</span><span class="o">/</span><span class="n">HullermeierW21</span><span class="o">.</span><span class="n">bib</span><span class="p">},</span>
+  <span class="n">bibsource</span>    <span class="o">=</span> <span class="p">{</span><span class="n">dblp</span> <span class="n">computer</span> <span class="n">science</span> <span class="n">bibliography</span><span class="p">,</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dblp</span><span class="o">.</span><span class="n">org</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -543,15 +592,20 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requierements</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-and-not-push-to-public">How to just build locally and not push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Requirements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-just-build-locally-without-pushing-to-public">How to just build locally without pushing to public?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-view-locally-the-website">How to view locally the website?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public">How to build a new page and push to public?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-build-a-new-page-and-push-to-public-with-gihub-workflow">How to build a new page and push to public with GiHub Workflow?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-explanation-what-is-happening">Technical explanation what is happening:</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-organize-chapters">How to organize Chapters?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-use-mutliple-files">Option 1: Use mutliple files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-uniform-style-for-the-documentation">What is the uniform style for the documentation?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
 
   </nav></div>

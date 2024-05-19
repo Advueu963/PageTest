@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -57,7 +57,7 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'subchapterTest/bigChapter';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-modelingAproxUncertainty/intro.html">Modelling Approximation Uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/intro.html">Probability Estimation via Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/intro.html">Probability Estimation via Ensemble</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/intro.html">Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
@@ -455,8 +455,8 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[E = mc^2\]</div>
 <p>Now let us define some complicated stuff</p>
-<div class="amsmath math notranslate nohighlight" id="equation-27096fb6-2592-40e1-9712-ee980defcc85">
-<span class="eqno">(1)<a class="headerlink" href="#equation-27096fb6-2592-40e1-9712-ee980defcc85" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c7a8d765-5a89-4aa5-be0f-803ba93a5c01">
+<span class="eqno">(1)<a class="headerlink" href="#equation-c7a8d765-5a89-4aa5-be0f-803ba93a5c01" title="Permalink to this equation">#</a></span>\[\begin{equation}
  m * x + t = y
 \end{equation}\]</div>
 <div class="admonition note">

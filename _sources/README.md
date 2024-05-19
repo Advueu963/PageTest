@@ -1,31 +1,47 @@
-# Requierements 
+# Requirements 
 Please see a detailed package list in the `requirements.txt`. 
 ```
 pip install -r requirements.txt
 ```
 
-# How to just build locally and not push to public?
+# How to just build locally without pushing to public?
+Run the following command on your local branch !!**not main**!!.
 ```
+bash build.zsh
+```
+Alternatively:
+```
+jupyter-book clean .
 jupyter-book build .
 ```
-
-On how to run locally see below \
 <span style="color: red">
-General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span>
+General remark: It is important to run this with the activated python environment you use to program the notebooks.</span>
 
 # How to view locally the website?
 Please open/copy the link line after `build/htmtl/index.html` in the terminal from your favorite browser.
 
-# How to build a new page and push to public?
+# How to build a new page and push to public with GiHub Workflow?
 run the following commands in the terminal:
 ```
 chmod +x build.zsh
 ./build.zsh
 ``` 
 
-The changes will only be made public if *build.zsh* is called in the git *main* branch.
+The changes will only be made public if *build.zsh* is called in the git *main* branch. \
+## Technical explanation what is happening:
+The script runs 
+``` 
+jupyter-book clean .
+jupyter-book build .
+```
+to build the book. Then the command ```ghp-import -n -p -f _build/html``` is executed.
+This will push the entire html files in *_build/html* to the *gh-pages* branch and GitHub will update the webpage based on that branch. \
+But this commands **deletes** everything that has prior been on the *gh-pages* branch. \
+That is the reason why I have written the *build.zsh* to only run the command when on the main branch.
+So our goal is to always have the desired content we want online, to be on the main branch.
+
 <span style="color: red">
-General remark: It is important to run this with the activated python enviroment in the terminal you use to program the jupyternotebooks.</span>
+General remark: It is important to run this with the activated python enviroment you use to program the notebooks.</span>
 
 # How to organize Chapters?
 1. First a general explanation how jupyter-book works. The `_toc.yml` file is the organizer keeping everything at bay and defining the structure.\
@@ -50,3 +66,28 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
 
 ## Option 2: Use one file (not recommended I think)
 Just write one big juypter file and structure the chapters with ```#``` indicating the main page name. ```##``` and ```###```for the supchapters.
+
+# What is the uniform style for the documentation?
+At least one example each chapter?
+
+# Citation
+If you found this toolbox helpful, please cite the following [_Paper_](https://link.springer.com/article/10.1007/s10994-021-05946-3):
+
+```
+@article{DBLP:journals/ml/HullermeierW21,
+  author       = {Eyke H{\"{u}}llermeier and
+                  Willem Waegeman},
+  title        = {Aleatoric and epistemic uncertainty in machine learning: an introduction
+                  to concepts and methods},
+  journal      = {Mach. Learn.},
+  volume       = {110},
+  number       = {3},
+  pages        = {457--506},
+  year         = {2021},
+  url          = {https://doi.org/10.1007/s10994-021-05946-3},
+  doi          = {10.1007/S10994-021-05946-3},
+  timestamp    = {Fri, 14 May 2021 08:31:53 +0200},
+  biburl       = {https://dblp.org/rec/journals/ml/HullermeierW21.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+```
