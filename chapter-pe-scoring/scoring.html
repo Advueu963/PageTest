@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-scoring/scoring';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -462,7 +464,22 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-via-scoring">
 <h1>Probability Estimation via Scoring<a class="headerlink" href="#probability-estimation-via-scoring" title="Link to this heading">#</a></h1>
-<section id="logarithmic-scoring-rule">
+<p>There are various methods in machine learning for inducing probabilistic predictors.
+These are hypotheses <span class="math notranslate nohighlight">\(h\)</span> that do not merely output point predictions <span class="math notranslate nohighlight">\(h(\vec{x}) \in \mathcal{Y}\)</span>,
+i.e., elements of the output space <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>,
+but probability estimates <span class="math notranslate nohighlight">\(p_h(\cdot \vert \vec{x}) =  p(\cdot \vert \vec{x}, h)\)</span>,
+i.e., complete probability distributions on <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>.
+In the case of classification,
+this means predicting a single (conditional) probability <span class="math notranslate nohighlight">\(p_h(y \vert \vec{x}) = p(y \vert \vec{x} , h)\)</span> for each class <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>,
+whereas in regression, <span class="math notranslate nohighlight">\(p( \cdot \vert \vec{x}, h)\)</span> is a density function on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.
+Such predictors can be learned in a discriminative way,
+i.e., in the form of a mapping <span class="math notranslate nohighlight">\(\vec{x} \mapsto p( \cdot \vert \vec{x})\)</span>,
+or in a generative way, which essentially means learning a joint distribution on <span class="math notranslate nohighlight">\(\mathcal{X} \times \mathcal{Y}\)</span>.
+Moreover, the approaches can be parametric (assuming specific parametric families of probability distributions) or non-parametric.
+Well-known examples include classical statistical methods such as logistic and linear regression,
+Bayesian approaches such as Bayesian networks and Gaussian processes, <!-- (cf.\ Section \ref{sec:gp}),  -->
+as well as various techniques in the realm of (deep) neural networks.</p>
+<!-- (cf.\ Section \ref{sec:m1}).  --><section id="logarithmic-scoring-rule">
 <h2>1. Logarithmic Scoring Rule<a class="headerlink" href="#logarithmic-scoring-rule" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
