@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/asyncio/base_events.py", line 685, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+def hartley_measure(A):
+    return np.log2(len(A))
+
+A = {1, 2, 3, 4}
+hartley_measure(A)
+
+set_sizes = range(1, 11)
+hartley_values = [hartley_measure(set(range(1, size + 1))) for size in set_sizes]
+
+plt.figure(figsize=(8, 4))
+plt.plot(set_sizes, hartley_values, marker='o')
+plt.title('Hartley Measure')
+plt.xlabel('Set Size')
+plt.ylabel('Hartley Measure (log2)')
+plt.grid(True)
+plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[4], line 5[0m
+[1;32m      2[0m     [38;5;28;01mreturn[39;00m np[38;5;241m.[39mlog2([38;5;28mlen[39m(A))
+[1;32m      4[0m A [38;5;241m=[39m {[38;5;241m1[39m, [38;5;241m2[39m, [38;5;241m3[39m, [38;5;241m4[39m}
+[0;32m----> 5[0m hartley_measure(A)
+[1;32m      7[0m set_sizes [38;5;241m=[39m [38;5;28mrange[39m([38;5;241m1[39m, [38;5;241m11[39m)
+[1;32m      8[0m hartley_values [38;5;241m=[39m [hartley_measure([38;5;28mset[39m([38;5;28mrange[39m([38;5;241m1[39m, size [38;5;241m+[39m [38;5;241m1[39m))) [38;5;28;01mfor[39;00m size [38;5;129;01min[39;00m set_sizes]
+
+Cell [0;32mIn[4], line 2[0m, in [0;36mhartley_measure[0;34m(A)[0m
+[1;32m      1[0m [38;5;28;01mdef[39;00m [38;5;21mhartley_measure[39m(A):
+[0;32m----> 2[0m     [38;5;28;01mreturn[39;00m np[38;5;241m.[39mlog2([38;5;28mlen[39m(A))
+
+[0;31mNameError[0m: name 'np' is not defined
+
