@@ -183,11 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/intro.html">Modelling Approximation Uncertainty</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/Version-space-learning.html">Version Space Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/Bayesian-inference.html">Bayesian Inference</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation via Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation via Ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
@@ -197,7 +193,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/intro.html">Deep neural network ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Conformal prediction for classification</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Conformal prediction for classification</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
@@ -463,7 +459,7 @@ document.write(`
 <p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1896" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">BHV14</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1897" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">SV08</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1986" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">VGS03</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
 Given a sequence of training observations and a new query <span class="math notranslate nohighlight">\(\vec{x}_{N+1}\)</span> (which we denoted by <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> before and in the following plot is marked red) with unknown outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-cpseq">
-<span class="eqno">(3)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
 (\vec{x}_1, y_1), \,  (\vec{x}_2, y_2), \ldots ,  (\vec{x}_N, y_N), \, (\vec{x}_{N+1}, \bullet)
 \enspace ,
 \]</div>
@@ -504,7 +500,7 @@ Given a sequence of training observations and a new query <span class="math notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03975692a08835004aff08c232e93d416bc5ceeb72cc7b66f70a9518f7bec26b.png" src="../_images/03975692a08835004aff08c232e93d416bc5ceeb72cc7b66f70a9518f7bec26b.png" />
+<img alt="../_images/f6285c04f85d9512794e100d6395e1eab826a857ddf43032538f9125a6d1129b.png" src="../_images/f6285c04f85d9512794e100d6395e1eab826a857ddf43032538f9125a6d1129b.png" />
 </div>
 </div>
 <p>the basic idea is to hypothetically replace <span class="math notranslate nohighlight">\(\bullet\)</span> by each candidate, i.e., to test the hypothesis <span class="math notranslate nohighlight">\(y_{N+1} = y\)</span> for all <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>. Only those outcomes <span class="math notranslate nohighlight">\(y\)</span> for which this hypothesis can be rejected at a predefined level of confidence are excluded, while those for which the hypothesis cannot be rejected are collected to form the prediction set or <em>prediction region</em> <span class="math notranslate nohighlight">\(Y^\epsilon \subseteq \mathcal{Y}\)</span>. The construction of a set-valued prediction <span class="math notranslate nohighlight">\(Y^\epsilon = Y^\epsilon(\vec{x}_{n+1})\)</span> that is guaranteed to cover the true outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span> with a given probability <span class="math notranslate nohighlight">\(1- \epsilon\)</span> (for example 95,%), instead of producing a point prediction <span class="math notranslate nohighlight">\(\hat{y}_{N+1} \in \mathcal{Y}\)</span>, is the basic idea of conformal prediction. Here, <span class="math notranslate nohighlight">\(\epsilon \in (0,1)\)</span> is a pre-specified level of significance. In the case of classification, <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> is a subset of the set of classes <span class="math notranslate nohighlight">\(\mathcal{Y} = \{ y_1, \ldots , y_K \}\)</span>, whereas in regression, a prediction region is commonly represented in terms of an interval<a class="footnote-reference brackets" href="#regressioncase" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
@@ -612,10 +608,10 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/d7edb1131c76daf6853d639cfbef9bf3b6895edae1b3130db1f20fd410a3affe.png" src="../_images/d7edb1131c76daf6853d639cfbef9bf3b6895edae1b3130db1f20fd410a3affe.png" />
+<img alt="../_images/e9091c930d14f16f11ea03682a5c95d1dfdd174bceb565d4c74b363f30459034.png" src="../_images/e9091c930d14f16f11ea03682a5c95d1dfdd174bceb565d4c74b363f30459034.png" />
 </div>
 </div>
-<p>Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(3)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 0), yields a sequence of scores</p>
+<p>Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(5)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 0), yields a sequence of scores</p>
 <div class="math notranslate nohighlight">
 \[
 \alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1} \enspace .
@@ -743,30 +739,16 @@ The complete <span class="math notranslate nohighlight">\(Y\epsilon\)</span> can
 </div>
 </div>
 </div>
-<p>If a definite choice (point prediction) <span class="math notranslate nohighlight">\(\hat{y}\)</span> has to be made, it is natural to pick the <span class="math notranslate nohighlight">\(y_i\)</span> with the highest <span class="math notranslate nohighlight">\(p\)</span>-value. The value <span class="math notranslate nohighlight">\(p_i\)</span> itself is then a natural measure of credibility, since the larger (closer to 1) this value, the more likely the prediction is correct. Note that the value also corresponds to the largest significance level <span class="math notranslate nohighlight">\(\epsilon\)</span> for which the prediction region <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> would be empty (since all candidates would be rejected). In other words, it is a degree to which <span class="math notranslate nohighlight">\(y_i\)</span> is indeed a plausible candidate that cannot be excluded. Another question one may ask is to what extent <span class="math notranslate nohighlight">\(y_i\)</span> is the unique candidate of that kind, i.e., to what extent other candidates can indeed be excluded. This can be quantified in terms of the greatest <span class="math notranslate nohighlight">\(1 - \epsilon\)</span> for which <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> is the singleton set <span class="math notranslate nohighlight">\(\{ y_i \}\)</span>, that is, <span class="math notranslate nohighlight">\(1\)</span> minus the second-highest <span class="math notranslate nohighlight">\(p\)</span>-value. Besides, other methods for quantifying the uncertainty of a point prediction in the context of conformal prediction have been proposed (<span id="id6">Linusson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="H. Linusson, U. Johansson, H. Boström, and T. Löfström. Reliable confidence predictions using conformal prediction. In Proc. PAKDD, 20th Pacific-Asia Conference on Knowledge Discovery and Data Mining. Auckland, New Zealand, 2016.">LJBostromLofstrom16</a>]</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_pointPrediction</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
-    <span class="n">y_hat</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">probabilities</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
-    <span class="n">sorted_probabilities</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">probabilities</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credability: &quot;</span><span class="p">,</span> <span class="n">sorted_probabilities</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confidence: &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span> <span class="n">sorted_probabilities</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">y_hat</span>
-<span class="n">get_pointPrediction</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Credability:  0.13861386138613863
-Confidence:  0.8811881188118812
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div align="justify">
+<p>If a definite choice (point prediction) <span class="math notranslate nohighlight">\(\hat{y}\)</span> has to be made, it is natural to pick the <span class="math notranslate nohighlight">\(y_i\)</span> with the highest <span class="math notranslate nohighlight">\(p\)</span>-value. The value <span class="math notranslate nohighlight">\(p_i\)</span> itself is then a natural measure of credibility, since the larger (closer to 1) this value, the more likely the prediction is correct. Note that the value also corresponds to the largest significance level <span class="math notranslate nohighlight">\(\epsilon\)</span> for which the prediction region <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> would be empty (since all candidates would be rejected). In other words, it is a degree to which <span class="math notranslate nohighlight">\(y_i\)</span> is indeed a plausible candidate that cannot be excluded. Another question one may ask is to what extent <span class="math notranslate nohighlight">\(y_i\)</span> is the unique candidate of that kind, i.e., to what extent other candidates can indeed be excluded. This can be quantified in terms of the greatest <span class="math notranslate nohighlight">\(1 - \epsilon\)</span> for which <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> is the singleton set <span class="math notranslate nohighlight">\(\{ y_i \}\)</span>, that is, <span class="math notranslate nohighlight">\(1\)</span> minus the second-highest <span class="math notranslate nohighlight">\(p\)</span>-value. Besides, other methods for quantifying the uncertainty of a point prediction in the context of conformal prediction have been proposed (<span id="id6">Linusson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="H. Linusson, U. Johansson, H. Boström, and T. Löfström. Reliable confidence predictions using conformal prediction. In Proc. PAKDD, 20th Pacific-Asia Conference on Knowledge Discovery and Data Mining. Auckland, New Zealand, 2016.">LJBostromLofstrom16</a>]</span>).</p>
 <p>With its main concern of constructing valid prediction regions, conformal prediction differs from most other machine learning methods, which produce point predictions <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, whether equipped with a degree of uncertainty or not. In a sense, conformal prediction can even be seen as being orthogonal: It predefines the degree of uncertainty (level of confidence) and adjusts its prediction correspondingly, rather than the other way around.</p>
 </div><hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
