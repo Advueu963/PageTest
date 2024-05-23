@@ -194,6 +194,7 @@
 <li class="toctree-l1"><a class="reference internal" href="chapter-conformel_classification/intro.html">Conformal prediction for classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-conformel_regression/intro.html">Conformal prediction for regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-setValued_utilityMaximization/intro.html">Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
     </div>
@@ -418,7 +419,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-uniform-style-for-the-documentation">What is the uniform style for the documentation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-uniform-style-for-the-documentation">What is the uniform style for the documentation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo">TODO:</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
             </nav>
@@ -517,14 +521,64 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
 For addtional subtitles, we add one more <code class="docutils literal notranslate"><span class="pre">#</span></code> then (i.e., <code class="docutils literal notranslate"><span class="pre">##</span></code> and <code class="docutils literal notranslate"><span class="pre">###</span></code>, better no <code class="docutils literal notranslate"><span class="pre">####</span></code> for simplicity).</p>
 <p>Note that we do <strong>not</strong> add <code class="docutils literal notranslate"><span class="pre">#</span></code> for the content in each Markdown cell,
 which means, we create pure <code class="docutils literal notranslate"><span class="pre">latex-like</span></code> texts which align with the survey paper.</p>
+<p>For those originally appear in Latex <code class="docutils literal notranslate"><span class="pre">.tex</span></code> format,
+we replace them into the Markdown format (See examples as below).</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Latex</p></th>
+<th class="head text-center"><p>Markdown</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>\emph{text}</p></td>
+<td class="text-center"><p>*text*</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>``text’’</p></td>
+<td class="text-center"><p>“text”</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>\given</p></td>
+<td class="text-center"><p>\vert</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>\citep{gnei_sp05}</p></td>
+<td class="text-center"><p>(<span id="id1">Gneiting and Raftery [<a class="reference internal" href="references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>\citet{gnei_sp05}</p></td>
+<td class="text-center"><p><span id="id2">Gneiting and Raftery [<a class="reference internal" href="references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>\cite{gnei_sp05}</p></td>
+<td class="text-center"><p><span id="id3">Gneiting and Raftery [<a class="reference internal" href="references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>&quot;i</p></td>
+<td class="text-center"><p>ï</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>\prob</p></td>
+<td class="text-center"><p>p</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>\ref{eq:xxxx}</p></td>
+<td class="text-center"><p><code class="xref eq docutils literal notranslate"><span class="pre">xxxx</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>\begin{equation}\label{xxx}…\end{equation}</p></td>
+<td class="text-center"><p>$$……$$(xxxx)</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>yyyyy.\footnote{xxxx}</p></td>
+<td class="text-center"><p>yyyyy.[^footNoteIdentifier] …. Somewhere: [^footNoteIdentifier]: xxxxx</p></td>
+</tr>
+</tbody>
+</table>
+<section id="todo">
+<h3>TODO:<a class="headerlink" href="#todo" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>convert \emph{text} to <em>text</em></p></li>
-<li><p>convert ``text’’ to “text”</p></li>
-<li><p>convert \given to \vert</p></li>
-<li><p>convert \citep{gnei_sp05} to (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="markdown.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)</p></li>
-<li><p>convert “i to ï</p></li>
+<li><p>cf.\ Section</p></li>
+<li><p>\vec?</p></li>
 </ul>
 <p>At least one example per chapter?</p>
+<p>For code cells, if we use any python packages,
+please make sure:</p>
+<ol class="arabic simple">
+<li><p>They are in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. If not, please add them.</p></li>
+<li><p>import them (e.g., <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>).</p></li>
+</ol>
+</section>
 </section>
 <section id="citation">
 <h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
@@ -608,7 +662,10 @@ which means, we create pure <code class="docutils literal notranslate"><span cla
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-one-file-not-recommended-i-think">Option 2: Use one file (not recommended I think)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-uniform-style-for-the-documentation">What is the uniform style for the documentation?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-uniform-style-for-the-documentation">What is the uniform style for the documentation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo">TODO:</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
   </nav></div>
