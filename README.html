@@ -521,6 +521,12 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
 For addtional subtitles, we add one more <code class="docutils literal notranslate"><span class="pre">#</span></code> then (i.e., <code class="docutils literal notranslate"><span class="pre">##</span></code> and <code class="docutils literal notranslate"><span class="pre">###</span></code>, better no <code class="docutils literal notranslate"><span class="pre">####</span></code> for simplicity).</p>
 <p>Note that we do <strong>not</strong> add <code class="docutils literal notranslate"><span class="pre">#</span></code> for the content in each Markdown cell,
 which means, we create pure <code class="docutils literal notranslate"><span class="pre">latex-like</span></code> texts which align with the survey paper.</p>
+<p>For code cells, if we use any python packages,
+please make sure:</p>
+<ol class="arabic simple">
+<li><p>They are in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. If not, please add them.</p></li>
+<li><p>import them (e.g., <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>).</p></li>
+</ol>
 <p>For those originally appear in Latex <code class="docutils literal notranslate"><span class="pre">.tex</span></code> format,
 we replace them into the Markdown format (See examples as below).</p>
 <table class="table">
@@ -540,13 +546,13 @@ we replace them into the Markdown format (See examples as below).</p>
 <td class="text-center"><p>\vert</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>\citep{gnei_sp05}</p></td>
-<td class="text-center"><p>(<span id="id1">Gneiting and Raftery [<a class="reference internal" href="references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)</p></td>
+<td class="text-center"><p>(<span id="id1">Gneiting and Raftery [<a class="reference internal" href="references.html#id2201" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>\citet{gnei_sp05}</p></td>
-<td class="text-center"><p><span id="id2">Gneiting and Raftery [<a class="reference internal" href="references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span></p></td>
+<td class="text-center"><p><span id="id2">Gneiting and Raftery [<a class="reference internal" href="references.html#id2201" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>\cite{gnei_sp05}</p></td>
-<td class="text-center"><p><span id="id3">Gneiting and Raftery [<a class="reference internal" href="references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span></p></td>
+<td class="text-center"><p><span id="id3">Gneiting and Raftery [<a class="reference internal" href="references.html#id2201" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>&quot;i</p></td>
 <td class="text-center"><p>ï</p></td>
@@ -572,12 +578,6 @@ we replace them into the Markdown format (See examples as below).</p>
 <li><p>\vec?</p></li>
 </ul>
 <p>At least one example per chapter?</p>
-<p>For code cells, if we use any python packages,
-please make sure:</p>
-<ol class="arabic simple">
-<li><p>They are in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. If not, please add them.</p></li>
-<li><p>import them (e.g., <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>).</p></li>
-</ol>
 </section>
 </section>
 <section id="citation">
