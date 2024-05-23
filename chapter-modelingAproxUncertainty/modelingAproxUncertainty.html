@@ -466,13 +466,13 @@ document.write(`
 <span class="eqno">(1)<a class="headerlink" href="#equation-ccp" title="Link to this equation">#</a></span>\[
 P( y \mid x_{q}) = \frac{P(x_{q} , y)}{P(x_q)}
 \]</div>
-<p>degenerates to <a class="reference internal" href="#equation-ccp">(1)</a></p>
+<p>degenerates to</p>
 <div class="math notranslate nohighlight" id="equation-ccpvs">
 <span class="eqno">(2)<a class="headerlink" href="#equation-ccpvs" title="Link to this equation">#</a></span>\[\begin{split}
 P( y \mid x_{q}) = \left\{ \begin{array}{ll}
 1 &amp; \text{ if } y = f^*(x_{q}) \\
 0 &amp; \text{ if } y \neq f^*(x_{q}) \\
-\end{array} \right.\tag{2}
+\end{array} \right.
 \end{split}\]</div>
 <p>Moreover, the training data</p>
 <div class="math notranslate nohighlight">
@@ -487,17 +487,17 @@ P( y \mid x_{q}) = \left\{ \begin{array}{ll}
 \]</div>
 <p>Obviously, the version space is shrinking with an increasing amount of training data, i.e., <span class="math notranslate nohighlight">\(\mathcal{V}(\mathcal{H} , \mathcal{D}') \subseteq \mathcal{V}(\mathcal{H} , \mathcal{D})\)</span> for <span class="math notranslate nohighlight">\(\mathcal{D} \subseteq \mathcal{D}'\)</span>.</p>
 <p>If a prediction <span class="math notranslate nohighlight">\(\hat{y}_{q}\)</span> for a query instance <span class="math notranslate nohighlight">\(x_{q}\)</span> is sought, this query is submitted to all members <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> of the version space. Obviously, a unique prediction can only be made if all members agree on the outcome of <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span>. Otherwise, several outcomes <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span> may still appear possible. Formally, mimicking the logical conjunction with the minimum operator and the existential quantification with a maximum, we can express the degree of possibility or plausibility of an outcome <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span> as follows (<span class="math notranslate nohighlight">\([\cdot]\)</span> denotes the indicator function):</p>
-<div class="math notranslate nohighlight">
-\[
-\pi(y) := \max_{h \in \mathcal{H}} \min \left( [h \in \mathcal{V}], [h(x_q) = y] \right)\tag{5}
+<div class="math notranslate nohighlight" id="equation-ee1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-ee1" title="Link to this equation">#</a></span>\[
+\pi(y) := \max_{h \in \mathcal{H}} \min \left( [h \in \mathcal{V}], [h(x_q) = y] \right)
 \]</div>
 <p>Thus, <span class="math notranslate nohighlight">\(\pi(y)=1\)</span> if there exists a candidate hypothesis <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\(h(\vec{x}_{q}) = y\)</span>, and <span class="math notranslate nohighlight">\(\pi(y)=0\)</span> otherwise. In other words, the prediction produced in version space learning is a subset</p>
 <div class="math notranslate nohighlight">
 \[
-Y = Y(x_q) := \{ h(x_q) \mid h \in \mathcal{V} \} = \{ y \mid \pi(y) = 1 \} \subseteq \mathcal{Y}\tag{6}
+Y = Y(x_q) := \{ h(x_q) \mid h \in \mathcal{V} \} = \{ y \mid \pi(y) = 1 \} \subseteq \mathcal{Y}
 \]</div>
 <p>See Fig.\ \ref{fig:vs} for an illustration.</p>
-<p>Note that the inference in Equation (5) can be seen as a kind of constraint propagation, in which the constraint <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> on the hypothesis space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is propagated to a constraint on <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, expressed in the form of the subset (\ref{eq:vss}) of possible outcomes; or symbolically:</p>
+<p>Note that the inference <a class="reference internal" href="#equation-ee1">(3)</a> can be seen as a kind of constraint propagation, in which the constraint <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> on the hypothesis space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is propagated to a constraint on <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, expressed in the form of the subset (\ref{eq:vss}) of possible outcomes; or symbolically:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathcal{H} , \mathcal{D} , x_{q}  \models Y\tag{7}

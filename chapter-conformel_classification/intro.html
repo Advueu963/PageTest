@@ -459,7 +459,7 @@ document.write(`
 <p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1896" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">BHV14</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1897" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">SV08</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1986" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">VGS03</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
 Given a sequence of training observations and a new query <span class="math notranslate nohighlight">\(\vec{x}_{N+1}\)</span> (which we denoted by <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> before and in the following plot is marked red) with unknown outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-cpseq">
-<span class="eqno">(5)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(6)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
 (\vec{x}_1, y_1), \,  (\vec{x}_2, y_2), \ldots ,  (\vec{x}_N, y_N), \, (\vec{x}_{N+1}, \bullet)
 \enspace ,
 \]</div>
@@ -611,7 +611,7 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
 <img alt="../_images/e9091c930d14f16f11ea03682a5c95d1dfdd174bceb565d4c74b363f30459034.png" src="../_images/e9091c930d14f16f11ea03682a5c95d1dfdd174bceb565d4c74b363f30459034.png" />
 </div>
 </div>
-<p>Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(5)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 0), yields a sequence of scores</p>
+<p>Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(6)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 0), yields a sequence of scores</p>
 <div class="math notranslate nohighlight">
 \[
 \alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1} \enspace .

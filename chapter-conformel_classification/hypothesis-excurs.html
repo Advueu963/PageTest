@@ -509,10 +509,10 @@ P(H = k | H_0) = B(k, \frac{1}{2}) = \binom{20}{k}(\frac{1}{2})^k(\frac{1}{2})^{
 <p>But because we do not want to accuse our friend without statistically certainty, we want to have a guarantee that we only at most <span class="math notranslate nohighlight">\(\epsilon\)</span> probable falsely accuse him. Therefore we have a <span class="math notranslate nohighlight">\(1-\epsilon\)</span> ‘’certainty’’ that we correctly identify a biased coin. In statistics we denote this as rejecting the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> with a significance niveau of <span class="math notranslate nohighlight">\(\epsilon\)</span>.
 Therefor we choose a thershold <span class="math notranslate nohighlight">\(r\)</span> for the amount of heads such that</p>
 <div class="math notranslate nohighlight" id="equation-probabilityequation">
-<span class="eqno">(6)<a class="headerlink" href="#equation-probabilityequation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(7)<a class="headerlink" href="#equation-probabilityequation" title="Link to this equation">#</a></span>\[
     A:=P(H \leq r \lor H \geq 20-r) = \sum_{k=0}^r B(k,\frac{1}{2}) + \sum_{k=20-r}^{20} B(k,\frac{1}{2}) \leq \epsilon
 \]</div>
-<p>In the  follwoing we show this in an animation, where the red area depicts the probability in <a class="reference internal" href="#equation-probabilityequation">(6)</a>.</p>
+<p>In the  follwoing we show this in an animation, where the red area depicts the probability in <a class="reference internal" href="#equation-probabilityequation">(7)</a>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
