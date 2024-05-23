@@ -500,7 +500,7 @@ Given a sequence of training observations and a new query <span class="math notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f6285c04f85d9512794e100d6395e1eab826a857ddf43032538f9125a6d1129b.png" src="../_images/f6285c04f85d9512794e100d6395e1eab826a857ddf43032538f9125a6d1129b.png" />
+<img alt="../_images/03975692a08835004aff08c232e93d416bc5ceeb72cc7b66f70a9518f7bec26b.png" src="../_images/03975692a08835004aff08c232e93d416bc5ceeb72cc7b66f70a9518f7bec26b.png" />
 </div>
 </div>
 <p>the basic idea is to hypothetically replace <span class="math notranslate nohighlight">\(\bullet\)</span> by each candidate, i.e., to test the hypothesis <span class="math notranslate nohighlight">\(y_{N+1} = y\)</span> for all <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>. Only those outcomes <span class="math notranslate nohighlight">\(y\)</span> for which this hypothesis can be rejected at a predefined level of confidence are excluded, while those for which the hypothesis cannot be rejected are collected to form the prediction set or <em>prediction region</em> <span class="math notranslate nohighlight">\(Y^\epsilon \subseteq \mathcal{Y}\)</span>. The construction of a set-valued prediction <span class="math notranslate nohighlight">\(Y^\epsilon = Y^\epsilon(\vec{x}_{n+1})\)</span> that is guaranteed to cover the true outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span> with a given probability <span class="math notranslate nohighlight">\(1- \epsilon\)</span> (for example 95,%), instead of producing a point prediction <span class="math notranslate nohighlight">\(\hat{y}_{N+1} \in \mathcal{Y}\)</span>, is the basic idea of conformal prediction. Here, <span class="math notranslate nohighlight">\(\epsilon \in (0,1)\)</span> is a pre-specified level of significance. In the case of classification, <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> is a subset of the set of classes <span class="math notranslate nohighlight">\(\mathcal{Y} = \{ y_1, \ldots , y_K \}\)</span>, whereas in regression, a prediction region is commonly represented in terms of an interval<a class="footnote-reference brackets" href="#regressioncase" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
@@ -608,7 +608,7 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/e9091c930d14f16f11ea03682a5c95d1dfdd174bceb565d4c74b363f30459034.png" src="../_images/e9091c930d14f16f11ea03682a5c95d1dfdd174bceb565d4c74b363f30459034.png" />
+<img alt="../_images/d7edb1131c76daf6853d639cfbef9bf3b6895edae1b3130db1f20fd410a3affe.png" src="../_images/d7edb1131c76daf6853d639cfbef9bf3b6895edae1b3130db1f20fd410a3affe.png" />
 </div>
 </div>
 <p>Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(6)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 0), yields a sequence of scores</p>

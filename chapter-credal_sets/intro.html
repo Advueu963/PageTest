@@ -490,8 +490,8 @@ the multinomial distribution (Bernardo, 2005).</p>
 </div>
 <p>Methods of that kind have also been used in the context of machine learning, for example in the framework of the Na”ive Credal Classifier \citep{zaffalon2002,cora_lr08} or more recently as an extension of sum-product networks \citep{dera_cs17}. As for the former, we can think of a Na”ive Bayes (NB) classifier as a hypothesis <span class="math notranslate nohighlight">\(h = h_{\vec{\theta}}\)</span> specified by a parameter vector <span class="math notranslate nohighlight">\({\vec{\theta}}\)</span> that comprises a prior probability <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class <span class="math notranslate nohighlight">\(y_k \in \set{Y}\)</span> and a conditional probability <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> for observing the <span class="math notranslate nohighlight">\(i^{th}\)</span> value <span class="math notranslate nohighlight">\(a_{i,j}\)</span> of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. For a given query instance specified by attributes <span class="math notranslate nohighlight">\((a_{i_1,1}, \ldots , a_{i_J,J})\)</span>, the posterior class probabilities are then given by
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8274dfd8-2b6d-4138-909b-61cebf65105d">
-<span class="eqno">(4)<a class="headerlink" href="#equation-8274dfd8-2b6d-4138-909b-61cebf65105d" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
+<div class="amsmath math notranslate nohighlight" id="equation-840cc0f7-b4a3-483b-8f55-0c577754015d">
+<span class="eqno">(4)<a class="headerlink" href="#equation-840cc0f7-b4a3-483b-8f55-0c577754015d" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
 p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_j,j,k} \, .
 \end{equation}\]</div>
 <p>$$</p>
@@ -570,8 +570,8 @@ H(A) = \log( |A|)  \, ,
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{m}_Q: \,  2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> is the M”obius inverse of the capacity function <span class="math notranslate nohighlight">\(\nu :\, 2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> defined by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0f62ad54-3ad4-4979-b14a-eb03b53c1848">
-<span class="eqno">(5)<a class="headerlink" href="#equation-0f62ad54-3ad4-4979-b14a-eb03b53c1848" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
+<div class="amsmath math notranslate nohighlight" id="equation-3d9322a9-5154-49b1-8fdd-db2de503bdaf">
+<span class="eqno">(5)<a class="headerlink" href="#equation-3d9322a9-5154-49b1-8fdd-db2de503bdaf" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
 \nu_Q(A) \defeq \inf_{q \in Q} q(A) 
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(A \subseteq \mathcal{Y}\)</span>, that is,</p>
