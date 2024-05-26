@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reliable Classification" href="../chapter-reliable_classification/intro.html" />
-    <link rel="prev" title="Deep neural network ensembles" href="../chapter-deep_neuralnetwork/intro.html" />
+    <link rel="prev" title="Bayesian neural networks" href="../chapter-bayesian_neuralnetwork/bayesian.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,6 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/intro.html">Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -490,8 +491,8 @@ the multinomial distribution (Bernardo, 2005).</p>
 </div>
 <p>Methods of that kind have also been used in the context of machine learning, for example in the framework of the Na”ive Credal Classifier \citep{zaffalon2002,cora_lr08} or more recently as an extension of sum-product networks \citep{dera_cs17}. As for the former, we can think of a Na”ive Bayes (NB) classifier as a hypothesis <span class="math notranslate nohighlight">\(h = h_{\vec{\theta}}\)</span> specified by a parameter vector <span class="math notranslate nohighlight">\({\vec{\theta}}\)</span> that comprises a prior probability <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class <span class="math notranslate nohighlight">\(y_k \in \set{Y}\)</span> and a conditional probability <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> for observing the <span class="math notranslate nohighlight">\(i^{th}\)</span> value <span class="math notranslate nohighlight">\(a_{i,j}\)</span> of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. For a given query instance specified by attributes <span class="math notranslate nohighlight">\((a_{i_1,1}, \ldots , a_{i_J,J})\)</span>, the posterior class probabilities are then given by
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ca6a2961-2698-4008-bf6c-b0860a24e382">
-<span class="eqno">(4)<a class="headerlink" href="#equation-ca6a2961-2698-4008-bf6c-b0860a24e382" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
+<div class="amsmath math notranslate nohighlight" id="equation-9d762cf1-c47f-4424-ad1b-228c99ff08aa">
+<span class="eqno">(4)<a class="headerlink" href="#equation-9d762cf1-c47f-4424-ad1b-228c99ff08aa" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
 p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_j,j,k} \, .
 \end{equation}\]</div>
 <p>$$</p>
@@ -570,8 +571,8 @@ H(A) = \log( |A|)  \, ,
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{m}_Q: \,  2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> is the M”obius inverse of the capacity function <span class="math notranslate nohighlight">\(\nu :\, 2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> defined by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f5a42064-2347-4f5e-8a69-47cbc48519ec">
-<span class="eqno">(5)<a class="headerlink" href="#equation-f5a42064-2347-4f5e-8a69-47cbc48519ec" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
+<div class="amsmath math notranslate nohighlight" id="equation-793d60bc-aab1-4bc6-92bc-b40f28ddb70b">
+<span class="eqno">(5)<a class="headerlink" href="#equation-793d60bc-aab1-4bc6-92bc-b40f28ddb70b" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
 \nu_Q(A) \defeq \inf_{q \in Q} q(A) 
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(A \subseteq \mathcal{Y}\)</span>, that is,</p>
@@ -725,12 +726,12 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../chapter-deep_neuralnetwork/intro.html"
+       href="../chapter-bayesian_neuralnetwork/bayesian.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Deep neural network ensembles</p>
+        <p class="prev-next-title">Bayesian neural networks</p>
       </div>
     </a>
     <a class="right-next"

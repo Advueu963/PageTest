@@ -191,6 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/intro.html">Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -443,9 +444,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-scoring-rule">1. Logarithmic Scoring Rule</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">2. Brier Score</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">3. Continuous Ranked Probability Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-logistic-regression">1. Example: Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-scoring-rule">Logarithmic Scoring Rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
 </ul>
             </nav>
         </div>
@@ -459,6 +462,22 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-via-scoring">
 <h1>Probability Estimation via Scoring<a class="headerlink" href="#probability-estimation-via-scoring" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">properscoring</span> <span class="kn">import</span> <span class="n">crps_ensemble</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span><span class="p">,</span> <span class="n">make_regression</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">brier_score_loss</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>
+
+<span class="c1"># Paper Page 21</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>There are various methods in machine learning for inducing probabilistic predictors.
 These are hypotheses <span class="math notranslate nohighlight">\(h\)</span> that do not merely output point predictions <span class="math notranslate nohighlight">\(h(\vec{x}) \in \mathcal{Y}\)</span>,
 i.e., elements of the output space <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>,
@@ -474,7 +493,63 @@ Moreover, the approaches can be parametric (assuming specific parametric familie
 Well-known examples include classical statistical methods such as logistic and linear regression,
 Bayesian approaches such as Bayesian networks and Gaussian processes, <!-- (cf.\ Section \ref{sec:gp}),  -->
 as well as various techniques in the realm of (deep) neural networks.</p>
-<!-- (cf.\ Section \ref{sec:m1}).  --><p>Training probabilistic predictors is typically accomplished by minimizing suitable loss functions,
+<!-- (cf.\ Section \ref{sec:m1}).  --><section id="example-logistic-regression">
+<h2>1. Example: Logistic Regression<a class="headerlink" href="#example-logistic-regression" title="Link to this heading">#</a></h2>
+<p>Logistic regression is a widely used supervised machine learning method for binary classification that provides probabilistic outputs.
+Below is an example using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.8500
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-linear-regression">
+<h2>2. Example: Linear Regression<a class="headerlink" href="#example-linear-regression" title="Link to this heading">#</a></h2>
+<p>In statistics, linear regression is a statistical model used for predicting a continuous target variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Example: Linear Regression</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 0.0107
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Example: Bayesian networks (UAIML: Slides 31&amp;32)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Training probabilistic predictors is typically accomplished by minimizing suitable loss functions,
 i.e., loss functions that enforce “correct” (conditional) probabilities as predictions.
 In this regard,
 proper scoring rules (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2201" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>) <!-- \citep{gnei_sp05}  -->
@@ -483,33 +558,19 @@ including the log-loss as a well-known special case.
 Sometimes, however, estimates are also obtained in a very simple way,
 following basic frequentist techniques for probability estimation,
 like in Naïve Bayes or nearest neighbor classification.</p>
-<p>The predictions delivered by corresponding methods are at best “pseudo-probabilities” that are often not very accurate.
-Besides, there are many methods that deliver natural scores,
-intuitively expressing a degree of confidence
-(like the distance from the separating hyperplane in support vector machines),
-but which do not immediately qualify as probabilities either.
-The idea of <em>scaling</em> or <em>calibration methods</em> is to turn such scores into proper,
-well-calibrated probabilities, that is,
-to learn a mapping from scores to the unit interval that can be applied to the output of a predictor as a kind of post-processing step (<span id="id2">Flach [<a class="reference internal" href="../references.html#id2185" title="P.A. Flach. Classifier calibration. In Encyclopedia of Machine Learning and Data Mining, pages 210–217. Springer, 2017.">Fla17</a>]</span>). <!-- \citep{flac_cc17} -->
-Examples of such methods include binning (<span id="id3">[<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">ZE01</a>]</span>), <!-- \citep{zadr_oc01} -->
-isotonic regression (<span id="id4">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">ZE02</a>]</span>), <!-- \citep{zadr_tc02} -->
-logistic scaling (<span id="id5">Platt [<a class="reference internal" href="../references.html#id212" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">Pla99</a>]</span>) <!-- \citep{Pla00} -->
-and improvements thereof (<span id="id6">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2184" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>), <!-- \citep{kull_bc17} -->
-as well as the use of Venn predictors (<span id="id7">Johansson <em>et al.</em> [<a class="reference internal" href="../references.html#id237" title="U. Johansson, T. Löfström, H. Sundell, H. Linusson, A. Gidenstam, and H. Boström. Venn predictors for well-calibrated probability estimation trees. In Proc. COPA, 7th Symposium on Conformal and Probabilistic Prediction and Applications, 3–14. Maastricht, The Netherlands, 2018.">JLofstromS+18</a>]</span>). <!-- \citep{joha_vp18} -->
-Calibration is still a topic of ongoing research.</p>
-<p>Another import class of methods is <em>ensemble learning</em>, such as bagging or boosting, which are especially popular in machine learning due to their ability to improve accuracy of (point) predictions.
-Since such methods produce a (large) set of predictors <span class="math notranslate nohighlight">\(h_1, \ldots, h_M\)</span> instead of a single hypothesis, it is tempting to produce probability estimates following basic frequentist principles. In the simplest case (of classification), each prediction <span class="math notranslate nohighlight">\(h_i(\vec{x})\)</span> can be interpreted as a “vote” in favor of a class <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, and probabilities can be estimated by relative frequencies,—,needless to say, probabilities constructed in this way tend to be biased and are not necessarily well calibrated. Especially important in this field are tree-based methods such as random forests (<span id="id8">Breiman [<a class="reference internal" href="../references.html#id2177" title="L. Breiman. Random forests. Machine Learning, 45(1):5–32, 2001.">Bre01</a>], Kruppa <em>et al.</em> [<a class="reference internal" href="../references.html#id2188" title="J. Kruppa, Y. Liu, G. Biau, M. Kohler, I.R. König, J.D. Malley, and A. Ziegler. Probability estimation with machine learning methods for dichotomous and multi-category outcome: Theory. Biometrical Journal, 56(4):534–563, 2014.">KLB+14</a>]</span>).</p>
-<!-- \citep{brei_rf01,krup_pe14} --><p>Obviously, while standard probability estimation is a viable approach to representing uncertainty in a prediction,
-there is no explicit distinction between different types of uncertainty.
-Methods falling into this category are mostly concerned with the aleatoric part of the overall uncertainty.</p>
-<!-- \footnote{Yet, as will be seen later on, one way to go beyond mere aleatoric uncertainty is to combine the above methods, for example learning ensembles of probabilistic predictors (cf.\ Section \ref{sec:m1}).}   -->
-<section id="logarithmic-scoring-rule">
-<h2>1. Logarithmic Scoring Rule<a class="headerlink" href="#logarithmic-scoring-rule" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Example: Naïve Bayes (UAIML: Slides 30)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="logarithmic-scoring-rule">
+<h2>Logarithmic Scoring Rule<a class="headerlink" href="#logarithmic-scoring-rule" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 
 <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
 
@@ -526,12 +587,10 @@ Methods falling into this category are mostly concerned with the aleatoric part 
 </div>
 </section>
 <section id="brier-score">
-<h2>2. Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h2>
+<h2>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">brier_score_loss</span>
-
-<span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 
 <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
 
@@ -548,13 +607,10 @@ Methods falling into this category are mostly concerned with the aleatoric part 
 </div>
 </section>
 <section id="continuous-ranked-probability-score">
-<h2>3. Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h2>
+<h2>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">properscoring</span> <span class="kn">import</span> <span class="n">crps_ensemble</span>
-
-<span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.5</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.5</span><span class="p">])</span>
 
 <span class="n">predicted_ensemble</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">]])</span>
 
@@ -636,9 +692,11 @@ Methods falling into this category are mostly concerned with the aleatoric part 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-scoring-rule">1. Logarithmic Scoring Rule</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">2. Brier Score</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">3. Continuous Ranked Probability Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-logistic-regression">1. Example: Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-scoring-rule">Logarithmic Scoring Rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
 </ul>
   </nav></div>
 
