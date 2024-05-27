@@ -458,6 +458,7 @@ document.write(`
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="excursus-hypothesis-testing">
 <h1>Excursus: Hypothesis testing<a class="headerlink" href="#excursus-hypothesis-testing" title="Link to this heading">#</a></h1>
+<div align="justify">
 <p>Let us first revise the basic idea of hypothesis testing, the underlying concept of conformal prediction.
 Assume you have been invited to a friends home and let a food delivery bring delicious food.
 Let us call the friend B.<br />
@@ -467,13 +468,14 @@ The proportion of <em>heads</em> in the sequence would be the amount you have to
 Because of modern days you do not have a coin with you and you have to take the coin of B.
 Having a certain doubt B wants to only the the faith decide on the bill split you want to check whether he uses a fair coin.
 With your basic knowledge in statistics you tackle this problem with hypothesis testing.</p>
+</div><div align="justify">
 <p>Firstly you formalize the problem. The assumption of a fair coin is your null hypothesis <span class="math notranslate nohighlight">\(H_0: \theta = \frac{1}{2}\)</span> and the alternative hypothesis <span class="math notranslate nohighlight">\(H_1: \theta \neq \frac{1}{2}\)</span>. If B provides a fair coin the probability of having k heads in a sequence with 20 coin flips should follow the following distribution.</p>
 <div class="math notranslate nohighlight">
 \[
 P(H = k | H_0) = B(k, \frac{1}{2}) = \binom{20}{k}(\frac{1}{2})^k(\frac{1}{2})^{N-k} = \binom{20}{k}(\frac{1}{2})^N
 \]</div>
 <p>In the following we define the probability distribution for general sequence with N realisations.</p>
-<div class="cell docutils container">
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binomial_distribution</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
     <span class="c1"># denote that this function works with both k being integer and k being an array of integers</span>
@@ -491,11 +493,18 @@ P(H = k | H_0) = B(k, \frac{1}{2}) = \binom{20}{k}(\frac{1}{2})^k(\frac{1}{2})^{
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coin_flips</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">head_amount</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">coin_flips</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">probabilities</span> <span class="o">=</span> <span class="n">binomial_distribution</span><span class="p">(</span><span class="n">head_amount</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">coin_flips</span><span class="p">)</span>
-
-
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">head_amount</span><span class="p">,</span> 
-        <span class="n">height</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="mf">.7</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">head_amount</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Binomial distribution for </span><span class="si">{</span><span class="n">coin_flips</span><span class="si">}</span><span class="s2"> coin flips&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of heads&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
@@ -503,18 +512,20 @@ P(H = k | H_0) = B(k, \frac{1}{2}) = \binom{20}{k}(\frac{1}{2})^k(\frac{1}{2})^{
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../_images/c487534b349ff8fc99803a23231190eb3e2be43cb4bc50296e680c0e1dbfc8bd.png" src="../_images/c487534b349ff8fc99803a23231190eb3e2be43cb4bc50296e680c0e1dbfc8bd.png" />
 </div>
 </div>
+<div align="justify">
 <p>But because we do not want to accuse our friend without statistically certainty, we want to have a guarantee that we only at most <span class="math notranslate nohighlight">\(\epsilon\)</span> probable falsely accuse him. Therefore we have a <span class="math notranslate nohighlight">\(1-\epsilon\)</span> ‘’certainty’’ that we correctly identify a biased coin. In statistics we denote this as rejecting the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> with a significance niveau of <span class="math notranslate nohighlight">\(\epsilon\)</span>.
 Therefor we choose a thershold <span class="math notranslate nohighlight">\(r\)</span> for the amount of heads such that</p>
 <div class="math notranslate nohighlight" id="equation-probabilityequation">
-<span class="eqno">(7)<a class="headerlink" href="#equation-probabilityequation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(8)<a class="headerlink" href="#equation-probabilityequation" title="Link to this equation">#</a></span>\[
     A:=P(H \leq r \lor H \geq 20-r) = \sum_{k=0}^r B(k,\frac{1}{2}) + \sum_{k=20-r}^{20} B(k,\frac{1}{2}) \leq \epsilon
 \]</div>
-<p>In the  follwoing we show this in an animation, where the red area depicts the probability in <a class="reference internal" href="#equation-probabilityequation">(7)</a>.</p>
-<div class="cell tag_hide-input docutils container">
+<p>In the  follwoing we show this in an animation, where the red area depicts the probability in <a class="reference internal" href="#equation-probabilityequation">(8)</a>.</p>
+</div><div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
@@ -583,7 +594,7 @@ Therefor we choose a thershold <span class="math notranslate nohighlight">\(r\)<
 <span class="ne">RuntimeError</span>: Requested MovieWriter (ffmpeg) not available
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.animation.FuncAnimation at 0x13a9ef190&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.animation.FuncAnimation at 0x10f42c580&gt;
 </pre></div>
 </div>
 </div>

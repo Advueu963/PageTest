@@ -421,7 +421,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -437,6 +439,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformel-prediction">Uncertainty Quantification in Conformel prediction</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -451,12 +461,28 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+
+<span class="kn">from</span> <span class="nn">mapie.classification</span> <span class="kn">import</span> <span class="n">MapieClassifier</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">mapie.classification</span> <span class="kn">import</span> <span class="n">MapieClassifier</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;mapie&#39;
 </pre></div>
 </div>
 </div>
 </div>
+<div align="justify">
 <p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1896" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">BHV14</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1897" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">SV08</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1986" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">VGS03</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
 Given a sequence of training observations and a new query <span class="math notranslate nohighlight">\(\vec{x}_{N+1}\)</span> (which we denoted by <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> before and in the following plot is marked red) with unknown outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-cpseq">
@@ -464,30 +490,39 @@ Given a sequence of training observations and a new query <span class="math notr
 (\vec{x}_1, y_1), \,  (\vec{x}_2, y_2), \ldots ,  (\vec{x}_N, y_N), \, (\vec{x}_{N+1}, \bullet)
 \enspace ,
 \]</div>
-<div class="cell tag_hide_input docutils container">
+</div><div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">n_classes</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n_classes</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">random_state</span> <span class="o">=</span> <span class="mi">41</span>
+
+<span class="c1"># parameters for toy data</span>
+<span class="n">means</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">covs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mf">2.5</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">3.5</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">])]</span>
 
 <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># This choice is the central point of conformel prediction</span>
 
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span>
-    <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
-    <span class="n">n_classes</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span>
-    <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span><span class="n">cov</span><span class="p">,</span><span class="n">n_samples</span><span class="p">)</span> 
+    <span class="k">for</span> <span class="n">mean</span><span class="p">,</span><span class="n">cov</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means</span><span class="p">,</span><span class="n">covs</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">])</span>
+
 <span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">])</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Synthetic Classification Data&quot;</span><span class="p">)</span>
 
-<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">x_new</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
 <span class="c1"># produce a legend with the unique colors from the scatter</span>
@@ -500,19 +535,31 @@ Given a sequence of training observations and a new query <span class="math notr
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/317b96a40d29c07b16557d11310403e8041cf191256e5ce1ef82394ceb94d33e.png" src="../_images/317b96a40d29c07b16557d11310403e8041cf191256e5ce1ef82394ceb94d33e.png" />
+<img alt="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" src="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" />
 </div>
 </div>
+<div align="justify">
 <p>the basic idea is to hypothetically replace <span class="math notranslate nohighlight">\(\bullet\)</span> by each candidate, i.e., to test the hypothesis <span class="math notranslate nohighlight">\(y_{N+1} = y\)</span> for all <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>. Only those outcomes <span class="math notranslate nohighlight">\(y\)</span> for which this hypothesis can be rejected at a predefined level of confidence are excluded, while those for which the hypothesis cannot be rejected are collected to form the prediction set or <em>prediction region</em> <span class="math notranslate nohighlight">\(Y^\epsilon \subseteq \mathcal{Y}\)</span>. The construction of a set-valued prediction <span class="math notranslate nohighlight">\(Y^\epsilon = Y^\epsilon(\vec{x}_{n+1})\)</span> that is guaranteed to cover the true outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span> with a given probability <span class="math notranslate nohighlight">\(1- \epsilon\)</span> (for example 95,%), instead of producing a point prediction <span class="math notranslate nohighlight">\(\hat{y}_{N+1} \in \mathcal{Y}\)</span>, is the basic idea of conformal prediction. Here, <span class="math notranslate nohighlight">\(\epsilon \in (0,1)\)</span> is a pre-specified level of significance. In the case of classification, <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> is a subset of the set of classes <span class="math notranslate nohighlight">\(\mathcal{Y} = \{ y_1, \ldots , y_K \}\)</span>, whereas in regression, a prediction region is commonly represented in terms of an interval<a class="footnote-reference brackets" href="#regressioncase" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+</div><div align="justify">
 <p>Hypothesis testing is done in a nonparametric way: Consider any ‘’nonconformity’’ function <span class="math notranslate nohighlight">\(f: \, \mathcal{X} \times \mathcal{Y} \longrightarrow \mathbb{R}\)</span> that assigns scores <span class="math notranslate nohighlight">\(\alpha = f(\vec{x}, y)\)</span> to input/output tuples; the latter can be interpreted as a measure of ‘’strangeness’’ of the pattern <span class="math notranslate nohighlight">\((\vec{x}, y)\)</span>, i.e., the higher the score, the less the data point <span class="math notranslate nohighlight">\((\vec{x}, y)\)</span> conforms to what one would expect to observe.</p>
-<p>An example of a nonconformity score based on <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The error bounds are valid and well calibrated by construction, regardless of the nonconformity function <span class="math notranslate nohighlight">\(f\)</span>. However, the choice of this function has an important influence on the <em>efficiency</em> of conformal prediction, that is, the size of prediction regions: The more suitable the nonconformity function is chosen, the smaller these sets <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> will be.</p>
+</div>
+<p>An example of a nonconformity score based on nearest neighbors:</p>
 <div class="math notranslate nohighlight">
 \[
 f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(d_i^+\)</span> is the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled y, and <span class="math notranslate nohighlight">\(d_i^-\)</span> the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled differently.</p>
-<div class="cell tag_hide-input docutils container">
+<p>where <span class="math notranslate nohighlight">\(d_i^+\)</span> is the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled y, and <span class="math notranslate nohighlight">\(d_i^-\)</span> the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled differently.
+Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(6)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 1), yields a sequence of scores</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1} \enspace .
+\]</div>
+</div><div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
@@ -547,7 +594,7 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
     <span class="k">return</span> <span class="n">data_with_same_class</span><span class="p">,</span> <span class="n">data_with_other_class</span>
 
 
-<span class="k">def</span> <span class="nf">nonconformity_function</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">nearest_neighbors_non_conformity_function</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="n">data_with_same_class</span><span class="p">,</span> <span class="n">data_with_other_class</span> <span class="o">=</span> <span class="n">split_data_classes</span><span class="p">(</span><span class="n">y_i</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">distance_to_same_class</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
         <span class="n">nearest_neighbors_distance</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span> <span class="n">data_with_same_class</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -559,12 +606,33 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
     <span class="k">return</span> <span class="n">distance_to_same_class</span> <span class="o">/</span> <span class="n">distance_to_other_class</span>
 
 
+<span class="k">def</span> <span class="nf">get_nonconformityScores</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># merge X and y into one array</span>
+    <span class="n">new_point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">))</span>  <span class="c1"># make the new data point</span>
+    <span class="n">complete_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">new_point</span><span class="p">))</span>  <span class="c1"># put all together</span>
+
+    <span class="n">resulting_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">nearest_neighbors_non_conformity_function</span><span class="p">(</span>
+                <span class="n">x_i</span><span class="o">=</span><span class="n">complete_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">y_i</span><span class="o">=</span><span class="n">complete_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">complete_data</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">complete_data</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">complete_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">resulting_scores</span>
+
+
 <span class="k">def</span> <span class="nf">plot_nearest_neighbors_distance</span><span class="p">(</span><span class="n">y_new</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nonconformity function for y_(N+1)=</span><span class="si">{</span><span class="n">y_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">x_new</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 
+    <span class="c1"># look up other colors: https://en.wikipedia.org/wiki/X11_color_names</span>
     <span class="c1"># visualize the distance to the equally labeled points:</span>
     <span class="n">data_with_same_class</span><span class="p">,</span> <span class="n">data_with_other_class</span> <span class="o">=</span> <span class="n">split_data_classes</span><span class="p">(</span><span class="n">y_new</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nearest_neighbors_idx</span><span class="p">(</span>
@@ -573,7 +641,7 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
         <span class="n">x_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_new</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_with_same_class</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
         <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_new</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data_with_same_class</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
         <span class="p">(</span><span class="n">line1</span><span class="p">,)</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-            <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;chartreuse&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;d_i^+&quot;</span>
+            <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;Aqua&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;d_i^+&quot;</span>
         <span class="p">)</span>
 
     <span class="c1"># visualize the distance to the differently labeled points:</span>
@@ -596,10 +664,19 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Feature 1&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Feature 2&quot;</span><span class="p">)</span>
 
+<span class="k">def</span> <span class="nf">plot_non_conformity_scores</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribution of non-conformity scores&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;non-conformity score&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">alpha_values_y1</span> <span class="o">=</span> <span class="n">get_nonconformityScores</span><span class="p">(</span><span class="n">x_new</span><span class="o">=</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-<span class="n">plot_nearest_neighbors_distance</span><span class="p">(</span><span class="n">y_new</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_nearest_neighbors_distance</span><span class="p">(</span><span class="n">y_new</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_non_conformity_scores</span><span class="p">(</span><span class="n">alpha_values_y1</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="c1"># plot_nearest_neighbors_distance(y_new=1, ax=ax)</span>
 <span class="c1"># plot_nearest_neighbors_distance(y_new=2, ax=ax)</span>
 <span class="c1"># plot_nearest_neighbors_distance(y_new=3, ax=ax)</span>
@@ -609,72 +686,16 @@ f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/b8a44fdbeed5988021db90276c06d306fc9c609e8be8a3bb57923136bc90dadd.png" src="../_images/b8a44fdbeed5988021db90276c06d306fc9c609e8be8a3bb57923136bc90dadd.png" />
+<img alt="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" src="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" />
 </div>
 </div>
-<p>Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(6)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 0), yields a sequence of scores</p>
-<div class="math notranslate nohighlight">
-\[
-\alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1} \enspace .
-\]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_nonconformityScores</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># merge X and y into one array</span>
-    <span class="n">new_point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">))</span>  <span class="c1"># make the new data point</span>
-    <span class="n">complete_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">new_point</span><span class="p">))</span>  <span class="c1"># put all together</span>
-
-    <span class="n">resulting_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-        <span class="p">[</span>
-            <span class="n">nonconformity_function</span><span class="p">(</span>
-                <span class="n">x_i</span><span class="o">=</span><span class="n">complete_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="n">y_i</span><span class="o">=</span><span class="n">complete_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">complete_data</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">complete_data</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">complete_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="p">]</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">resulting_scores</span>
-
-<span class="n">alpha_values_y0</span> <span class="o">=</span> <span class="n">get_nonconformityScores</span><span class="p">(</span><span class="n">x_new</span><span class="o">=</span><span class="n">x_new</span><span class="p">,</span><span class="n">y_new</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">alpha_values_y0</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.77314968, 0.68439392, 0.4278431 , 0.3351231 , 0.31205702,
-       0.37149363, 0.38839207, 2.34878393, 3.44963777, 1.23632178,
-       0.24002514, 1.05460681, 0.82161649, 0.57034633, 1.58489954,
-       0.45756937, 0.44887226, 0.67247494, 1.04008292, 0.24198849,
-       0.32940179, 0.38664866, 0.27318212, 2.91793606, 0.37580255,
-       0.70710082, 0.24400042, 0.32505527, 0.11035944, 0.66771116,
-       0.91566299, 0.37693889, 0.16337647, 0.14007474, 0.36650715,
-       0.14241597, 0.27620508, 0.20424121, 0.14868598, 2.32878916,
-       0.14263151, 0.39294787, 0.2030195 , 0.20843384, 0.15618444,
-       0.27426505, 0.54216901, 1.798158  , 0.34479019, 2.60135297,
-       0.43759038, 0.34668837, 1.21901677, 0.41059399, 0.41424125,
-       1.59304939, 0.37108512, 0.67806662, 0.33722239, 0.20835847,
-       0.80379316, 0.37524613, 0.13463129, 5.9159343 , 1.76058581,
-       0.13357575, 0.16599407, 0.7740414 , 0.48088605, 1.33502035,
-       0.44453412, 0.90293159, 0.4927097 , 0.34081446, 0.17300341,
-       0.80159731, 1.92581433, 0.20847428, 0.21309259, 0.5543557 ,
-       0.1955679 , 0.71849975, 0.49265715, 0.33875374, 1.70007407,
-       0.2282272 , 0.37763559, 0.52236119, 0.38414292, 0.16828994,
-       0.16653266, 0.12264376, 0.23371545, 0.79740665, 2.65673704,
-       0.4670233 , 0.25254976, 0.47143755, 0.47254834, 0.32251886,
-       3.87069918])
-</pre></div>
-</div>
-</div>
-</div>
+<div align="justify">
 <p>Denote by <span class="math notranslate nohighlight">\(\sigma\)</span> the permutation of <span class="math notranslate nohighlight">\(\{1, \ldots , N+1\}\)</span> that sorts the scores in increasing order, i.e., such that <span class="math notranslate nohighlight">\(\alpha_{\sigma(1)} \leq \ldots \leq \alpha_{\sigma(N+1)}\)</span>. Under the assumption that the hypothetical choice of <span class="math notranslate nohighlight">\(y_{N+1}\)</span> is in agreement with the true data-generating process, and that this process has the property of exchangeability (which is weaker than the assumption of independence and essentially means that the order of observations is irrelevant), every permutation <span class="math notranslate nohighlight">\(\sigma\)</span> has the same probability of occurrence. Consequently, the probability that <span class="math notranslate nohighlight">\(\alpha_{N+1}\)</span> is among the <span class="math notranslate nohighlight">\(\epsilon\)</span>,% highest nonconformity scores should be low. This notion can be captured by the <span class="math notranslate nohighlight">\(p\)</span>-values associated with the candidate <span class="math notranslate nohighlight">\(y\)</span>, defined as</p>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-probability-y-highestnonconformity">
+<span class="eqno">(7)<a class="headerlink" href="#equation-probability-y-highestnonconformity" title="Link to this equation">#</a></span>\[
 p(y)   := \frac{\# \{ i \given \alpha_i \geq \alpha_{N+1} \}}{N+1}
 \]</div>
-<div class="cell docutils container">
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_probability</span><span class="p">(</span><span class="n">nonconformity_sequence</span><span class="p">):</span>
     <span class="c1"># calculate the proportion that atleast the new datapoints nonconformity score occurs.</span>
@@ -686,71 +707,353 @@ p(y)   := \frac{\# \{ i \given \alpha_i \geq \alpha_{N+1} \}}{N+1}
     <span class="p">)</span>  <span class="c1"># the N + 1 is inherently in the length of the sequence</span>
     <span class="k">return</span> <span class="n">probability</span>
 
-<span class="n">probability_y0</span> <span class="o">=</span> <span class="n">calculate_probability</span><span class="p">(</span><span class="n">alpha_values_y0</span><span class="p">)</span>
-<span class="n">probability_y0</span>
+<span class="n">probability_y1</span> <span class="o">=</span> <span class="n">calculate_probability</span><span class="p">(</span><span class="n">alpha_values_y1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Probability of y = 1: &quot;</span><span class="p">,</span> <span class="n">probability_y1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.019801980198019802
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probability of y = 1:  0.03870162297128589
 </pre></div>
 </div>
 </div>
 </div>
+<div align="justify">
 <p>According to what we said, the probability that <span class="math notranslate nohighlight">\(p(y) &lt; \epsilon\)</span> (i.e., <span class="math notranslate nohighlight">\(\alpha_{N+1}\)</span> is among the <span class="math notranslate nohighlight">\(\epsilon\)</span>,% highest <span class="math notranslate nohighlight">\(\alpha\)</span>-values) is upper-bounded by <span class="math notranslate nohighlight">\(\epsilon\)</span>.
 Thus, the hypothesis <span class="math notranslate nohighlight">\(y_{N+1} = y\)</span> can be rejected for those candidates <span class="math notranslate nohighlight">\(y\)</span> for which <span class="math notranslate nohighlight">\(p(y) &lt; \epsilon\)</span>.
-For the initial choice y = 0 we can reject this candidate, because <span class="math notranslate nohighlight">\(p(y) = 0.019 &lt; 0.05 = \epsilon\)</span>.
-The complete <span class="math notranslate nohighlight">\(Y\epsilon\)</span> can then be constructed iterating through all possible candidates <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span>.</p>
-<div class="cell docutils container">
+For the initial choice y = 1 we can reject this candidate, because <span class="math notranslate nohighlight">\(p(y) \approx 0.038 &lt; 0.05 = \epsilon\)</span>.
+The complete <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> can then be constructed iterating through all possible candidates <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span>.</p>
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilities</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">calculate_probability</span><span class="p">(</span><span class="n">get_nonconformityScores</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
-                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilities</span> <span class="o">=</span> <span class="p">{</span><span class="n">possible_class</span><span class="p">:</span> <span class="n">calculate_probability</span><span class="p">(</span><span class="n">get_nonconformityScores</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">possible_class</span><span class="p">))</span>
+                 <span class="k">for</span> <span class="n">possible_class</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">}</span>
 
-<span class="n">Y_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="n">Y_epsilon</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
     <span class="p">[</span>
         <span class="n">prediction</span>
         <span class="k">for</span> <span class="n">prediction</span><span class="p">,</span><span class="n">probability</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">probability</span> <span class="o">&gt;=</span> <span class="mf">0.05</span>
     <span class="p">]</span>
 <span class="p">)</span>
-<span class="n">Y_hat</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediction set Y:&quot;</span><span class="p">,</span> <span class="n">Y_epsilon</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Conformal prediction as outlined above realizes transductive inference, although inductive variants also exist (<span id="id4">Papadopoulos [<a class="reference internal" href="../references.html#id1987" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">Pap08</a>]</span>).  The error bounds are valid and well calibrated by construction, regardless of the nonconformity function <span class="math notranslate nohighlight">\(f\)</span>. However, the choice of this function has an important influence on the <em>efficiency</em> of conformal prediction, that is, the size of prediction regions: The more suitable the nonconformity function is chosen, the smaller these sets will be.</p>
-<p>Although conformal prediction is mainly concerned with constructing prediction regions, the scores produced in the course of this construction can also be used for quantifying uncertainty. In this regard, the notions of <em>confidence</em> and <em>credibility</em> have been introduced (<span id="id5">Gammerman and Vovk [<a class="reference internal" href="../references.html#id2173" title="A. Gammerman and V. Vovk. Prediction algorithms and confidence measures based on algorithmic randomness theory. Theoretical Computer Science, 287:209–217, 2002.">GV02</a>]</span>): Let <span class="math notranslate nohighlight">\(p_1, \ldots , p_K\)</span> denote the <span class="math notranslate nohighlight">\(p\)</span>-values that correspond, respectively, to the candidate outcomes <span class="math notranslate nohighlight">\(y_1, \ldots , y_K\)</span> in a classification problem.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilities</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 0.019801980198019802,
- 1: 0.13861386138613863,
- 2: 0.1188118811881188,
- 3: 0.1188118811881188}
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_pointPrediction</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
-    <span class="n">y_hat</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediction set Y: {2, 4}
 </pre></div>
 </div>
 </div>
 </div>
 <div align="justify">
-<p>If a definite choice (point prediction) <span class="math notranslate nohighlight">\(\hat{y}\)</span> has to be made, it is natural to pick the <span class="math notranslate nohighlight">\(y_i\)</span> with the highest <span class="math notranslate nohighlight">\(p\)</span>-value. The value <span class="math notranslate nohighlight">\(p_i\)</span> itself is then a natural measure of credibility, since the larger (closer to 1) this value, the more likely the prediction is correct. Note that the value also corresponds to the largest significance level <span class="math notranslate nohighlight">\(\epsilon\)</span> for which the prediction region <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> would be empty (since all candidates would be rejected). In other words, it is a degree to which <span class="math notranslate nohighlight">\(y_i\)</span> is indeed a plausible candidate that cannot be excluded. Another question one may ask is to what extent <span class="math notranslate nohighlight">\(y_i\)</span> is the unique candidate of that kind, i.e., to what extent other candidates can indeed be excluded. This can be quantified in terms of the greatest <span class="math notranslate nohighlight">\(1 - \epsilon\)</span> for which <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> is the singleton set <span class="math notranslate nohighlight">\(\{ y_i \}\)</span>, that is, <span class="math notranslate nohighlight">\(1\)</span> minus the second-highest <span class="math notranslate nohighlight">\(p\)</span>-value. Besides, other methods for quantifying the uncertainty of a point prediction in the context of conformal prediction have been proposed (<span id="id6">Linusson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="H. Linusson, U. Johansson, H. Boström, and T. Löfström. Reliable confidence predictions using conformal prediction. In Proc. PAKDD, 20th Pacific-Asia Conference on Knowledge Discovery and Data Mining. Auckland, New Zealand, 2016.">LJBostromLofstrom16</a>]</span>).</p>
+<p>Conformal prediction as outlined above realizes transductive inference, although inductive variants also exist (<span id="id4">Papadopoulos [<a class="reference internal" href="../references.html#id1987" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">Pap08</a>]</span>). For transductive inference the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1}\)</span> have to re-calculated for each new proposal <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span>. In inductive inference this problem is solved by using an <em>calibration</em> dataset. Many packages have already been published implementing the inductive inference, such as <a class="reference external" href="https://mapie.readthedocs.io/en/latest/index.html">MAPIE</a>. We again use the above mentioned synthetic dataset and split it into <span class="math notranslate nohighlight">\(l\)</span> training, <span class="math notranslate nohighlight">\(N-l\)</span> testing points.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                                             <span class="n">y</span><span class="p">,</span>
+                                             <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                                             <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Synthetic Training Classification Data&quot;</span><span class="p">)</span>
+
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">x_new</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+<span class="c1"># produce a legend with the unique colors from the scatter</span>
+<span class="n">legend1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="o">*</span><span class="n">scatter</span><span class="o">.</span><span class="n">legend_elements</span><span class="p">(),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Classes&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">legend1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Feature 1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Feature 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" src="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" />
+</div>
+</div>
+<div align="justify">
+<p>In the next step we take an arbitrary classifier such as the <a class="reference external" href="https://scikit-learn.org/stable/modules/naive_bayes.html">Gaussian Naive Bayes classifier</a> and train it on the classification dataset. Then on the validation dataset the corresponding non-conformity scores are computed for which we use the wrapper <a class="reference external" href="https://mapie.readthedocs.io/en/latest/generated/mapie.classification.MapieClassifier.html#mapie.classification.MapieClassifier">MapieClassifier</a>. For this a corresponding non-conformity function <span class="math notranslate nohighlight">\(f\)</span> has to be defined.
+We will use the <em>Least Ambiguous Set-Valued Classifier</em> (LAC) method <span id="id5">Sadinle <em>et al.</em> [<a class="reference internal" href="../references.html#id2168" title="Mauricio Sadinle, Jing Lei, and Larry A. Wasserman. Least ambiguous set-valued classifiers with bounded error levels. CoRR, 2016. URL: http://arxiv.org/abs/1609.00451, arXiv:1609.00451.">SLW16</a>]</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    f(\vec{x},y) = 1 - \hath(\vec{x})_y
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hath\)</span> is a classifier and <span class="math notranslate nohighlight">\(\hath(x)_y\)</span> the probability of classifying the data point <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(y\)</span>.
+Applying this function to the validation dataset yields a sequence of non-conformity scores <span class="math notranslate nohighlight">\(\alpha_{l+1}, \, \alpha_{l+2}, \ldots , \alpha_{N-1}, \alpha_{N}\)</span> which can be represented by the below Histogram.</p>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>From an usage aspect is not necessary to split the data into train and validation beforehand.
+The <em>MapieClassifier</em> would do this automatically controlled by the parameter <code class="docutils literal notranslate"><span class="pre">cv</span></code>.
+Here we want to illustrate therefore we choose <code class="docutils literal notranslate"><span class="pre">cv=&quot;prefit&quot;</span></code></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">naive_bayes</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">naive_bayes</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">conformel_classifier</span> <span class="o">=</span> <span class="n">MapieClassifier</span><span class="p">(</span><span class="n">naive_bayes</span><span class="p">,</span>
+                                       <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lac&quot;</span><span class="p">,</span>
+                                       <span class="n">cv</span><span class="o">=</span><span class="s2">&quot;prefit&quot;</span><span class="p">,</span> 
+                                       <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+<span class="n">conformel_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">)</span>
+
+<span class="n">non_conformity_scores</span> <span class="o">=</span> <span class="n">conformel_classifier</span><span class="o">.</span><span class="n">conformity_scores_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the score distribution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Histogram of non-conformity scores&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;non_conformity scores&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/88cc799c7208232a9346f0fe96141f9947252af5b5c28289ec25bd38bff83a45.png" src="../_images/88cc799c7208232a9346f0fe96141f9947252af5b5c28289ec25bd38bff83a45.png" />
+</div>
+</div>
+<div align="justify">
+<p>Now given a <span class="math notranslate nohighlight">\(\epsilon\)</span> one can define based on the above distribution an threshold <span class="math notranslate nohighlight">\(q\)</span> such that all candidates <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span> can be rejected if <span class="math notranslate nohighlight">\(f(x_{N+1},y_{N+1}) \geq q\)</span>. The value of <span class="math notranslate nohighlight">\(q\)</span> is chosen such that <a class="reference internal" href="#equation-probability-y-highestnonconformity">(7)</a> holds. The resulting prediction set is as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+    Y^\epsilon = \{
+            y \given 1 - \hath(x_{N+1})_y \leq q
+        \}
+\]</div>
+<p>To calculate <span class="math notranslate nohighlight">\(q\)</span> one must think of a value such that <span class="math notranslate nohighlight">\((1-\epsilon)\)</span>% of the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_{l+1}, \, \alpha_{l+2}, \ldots , \alpha_{N-1}, \alpha_{N}, \alpha_{N+1}\)</span> are smaller then <span class="math notranslate nohighlight">\(q\)</span>.
+This is exactly what the <span class="math notranslate nohighlight">\((1-\epsilon)\)</span> quantile represents!
+Therefore to have our threshold q we calculate the <span class="math notranslate nohighlight">\(\frac{\lceil (N-l+1)*(1-\epsilon) \rceil}{n}\)</span> quantile on the sequence <span class="math notranslate nohighlight">\(\alpha_{l+1}, \, \alpha_{l+2}, \ldots , \alpha_{N-1}, \alpha_{N}\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[
+    q = \textit{Quantile}\left(\alpha_{l+1}, \, \alpha_{l+2}, \ldots , \alpha_{N-1}, \alpha_{N}, \frac{\lceil (N-l+1) (1-\epsilon) \rceil}{N-l}\right)
+\]</div>
+</div><div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># helper function converting the mapie output to a &quot;real&quot; prediction set</span>
+<span class="k">def</span> <span class="nf">to_predictionSet</span><span class="p">(</span><span class="n">predicton_set_indicator</span><span class="p">):</span>    
+    <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">n_alpha</span> <span class="o">=</span> <span class="n">predicton_set_indicator</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">prediction_sets_with_zero_fills</span> <span class="o">=</span> <span class="n">predicton_set_indicator</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">classes</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="n">datapoint_sets</span> <span class="o">=</span> <span class="p">[[]]</span> <span class="o">*</span> <span class="n">n_alpha</span> <span class="c1"># we need so many prediction sets for each data point as we defined alpha values</span>
+    <span class="n">prediction_sets</span> <span class="o">=</span><span class="p">[</span><span class="n">datapoint_sets</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_samples</span>
+    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">epsilon</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_alpha</span><span class="p">):</span>
+            <span class="n">current_mask</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">prediction_sets_with_zero_fills</span><span class="p">[</span><span class="n">sample</span><span class="p">,</span> <span class="p">:,</span> <span class="n">epsilon</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="p">)</span>  <span class="c1"># mask to indicate the classes included in set</span>
+            <span class="n">prediction_sets</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="n">epsilon</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">prediction_sets_with_zero_fills</span><span class="p">[</span>
+                <span class="n">sample</span><span class="p">,</span> <span class="p">:,</span> <span class="n">epsilon</span>
+            <span class="p">][</span>
+                <span class="n">current_mask</span>
+            <span class="p">])</span>  <span class="c1"># put these values in the prediction set</span>
+    <span class="k">return</span> <span class="n">prediction_sets</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point</span><span class="p">,</span> <span class="n">prediction_set_indicator</span> <span class="o">=</span> <span class="n">conformel_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="n">x_new</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>  <span class="c1"># note that what we denote as epsilon is called alpha in MAPIE. Also we can use mutliple epsilon values</span>
+<span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Point estimate: &quot;</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Prediction Indicator Set(epsilon=0.05; epsilon=0.1): </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">prediction_set_indicator</span>
+<span class="p">)</span>  <span class="c1"># The output indicates whether the corresponding class is contained in the set prediction set for the given epsilon niveau.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediction sets (epsilon=.05; epsilon=0.1): </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">to_predictionSet</span><span class="p">(</span><span class="n">predicton_set_indicator</span><span class="o">=</span><span class="n">prediction_set_indicator</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Point estimate:  [2]
+Prediction Indicator Set(epsilon=0.05; epsilon=0.1): 
+ [[[False False]
+  [ True False]
+  [False False]
+  [ True False]]]
+Prediction sets (epsilon=.05; epsilon=0.1): 
+ [[{2, 4}, set()]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To reproduce the above output one can retrace the individual steps.
+The first step is to calculate the quantile q.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_quantile</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span>
+        <span class="n">non_conformity_scores</span><span class="p">,</span>
+        <span class="n">q</span><span class="o">=</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">))</span>
+        <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">),</span>
+        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;higher&quot;</span><span class="p">,</span>  <span class="c1"># rounds the quantile to the upper value</span>
+    <span class="p">)</span>
+
+<span class="c1"># compute the threshold q such that only 5% proportion of the data is bigger than q</span>
+
+<span class="n">q_5percent</span> <span class="o">=</span> <span class="n">calculate_quantile</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold with epsilon=0.05: &quot;</span><span class="p">,</span> <span class="n">q_5percent</span><span class="p">)</span>
+
+<span class="n">q_10percent</span> <span class="o">=</span> <span class="n">calculate_quantile</span><span class="p">(</span><span class="n">non_conformity_scores</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold with epsilon=0.10: &quot;</span><span class="p">,</span> <span class="n">q_10percent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Threshold with epsilon=0.05:  0.7831678438712201
+Threshold with epsilon=0.10:  0.5646060878125463
+</pre></div>
+</div>
+</div>
+</div>
+<p>As for the next step we calculate the non-conformity scores for the data point <span class="math notranslate nohighlight">\(x_{N+1}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute non-conformity scores for the new data point x_(N+1)</span>
+<span class="n">non_conformity_scores_x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">naive_bayes</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x_new</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+    <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="p">)</span>
+<span class="c1"># Output the to 4 decimal places rounded non-conformity scores</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">score</span> <span class="ow">in</span> <span class="nb">enumerate</span> <span class="p">(</span><span class="n">non_conformity_scores_x</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Non-conformity score for y=</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-conformity score for y=1:  0.9137
+Non-conformity score for y=2:  0.5712
+Non-conformity score for y=3:  0.9026
+Non-conformity score for y=4:  0.6124
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the final step we construct the <span class="math notranslate nohighlight">\(Y^\epsilon\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prediction_set_5percent</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span>
+    <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">non_conformity_scores_x</span><span class="p">)</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="n">q_5percent</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediction set for epsilon = 5%: &quot;</span><span class="p">,</span> <span class="n">prediction_set_5percent</span><span class="p">)</span>
+
+<span class="n">prediction_set_10percent</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span>
+    <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">non_conformity_scores_x</span><span class="p">)</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="n">q_10percent</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediction set for epsilon = 10%: &quot;</span><span class="p">,</span> <span class="n">prediction_set_10percent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediction set for epsilon = 5%:  {2, 4}
+Prediction set for epsilon = 10%:  set()
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
 <p>With its main concern of constructing valid prediction regions, conformal prediction differs from most other machine learning methods, which produce point predictions <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, whether equipped with a degree of uncertainty or not. In a sense, conformal prediction can even be seen as being orthogonal: It predefines the degree of uncertainty (level of confidence) and adjusts its prediction correspondingly, rather than the other way around.</p>
+</div><section id="uncertainty-quantification-in-conformel-prediction">
+<h2>Uncertainty Quantification in Conformel prediction<a class="headerlink" href="#uncertainty-quantification-in-conformel-prediction" title="Link to this heading">#</a></h2>
+<div align="justify">
+<p>Although conformal prediction is mainly concerned with constructing prediction regions, the scores produced in the course of this construction can also be used for quantifying uncertainty. In this regard, the notions of <em>confidence</em> and <em>credibility</em> have been introduced (<span id="id6">Gammerman and Vovk [<a class="reference internal" href="../references.html#id2174" title="A. Gammerman and V. Vovk. Prediction algorithms and confidence measures based on algorithmic randomness theory. Theoretical Computer Science, 287:209–217, 2002.">GV02</a>]</span>): Let <span class="math notranslate nohighlight">\(p_1, \ldots , p_K\)</span> denote the <span class="math notranslate nohighlight">\(p\)</span>-values that correspond, respectively, to the candidate outcomes <span class="math notranslate nohighlight">\(y_1, \ldots , y_K\)</span> in a classification problem.
+In the transductive case the <span class="math notranslate nohighlight">\(p\)</span>-values are directly calculated, while here in the inductive we need to calculate them separately. Let us assume a <span class="math notranslate nohighlight">\(\epsilon=0.05\)</span>.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_p_values</span><span class="p">(</span><span class="n">non_conformity_scores_valdiation</span><span class="p">,</span> <span class="n">non_conformity_scores_newPoint</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">i</span>
+        <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">non_conformity_scores_valdiation</span> <span class="o">&gt;=</span> <span class="n">score</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">non_conformity_scores_valdiation</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># the +1 is for the score itself which is also part of the non-conformity score sequence in general but not in non_conformity_scores_valdiation</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">non_conformity_scores_newPoint</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="n">probabilities</span> <span class="o">=</span> <span class="n">get_p_values</span><span class="p">(</span>
+    <span class="n">non_conformity_scores_valdiation</span><span class="o">=</span><span class="n">non_conformity_scores</span><span class="p">,</span>
+    <span class="n">non_conformity_scores_newPoint</span><span class="o">=</span><span class="n">non_conformity_scores_x</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">y</span><span class="p">,</span><span class="n">p_y</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The probability of y = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> is p(y) = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">p_y</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The probability of y = 1 is p(y) = 0.037.
+The probability of y = 2 is p(y) = 0.099.
+The probability of y = 3 is p(y) = 0.037.
+The probability of y = 4 is p(y) = 0.099.
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<p>If a definite choice (point prediction) <span class="math notranslate nohighlight">\(\hat{y}\)</span> has to be made, it is natural to pick the <span class="math notranslate nohighlight">\(y_i\)</span> with the highest <span class="math notranslate nohighlight">\(p\)</span>-value. The value <span class="math notranslate nohighlight">\(p_i\)</span> itself is then a natural measure of credibility, since the larger (closer to 1) this value, the more likely the prediction is correct. Note that the value also corresponds to the largest significance level <span class="math notranslate nohighlight">\(\epsilon\)</span> for which the prediction region <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> would be empty (since all candidates would be rejected). In other words, it is a degree to which <span class="math notranslate nohighlight">\(y_i\)</span> is indeed a plausible candidate that cannot be excluded. Another question one may ask is to what extent <span class="math notranslate nohighlight">\(y_i\)</span> is the unique candidate of that kind, i.e., to what extent other candidates can indeed be excluded. This can be quantified in terms of the greatest <span class="math notranslate nohighlight">\(1 - \epsilon\)</span> for which <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> is the singleton set <span class="math notranslate nohighlight">\(\{ y_i \}\)</span>, that is, <span class="math notranslate nohighlight">\(1\)</span> minus the second-highest <span class="math notranslate nohighlight">\(p\)</span>-value. Besides, other methods for quantifying the uncertainty of a point prediction in the context of conformal prediction have been proposed (<span id="id7">Linusson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="H. Linusson, U. Johansson, H. Boström, and T. Löfström. Reliable confidence predictions using conformal prediction. In Proc. PAKDD, 20th Pacific-Asia Conference on Knowledge Discovery and Data Mining. Auckland, New Zealand, 2016.">LJBostromLofstrom16</a>]</span>).</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_pointPrediction</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">probabilities</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+    
+    <span class="n">sorted_probabilities</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">probabilities</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">credibility</span><span class="p">,</span> <span class="n">confidence</span> <span class="o">=</span> <span class="n">sorted_probabilities</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sorted_probabilities</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">y_hat</span><span class="p">,</span><span class="n">credibility</span><span class="p">,</span> <span class="n">confidence</span>
+
+<span class="n">y_hat</span><span class="p">,</span><span class="n">credibility</span><span class="p">,</span><span class="n">confidence</span> <span class="o">=</span> <span class="n">get_pointPrediction</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credibility: &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">credibility</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confidence: &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">confidence</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Point Prediction: &quot;</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Credibility:  0.099
+Confidence:  0.901
+Point Prediction:  2
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<p>From the above output we can deduce the model has a strong belief that it can exclude other class predictions but has low belief that 2 is the real class. The credibility can be seen as indication of epistemic uncertainty, as it indicates how good the training points are at classifying <span class="math notranslate nohighlight">\(x_{N+1}\)</span> <span id="id8">Papadopoulos [<a class="reference internal" href="../references.html#id1987" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">Pap08</a>]</span>.
+Therefore a low credibility indicates a high epistemic uncertainty.
+Confidence describes to how likely it is that the prediction is the true label. With a high confidence we can assume that the model is likely to have the true prediction, where the credibility indicates the (epistemic) uncertainty the model has in its prediction.
+Looking at the data point <span class="math notranslate nohighlight">\(x_{N+1}\)</span> in the above plot, we can see that it lies in the center of each cluster such that it is intuitive to have a high uncertainty regarding the prediction of that point.</p>
 </div><hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="revision" role="doc-footnote">
@@ -762,6 +1065,7 @@ The complete <span class="math notranslate nohighlight">\(Y\epsilon\)</span> can
 <p>Obviously, since <span class="math notranslate nohighlight">\(\mathcal{Y} = \mathbb{R}\)</span> is infinite in regression, a hypothesis test cannot be conducted explicitly for each candidate outcome <span class="math notranslate nohighlight">\(y\)</span>.</p>
 </aside>
 </aside>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -821,7 +1125,20 @@ The complete <span class="math notranslate nohighlight">\(Y\epsilon\)</span> can
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformel-prediction">Uncertainty Quantification in Conformel prediction</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
