@@ -572,13 +572,14 @@ we replace them into the Markdown format (See examples as below).</p>
 <tr class="row-odd"><td class="text-center"><p>\begin{equation}\label{xxx}…\end{equation}</p></td>
 <td class="text-center"><p>$$……$$(xxxx)</p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p>yyyyy.\footnote{xxxx}</p></td>
-<td class="text-center"><p>yyyyy.[^footNoteIdentifier] <em><code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">the</span> <span class="pre">last</span> <span class="pre">Markdown</span> <span class="pre">cell</span></code></em> [^footNoteIdentifier]: xxxxx</p></td>
+<tr class="row-even"><td class="text-center"><p>yyyyy\footnote{xxxx}.</p></td>
+<td class="text-center"><p>yyyyy[^footNoteIdentifier]. <em><code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">the</span> <span class="pre">last</span> <span class="pre">Markdown</span> <span class="pre">cell</span></code> or anywhere</em> [^footNoteIdentifier]: xxxxx</p></td>
 </tr>
 </tbody>
 </table>
-<p>Note that we follow the rule from the original paper,
-i.e. after the punctuation such as “.”.</p>
+<p>Note that we consistently apply the <code class="docutils literal notranslate"><span class="pre">footrule</span></code> before the punctuation such as “.”. <br />
+Also,
+there is no space between the last character and the [^footNoteIdentifier]</p>
 <section id="todo">
 <h3>TODO:<a class="headerlink" href="#todo" title="Link to this heading">#</a></h3>
 <ul class="simple">

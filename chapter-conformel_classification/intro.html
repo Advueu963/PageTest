@@ -444,7 +444,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformel-prediction">Uncertainty Quantification in Conformel prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-prediction">Uncertainty Quantification in Conformal prediction</a></li>
 </ul>
             </nav>
         </div>
@@ -466,18 +466,6 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
 
 <span class="kn">from</span> <span class="nn">mapie.classification</span> <span class="kn">import</span> <span class="n">MapieClassifier</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">mapie.classification</span> <span class="kn">import</span> <span class="n">MapieClassifier</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;mapie&#39;
 </pre></div>
 </div>
 </div>
@@ -506,7 +494,7 @@ Given a sequence of training observations and a new query <span class="math notr
 <span class="n">means</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
 <span class="n">covs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mf">2.5</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">3.5</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">])]</span>
 
-<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># This choice is the central point of conformel prediction</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># This choice is the central point of conformal prediction</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
@@ -537,7 +525,7 @@ Given a sequence of training observations and a new query <span class="math notr
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" src="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" />
+<img alt="../_images/fcce53cd64dd0e2214c75caaf0513f507aa59d66c40f918454ac499ac0c564da.png" src="../_images/fcce53cd64dd0e2214c75caaf0513f507aa59d66c40f918454ac499ac0c564da.png" />
 </div>
 </div>
 <div align="justify">
@@ -686,7 +674,7 @@ Applying this function to the sequence <a class="reference internal" href="#equa
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" src="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" />
+<img alt="../_images/f9f2399e0e0f3fa49436cd0574f193c50c78711a863f73c6390cdc3304be1ba2.png" src="../_images/f9f2399e0e0f3fa49436cd0574f193c50c78711a863f73c6390cdc3304be1ba2.png" />
 </div>
 </div>
 <div align="justify">
@@ -698,7 +686,7 @@ p(y)   := \frac{\# \{ i \given \alpha_i \geq \alpha_{N+1} \}}{N+1}
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_probability</span><span class="p">(</span><span class="n">nonconformity_sequence</span><span class="p">):</span>
-    <span class="c1"># calculate the proportion that atleast the new datapoints nonconformity score occurs.</span>
+    <span class="c1"># calculate the proportion that at least new data points nonconformity score occurs.</span>
     <span class="n">new_datapoint_nonconformityScore</span> <span class="o">=</span> <span class="n">nonconformity_sequence</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
         <span class="n">nonconformity_sequence</span> <span class="o">&gt;=</span> <span class="n">new_datapoint_nonconformityScore</span>
@@ -783,12 +771,12 @@ The complete <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> ca
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" src="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" />
+<img alt="../_images/63bfdf91cc68d94b4d09d2b55950596fc8c1d20d9e1b7c5d149dc311d5ec54b8.png" src="../_images/63bfdf91cc68d94b4d09d2b55950596fc8c1d20d9e1b7c5d149dc311d5ec54b8.png" />
 </div>
 </div>
 <div align="justify">
 <p>In the next step we take an arbitrary classifier such as the <a class="reference external" href="https://scikit-learn.org/stable/modules/naive_bayes.html">Gaussian Naive Bayes classifier</a> and train it on the classification dataset. Then on the validation dataset the corresponding non-conformity scores are computed for which we use the wrapper <a class="reference external" href="https://mapie.readthedocs.io/en/latest/generated/mapie.classification.MapieClassifier.html#mapie.classification.MapieClassifier">MapieClassifier</a>. For this a corresponding non-conformity function <span class="math notranslate nohighlight">\(f\)</span> has to be defined.
-We will use the <em>Least Ambiguous Set-Valued Classifier</em> (LAC) method <span id="id5">Sadinle <em>et al.</em> [<a class="reference internal" href="../references.html#id2168" title="Mauricio Sadinle, Jing Lei, and Larry A. Wasserman. Least ambiguous set-valued classifiers with bounded error levels. CoRR, 2016. URL: http://arxiv.org/abs/1609.00451, arXiv:1609.00451.">SLW16</a>]</span>.</p>
+We will use the <em>Least Ambiguous Set-Valued Classifier</em> (LAC) method from <span id="id5">Sadinle <em>et al.</em> [<a class="reference internal" href="../references.html#id2168" title="Mauricio Sadinle, Jing Lei, and Larry A. Wasserman. Least ambiguous set-valued classifiers with bounded error levels. CoRR, 2016. URL: http://arxiv.org/abs/1609.00451, arXiv:1609.00451.">SLW16</a>]</span>.</p>
 <div class="math notranslate nohighlight">
 \[
     f(\vec{x},y) = 1 - \hath(\vec{x})_y
@@ -806,13 +794,13 @@ Here we want to illustrate therefore we choose <code class="docutils literal not
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">naive_bayes</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
 <span class="n">naive_bayes</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">conformel_classifier</span> <span class="o">=</span> <span class="n">MapieClassifier</span><span class="p">(</span><span class="n">naive_bayes</span><span class="p">,</span>
+<span class="n">conformal_classifier</span> <span class="o">=</span> <span class="n">MapieClassifier</span><span class="p">(</span><span class="n">naive_bayes</span><span class="p">,</span>
                                        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lac&quot;</span><span class="p">,</span>
                                        <span class="n">cv</span><span class="o">=</span><span class="s2">&quot;prefit&quot;</span><span class="p">,</span> 
                                        <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
-<span class="n">conformel_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">)</span>
+<span class="n">conformal_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">)</span>
 
-<span class="n">non_conformity_scores</span> <span class="o">=</span> <span class="n">conformel_classifier</span><span class="o">.</span><span class="n">conformity_scores_</span>
+<span class="n">non_conformity_scores</span> <span class="o">=</span> <span class="n">conformal_classifier</span><span class="o">.</span><span class="n">conformity_scores_</span>
 </pre></div>
 </div>
 </div>
@@ -838,7 +826,7 @@ Here we want to illustrate therefore we choose <code class="docutils literal not
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/88cc799c7208232a9346f0fe96141f9947252af5b5c28289ec25bd38bff83a45.png" src="../_images/88cc799c7208232a9346f0fe96141f9947252af5b5c28289ec25bd38bff83a45.png" />
+<img alt="../_images/8bd04bdab0433d77b0fa7a046bc81892e2ddcb8f367ab90d7891721ea0628b23.png" src="../_images/8bd04bdab0433d77b0fa7a046bc81892e2ddcb8f367ab90d7891721ea0628b23.png" />
 </div>
 </div>
 <div align="justify">
@@ -864,10 +852,10 @@ Therefore to have our threshold q we calculate the <span class="math notranslate
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># helper function converting the mapie output to a &quot;real&quot; prediction set</span>
-<span class="k">def</span> <span class="nf">to_predictionSet</span><span class="p">(</span><span class="n">predicton_set_indicator</span><span class="p">):</span>    
-    <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">n_alpha</span> <span class="o">=</span> <span class="n">predicton_set_indicator</span><span class="o">.</span><span class="n">shape</span>
+<span class="k">def</span> <span class="nf">to_predictionSet</span><span class="p">(</span><span class="n">prediction_set_indicator</span><span class="p">):</span>    
+    <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">n_alpha</span> <span class="o">=</span> <span class="n">prediction_set_indicator</span><span class="o">.</span><span class="n">shape</span>
 
-    <span class="n">prediction_sets_with_zero_fills</span> <span class="o">=</span> <span class="n">predicton_set_indicator</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">classes</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">prediction_sets_with_zero_fills</span> <span class="o">=</span> <span class="n">prediction_set_indicator</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">classes</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
 
     <span class="n">datapoint_sets</span> <span class="o">=</span> <span class="p">[[]]</span> <span class="o">*</span> <span class="n">n_alpha</span> <span class="c1"># we need so many prediction sets for each data point as we defined alpha values</span>
     <span class="n">prediction_sets</span> <span class="o">=</span><span class="p">[</span><span class="n">datapoint_sets</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_samples</span>
@@ -889,7 +877,7 @@ Therefore to have our threshold q we calculate the <span class="math notranslate
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point</span><span class="p">,</span> <span class="n">prediction_set_indicator</span> <span class="o">=</span> <span class="n">conformel_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point</span><span class="p">,</span> <span class="n">prediction_set_indicator</span> <span class="o">=</span> <span class="n">conformal_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
     <span class="n">x_new</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
     <span class="n">alpha</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>  <span class="c1"># note that what we denote as epsilon is called alpha in MAPIE. Also we can use mutliple epsilon values</span>
 <span class="p">)</span> 
@@ -897,7 +885,7 @@ Therefore to have our threshold q we calculate the <span class="math notranslate
 <span class="nb">print</span><span class="p">(</span>
     <span class="s2">&quot;Prediction Indicator Set(epsilon=0.05; epsilon=0.1): </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">prediction_set_indicator</span>
 <span class="p">)</span>  <span class="c1"># The output indicates whether the corresponding class is contained in the set prediction set for the given epsilon niveau.</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediction sets (epsilon=.05; epsilon=0.1): </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">to_predictionSet</span><span class="p">(</span><span class="n">predicton_set_indicator</span><span class="o">=</span><span class="n">prediction_set_indicator</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediction sets (epsilon=.05; epsilon=0.1): </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">to_predictionSet</span><span class="p">(</span><span class="n">prediction_set_indicator</span><span class="o">=</span><span class="n">prediction_set_indicator</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -989,23 +977,23 @@ Prediction set for epsilon = 10%:  set()
 </div>
 <div align="justify">
 <p>With its main concern of constructing valid prediction regions, conformal prediction differs from most other machine learning methods, which produce point predictions <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, whether equipped with a degree of uncertainty or not. In a sense, conformal prediction can even be seen as being orthogonal: It predefines the degree of uncertainty (level of confidence) and adjusts its prediction correspondingly, rather than the other way around.</p>
-</div><section id="uncertainty-quantification-in-conformel-prediction">
-<h2>Uncertainty Quantification in Conformel prediction<a class="headerlink" href="#uncertainty-quantification-in-conformel-prediction" title="Link to this heading">#</a></h2>
+</div><section id="uncertainty-quantification-in-conformal-prediction">
+<h2>Uncertainty Quantification in Conformal prediction<a class="headerlink" href="#uncertainty-quantification-in-conformal-prediction" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Although conformal prediction is mainly concerned with constructing prediction regions, the scores produced in the course of this construction can also be used for quantifying uncertainty. In this regard, the notions of <em>confidence</em> and <em>credibility</em> have been introduced (<span id="id6">Gammerman and Vovk [<a class="reference internal" href="../references.html#id2174" title="A. Gammerman and V. Vovk. Prediction algorithms and confidence measures based on algorithmic randomness theory. Theoretical Computer Science, 287:209–217, 2002.">GV02</a>]</span>): Let <span class="math notranslate nohighlight">\(p_1, \ldots , p_K\)</span> denote the <span class="math notranslate nohighlight">\(p\)</span>-values that correspond, respectively, to the candidate outcomes <span class="math notranslate nohighlight">\(y_1, \ldots , y_K\)</span> in a classification problem.
 In the transductive case the <span class="math notranslate nohighlight">\(p\)</span>-values are directly calculated, while here in the inductive we need to calculate them separately. Let us assume a <span class="math notranslate nohighlight">\(\epsilon=0.05\)</span>.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_p_values</span><span class="p">(</span><span class="n">non_conformity_scores_valdiation</span><span class="p">,</span> <span class="n">non_conformity_scores_newPoint</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_p_values</span><span class="p">(</span><span class="n">non_conformity_scores_validation</span><span class="p">,</span> <span class="n">non_conformity_scores_newPoint</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="n">i</span>
-        <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">non_conformity_scores_valdiation</span> <span class="o">&gt;=</span> <span class="n">score</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">non_conformity_scores_valdiation</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="c1"># the +1 is for the score itself which is also part of the non-conformity score sequence in general but not in non_conformity_scores_valdiation</span>
+        <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">non_conformity_scores_validation</span> <span class="o">&gt;=</span> <span class="n">score</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">non_conformity_scores_validation</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># the +1 is for the score itself which is also part of the non-conformity score sequence in general but not in non_conformity_scores_validation</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">non_conformity_scores_newPoint</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="n">probabilities</span> <span class="o">=</span> <span class="n">get_p_values</span><span class="p">(</span>
-    <span class="n">non_conformity_scores_valdiation</span><span class="o">=</span><span class="n">non_conformity_scores</span><span class="p">,</span>
+    <span class="n">non_conformity_scores_validation</span><span class="o">=</span><span class="n">non_conformity_scores</span><span class="p">,</span>
     <span class="n">non_conformity_scores_newPoint</span><span class="o">=</span><span class="n">non_conformity_scores_x</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">for</span> <span class="n">y</span><span class="p">,</span><span class="n">p_y</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1050,7 +1038,7 @@ Point Prediction:  2
 </div>
 </div>
 <div align="justify">
-<p>From the above output we can deduce the model has a strong belief that it can exclude other class predictions but has low belief that 2 is the real class. The credibility can be seen as indication of epistemic uncertainty, as it indicates how good the training points are at classifying <span class="math notranslate nohighlight">\(x_{N+1}\)</span> <span id="id8">Papadopoulos [<a class="reference internal" href="../references.html#id1987" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">Pap08</a>]</span>.
+<p>From the above output we can deduce the model has a strong belief that it can exclude other class predictions but has low belief that 2 is the real class. The credibility can be seen as indication of epistemic uncertainty, as it indicates how good the training points are at classifying <span class="math notranslate nohighlight">\(x_{N+1}\)</span> (<span id="id8">Papadopoulos [<a class="reference internal" href="../references.html#id1987" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">Pap08</a>]</span>).
 Therefore a low credibility indicates a high epistemic uncertainty.
 Confidence describes to how likely it is that the prediction is the true label. With a high confidence we can assume that the model is likely to have the true prediction, where the credibility indicates the (epistemic) uncertainty the model has in its prediction.
 Looking at the data point <span class="math notranslate nohighlight">\(x_{N+1}\)</span> in the above plot, we can see that it lies in the center of each cluster such that it is intuitive to have a high uncertainty regarding the prediction of that point.</p>
@@ -1134,7 +1122,7 @@ Looking at the data point <span class="math notranslate nohighlight">\(x_{N+1}\)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformel-prediction">Uncertainty Quantification in Conformel prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-prediction">Uncertainty Quantification in Conformal prediction</a></li>
 </ul>
   </nav></div>
 
