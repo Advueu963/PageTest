@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-scoring/scoring';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Probability Estimation via Calibration" href="../chapter-pe-calibration/calibration.html" />
+    <link rel="next" title="Proper Scoring Rules" href="proper_scoring_rules.html" />
     <link rel="prev" title="Modelling Approximation Uncertainty" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,17 +184,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Estimation via Scoring</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Probability Estimation via Scoring</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="proper_scoring_rules.html">Proper Scoring Rules</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation via Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation via Ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/intro.html">Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
@@ -444,16 +447,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-logistic-regression">1. Example: Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bayesian-networks">3. Example: Bayesian networks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gaussian-processes">4. Example: Gaussian Processes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-deep-neural-networks">5. Example: (Deep) Neural Networks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-naive-bayes">6. Example: Naïve Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nearest-neighbor-classification">7. Example: Nearest Neighbor Classification</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-scoring-rule">Logarithmic Scoring Rule</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
 </ul>
             </nav>
         </div>
@@ -471,26 +467,23 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">from</span> <span class="nn">properscoring</span> <span class="kn">import</span> <span class="n">crps_ensemble</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span><span class="p">,</span> <span class="n">make_regression</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LinearRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">brier_score_loss</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span><span class="p">,</span> <span class="n">average_precision_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">brier_score_loss</span><span class="p">,</span> <span class="n">r2_score</span>
 
 <span class="kn">from</span> <span class="nn">pgmpy.models</span> <span class="kn">import</span> <span class="n">BayesianNetwork</span>
 <span class="kn">from</span> <span class="nn">pgmpy.factors.discrete</span> <span class="kn">import</span> <span class="n">TabularCPD</span>
 <span class="kn">from</span> <span class="nn">pgmpy.inference</span> <span class="kn">import</span> <span class="n">VariableElimination</span>
-
-<span class="c1"># Paper Page 21</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div align="justify">
 <p>There are various methods in machine learning for inducing probabilistic predictors.
 These are hypotheses <span class="math notranslate nohighlight">\(h\)</span> that do not merely output point predictions <span class="math notranslate nohighlight">\(h(\vec{x}) \in \mathcal{Y}\)</span>,
 i.e., elements of the output space <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>,
@@ -504,28 +497,104 @@ i.e., in the form of a mapping <span class="math notranslate nohighlight">\(\vec
 or in a generative way, which essentially means learning a joint distribution on <span class="math notranslate nohighlight">\(\mathcal{X} \times \mathcal{Y}\)</span>.
 Moreover, the approaches can be parametric (assuming specific parametric families of probability distributions) or non-parametric.
 Well-known examples include classical statistical methods such as logistic and linear regression,
-Bayesian approaches such as Bayesian networks and Gaussian processes, <!-- (cf.\ Section \ref{sec:gp}),  -->
-as well as various techniques in the realm of (deep) neural networks.</p>
-<!-- (cf.\ Section \ref{sec:m1}).  --><section id="example-logistic-regression">
-<h2>1. Example: Logistic Regression<a class="headerlink" href="#example-logistic-regression" title="Link to this heading">#</a></h2>
+Bayesian approaches such as Bayesian networks and Gaussian processes (see <a class="reference external" href="https://advueu963.github.io/PageTest/chapter-gaussianprocess/intro.html">here</a>),
+as well as various techniques in the realm of (deep) neural networks (cf. <span class="xref std std-doc">chapter-deep_neuralnetwork/dnn</span>).</p>
+</div><div align="justify">
+<p>Training probabilistic predictors is typically accomplished by minimizing suitable loss functions,
+i.e., loss functions that enforce “correct” (conditional) probabilities as predictions.
+In this regard,
+<a class="reference internal" href="proper_scoring_rules.html"><span class="doc">Proper Scoring Rules</span></a> (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)
+play an important role,
+including the log-loss as a well-known special case.
+Sometimes, however, estimates are also obtained in a very simple way,
+following basic frequentist techniques for probability estimation,
+like in Naïve Bayes or nearest neighbor classification.</p>
+</div><section id="example-probabilistic-predictor-with-logistic-regression">
+<h2>1. Example: Probabilistic Predictor with Logistic Regression<a class="headerlink" href="#example-probabilistic-predictor-with-logistic-regression" title="Link to this heading">#</a></h2>
+<div align="justify">
 <p>Logistic regression is a widely used supervised machine learning method for binary classification that provides probabilistic outputs.
-Below is an example using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p>
-<div class="cell docutils container">
+Below is an example using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Let us first make a synthetic binary classification dataset.
+Since the dataset has 20 features,
+it can be challenging to visualize all features at once. Instead, we use the first two features for a simple scatter plot.</p>
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="n">X_2d</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> 
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_2d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Synthetic Binary Classification Dataset&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.8500
+<img alt="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" src="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" />
+</div>
+</div>
+<div align="justify">
+<p>Below we plot the decision boundary for a logistic regression model using the first two features as well.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="mf">.02</span>
+<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X_2d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X_2d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X_2d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X_2d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+
+<span class="n">Z</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Decision Boundary (First Two Features)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3p/bdr8j4td0z9bjg8_ngvzj9600000gn/T/ipykernel_68921/2650500348.py:15: UserWarning: You passed a edgecolor/edgecolors (&#39;k&#39;) for an unfilled marker (&#39;x&#39;).  Matplotlib is ignoring the edgecolor in favor of the facecolor.  This behavior may change in the future.
+  plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, edgecolor=&#39;k&#39;, marker=&#39;x&#39;, alpha=0.5, label=&#39;Test&#39;)
+</pre></div>
+</div>
+<img alt="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" src="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">p_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">loss</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">brier_score</span> <span class="o">=</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">)</span>
+<span class="n">log_score</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_pred</span><span class="p">[</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Log Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Brier Score: </span><span class="si">{</span><span class="n">brier_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logarithmic Score: </span><span class="si">{</span><span class="n">log_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log Loss: 0.5899
+Accuracy: 0.6850
+Brier Score: 0.2039
+Logarithmic Score: 0.6852
 </pre></div>
 </div>
 </div>
@@ -533,24 +602,88 @@ Below is an example using <code class="docutils literal notranslate"><span class
 </section>
 <section id="example-linear-regression">
 <h2>2. Example: Linear Regression<a class="headerlink" href="#example-linear-regression" title="Link to this heading">#</a></h2>
-<p>In statistics, linear regression is a statistical model used for predicting a continuous target variable.</p>
-<div class="cell docutils container">
+<div align="justify">
+<p>In statistics, linear regression is a statistical model used for predicting a continuous target variable. Let us also plot a synthetic regression dataset first.</p>
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Example: Linear Regression</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Synthetic Regression Dataset&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 0.0107
+<img alt="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" src="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" />
+</div>
+</div>
+<div align="justify">
+<p>Similarly, we train a linear regressor on this dataset and plot them.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Regressor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Linear Regression on the Synthetic Dataset&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" src="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" />
+</div>
+</div>
+<div align="justify">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We here calculate the Mean Squared Error (MSE), <span class="math notranslate nohighlight">\(R^2\)</span>, and Continuous Ranked Probability Score (CRPS) for this regression problem because Brier Score and Logarithmic Score are typically used for probabilistic classification models.</p>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crps</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">y_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+    <span class="n">crps_values</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">)):</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="n">y_std</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">term1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">obs</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span>
+        <span class="n">term2</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+        <span class="n">term3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">((</span><span class="n">obs</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">crps_value</span> <span class="o">=</span> <span class="n">term1</span> <span class="o">+</span> <span class="n">term2</span> <span class="o">-</span> <span class="n">term3</span>
+        <span class="n">crps_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">crps_value</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">crps_values</span><span class="p">)</span>
+
+<span class="n">crps_score</span> <span class="o">=</span> <span class="n">crps</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Continuous Ranked Probability Score: </span><span class="si">{</span><span class="n">crps_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R^2 Score: </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Continuous Ranked Probability Score: 0.7551
+Mean Squared Error: 0.9338
+R^2 Score: 0.7647
 </pre></div>
 </div>
 </div>
@@ -563,10 +696,24 @@ Below is an example using <code class="docutils literal notranslate"><span class
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  (UAIML: Slides 31&amp;32)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">BayesianNetwork</span><span class="p">([(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X3&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="s1">&#39;X4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;X3&#39;</span><span class="p">,</span> <span class="s1">&#39;X4&#39;</span><span class="p">)])</span>
 
-<span class="n">cpd_X1</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.6</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">]])</span>
-<span class="n">cpd_X2</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]],</span> <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">cpd_X3</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X3&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]],</span> <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">cpd_X4</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X4&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]],</span> <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="s1">&#39;X3&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">cpd_X1</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> 
+                    <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                    <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.6</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">]])</span>
+<span class="n">cpd_X2</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span> 
+                    <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                    <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]],</span> 
+                    <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">],</span> 
+                    <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">cpd_X3</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X3&#39;</span><span class="p">,</span> 
+                    <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                    <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]],</span> 
+                    <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">],</span> 
+                    <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">cpd_X4</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;X4&#39;</span><span class="p">,</span> 
+                    <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                    <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]],</span> 
+                    <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="s1">&#39;X3&#39;</span><span class="p">],</span> 
+                    <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">add_cpds</span><span class="p">(</span><span class="n">cpd_X1</span><span class="p">,</span> <span class="n">cpd_X2</span><span class="p">,</span> <span class="n">cpd_X3</span><span class="p">,</span> <span class="n">cpd_X4</span><span class="p">)</span>
 
@@ -577,12 +724,11 @@ Below is an example using <code class="docutils literal notranslate"><span class
 <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X3&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="s1">&#39;X4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;X3&#39;</span><span class="p">,</span> <span class="s1">&#39;X4&#39;</span><span class="p">)])</span>
 
 <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bayesian Network Structure&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">inference</span> <span class="o">=</span> <span class="n">VariableElimination</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-
 <span class="n">result</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X4&#39;</span><span class="p">],</span> <span class="n">evidence</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -590,7 +736,7 @@ Below is an example using <code class="docutils literal notranslate"><span class
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/da33434a6816a8f140b6ed8378d74ec7821a24a894ebb647f2fab5ef7b2a1cd1.png" src="../_images/da33434a6816a8f140b6ed8378d74ec7821a24a894ebb647f2fab5ef7b2a1cd1.png" />
+<img alt="../_images/2246ffdd4cbbf6f04ffc107949758852a55fa1ef668f987fc465849fe9e9aad7.png" src="../_images/2246ffdd4cbbf6f04ffc107949758852a55fa1ef668f987fc465849fe9e9aad7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------+-----------+
 | X4    |   phi(X4) |
 +=======+===========+
@@ -603,94 +749,8 @@ Below is an example using <code class="docutils literal notranslate"><span class
 </div>
 </div>
 </section>
-<section id="example-gaussian-processes">
-<h2>4. Example: Gaussian Processes<a class="headerlink" href="#example-gaussian-processes" title="Link to this heading">#</a></h2>
-</section>
-<section id="example-deep-neural-networks">
-<h2>5. Example: (Deep) Neural Networks<a class="headerlink" href="#example-deep-neural-networks" title="Link to this heading">#</a></h2>
-<p>Training probabilistic predictors is typically accomplished by minimizing suitable loss functions,
-i.e., loss functions that enforce “correct” (conditional) probabilities as predictions.
-In this regard,
-proper scoring rules (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)
-play an important role,
-including the log-loss as a well-known special case.
-Sometimes, however, estimates are also obtained in a very simple way,
-following basic frequentist techniques for probability estimation,
-like in Naïve Bayes or nearest neighbor classification.</p>
-</section>
-<section id="example-naive-bayes">
-<h2>6. Example: Naïve Bayes<a class="headerlink" href="#example-naive-bayes" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (UAIML: Slides 30)</span>
-</pre></div>
+<div class="toctree-wrapper compound">
 </div>
-</div>
-</div>
-</section>
-<section id="example-nearest-neighbor-classification">
-<h2>7. Example: Nearest Neighbor Classification<a class="headerlink" href="#example-nearest-neighbor-classification" title="Link to this heading">#</a></h2>
-</section>
-<section id="logarithmic-scoring-rule">
-<h2>Logarithmic Scoring Rule<a class="headerlink" href="#logarithmic-scoring-rule" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
-
-<span class="n">log_score</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_pred</span><span class="p">[</span><span class="n">y_true</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Log Score: </span><span class="si">{</span><span class="n">log_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log Score: 0.7136
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="brier-score">
-<h2>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
-
-<span class="n">brier_score</span> <span class="o">=</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Brier Score: </span><span class="si">{</span><span class="n">brier_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brier Score: 0.2967
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="continuous-ranked-probability-score">
-<h2>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.5</span><span class="p">])</span>
-
-<span class="n">predicted_ensemble</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">]])</span>
-
-<span class="n">crps_score</span> <span class="o">=</span> <span class="n">crps_ensemble</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">predicted_ensemble</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Continuous Ranked Probability Score: </span><span class="si">{</span><span class="n">crps_score</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Continuous Ranked Probability Score: 0.1000
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -733,11 +793,11 @@ like in Naïve Bayes or nearest neighbor classification.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../chapter-pe-calibration/calibration.html"
+       href="proper_scoring_rules.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Probability Estimation via Calibration</p>
+        <p class="prev-next-title">Proper Scoring Rules</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -757,16 +817,9 @@ like in Naïve Bayes or nearest neighbor classification.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-logistic-regression">1. Example: Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bayesian-networks">3. Example: Bayesian networks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gaussian-processes">4. Example: Gaussian Processes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-deep-neural-networks">5. Example: (Deep) Neural Networks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-naive-bayes">6. Example: Naïve Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nearest-neighbor-classification">7. Example: Nearest Neighbor Classification</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-scoring-rule">Logarithmic Scoring Rule</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
 </ul>
   </nav></div>
 

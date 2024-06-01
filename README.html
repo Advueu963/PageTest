@@ -182,17 +182,20 @@
 <li class="toctree-l1"><a class="reference internal" href="chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter-pe-scoring/proper_scoring_rules.html">Proper Scoring Rules</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-pe-calibration/calibration.html">Probability Estimation via Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-pe-ensemble/ensemble.html">Probability Estimation via Ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter-deep_neuralnetwork/intro.html">Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
@@ -524,7 +527,13 @@ Thus all chapters of <mainPage> are structured before the chapters of subPages (
 <p>We use one <code class="docutils literal notranslate"><span class="pre">#</span></code> <strong>once</strong> for the main title of each chapter.
 For additional subtitles, we add one more <code class="docutils literal notranslate"><span class="pre">#</span></code> then (i.e., <code class="docutils literal notranslate"><span class="pre">##</span></code> and <code class="docutils literal notranslate"><span class="pre">###</span></code>, better no <code class="docutils literal notranslate"><span class="pre">####</span></code> for simplicity).</p>
 <p>Note that we do <strong>not</strong> add <code class="docutils literal notranslate"><span class="pre">#</span></code> for the content in each Markdown cell,
-which means, we create pure <code class="docutils literal notranslate"><span class="pre">latex-like</span></code> texts which align with the survey paper.</p>
+which means, we create pure <code class="docutils literal notranslate"><span class="pre">latex-like</span></code> texts which align with the survey paper.
+For a better view and alignment, we add the following in each contextual <code class="docutils literal notranslate"><span class="pre">Markdown</span> <span class="pre">cell</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">div</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;justify&quot;</span><span class="o">&gt;</span>
+
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</pre></div>
+</div>
 <p>We add an extra <code class="docutils literal notranslate"><span class="pre">sub-chapter</span></code> (another <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file) in chapter folders for additional information or examples.</p>
 <p>Import packages in the first code cell on the page at the top.</p>
 <p>For code cells, if we use any python packages,
@@ -583,6 +592,7 @@ there is no space between the last character and the [^footNoteIdentifier]</p>
 <section id="todo">
 <h3>TODO:<a class="headerlink" href="#todo" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>plot size</p></li>
 <li><p>cf.\ Section</p></li>
 <li><p>domain name (feedback link)</p></li>
 </ul>

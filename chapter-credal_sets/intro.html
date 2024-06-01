@@ -184,17 +184,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter-pe-scoring/proper_scoring_rules.html">Proper Scoring Rules</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation via Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation via Ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/intro.html">Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
@@ -491,8 +494,8 @@ the multinomial distribution (Bernardo, 2005).</p>
 </div>
 <p>Methods of that kind have also been used in the context of machine learning, for example in the framework of the Na”ive Credal Classifier \citep{zaffalon2002,cora_lr08} or more recently as an extension of sum-product networks \citep{dera_cs17}. As for the former, we can think of a Na”ive Bayes (NB) classifier as a hypothesis <span class="math notranslate nohighlight">\(h = h_{\vec{\theta}}\)</span> specified by a parameter vector <span class="math notranslate nohighlight">\({\vec{\theta}}\)</span> that comprises a prior probability <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class <span class="math notranslate nohighlight">\(y_k \in \set{Y}\)</span> and a conditional probability <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> for observing the <span class="math notranslate nohighlight">\(i^{th}\)</span> value <span class="math notranslate nohighlight">\(a_{i,j}\)</span> of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. For a given query instance specified by attributes <span class="math notranslate nohighlight">\((a_{i_1,1}, \ldots , a_{i_J,J})\)</span>, the posterior class probabilities are then given by
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ce2c01e-283f-4b15-aad4-3e760d9204f6">
-<span class="eqno">(4)<a class="headerlink" href="#equation-9ce2c01e-283f-4b15-aad4-3e760d9204f6" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
+<div class="amsmath math notranslate nohighlight" id="equation-77fd5aca-d0a4-4b40-9e4d-a1c0d1026bb7">
+<span class="eqno">(4)<a class="headerlink" href="#equation-77fd5aca-d0a4-4b40-9e4d-a1c0d1026bb7" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
 p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_j,j,k} \, .
 \end{equation}\]</div>
 <p>$$</p>
@@ -571,8 +574,8 @@ H(A) = \log( |A|)  \, ,
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{m}_Q: \,  2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> is the M”obius inverse of the capacity function <span class="math notranslate nohighlight">\(\nu :\, 2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> defined by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bc125cac-1ca8-49f4-8480-e6bfa8651fda">
-<span class="eqno">(5)<a class="headerlink" href="#equation-bc125cac-1ca8-49f4-8480-e6bfa8651fda" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
+<div class="amsmath math notranslate nohighlight" id="equation-e5001014-f901-4433-8bf8-7e626260f0d9">
+<span class="eqno">(5)<a class="headerlink" href="#equation-e5001014-f901-4433-8bf8-7e626260f0d9" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
 \nu_Q(A) \defeq \inf_{q \in Q} q(A) 
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(A \subseteq \mathcal{Y}\)</span>, that is,</p>
