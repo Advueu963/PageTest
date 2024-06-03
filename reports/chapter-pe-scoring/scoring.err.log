@@ -18,37 +18,31 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-def hartley_measure(A):
-    return np.log2(len(A))
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+import networkx as nx
 
-A = {1, 2, 3, 4}
-hartley_measure(A)
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.metrics import log_loss, mean_squared_error
+from sklearn.metrics import accuracy_score, brier_score_loss, r2_score
 
-set_sizes = range(1, 11)
-hartley_values = [hartley_measure(set(range(1, size + 1))) for size in set_sizes]
-
-plt.figure(figsize=(8, 4))
-plt.plot(set_sizes, hartley_values, marker='o')
-plt.title('Hartley Measure')
-plt.xlabel('Set Size')
-plt.ylabel('Hartley Measure (log2)')
-plt.grid(True)
-plt.show()
+from pgmpy.models import BayesianNetwork
+from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[4], line 5[0m
-[1;32m      2[0m     [38;5;28;01mreturn[39;00m np[38;5;241m.[39mlog2([38;5;28mlen[39m(A))
-[1;32m      4[0m A [38;5;241m=[39m {[38;5;241m1[39m, [38;5;241m2[39m, [38;5;241m3[39m, [38;5;241m4[39m}
-[0;32m----> 5[0m hartley_measure(A)
-[1;32m      7[0m set_sizes [38;5;241m=[39m [38;5;28mrange[39m([38;5;241m1[39m, [38;5;241m11[39m)
-[1;32m      8[0m hartley_values [38;5;241m=[39m [hartley_measure([38;5;28mset[39m([38;5;28mrange[39m([38;5;241m1[39m, size [38;5;241m+[39m [38;5;241m1[39m))) [38;5;28;01mfor[39;00m size [38;5;129;01min[39;00m set_sizes]
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 12[0m
+[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmetrics[39;00m [38;5;28;01mimport[39;00m log_loss, mean_squared_error
+[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmetrics[39;00m [38;5;28;01mimport[39;00m accuracy_score, brier_score_loss, r2_score
+[0;32m---> 12[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpgmpy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodels[39;00m [38;5;28;01mimport[39;00m BayesianNetwork
+[1;32m     13[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpgmpy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfactors[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdiscrete[39;00m [38;5;28;01mimport[39;00m TabularCPD
+[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpgmpy[39;00m[38;5;21;01m.[39;00m[38;5;21;01minference[39;00m [38;5;28;01mimport[39;00m VariableElimination
 
-Cell [0;32mIn[4], line 2[0m, in [0;36mhartley_measure[0;34m(A)[0m
-[1;32m      1[0m [38;5;28;01mdef[39;00m [38;5;21mhartley_measure[39m(A):
-[0;32m----> 2[0m     [38;5;28;01mreturn[39;00m np[38;5;241m.[39mlog2([38;5;28mlen[39m(A))
-
-[0;31mNameError[0m: name 'np' is not defined
+[0;31mModuleNotFoundError[0m: No module named 'pgmpy'
 
