@@ -69,6 +69,8 @@ launch_buttons:
 latex:
   latex_documents:
     targetname: book.tex
+  custom_preamble:
+    _preamble.tex
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
