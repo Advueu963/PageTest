@@ -24,6 +24,10 @@ chapters:
 - file: chapter-generative_models/intro
 - file: chapter-gaussianprocess/intro
 - file: chapter-deep_neuralnetwork/intro
+- file: chapter-bayesian_neural_network
+  sections:
+  - file: chapter-bayesian_neural_network/intro
+  - file: chapter-bayesian_neural_network/example
 - file: chapter-credal_sets/intro
 - file: chapter-reliable_classification/intro
 - file: chapter-conformel_classification/intro
