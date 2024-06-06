@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Probability Estimation via Ensemble &#8212; My sample book</title>
+    <title>Set-based versus distributional representations &#8212; My sample book</title>
   
   
   
@@ -59,11 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-ensemble/ensemble';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-modelingAproxUncertainty/set-based-versus-distributional-representations';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Maximum Likelihood and Fisher Information" href="../chapter-mle_and_fisher/intro.html" />
-    <link rel="prev" title="Probability Estimation via Calibration" href="../chapter-pe-calibration/calibration.html" />
+    <link rel="next" title="Probability Estimation via Scoring" href="../chapter-pe-scoring/scoring.html" />
+    <link rel="prev" title="Modelling Approximation Uncertainty" href="modelingAproxUncertainty.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,8 +183,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">Set-based versus distributional representations</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Set-based versus distributional representations</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -192,7 +192,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation via Calibration</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Estimation via Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation via Ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
@@ -261,7 +261,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-pe-ensemble/ensemble.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +309,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-pe-ensemble/ensemble.ipynb" target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +326,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-pe-ensemble/ensemble.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -356,7 +356,7 @@
       
       
       
-      <li><a href="../_sources/chapter-pe-ensemble/ensemble.ipynb" target="_blank"
+      <li><a href="../_sources/chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -427,7 +427,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -438,11 +440,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Probability Estimation via Ensemble</h1>
+    <h1>Set-based versus distributional representations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-on-uncertainty-modeling">Background on uncertainty modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-versus-distributions">Sets versus distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-ignorance">Representation of ignorance</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -452,23 +464,61 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-via-ensemble">
-<h1>Probability Estimation via Ensemble<a class="headerlink" href="#probability-estimation-via-ensemble" title="Link to this heading">#</a></h1>
-<div align="justify">
-<p>Another import class of methods is <em>ensemble learning</em>, such as bagging or boosting, which are especially popular in machine learning due to their ability to improve accuracy of (point) predictions.
-Since such methods produce a (large) set of predictors <span class="math notranslate nohighlight">\(h_1, \ldots, h_M\)</span> instead of a single hypothesis, it is tempting to produce probability estimates following basic frequentist principles. In the simplest case (of classification), each prediction <span class="math notranslate nohighlight">\(h_i(\vec{x})\)</span> can be interpreted as a “vote” in favor of a class <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, and probabilities can be estimated by relative frequencies,—,needless to say, probabilities constructed in this way tend to be biased and are not necessarily well calibrated. Especially important in this field are tree-based methods such as random forests (<span id="id1">Breiman [<a class="reference internal" href="../references.html#id2178" title="L. Breiman. Random forests. Machine Learning, 45(1):5–32, 2001.">Bre01</a>], Kruppa <em>et al.</em> [<a class="reference internal" href="../references.html#id2189" title="J. Kruppa, Y. Liu, G. Biau, M. Kohler, I.R. König, J.D. Malley, and A. Ziegler. Probability estimation with machine learning methods for dichotomous and multi-category outcome: Theory. Biometrical Journal, 56(4):534–563, 2014.">KLB+14</a>]</span>).</p>
-<!-- \citep{brei_rf01,krup_pe14} -->
-</div><div align="justify">
-<p>Obviously, while standard probability estimation is a viable approach to representing uncertainty in a prediction,
-there is no explicit distinction between different types of uncertainty.
-Methods falling into this category are mostly concerned with the aleatoric part of the overall uncertainty<a class="footnote-reference brackets" href="#footnoteidentifier" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
-</div> <!-- (cf.\ Section \ref{sec:m1}) --><hr class="footnotes docutils" />
+  <section class="tex2jax_ignore mathjax_ignore" id="set-based-versus-distributional-representations">
+<h1>Set-based versus distributional representations<a class="headerlink" href="#set-based-versus-distributional-representations" title="Link to this heading">#</a></h1>
+<section id="background-on-uncertainty-modeling">
+<span id="unc"></span><h2>Background on uncertainty modeling<a class="headerlink" href="#background-on-uncertainty-modeling" title="Link to this heading">#</a></h2>
+<p>The notion of uncertainty has been studied in various branches of science and scientific disciplines. For a long time, it plays a major role in fields like economics, psychology, and the social sciences, typically in the appearance of applied statistics. Likewise, its importance for artificial intelligence has been recognized very early on<a class="footnote-reference brackets" href="#footnoteidentifier1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, at the latest with the emergence of expert systems, which came along with the need for handling inconsistency, incompleteness, imprecision, and vagueness in knowledge representation <span id="id2">Kruse <em>et al.</em> [<a class="reference internal" href="../references.html#id680" title="R. Kruse, E. Schwecke, and J. Heinsohn. Uncertainty and Vagueness in Knowledge Based Systems. Springer-Verlag, 1991.">KSH91</a>]</span>. More recently, the phenomenon of uncertainty has also attracted a lot of attention in engineering, where it is studied under the notion of “uncertainty quantification”  <span id="id3">Owhadi <em>et al.</em> [<a class="reference internal" href="../references.html#id679" title="H. Owhadi, T.J. Sullivan, M. McKerns, M. Ortiz, and C. Scovel. Optimal uncertainty quantification. CoRR, 2012. URL: http://arxiv.org/abs/1009.0679.">OSM+12</a>]</span>; interestingly, a distinction between aleatoric and epistemic uncertainty, very much in line with our machine learning perspective, is also made there.</p>
+<p>The contemporary literature on uncertainty is rather broad (cf. <a class="reference internal" href="#calculi"><span class="std std-numref">Fig. 4</span></a>). In the following, we give a brief overview, specifically focusing on the distinction between set-based and distributional (probabilistic) representations. Against the background of our discussion about aleatoric and epistemic uncertainty, this distinction is arguably important. Roughly speaking, while aleatoric uncertainty is appropriately modeled in terms of probability distributions, one may argue that a set-based approach is more suitable for modeling ignorance and a lack of knowledge, and hence more apt at capturing epistemic uncertainty.</p>
+<figure class="align-default" id="calculi">
+<a class="reference internal image-reference" href="../_images/pic-calculi.png"><img alt="calculi" src="../_images/pic-calculi.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Various uncertainty calculi and common frameworks for uncertainty representation <span id="id4">Destercke <em>et al.</em> [<a class="reference internal" href="../references.html#id5" title="S. Destercke, D. Dubois, and E. Chojnacki. Unifying practical uncertainty representations: I. Generalized p-boxes. International Journal of Approximate Reasoning, 49:649–663, 2008.">DDC08</a>]</span>. Most of these formalisms are generalizations of standard probability theory an arrow denotes an “is more general than” relationship</span><a class="headerlink" href="#calculi" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="sets-versus-distributions">
+<h2>Sets versus distributions<a class="headerlink" href="#sets-versus-distributions" title="Link to this heading">#</a></h2>
+<p>A generic way for describing situations of uncertainty is to proceed from an underlying reference set <span class="math notranslate nohighlight">\(\Omega\)</span>, sometimes called the <em>frame of discernment</em> <span id="id5">Shafer [<a class="reference internal" href="../references.html#id856" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">Sha76</a>]</span>. This set consists of all hypotheses, or pieces of precise information, that ought to be distinguished in the current context.  Thus, the elements <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> are exhaustive and mutually exclusive, and one of them, <span class="math notranslate nohighlight">\(\omega^*\)</span>, corresponds to the truth. For example, <span class="math notranslate nohighlight">\(\Omega = \{ H, T \}\)</span> in the case of coin tossing, <span class="math notranslate nohighlight">\(\Omega = \{ \text{win}, \text{loss}, \text{tie} \}\)</span> in predicting the outcome of a football match, or <span class="math notranslate nohighlight">\(\Omega = \mathbb{R} \times \mathbb{R}_+\)</span> in the estimation of the parameters (expected value and standard deviation) of a normal distribution from data. For ease of exposition and to avoid measure-theoretic complications, we will subsequently assume that <span class="math notranslate nohighlight">\(\Omega\)</span> is a discrete (finite or countable) set.</p>
+<p>As an aside, we note that the assumption of exhaustiveness of <span class="math notranslate nohighlight">\(\Omega\)</span> could be relaxed. In a classification problem in machine learning, for example, not all possible classes might be known beforehand, or new classes may emerge in the course of time \citep{hend_ab17,lian_et18,devr_lc18}. In the literature, this is often called the “open world assumption”, whereas an exhaustive <span class="math notranslate nohighlight">\(\Omega\)</span> is considered as a “closed world” <span id="id6">Deng [<a class="reference internal" href="../references.html#id225" title="Y. Deng. Generalized evidence theory. CoRR, 2014. URL: http://arxiv.org/abs/404.4801.">Den14</a>]</span>. Although this distinction may look technical at first sight, it has important consequences with regard to the representation and processing of uncertain information, which specifically concern the role of the empty set. While the empty set is logically excluded as a valid piece of information under the closed world assumption, it may suggest that the true state <span class="math notranslate nohighlight">\(\omega^*\)</span> is outside <span class="math notranslate nohighlight">\(\Omega\)</span> under the open world assumption.</p>
+<p>There are two basic ways for expressing uncertain information about <span class="math notranslate nohighlight">\(\omega^*\)</span>, namely, in terms of <em>subsets</em> and in terms of <em>distributions</em>. A subset <span class="math notranslate nohighlight">\(C \subseteq \Omega\)</span> corresponds to a constraint suggesting that <span class="math notranslate nohighlight">\(\omega^* \in C\)</span>. Thus, information or knowledge<a class="footnote-reference brackets" href="#footnoteidentifier2" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> expressed in this way distinguishes between values that are (at least provisionally) considered possible and those that are definitely excluded. As suggested by common examples such as specifying incomplete information about a numerical quantity in terms of an interval <span class="math notranslate nohighlight">\(C= [l,u]\)</span>, a set-based representation is appropriate for capturing uncertainty in the sense of <em>imprecision</em>.</p>
+<p>Going beyond this rough dichotomy, a distribution assigns a weight <span class="math notranslate nohighlight">\(p(\omega)\)</span> to each element <span class="math notranslate nohighlight">\(\omega\)</span>, which can generally be understood as a degree of belief. At first sight, this appears to be a proper generalization of the set-based approach. Indeed, without any constraints on the weights, each subset <span class="math notranslate nohighlight">\(C\)</span> can be characterized in terms of its indicator function <span class="math notranslate nohighlight">\(\mathbb{I}_C\)</span> on <span class="math notranslate nohighlight">\(\Omega\)</span> (which is a specific distribution assigning a weight of 1 to each <span class="math notranslate nohighlight">\(\omega \in C\)</span> and 0 to all <span class="math notranslate nohighlight">\(\omega \not\in \Omega\)</span>). However, for the specifically important case of probability distributions, this view is actually not valid.</p>
+<p>First, probability distributions need to obey a normalization constraint. In particular, a probability distribution requires the weights to be nonnegative and integrate to 1. A corresponding probability measure on <span class="math notranslate nohighlight">\(\Omega\)</span> is a set-function <span class="math notranslate nohighlight">\(\Prob: \, 2^\Omega \longrightarrow [0,1]\)</span> such that <span class="math notranslate nohighlight">\(\Prob(\emptyset) = 0\)</span>, <span class="math notranslate nohighlight">\(\Prob(\Omega)=1\)</span>, and</p>
+<div class="math notranslate nohighlight" id="equation-addi">
+<span class="eqno">(10)<a class="headerlink" href="#equation-addi" title="Link to this equation">#</a></span>\[
+\Prob(A \cup B) = \Prob(A) + \Prob(B) 
+\]</div>
+<p>for all disjoint sets (events) <span class="math notranslate nohighlight">\(A, B \subseteq \Omega\)</span>. With <span class="math notranslate nohighlight">\(\prob(\omega) = \Prob(\{ \omega \})\)</span> for all <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> it follows that <span class="math notranslate nohighlight">\(\Prob(A) = \sum_{\omega \in A} \prob(\omega)\)</span>, and hence <span class="math notranslate nohighlight">\(\sum_{\omega \in \Omega} \prob(\omega)=1\)</span>. Since the set-based approach does not (need to) satify this constraint, it is no longer a special case.</p>
+<p>Second, in addition to the question of how information is represented, it is of course important to ask how the information is processed. In this regard, the probabilistic calculus differs fundamentally from constraint-based (set-based) information processing. The characteristic property of probability is its additivity <a class="reference internal" href="#equation-addi">(10)</a>, suggesting that the belief in the disjunction (union) of two (disjoint) events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is the sum of the belief in either of them. In contrast to this, the set-based approach is more in line with a logical interpretation and calculus. Interpreting a constraint <span class="math notranslate nohighlight">\(C\)</span> as a logical proposition <span class="math notranslate nohighlight">\((\omega \in C)\)</span>, an event <span class="math notranslate nohighlight">\(A \subseteq \Omega\)</span> is possible as soon as <span class="math notranslate nohighlight">\(A \cap C \neq \emptyset\)</span> and impossible otherwise. Thus, the information <span class="math notranslate nohighlight">\((\omega \in C)\)</span> can be associated with a set-function <span class="math notranslate nohighlight">\(\Pi:\, 2^\Omega \longrightarrow \{ 0, 1 \}\)</span> such that <span class="math notranslate nohighlight">\(\Pi(A) = \llbracket A \cap C \neq \emptyset \rrbracket\)</span>. Obviously, this set-function satisfies <span class="math notranslate nohighlight">\(\Pi(\emptyset) = 0\)</span>, <span class="math notranslate nohighlight">\(\Pi(\Omega) = 1\)</span>, and</p>
+<div class="math notranslate nohighlight" id="equation-maxi">
+<span class="eqno">(11)<a class="headerlink" href="#equation-maxi" title="Link to this equation">#</a></span>\[
+\Pi(A \cup B) = \max \big( \Pi(A) , \Pi(B) \big) 
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\Pi\)</span> is “maxitive” instead of additive <span id="id8">Dubois [<a class="reference internal" href="../references.html#id941" title="D. Dubois. Possibility theory and statistical reasoning. Computational Statistics and Data Analysis, 51(1):47–69, 2006.">Dub06</a>], Shilkret [<a class="reference internal" href="../references.html#id1840" title="N. Shilkret. Maxitive measure and integration. Nederl. Akad. Wetensch. Proc. Ser. A 74 = Indag. Math., 33:109–116, 1971.">Shi71</a>]</span>. Roughly speaking, an event <span class="math notranslate nohighlight">\(A\)</span> is evaluated according to its (logical) consistency with a constraint <span class="math notranslate nohighlight">\(C\)</span>, whereas in probability theory, an event <span class="math notranslate nohighlight">\(A\)</span> is evaluated in terms of its probability of occurrence. The latter is reflected by the probability mass assigned to <span class="math notranslate nohighlight">\(A\)</span>, and requires a comparison of this mass with the mass of other events (since only one outcome <span class="math notranslate nohighlight">\(\omega\)</span> is possible, the elementary events compete with each other). Consequently, the calculus of probability, including rules for combination of information, conditioning, etc., is quite different from the corresponding calculus of constraint-based information processing <span id="id9">Dubois [<a class="reference internal" href="../references.html#id941" title="D. Dubois. Possibility theory and statistical reasoning. Computational Statistics and Data Analysis, 51(1):47–69, 2006.">Dub06</a>]</span>.</p>
+</section>
+<section id="representation-of-ignorance">
+<span id="aproi"></span><h2>Representation of ignorance<a class="headerlink" href="#representation-of-ignorance" title="Link to this heading">#</a></h2>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+            Macros: {
+                llbracket: "{\\lbrack\\lbrack}",
+                rrbracket: "{\\rbrack\\rbrack}"
+            }
+        }
+    });
+</script><hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="footnoteidentifier" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
-<p>Yet, as will be seen later on, one way to go beyond mere aleatoric uncertainty is to combine the above methods, for example learning ensembles of probabilistic predictors.</p>
+<aside class="footnote brackets" id="footnoteidentifier1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The “Annual Conference on Uncertainty in Artificial Intelligence” (UAI) was launched in the mid 1980s.</p>
+</aside>
+<aside class="footnote brackets" id="footnoteidentifier2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">2</a><span class="fn-bracket">]</span></span>
+<p>We do not distinguish between the notions of information and knowledge in this paper.</p>
 </aside>
 </aside>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -484,7 +534,7 @@ Methods falling into this category are mostly concerned with the aleatoric part 
         },
         kernelOptions: {
             name: "python3",
-            path: "./chapter-pe-ensemble"
+            path: "./chapter-modelingAproxUncertainty"
         },
         predefinedOutput: true
     }
@@ -502,20 +552,20 @@ Methods falling into this category are mostly concerned with the aleatoric part 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../chapter-pe-calibration/calibration.html"
+       href="modelingAproxUncertainty.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Probability Estimation via Calibration</p>
+        <p class="prev-next-title">Modelling Approximation Uncertainty</p>
       </div>
     </a>
     <a class="right-next"
-       href="../chapter-mle_and_fisher/intro.html"
+       href="../chapter-pe-scoring/scoring.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Maximum Likelihood and Fisher Information</p>
+        <p class="prev-next-title">Probability Estimation via Scoring</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -526,7 +576,22 @@ Methods falling into this category are mostly concerned with the aleatoric part 
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-on-uncertainty-modeling">Background on uncertainty modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-versus-distributions">Sets versus distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-ignorance">Representation of ignorance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

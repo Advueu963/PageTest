@@ -21,16 +21,21 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-credal_sets = get_posterior_credal_set(X_test, classifiers)
-credal_sets[0]
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+
+from mapie.classification import MapieClassifier
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[8], line 1[0m
-[0;32m----> 1[0m credal_sets [38;5;241m=[39m get_posterior_credal_set(X_test, classifiers)
-[1;32m      2[0m credal_sets[[38;5;241m0[39m]
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 6[0m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodel_selection[39;00m [38;5;28;01mimport[39;00m train_test_split
+[1;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnaive_bayes[39;00m [38;5;28;01mimport[39;00m GaussianNB
+[0;32m----> 6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmapie[39;00m[38;5;21;01m.[39;00m[38;5;21;01mclassification[39;00m [38;5;28;01mimport[39;00m MapieClassifier
 
-[0;31mNameError[0m: name 'classifiers' is not defined
-NameError: name 'classifiers' is not defined
+[0;31mModuleNotFoundError[0m: No module named 'mapie'
+ModuleNotFoundError: No module named 'mapie'
 
