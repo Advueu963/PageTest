@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-scoring/scoring';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Proper Scoring Rules" href="proper_scoring_rules.html" />
+    <link rel="next" title="Probability Estimation and Calibration" href="../chapter-pe-calibration/calibration.html" />
     <link rel="prev" title="Set-based versus distributional representations" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,12 +187,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">Set-based versus distributional representations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Probability Estimation via Scoring</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="proper_scoring_rules.html">Proper Scoring Rules</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation via Calibration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation via Ensemble</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation and Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation and Ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
@@ -200,7 +197,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
@@ -450,9 +447,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-scoring-rules">Proper Scoring Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">Logarithmic Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">Log Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-error">Mean Square Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2"><span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bayesian-networks">3. Example: Bayesian networks</a></li>
 </ul>
             </nav>
         </div>
@@ -471,22 +476,12 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">brier_score_loss</span><span class="p">,</span> <span class="n">r2_score</span>
-
-<span class="kn">from</span> <span class="nn">pgmpy.models</span> <span class="kn">import</span> <span class="n">BayesianNetwork</span>
-<span class="kn">from</span> <span class="nn">pgmpy.factors.discrete</span> <span class="kn">import</span> <span class="n">TabularCPD</span>
-<span class="kn">from</span> <span class="nn">pgmpy.inference</span> <span class="kn">import</span> <span class="n">VariableElimination</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:numexpr.utils:NumExpr defaulting to 8 threads.
 </pre></div>
 </div>
 </div>
@@ -505,19 +500,193 @@ i.e., in the form of a mapping <span class="math notranslate nohighlight">\(\vec
 or in a generative way, which essentially means learning a joint distribution on <span class="math notranslate nohighlight">\(\mathcal{X} \times \mathcal{Y}\)</span>.
 Moreover, the approaches can be parametric (assuming specific parametric families of probability distributions) or non-parametric.
 Well-known examples include classical statistical methods such as <a class="reference internal" href="#1-example-probabilistic-predictor-with-logistic-regression"><span class="xref myst">logistic regression</span></a> and <a class="reference internal" href="#2-example-linear-regression"><span class="xref myst">linear regression</span></a>,
-Bayesian approaches such as <a class="reference internal" href="#3-example-bayesian-networks"><span class="xref myst">Bayesian networks</span></a> and Gaussian processes (see <a class="reference external" href="https://advueu963.github.io/PageTest/chapter-gaussianprocess/intro.html">here</a>),
-as well as various techniques in the realm of (deep) neural networks (cf. <span class="xref std std-doc">chapter-deep_neuralnetwork/dnn</span>).</p>
+Bayesian approaches such as <a class="reference external" href="https://advueu963.github.io/PageTest/chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a> and Gaussian processes (see <a class="reference external" href="https://advueu963.github.io/PageTest/chapter-gaussianprocess/intro.html">here</a>),
+as well as various techniques in the realm of (deep) neural networks (see <a class="reference external" href="https://advueu963.github.io/PageTest/chapter-deep_neuralnetwork/dnn.html">here</a>).</p>
+<!-- cf. {doc}`chapter-deep_neuralnetwork/dnn` -->
 </div><div align="justify">
 <p>Training probabilistic predictors is typically accomplished by minimizing suitable loss functions,
 i.e., loss functions that enforce “correct” (conditional) probabilities as predictions.
 In this regard,
-<a class="reference internal" href="proper_scoring_rules.html"><span class="doc">Proper Scoring Rules</span></a> (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)
+<span class="xref std std-doc">proper_scoring_rules</span> (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)
 play an important role,
 including the log-loss as a well-known special case.
 Sometimes, however, estimates are also obtained in a very simple way,
 following basic frequentist techniques for probability estimation,
 like in Naïve Bayes or nearest neighbor classification.</p>
-</div><section id="example-probabilistic-predictor-with-logistic-regression">
+</div><section id="proper-scoring-rules">
+<h2>Proper Scoring Rules<a class="headerlink" href="#proper-scoring-rules" title="Link to this heading">#</a></h2>
+<div align="justify">
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Scoring_rule">Scoring Rules</a> assess the quality of probabilistic forecasts, by assigning a numerical score based on the predictive distribution and on the event or value that materializes. A scoring rule is proper if the forecaster maximizes the expected score for an observation drawn from the distribution <span class="math notranslate nohighlight">\(F\)</span> if he or she issues the probabilistic forecast <span class="math notranslate nohighlight">\(F\)</span>, rather than <span class="math notranslate nohighlight">\(G \neq F\)</span>. It is strictly proper if the maximum is unique. In prediction problems, proper scoring rules encourage the forecaster to make careful assessments and to be honest. In estimation problems, strictly proper scoring rules provide attractive loss and utility functions that can be tailored to the problem at hand (<span id="id2">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>).</p>
+</div><section id="continuous-ranked-probability-score">
+<h3>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>The Continuous Ranked Probability Score (CRPS) applies to probabilistic forecasts that take the form of predictive cumulative distribution functions. It generalizes the absolute error and forms a special case of a new and very general type of score, the energy score. Like many other scoring rules, the energy score admits a kernel representation in terms of negative definite functions, with links to inequalities of Hoeffding type, in both univariate and multivariate settings (<span id="id3">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>).</p>
+<p>The CRPS is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{CRPS}(F, y) = \int_{-\infty}^{\infty} \left( F(x) - \mathbf{1}\{x \geq y\} \right)^2 \, dx,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(F\)</span> is the cumulative distribution function (CDF) of the forecast, <span class="math notranslate nohighlight">\(y\)</span> is the observed value, and <span class="math notranslate nohighlight">\(\mathbf{1}\{x \geq y\}\)</span> is the indicator function, which is 1 if <span class="math notranslate nohighlight">\(x \geq y\)</span> and 0 otherwise.</p>
+<p>For a Gaussian (normal) predictive distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>,
+the CRPS can be computed using a closed-form solution:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{CRPS}(F, y) = \sigma \left[ \frac{y - \mu}{\sigma} \left( 2\Phi\left( \frac{y - \mu}{\sigma} \right) - 1 \right) + 2\phi\left( \frac{y - \mu}{\sigma} \right) - \frac{1}{\sqrt{\pi}} \right], 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the CDF of the standard normal distribution and <span class="math notranslate nohighlight">\(\phi\)</span> is the probability density function (PDF) of the standard normal distribution.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crps</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">y_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+    <span class="n">crps_values</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">)):</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="n">y_std</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">term1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">obs</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span>
+        <span class="n">term2</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+        <span class="n">term3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">((</span><span class="n">obs</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span>
+        <span class="n">crps_value</span> <span class="o">=</span> <span class="n">term1</span> <span class="o">+</span> <span class="n">term2</span> <span class="o">-</span> <span class="n">term3</span>
+        <span class="n">crps_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">crps_value</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">crps_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="brier-score">
+<h3>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Brier_score">Brier Score</a> (Quadratic Score) is a strictly proper scoring rule which measures the accuracy of probabilistic predictions,</p>
+<div class="math notranslate nohighlight">
+\[
+S_{\text{Brier}}= \frac{1}{N} \sum_{i=1}^N (p_i-y_i)^2.
+\]</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">brier_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+    <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_pred</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">p_pred</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Brier score can be thought of as a cost function. Thus lower values indicate better performance.
+In its most common formulation, it takes on a value between 0 and 1,
+since this is the square of the largest possible difference between a predicted probability and the actual outcome.
+The Brier score is appropriate for binary and categorical outcomes that can be structured as true or false,
+but it is inappropriate for ordinal variables which can take on three or more values.</p>
+</div>
+</div></section>
+<section id="logarithmic-score">
+<h3>Logarithmic Score<a class="headerlink" href="#logarithmic-score" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>The Logarithmic (Log) Score is also often used in the context of probability forecasting,</p>
+<div class="math notranslate nohighlight">
+\[
+S_{\text{Log}} = -\sum_{i=1}^N y_i \log(p_i).
+\]</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logarithmic_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+    <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_pred</span><span class="p">)</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-15</span>
+    <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">p_pred</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_true</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="log-loss">
+<h3>Log Loss<a class="headerlink" href="#log-loss" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>It measures the performance of a classification model where the prediction is a probability value between 0 and 1,</p>
+<div class="math notranslate nohighlight">
+\[
+L = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(p_i) + (1-y_i) \log(1-p_i) \right).
+\]</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+    <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_pred</span><span class="p">)</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-15</span>
+    <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">p_pred</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_true</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_pred</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The Log Loss, Logarithmic Loss, Logistic Loss, and Cross-entropy Loss are used interchangeably.</p>
+</div>
+</div></section>
+<section id="mean-square-error">
+<h3>Mean Square Error<a class="headerlink" href="#mean-square-error" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>In statistics, the <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">mean squared error (MSE)</a> or mean squared deviation (MSD) of an estimator (of a procedure for estimating an unobserved quantity) measures the average of the squares of the errors,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{N} \sum_{i=1}^N (\hat{y_i}-y_i)^2.
+\]</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Mean Squared Error is a more general measure of accuracy, used primarily in regression tasks.
+It measures the average of the squares of the differences between predicted values and actual values.
+While the Brier Score is used specifically for probabilistic predictions in binary classification tasks.
+It measures the mean squared difference between predicted probabilities and the actual binary outcomes.</p>
+</div>
+</div></section>
+<section id="r-2">
+<h3><span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#r-2" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>R-squared (<a class="reference external" href="https://en.wikipedia.org/wiki/Coefficient_of_determination">coefficient of determination</a>) measures the proportion of the variance in the dependent variable that is predictable from the independent variables, normally ranging from 0 to 1.
+Mathematically, it is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = 1 - \frac{\sum_{i=1}^N (y_i-\hat{y_i})^2}{\sum_{i=1}^N (y_i-\bar{y_i})^2}.
+\]</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">r_squared</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_true</span>
+    <span class="n">sse</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">tss</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_true</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>    
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sse</span> <span class="o">/</span> <span class="n">tss</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(N\)</span> denotes the number of observations or data points in the dataset.</p>
+</div>
+</div></section>
+</section>
+<section id="example-probabilistic-predictor-with-logistic-regression">
 <h2>1. Example: Probabilistic Predictor with Logistic Regression<a class="headerlink" href="#example-probabilistic-predictor-with-logistic-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Logistic regression is a widely used supervised machine learning method for binary classification that provides probabilistic outputs.
@@ -543,7 +712,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12c7cd3c0878b355cae7b5bbdb631668f70e8a6d7608b0aa005067009d68595f.png" src="../_images/12c7cd3c0878b355cae7b5bbdb631668f70e8a6d7608b0aa005067009d68595f.png" />
+<img alt="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" src="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" />
 </div>
 </div>
 <div align="justify">
@@ -574,7 +743,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b7385dcd66a8076c3c9b09f24183302f5022d380e4892e4fe9c0371ff15aa332.png" src="../_images/b7385dcd66a8076c3c9b09f24183302f5022d380e4892e4fe9c0371ff15aa332.png" />
+<img alt="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" src="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -624,7 +793,7 @@ Logarithmic Score: 0.6852
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1eed006705cd676c32343dfdf6a9050bccd0086e4b7f72ff63f4ae84c0b9ce29.png" src="../_images/1eed006705cd676c32343dfdf6a9050bccd0086e4b7f72ff63f4ae84c0b9ce29.png" />
+<img alt="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" src="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" />
 </div>
 </div>
 <div align="justify">
@@ -647,15 +816,10 @@ Logarithmic Score: 0.6852
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/24c64816d1ceab8bb07348db175e36f6c1c5c035ba30703feeaa81c2fda4fb21.png" src="../_images/24c64816d1ceab8bb07348db175e36f6c1c5c035ba30703feeaa81c2fda4fb21.png" />
+<img alt="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" src="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" />
 </div>
 </div>
-<div align="justify">
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>We here calculate the Mean Squared Error (MSE), <span class="math notranslate nohighlight">\(R^2\)</span>, and Continuous Ranked Probability Score (CRPS) for this regression problem because Brier Score and Logarithmic Score are typically used for probabilistic classification models.</p>
-</div>
-</div><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crps</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span>
@@ -692,122 +856,12 @@ R^2 Score: 0.7647
 </div>
 </div>
 </div>
-</section>
-<section id="example-bayesian-networks">
-<h2>3. Example: Bayesian networks<a class="headerlink" href="#example-bayesian-networks" title="Link to this heading">#</a></h2>
 <div align="justify">
-<p>Let (<span class="math notranslate nohighlight">\(\mathcal{X}\)</span>,<span class="math notranslate nohighlight">\(\mathcal{E}\)</span>,<span class="math notranslate nohighlight">\(P\)</span>) be a Bayesian network (BN).
-<span class="math notranslate nohighlight">\(\mathcal{X}\)</span> is a set of random variables and <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> represents the edges indicating dependencies among the variables.
-Then the joint distribution <span class="math notranslate nohighlight">\(P\)</span> is given by</p>
-<div class="math notranslate nohighlight">
-\[
-P(\mathcal{X}) = \prod_{X_i \in \mathcal{X}} P(X_i \mid pa(X_i)).
-\]</div>
-<p>Specification of the Bayesian network requires specification of <span class="math notranslate nohighlight">\(P(X_i \mid \mathbf{B}_i)\)</span> for each <span class="math notranslate nohighlight">\(X_i \in \mathcal{X}\)</span>,
-where <span class="math notranslate nohighlight">\(\mathbf{B}_i = pa(X_i)\)</span>.
-Thus, for each <span class="math notranslate nohighlight">\(X_i \in \mathcal{X}\)</span>,
-one probability distribution on <span class="math notranslate nohighlight">\(V_{X_i}\)</span> must be specified for each instantiation <span class="math notranslate nohighlight">\(b_i \in V_{\mathbf{B}_i}\)</span>.</p>
-<p>In the discrete case, the distributions typically take the form of a “probability table”
-(<span class="math notranslate nohighlight">\(\sum_{i \in [N]} (|V_{X_i}| - 1)|V_{\mathbf{B}_i}|\)</span> probabilities in total),
-in the continuous case they can be defined in parametric form.</p>
-<p>To construct Bayesian networks,
-the simplest way to define a BN is to fix an order</p>
-<div class="math notranslate nohighlight">
-\[
-X_{\sigma(1)}, X_{\sigma(2)}, \dots, X_{\sigma(n)}
-\]</div>
-<p>of the variables,
-and to find for each variable a minimal subset</p>
-<div class="math notranslate nohighlight">
-\[
-pa(X_{\sigma(i)}) \subseteq \{X_{\sigma(1)}, \ldots, X_{\sigma(i-1)}\},
-\]</div>
-<p>such that</p>
-<div class="math notranslate nohighlight">
-\[
-P(X_{\sigma(i)} \mid pa(X_{\sigma(i)})) = P(X_{\sigma(i)} \mid X_{\sigma(1)}, \ldots, X_{\sigma(i-1)}).
-\]</div>
-<p>Obviously, an inappropriate order could make the net more complex than necessary.
-Decisions about conditional independence in non-causal directions can be difficult.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In a BN,
-every probability can be written as a product of conditional probabilities.</p>
+<p>We here calculate the Mean Squared Error (MSE), <span class="math notranslate nohighlight">\(R^2\)</span>, and Continuous Ranked Probability Score (CRPS) for this regression problem because Brier Score and Logarithmic Score are typically used for probabilistic classification models.</p>
 </div>
-<p>In the following,
-we implement a bayesian network example via the <a class="reference external" href="https://pgmpy.org/models/bayesiannetwork.html">pgmpy</a>.</p>
-<p>Given a root node <code class="docutils literal notranslate"><span class="pre">Cloudy</span></code> (C) with the probability <span class="math notranslate nohighlight">\(P(C) = 0.5\)</span>,
-depend on <code class="docutils literal notranslate"><span class="pre">Cloudy</span></code>, the probability of <code class="docutils literal notranslate"><span class="pre">Sprinkler</span></code> (S) is <span class="math notranslate nohighlight">\(P(S|C=1)=0.1\)</span> and <span class="math notranslate nohighlight">\(P(S|C=0)=0.5\)</span>.
-Similarly depend on <code class="docutils literal notranslate"><span class="pre">Cloudy</span></code>, the probability of <code class="docutils literal notranslate"><span class="pre">Rain</span></code> (R) <span class="math notranslate nohighlight">\(P(S|C)=0.8\)</span> if <span class="math notranslate nohighlight">\(C=1\)</span>, and <span class="math notranslate nohighlight">\(P(S|C)=0.2\)</span> if <span class="math notranslate nohighlight">\(C=0\)</span>.
-Depend on both <code class="docutils literal notranslate"><span class="pre">Sprinkler</span></code> and <code class="docutils literal notranslate"><span class="pre">Rain</span></code>, the probability of <code class="docutils literal notranslate"><span class="pre">Wet</span> <span class="pre">Grass</span></code> (W) <span class="math notranslate nohighlight">\(P(W|S,R)\)</span> is given by:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-  \begin{cases}
-  0.99 &amp; \text{if } S = 1, R = 1 \\
-  0.90 &amp; \text{if } S = 1, R = 0 \\
-  0.90 &amp; \text{if } S = 0, R = 1 \\
-  0.01 &amp; \text{if } S = 0, R = 0
-  \end{cases}
-\end{split}\]</div>
-</div><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">BayesianNetwork</span><span class="p">([(</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sprinkler&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Sprinkler&#39;</span><span class="p">,</span> <span class="s1">&#39;Wet Grass&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Wet Grass&#39;</span><span class="p">)])</span>
-
-<span class="n">cpd_cloudy</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
-                        <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.5</span><span class="p">],</span> 
-                                <span class="p">[</span><span class="mf">0.5</span><span class="p">]])</span>
-<span class="n">cpd_sprinkler</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;Sprinkler&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
-                           <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> 
-                                   <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]],</span> 
-                           <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">cpd_rain</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
-                      <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> 
-                              <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]],</span> 
-                      <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">cpd_wet_grass</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;Wet Grass&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
-                           <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">],</span> 
-                                   <span class="p">[</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]],</span> 
-                           <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sprinkler&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">add_cpds</span><span class="p">(</span><span class="n">cpd_cloudy</span><span class="p">,</span> <span class="n">cpd_rain</span><span class="p">,</span> <span class="n">cpd_sprinkler</span><span class="p">,</span> <span class="n">cpd_wet_grass</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">model</span><span class="o">.</span><span class="n">check_model</span><span class="p">()</span>
-
-<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Sprinkler&#39;</span><span class="p">,</span> <span class="s1">&#39;Wet Grass&#39;</span><span class="p">])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sprinkler&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Wet Grass&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Sprinkler&#39;</span><span class="p">,</span> <span class="s1">&#39;Wet Grass&#39;</span><span class="p">)])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bayesian Network Structure&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">inference</span> <span class="o">=</span> <span class="n">VariableElimination</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="c1"># result = inference.query(variables=[&#39;Sprinkler&#39;], evidence={&#39;Cloudy&#39;: 1})</span>
-<span class="c1"># result = inference.query(variables=[&#39;Rain&#39;], evidence={&#39;Cloudy&#39;: 1})</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Wet Grass&#39;</span><span class="p">],</span> <span class="n">evidence</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Rain&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/ebed84e10dd83bab716706b6123a1703819e17942bb074cc9e5ad3e4c6833cf1.png" src="../_images/ebed84e10dd83bab716706b6123a1703819e17942bb074cc9e5ad3e4c6833cf1.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------+------------------+
-| Wet Grass    |   phi(Wet Grass) |
-+==============+==================+
-| Wet Grass(0) |           0.5450 |
-+--------------+------------------+
-| Wet Grass(1) |           0.4550 |
-+--------------+------------------+
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<div class="toctree-wrapper compound">
-</div>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -850,11 +904,11 @@ Depend on both <code class="docutils literal notranslate"><span class="pre">Spri
       </div>
     </a>
     <a class="right-next"
-       href="proper_scoring_rules.html"
+       href="../chapter-pe-calibration/calibration.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Proper Scoring Rules</p>
+        <p class="prev-next-title">Probability Estimation and Calibration</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -874,9 +928,17 @@ Depend on both <code class="docutils literal notranslate"><span class="pre">Spri
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-scoring-rules">Proper Scoring Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">Logarithmic Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">Log Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-error">Mean Square Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2"><span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bayesian-networks">3. Example: Bayesian networks</a></li>
 </ul>
   </nav></div>
 

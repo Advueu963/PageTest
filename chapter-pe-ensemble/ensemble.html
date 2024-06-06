@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Probability Estimation via Ensemble &#8212; My sample book</title>
+    <title>Probability Estimation and Ensembles &#8212; My sample book</title>
   
   
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Maximum Likelihood and Fisher Information" href="../chapter-mle_and_fisher/intro.html" />
-    <link rel="prev" title="Probability Estimation via Calibration" href="../chapter-pe-calibration/calibration.html" />
+    <link rel="prev" title="Probability Estimation and Calibration" href="../chapter-pe-calibration/calibration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,12 +187,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">Set-based versus distributional representations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-pe-scoring/proper_scoring_rules.html">Proper Scoring Rules</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation via Calibration</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Estimation via Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation and Calibration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Estimation and Ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
@@ -200,7 +197,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
@@ -438,7 +435,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Probability Estimation via Ensemble</h1>
+    <h1>Probability Estimation and Ensembles</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -452,8 +449,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-via-ensemble">
-<h1>Probability Estimation via Ensemble<a class="headerlink" href="#probability-estimation-via-ensemble" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-and-ensembles">
+<h1>Probability Estimation and Ensembles<a class="headerlink" href="#probability-estimation-and-ensembles" title="Link to this heading">#</a></h1>
 <div align="justify">
 <p>Another import class of methods is <em>ensemble learning</em>, such as bagging or boosting, which are especially popular in machine learning due to their ability to improve accuracy of (point) predictions.
 Since such methods produce a (large) set of predictors <span class="math notranslate nohighlight">\(h_1, \ldots, h_M\)</span> instead of a single hypothesis, it is tempting to produce probability estimates following basic frequentist principles. In the simplest case (of classification), each prediction <span class="math notranslate nohighlight">\(h_i(\vec{x})\)</span> can be interpreted as a “vote” in favor of a class <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, and probabilities can be estimated by relative frequencies,—,needless to say, probabilities constructed in this way tend to be biased and are not necessarily well calibrated. Especially important in this field are tree-based methods such as random forests (<span id="id1">Breiman [<a class="reference internal" href="../references.html#id2178" title="L. Breiman. Random forests. Machine Learning, 45(1):5–32, 2001.">Bre01</a>], Kruppa <em>et al.</em> [<a class="reference internal" href="../references.html#id2189" title="J. Kruppa, Y. Liu, G. Biau, M. Kohler, I.R. König, J.D. Malley, and A. Ziegler. Probability estimation with machine learning methods for dichotomous and multi-category outcome: Theory. Biometrical Journal, 56(4):534–563, 2014.">KLB+14</a>]</span>).</p>
@@ -507,7 +504,7 @@ Methods falling into this category are mostly concerned with the aleatoric part 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Probability Estimation via Calibration</p>
+        <p class="prev-next-title">Probability Estimation and Calibration</p>
       </div>
     </a>
     <a class="right-next"
