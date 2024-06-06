@@ -5,3 +5,6 @@ scikit-learn
 pandas
 numpy
 properscoring
+pymc==5.15.1
+pytensor==2.22.1
+
