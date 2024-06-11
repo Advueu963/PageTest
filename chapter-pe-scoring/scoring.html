@@ -458,7 +458,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression-2-example-linear-regression">2. Example: Linear Regression {#2-example-linear-regression}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
 </ul>
             </nav>
         </div>
@@ -481,8 +481,8 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LinearRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">mean_squared_error</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">brier_score_loss</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">brier_score_loss</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">r2_score</span>
 </pre></div>
 </div>
 </div>
@@ -500,8 +500,11 @@ Such predictors can be learned in a discriminative way,
 i.e., in the form of a mapping <span class="math notranslate nohighlight">\(\vec{x} \mapsto p( \cdot \vert \vec{x})\)</span>,
 or in a generative way, which essentially means learning a joint distribution on <span class="math notranslate nohighlight">\(\mathcal{X} \times \mathcal{Y}\)</span>.
 Moreover, the approaches can be parametric (assuming specific parametric families of probability distributions) or non-parametric.
-Well-known examples include classical statistical methods such as <a class="reference internal" href="#1-example-probabilistic-predictor-with-logistic-regression"><span class="xref myst">logistic regression</span></a> and <a class="reference internal" href="#2-example-linear-regression"><span class="xref myst">linear regression</span></a>,
-Bayesian approaches such as <a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html"><span class="doc std std-doc">Bayesian neural networks</span></a> and <a class="reference internal" href="../chapter-gaussianprocess/intro.html"><span class="doc std std-doc">Gaussian processes</span></a>,
+Well-known examples include classical statistical methods such as <code class="docutils literal notranslate"><span class="pre">logistic</span> <span class="pre">regression</span></code></p>
+<!-- [logistic regression](#1-example-probabilistic-predictor-with-logistic-regression)  -->
+<p>and <code class="docutils literal notranslate"><span class="pre">linear</span> <span class="pre">regression</span></code>.</p>
+<!-- [linear regression](#2-example-linear-regression),  -->
+<p>Bayesian approaches such as <a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html"><span class="doc std std-doc">Bayesian neural networks</span></a> and <a class="reference internal" href="../chapter-gaussianprocess/intro.html"><span class="doc std std-doc">Gaussian processes</span></a>,
 as well as various techniques in the realm of <a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html"><span class="doc std std-doc">(deep) neural networks</span></a>.</p>
 </div><div align="justify">
 <p>Training probabilistic predictors is typically accomplished by minimizing suitable loss functions,
@@ -536,7 +539,7 @@ the CRPS can be computed using a closed-form solution:</p>
 <p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the CDF of the standard normal distribution and <span class="math notranslate nohighlight">\(\phi\)</span> is the probability density function (PDF) of the standard normal distribution.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crps</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_crps</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span>
     <span class="n">y_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
     <span class="n">crps_values</span> <span class="o">=</span> <span class="p">[]</span>
@@ -567,7 +570,7 @@ S_{\text{Brier}}= \frac{1}{N} \sum_{i=1}^N (p_i-y_i)^2.
 \]</div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">brier_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_bs</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_pred</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">p_pred</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -595,7 +598,7 @@ S_{\text{Log}} = -\sum_{i=1}^N y_i \log(p_i).
 \]</div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logarithmic_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_ls</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_pred</span><span class="p">)</span>
     <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-15</span>
@@ -616,7 +619,7 @@ L = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(p_i) + (1-y_i) \log(1-p_i) \right).
 \]</div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_ll</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">):</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="n">p_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_pred</span><span class="p">)</span>
     <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-15</span>
@@ -642,7 +645,7 @@ L = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(p_i) + (1-y_i) \log(1-p_i) \right).
 \]</div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_mse</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -670,7 +673,7 @@ R^2 = 1 - \frac{\sum_{i=1}^N (y_i-\hat{y_i})^2}{\sum_{i=1}^N (y_i-\bar{y_i})^2}.
 \]</div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">r_squared</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_r_squared</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_true</span>
     <span class="n">sse</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     <span class="n">tss</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_true</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>    
@@ -751,6 +754,9 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="n">p_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
 
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">log_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">),</span> <span class="n">my_ll</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">),</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span> 
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">),</span> <span class="n">my_bs</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">),</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span> 
+
 <span class="n">loss</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">)</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 <span class="n">brier_score</span> <span class="o">=</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">)</span>
@@ -773,8 +779,8 @@ Logarithmic Score: 0.6852
 </div>
 </div>
 </section>
-<section id="example-linear-regression-2-example-linear-regression">
-<h2>2. Example: Linear Regression {#2-example-linear-regression}<a class="headerlink" href="#example-linear-regression-2-example-linear-regression" title="Link to this heading">#</a></h2>
+<section id="example-linear-regression">
+<h2>2. Example: Linear Regression<a class="headerlink" href="#example-linear-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>In statistics, linear regression is a statistical model used for predicting a continuous target variable. Let us also plot a synthetic regression dataset first.</p>
 </div><div class="cell docutils container">
@@ -804,6 +810,7 @@ Logarithmic Score: 0.6852
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Regressor&#39;</span><span class="p">)</span>
@@ -821,24 +828,10 @@ Logarithmic Score: 0.6852
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crps</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
-    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span>
-    <span class="n">y_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">crps_values</span> <span class="o">=</span> <span class="p">[]</span>
-    
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">)):</span>
-        <span class="n">mu</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">sigma</span> <span class="o">=</span> <span class="n">y_std</span>
-        <span class="n">obs</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">term1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">obs</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span>
-        <span class="n">term2</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
-        <span class="n">term3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">((</span><span class="n">obs</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span>
-        <span class="n">crps_value</span> <span class="o">=</span> <span class="n">term1</span> <span class="o">+</span> <span class="n">term2</span> <span class="o">-</span> <span class="n">term3</span>
-        <span class="n">crps_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">crps_value</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">crps_values</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">my_mse</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span> 
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">my_r_squared</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span> 
 
-<span class="n">crps_score</span> <span class="o">=</span> <span class="n">crps</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">crps_score</span> <span class="o">=</span> <span class="n">my_crps</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 
@@ -938,7 +931,7 @@ R^2 Score: 0.7647
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression-2-example-linear-regression">2. Example: Linear Regression {#2-example-linear-regression}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a></li>
 </ul>
   </nav></div>
 
