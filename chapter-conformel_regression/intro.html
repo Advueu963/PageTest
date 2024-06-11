@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_regression/intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -200,6 +202,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Conformal prediction for regression</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">Set-valued prediction based on utility maximization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
@@ -422,7 +425,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -438,6 +443,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Conformal prediction for regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">Split Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method-without-prefit">Split Method without Prefit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">Jackknife Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">Jackknife+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">CV+ Method</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -449,6 +471,798 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="conformal-prediction-for-regression">
 <h1>Conformal prediction for regression<a class="headerlink" href="#conformal-prediction-for-regression" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">clone</span>
+
+<span class="kn">from</span> <span class="nn">mapie.regression</span> <span class="kn">import</span> <span class="n">MapieRegressor</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">sps</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># paramters that can be tweaked</span>
+<span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mf">.5</span>
+
+<span class="c1"># Used for plotting the target function</span>
+<span class="n">X_general</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">norm_quantile</span> <span class="o">=</span> <span class="n">sps</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span> 
+
+
+<span class="c1">##### Jupyter Book auxiliary########</span>
+<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># makes the vairble mu abailable in markdown cell with {glue:}`mu`</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;noise&quot;</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">###################################</span>
+
+
+
+<span class="k">def</span> <span class="nf">are_both_intervals_equal</span><span class="p">(</span><span class="n">interval1</span><span class="p">,</span><span class="n">interval2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are both inervals equal?&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">interval1</span> <span class="o">==</span> <span class="n">interval2</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Yes, both are equal!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No, both are not equal!&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">calculate_quantile</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;higher&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">n</span><span class="p">,</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span><span class="n">n</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span>
+        <span class="n">scores</span><span class="p">,</span>
+        <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span>
+        <span class="n">q</span><span class="o">=</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">))</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span>
+        <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">target_function</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">X</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">create_regression_data</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">noise</span><span class="p">):</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">n_samples</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">sigma</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">target_function</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+                                                          <span class="n">noise</span><span class="p">,</span>
+                                                          <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:,</span><span class="kc">None</span><span class="p">]</span>
+    <span class="n">y_test</span> <span class="o">=</span> <span class="n">target_function</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+                                                        <span class="n">noise</span><span class="p">,</span>
+                                                        <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:,</span><span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">X_train</span><span class="p">,</span>
+        <span class="n">X_test</span><span class="p">,</span>
+        <span class="n">y_train</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
+        <span class="n">y_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">get_coverage</span><span class="p">(</span><span class="n">true_ground</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+    <span class="n">coverage</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">inter</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">interval</span><span class="p">):</span>
+        <span class="n">current_value</span> <span class="o">=</span> <span class="n">true_ground</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">coverage</span> <span class="o">+=</span> <span class="n">inter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">current_value</span> <span class="o">&lt;=</span> <span class="n">inter</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">coverage</span> <span class="o">=</span> <span class="n">coverage</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">true_ground</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">coverage</span>
+
+<span class="k">def</span> <span class="nf">plot_data</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="p">,</span>
+    <span class="n">X_test</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="p">,</span>
+    <span class="n">y_test</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>              
+    <span class="n">y_pred_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+    <span class="c1"># plot the true relationship with confidence intervals</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">X_general</span><span class="p">,</span> <span class="n">target_function</span><span class="p">(</span><span class="n">X_general</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ground_truth&quot;</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_general</span><span class="p">,</span> <span class="n">target_function</span><span class="p">(</span><span class="n">X_general</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm_quantile</span> <span class="o">*</span> <span class="n">noise</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;95</span><span class="si">% c</span><span class="s2">onfidence interval of ground_truth&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_general</span><span class="p">,</span> <span class="n">target_function</span><span class="p">(</span><span class="n">X_general</span><span class="p">)</span> <span class="o">+</span> <span class="n">norm_quantile</span> <span class="o">*</span> <span class="n">noise</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">y_pred</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y_pred_interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># plot the prediction plus the interval</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;aqua&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;prediction&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y_pred_interval</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y_pred_interval</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;prediction_coverage&quot;</span><span class="p">)</span>
+
+    <span class="c1"># plot the data points</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;train data&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test data&quot;</span><span class="p">)</span>
+
+    <span class="c1"># set title</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Visualization of </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> having coverage = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">get_coverage</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred_interval</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Visualization of data&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<p>We now discuss Conformal prediction applied to regression tasks. We recommend reading the Chapter on <a class="reference internal" href="../chapter-conformel_classification/intro.html"><span class="doc std std-doc">Conformal Classification</span></a> as it covers the general idea. Regression is done through inductive conformal prediction which can be briefly described in four steps:</p>
+<ol class="arabic simple">
+<li><p>Divide the <span class="math notranslate nohighlight">\(x_1, \dots, x_n\)</span> data points into <span class="math notranslate nohighlight">\(x_1, \dots, x_k\)</span> training points and <span class="math notranslate nohighlight">\(x_{k+1}, \dots, x_{k+l-1}, x_{n}\)</span> validation points such that <span class="math notranslate nohighlight">\(n = k + l\)</span>.</p></li>
+<li><p>Train a arbitrary machine learning model on the  training set.</p></li>
+<li><p>Calculate the non-conformity scores based on the calibration set.</p></li>
+<li><p>Based on these value create a prediction interval for each new observation <span class="math notranslate nohighlight">\(x_{n+1}\)</span>.</p></li>
+</ol>
+<p>The non-conformity function <span class="math notranslate nohighlight">\(f\)</span> can be seen as the ‘’weirdness’ of a label <span class="math notranslate nohighlight">\(y\)</span> given the features <span class="math notranslate nohighlight">\(x\)</span>.
+For the non-conformity function <span class="math notranslate nohighlight">\(f\)</span> we use the <em>absolute residual score</em> one of the most commonly used non-conformity score functions:</p>
+<div class="math notranslate nohighlight">
+\[
+    f_h(x,y) = | y - h(x) |
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h\)</span> is the underlying machine learning model we use.\</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">absolute_residual_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<p>There are different ways of calculating the non-conformity scores and prediction intervals namely <a class="reference internal" href="#content-split"><span class="std std-ref">Split</span></a>,<a class="reference internal" href="#content-jackknife"><span class="std std-ref">Jackknife</span></a> , <a class="reference internal" href="#content-jackknife-plus"><span class="std std-ref">Jackknife+</span></a> and <a class="reference internal" href="#content:jackknife_plus_cv"><span class="xref myst">Jackknife+_CV</span></a> which we will present. <br />
+We apply these methods to synthetic data, with features X being drawn from a Gaussian distribution with parameters <span class="math notranslate nohighlight">\(\mu = \)</span> <span class="output text_plain">0</span>, <span class="math notranslate nohighlight">\(\sigma=\)</span> <span class="output text_plain">2</span>.
+The relationship between the X values and target y is described by the function <span class="math notranslate nohighlight">\(x \mapsto x\sin(x)\cos(x)\)</span>.
+Noise was added to y drawn from a Gaussian distribution with <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=\)</span><span class="output text_plain">0.5</span>.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">create_regression_data</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span>
+                                                       <span class="n">sigma</span><span class="p">,</span>
+                                                       <span class="n">n_samples</span><span class="p">,</span>
+                                                       <span class="n">noise</span><span class="p">)</span>
+<span class="n">plot_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" src="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" />
+</div>
+</div>
+<section id="split-method">
+<span id="content-split"></span><h2>Split Method<a class="headerlink" href="#split-method" title="Link to this heading">#</a></h2>
+<div align="justify">
+<p>This method uses the general inductive conformal prediction with only a single train/validation split.
+It can be described by the following steps</p>
+<ol class="arabic simple">
+<li><p>Split the <span class="math notranslate nohighlight">\(n\)</span> training data points into <span class="math notranslate nohighlight">\(k\)</span> proper training and <span class="math notranslate nohighlight">\(l\)</span> validation points and fit a model <span class="math notranslate nohighlight">\(\hat{h}\)</span> on the training data.</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(i = l, l+1, \dots, l+k-1, n\)</span> validation points calculate the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_i = f_{\hat{h}}(y_i, x_i)\)</span>.</p></li>
+<li><p>Calculate the Quantile <span class="math notranslate nohighlight">\( q_{split} = \lceil (1-\epsilon)*(l+1)\rceil \text{-Quantile of the sequence }(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n})\)</span> for a predefined significance level <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
+<li><p>Build the prediction interval <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> for a new data point <span class="math notranslate nohighlight">\(x_{n+1}\)</span>:
+$<span class="math notranslate nohighlight">\(
+ Y_\epsilon = [\hat{h}(X_{n+1} - q_{split} \ , \ \hat h(x_{n+1})  + q_{split})]
+\)</span>$</p></li>
+</ol>
+<p>Given the above data, we firstly split the training into proper training and validation data.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_prefit</span><span class="p">,</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_train_prefit</span><span class="p">,</span><span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span>
+                                               <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                                               <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the next step we fit an arbitrary machine learning algorithm to the training data.
+Here we will use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html">GradienBoostingRegressor</a>.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_model</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;squared_error&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+<span class="p">)</span>  <span class="c1"># https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html</span>
+<span class="n">base_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_prefit</span><span class="p">,</span> <span class="n">y_train_prefit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we apply the non-conformity function <span class="math notranslate nohighlight">\(f\)</span> to the validation dataset.</p>
+<div class="cell tag_scroll-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct the sequence of residuals</span>
+<span class="n">split_non_conformity_scores</span> <span class="o">=</span> <span class="n">absolute_residual_score</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">base_model</span><span class="p">,</span><span class="n">X</span><span class="o">=</span><span class="n">X_val</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_val</span><span class="p">)</span>
+<span class="n">split_non_conformity_scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.17621188e+00, 1.29941504e-01, 2.19041871e-01, 2.19637592e-02,
+       8.65203580e-02, 7.72014317e-01, 3.68429832e-01, 7.22305073e-01,
+       7.92107736e-01, 1.36845459e-01, 6.74883979e-01, 5.45870255e-01,
+       8.71455367e-01, 1.82357056e-01, 4.50544064e-01, 5.32927336e-01,
+       4.12196792e-01, 4.10194193e-01, 4.09962030e-01, 3.39198452e-01,
+       1.08439456e-01, 1.04735050e+00, 1.03149838e-01, 4.90559969e-01,
+       1.44895677e-01, 6.10784086e-01, 2.05508173e-01, 1.84123284e-01,
+       5.13777762e-01, 2.01735407e-01, 9.11415896e-01, 5.53804262e-01,
+       5.91165071e-01, 1.59038518e-01, 7.18983939e-01, 4.54037720e-01,
+       1.29669969e+00, 1.51941944e-01, 8.92657129e+00, 2.27890354e-01,
+       1.14714162e-01, 2.00646787e-01, 8.20624163e-01, 1.10063611e+00,
+       8.20420804e-01, 3.87726955e-01, 4.07553094e-01, 2.10098109e-01,
+       6.14708774e-02, 3.53782090e-01, 1.48828689e-01, 4.45750268e-01,
+       7.42418761e-01, 5.83629052e-01, 5.07656121e-01, 8.08408140e-02,
+       1.75970711e-01, 7.11394596e-03, 1.09304790e+00, 7.11316256e-01,
+       6.21553796e-01, 4.58020376e+00, 1.69140853e-01, 7.43947419e-02,
+       4.95359946e-01, 1.95995834e-01, 4.10885347e-01, 1.19124018e-01,
+       9.18979322e-01, 2.37338725e-01, 1.80205360e-01, 4.78802398e-01,
+       2.78605219e-02, 3.39816065e-01, 5.12204494e-01, 2.91652568e-01,
+       4.21492921e-01, 4.22069926e-01, 8.08490467e-01, 8.32273693e-01,
+       1.38956798e+00, 2.94128325e-01, 1.08616382e+00, 2.78812596e-01,
+       6.58363919e-01, 6.48754374e-02, 4.16288145e-01, 3.94485843e-02,
+       8.85839957e-01, 5.94322825e-02, 1.66767137e-01, 6.72845609e-01,
+       6.59790898e-01, 9.52924575e-02, 6.44859412e-01, 9.40116328e-01,
+       5.84414468e-02, 9.48438316e-01, 2.21268926e-01, 4.92947428e-01])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we must calculate the <span class="math notranslate nohighlight">\(\lceil (1-\epsilon)*(l+1)\rceil\)</span> Quantile on <span class="math notranslate nohighlight">\(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split_quantile</span> <span class="o">=</span> <span class="n">calculate_quantile</span><span class="p">(</span><span class="n">split_non_conformity_scores</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="n">split_quantile</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1762118765177787
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">output_mean_interval_width</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+    <span class="n">interval_widths</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">intervals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean interval width: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">interval_widths</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_prediction_interval_through_quantile</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">quantile</span><span class="p">):</span>
+    
+    <span class="n">prediction_lower</span> <span class="o">=</span> <span class="p">(</span><span class="n">predictions</span> <span class="o">-</span> <span class="n">quantile</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">prediction_higher</span> <span class="o">=</span> <span class="p">(</span><span class="n">predictions</span> <span class="o">+</span> <span class="n">quantile</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">prediction_interval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">prediction_lower</span><span class="p">,</span><span class="n">prediction_higher</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">prediction_interval</span>
+
+
+
+<span class="n">split_prediction</span><span class="p">,</span> <span class="n">split_interval</span> <span class="o">=</span> <span class="n">get_prediction_interval_through_quantile</span><span class="p">(</span>
+    <span class="n">predictions</span><span class="o">=</span><span class="n">base_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> 
+    <span class="n">quantile</span><span class="o">=</span><span class="n">split_quantile</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">split_interval</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">split_interval</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-4.73059586 -2.37817211]
+ [-4.73059586 -2.37817211]]
+Mean interval width:  2.352423753035558
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<p>An equal approach is firstly adding/subtracting the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n}\)</span> from the predictions and then computing the upper bound <span class="math notranslate nohighlight">\(q_{l,\epsilon}^+\)</span> and <span class="math notranslate nohighlight">\(q_{l,\epsilon}^-\)</span> which are calculated as follows:
+$<span class="math notranslate nohighlight">\(
+    q_{m,\epsilon}^{+}(v_i) = \lceil (1-\epsilon)*(m+1)\rceil \text{-Quantile of the sequence }(v_1, v_2, \ldots , v_m)
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+    q_{m,\epsilon}^{-}(v_i) = \lfloor \epsilon*(m+1)\rfloor \text{-Quantile of the sequence }(v_1, v_2, \ldots , v_m) = -q_{n,\epsilon}^{+}(-v_i)
+\)</span>$</p>
+<p>The corresponding prediction interval <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> for a new data point <span class="math notranslate nohighlight">\(x_{n+1}\)</span> would then be:</p>
+<div class="math notranslate nohighlight">
+\[
+    Y_\epsilon = [q_{l,\epsilon}^{-}(\hat{h}(x_{n+1}) - \alpha_i), \ q_{l,\epsilon}^{+}(\hat{h}(x_{n+1}) + \alpha_i]
+\]</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_prediction_interval_through_scores</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">non_conformity_scores</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">plus_sequence</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">non_conformity_scores</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">neg_sequence</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">non_conformity_scores</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># jackknife plus method</span>
+        <span class="n">plus_sequence</span> <span class="o">=</span> <span class="n">predictions</span> <span class="o">+</span> <span class="n">non_conformity_scores</span>
+        <span class="n">neg_sequence</span> <span class="o">=</span> <span class="n">predictions</span> <span class="o">-</span> <span class="n">non_conformity_scores</span>
+
+    <span class="n">prediction_higher</span> <span class="o">=</span> <span class="n">calculate_quantile</span><span class="p">(</span>
+        <span class="n">plus_sequence</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="s2">&quot;higher&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+        <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="p">)</span>  <span class="c1"># 1-epsilon quantile</span>
+    <span class="n">prediction_lower</span> <span class="o">=</span> <span class="n">calculate_quantile</span><span class="p">(</span>
+        <span class="n">neg_sequence</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+        <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="p">)</span>  <span class="c1"># epsilon quantile</span>
+
+    <span class="n">prediction_interval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">prediction_lower</span><span class="p">,</span> <span class="n">prediction_higher</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">prediction_interval</span>
+
+
+<span class="n">split_prediction_2</span><span class="p">,</span> <span class="n">split_interval_2</span> <span class="o">=</span> <span class="n">get_prediction_interval_through_scores</span><span class="p">(</span>
+    <span class="n">base_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">split_non_conformity_scores</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">split_interval_2</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">split_interval_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-4.73059586 -2.37817211]
+ [-4.73059586 -2.37817211]]
+Mean interval width:  2.352423753035558
+</pre></div>
+</div>
+</div>
+</div>
+<div align="justify">
+<p>Reproducing the above intervals with the <a class="reference external" href="https://mapie.readthedocs.io/en/latest/generated/mapie.regression.MapieRegressor.html#mapie.regression.MapieRegressor">MapieRegressor</a>. <br />
+<code class="docutils literal notranslate"><span class="pre">methdo=&quot;base&quot;</span></code> tells MAPIE, when constructing the prediction interval to apply the non-conformity function to the calibration dataset.<br />
+<code class="docutils literal notranslate"><span class="pre">cv=&quot;prefit&quot;</span></code> indicates that the <code class="docutils literal notranslate"><span class="pre">estimator</span></code> has already been fitted to the data.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conformal_model</span> <span class="o">=</span> <span class="n">MapieRegressor</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">base_model</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;base&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="s2">&quot;prefit&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+<span class="p">)</span>
+<span class="n">conformal_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="n">y_pred_split_prefit</span><span class="p">,</span> <span class="n">y_interval_split_prefit</span> <span class="o">=</span> <span class="n">conformal_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span>
+                                             <span class="n">alpha</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="n">y_interval_split_prefit</span> <span class="o">=</span> <span class="n">y_interval_split_prefit</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_interval_split_prefit</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">y_interval_split_prefit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-4.73059586 -2.37817211]
+ [-4.73059586 -2.37817211]]
+Mean interval width:  2.352423753035558
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The MAPIE package supports predicting the intervals with multiple alpha/epsilon values. \
+Because we are only using one alpha/epsilon value we can safely apply `y_interval_split_prefit.reshape(-1, 2)`. \
+When using multiple values this is not recommended!
+</pre></div>
+</div>
+</div>
+</section>
+<section id="split-method-without-prefit">
+<h2>Split Method without Prefit<a class="headerlink" href="#split-method-without-prefit" title="Link to this heading">#</a></h2>
+<div align="justify">
+<p>Instead of manually splitting the training data into train and calibration data, MAPIE can do for us.
+To achieve the same result we use the <code class="docutils literal notranslate"><span class="pre">cv</span> <span class="pre">=</span> <span class="pre">&quot;split&quot;</span></code>parameter.
+More on the cv parameter can be found in the <a class="reference external" href="https://mapie.readthedocs.io/en/latest/generated/mapie.regression.MapieRegressor.html#mapie.regression.MapieRegressor">documentation</a>.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conformel_model</span> <span class="o">=</span> <span class="n">MapieRegressor</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">clone</span><span class="p">(</span><span class="n">base_model</span><span class="p">),</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;base&quot;</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="s2">&quot;split&quot;</span><span class="p">,</span> 
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+<span class="p">)</span>
+
+<span class="n">conformel_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_split</span><span class="p">,</span> <span class="n">y_interval_split</span> <span class="o">=</span> <span class="n">conformel_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">y_interval_split</span> <span class="o">=</span> <span class="n">y_interval_split</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y_interval_split</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">y_interval_split</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-4.73059586 -2.37817211]
+ [-4.73059586 -2.37817211]]
+Mean interval width:  2.352423753035558
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_data</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_split</span><span class="p">,</span>
+    <span class="n">y_pred_interval</span><span class="o">=</span><span class="n">y_interval_split</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Split Method&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5188a01faa7880a830bbffbb1bf8f80f155a0cf740811fbe7bed4849e1337f51.png" src="../_images/5188a01faa7880a830bbffbb1bf8f80f155a0cf740811fbe7bed4849e1337f51.png" />
+</div>
+</div>
+</section>
+<section id="jackknife-method">
+<span id="content-jackknife"></span><h2>Jackknife Method<a class="headerlink" href="#jackknife-method" title="Link to this heading">#</a></h2>
+<div align="justify">
+<p>Instead of only using one calibration split to compute <span class="math notranslate nohighlight">\(l\)</span> non-conformity scores as in the <em>Split Method</em> <span class="xref std std-ref">split</span>, the Jackknife (or Leave-one-out) methods computes a <span class="math notranslate nohighlight">\(\alpha_i\)</span> for each training point <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span>.
+It consists of the following four steps:</p>
+<ol class="arabic simple">
+<li><p>For each training instance <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span> fit a model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> on all data points excluding i.</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> the non-conformity scores are computed: <span class="math notranslate nohighlight">\(\alpha_i^{jack} = f_{\hat{h}_{-i}}(y_i,x_i)\)</span> for each <span class="math notranslate nohighlight">\(i =1, \dots, n\)</span>.</p></li>
+<li><p>Based on these scores <span class="math notranslate nohighlight">\(\alpha_1^{jack}, \dots, \alpha_{n}^{jack}\)</span> the corresponding quantile <span class="math notranslate nohighlight">\( q_{jack} =\lceil (1-\epsilon)*(n+1)\rceil \text{-quantile of the sequence }(\alpha_{1}^{jack},\alpha_{2}^{jack} \dots , \alpha_{n}^{jack})\)</span> is calculated.</p></li>
+<li><p>The prediction interval for a new instance <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is calculated through <span class="math notranslate nohighlight">\(\pm \ q_{jack}\)</span>:
+$<span class="math notranslate nohighlight">\(
+ [\hat{h}(x_{n+1}) - q_{jack} , \hat{h}(x_{n+1}) + q_{jack}]
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\hat{h}<span class="math notranslate nohighlight">\( is the model trained on all \)</span>n$ data points.</p></li>
+</ol>
+<p>Let us start with fitting the corresponding models <span class="math notranslate nohighlight">\(\hat{h}_{-i}.
+Doing this we can directly compute the corresponding \)</span>\alpha_i^{jack} = f_{\hat{h}_{-i}}(y_i,x_i)$.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_missing_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">jackknife_non_conformity_scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+<span class="c1"># 1: Fit the \hat h_{-i} models on the training data</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)):</span>
+    <span class="n">new_model</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">base_model</span><span class="p">)</span>
+    
+    <span class="n">X_train_missing_i</span><span class="p">,</span> <span class="n">y_train_missing_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+        <span class="n">y_train</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">new_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_missing_i</span><span class="p">,</span> <span class="n">y_train_missing_i</span><span class="p">)</span>
+    <span class="c1"># 2: calculate non-conformity scores</span>
+    <span class="n">jackknife_non_conformity_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">new_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+        <span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">))</span>
+    <span class="n">model_missing_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_model</span><span class="p">)</span>
+
+<span class="n">jackknife_non_conformity_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">jackknife_non_conformity_scores</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As for the next step we calculate the <span class="math notranslate nohighlight">\(\lceil (1-\epsilon)*(n+1)\rceil\)</span>-quantile of <code class="docutils literal notranslate"><span class="pre">jackknife_non_conformity_scores</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3: Compute quantile</span>
+<span class="n">jackknife_quantile</span> <span class="o">=</span> <span class="n">calculate_quantile</span><span class="p">(</span><span class="n">jackknife_non_conformity_scores</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
+<span class="n">jackknife_quantile</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1052691479091148
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the last step we train our model <span class="math notranslate nohighlight">\(\hat{h}\)</span> on the entire <span class="math notranslate nohighlight">\(n\)</span> data points.
+For a new data points <span class="math notranslate nohighlight">\(x_{n+1}\)</span> the prediction interval <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> is computed by subtracting and adding the Quantile <code class="docutils literal notranslate"><span class="pre">jackknife_quantile</span></code> to <span class="math notranslate nohighlight">\(\hat{h}(x_{n+1})\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4: Get prediction intervals</span>
+<span class="n">jackknife_model</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">base_model</span><span class="p">)</span>  <span class="c1"># done such that upper cells do not interfere here</span>
+<span class="n">jackknife_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">jackknife_prediction</span><span class="p">,</span> <span class="n">jackknife_interval</span> <span class="o">=</span> <span class="n">get_prediction_interval_through_quantile</span><span class="p">(</span>
+    <span class="n">jackknife_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">jackknife_quantile</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jackknife_interval</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">jackknife_interval</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.27175184  1.93878646]
+ [-4.66435625 -2.45381795]]
+Mean interval width:  2.2105382958182296
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again as above in <em>Split</em>(see Section <span class="xref std std-ref">split</span>) we can firstly add the <code class="docutils literal notranslate"><span class="pre">jackknife_non_conformity_scores</span></code> to the prediction <span class="math notranslate nohighlight">\(\hat{h(x_{n+1})}\)</span> and then take the corresponding Quantiles as bounds.
+$<span class="math notranslate nohighlight">\(
+    Y_\epsilon = [ q_{n,\epsilon}^{-}(\hat{h}(x_{n+1}) - \alpha_i^{jack}) \ , \ q_{n,\epsilon}^{+}(\hat{h}(x_{n+1}) + \alpha_i^{jack})]
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4</span>
+<span class="n">jackknife_model</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">base_model</span><span class="p">)</span>  <span class="c1"># done such that upper cells do not interfere here</span>
+<span class="n">jackknife_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">jackknife_prediction_2</span><span class="p">,</span> <span class="n">jackknife_interval_2</span> <span class="o">=</span> <span class="n">get_prediction_interval_through_scores</span><span class="p">(</span>
+    <span class="n">jackknife_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">jackknife_non_conformity_scores</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jackknife_interval_2</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">jackknife_interval_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.27175184  1.93878646]
+ [-4.66435625 -2.45381795]]
+Mean interval width:  2.2105382958182296
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In most common cases the coverage of the jackknife method is equal to <span class="math notranslate nohighlight">\(1-\epsilon\)</span>.
+But in scenarios where a regression model is less stable (samples size equal to number of features) the coverage might be less than <span class="math notranslate nohighlight">\(1-\epsilon\)</span>. For further details see <span id="id1">Barber <em>et al.</em> [<a class="reference internal" href="../references.html#id2168" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">BCandesRT19</a>]</span>.</p>
+</div>
+<p>Equally in MAPIE:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conformel_model</span> <span class="o">=</span> <span class="n">MapieRegressor</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">base_model</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;base&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+<span class="p">)</span>
+<span class="n">conformel_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred_jackknife</span><span class="p">,</span> <span class="n">y_interval_jackknife</span> <span class="o">=</span> <span class="n">conformel_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="n">y_interval_jackknife</span> <span class="o">=</span> <span class="n">y_interval_jackknife</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y_interval_jackknife</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">y_interval_jackknife</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.27175184  1.93878646]
+ [-4.66435625 -2.45381795]]
+Mean interval width:  2.2105382958182296
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_data</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_jackknife</span><span class="p">,</span>
+    <span class="n">y_pred_interval</span><span class="o">=</span><span class="n">y_interval_jackknife</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Jackknife&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/29bc5cf4f5d741c6bbfb5687601b2f018a4d8f8a643a5741c0c37eb198b87e67.png" src="../_images/29bc5cf4f5d741c6bbfb5687601b2f018a4d8f8a643a5741c0c37eb198b87e67.png" />
+</div>
+</div>
+</section>
+<section id="content-jackknife-plus">
+<span id="id2"></span><h2>Jackknife+ Method<a class="headerlink" href="#content-jackknife-plus" title="Link to this heading">#</a></h2>
+<div align="justify">
+<p>In Jackknife we build the intervals based on <span class="math notranslate nohighlight">\(\hat{h}(x_{N+1})\)</span> and the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_i^{jack}\)</span>.
+As seen in our example it perform better than just using one split, but no theoretical guarantee on the coverage can be given (see <span id="id3">[<a class="reference internal" href="../references.html#id2168" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">BCandesRT19</a>]</span>).
+We now introduce the Jackknife+ method proposed by <span id="id4">Barber <em>et al.</em> [<a class="reference internal" href="../references.html#id2168" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">BCandesRT19</a>]</span>. <br />
+The prediction of <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is not only based on <span class="math notranslate nohighlight">\(\hat h\)</span> but rather on multiple predictions <span class="math notranslate nohighlight">\(\hat{h}_{-1}, \dots , \hat{h}_{-n}\)</span>, incorporating the variability of the underlying machine learning algorithm.
+Jackknife+ guarantees a coverage of at least <span class="math notranslate nohighlight">\(1-2\epsilon\)</span> while not having any assumptions than exchangeablility.
+We again distinguish four steps:</p>
+<ol class="arabic simple">
+<li><p>For each training instance <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span> fit a model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> on all data points excluding i.</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(i =1, \dots, n\)</span> models <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> the non-conformity scores are computed: <span class="math notranslate nohighlight">\(\alpha_i = y_i - \hat{h}_{-i}\)</span>.</p></li>
+<li><p>Based on these scores <span class="math notranslate nohighlight">\(\alpha_1, \dots, \alpha_{n}\)</span> the corresponding quantile <span class="math notranslate nohighlight">\( q_{jack} =\lceil (1-\epsilon)*(n+1)\rceil \text{-quantile of the sequence }(\alpha_{1}, \, \alpha_{l+2}, \ldots , \alpha_{n})\)</span> is calculated.</p></li>
+<li><p>The prediction interval for a new instance <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is calculated through :
+$<span class="math notranslate nohighlight">\(
+ \left[q_{n,\epsilon}^{-}\left(\hat{h}_{-i}(x_{n+1}) - \alpha_i \right), \ q_{n,\epsilon}^{+}\left(\hat{h}_{-i}(x_{n+1}) + \alpha_i \right) \right]
+\)</span>$</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1: this is done above in jackknife</span>
+<span class="n">model_missing_data</span>
+<span class="c1"># 2: see above in jackknife</span>
+<span class="n">jackknife_non_conformity_scores</span>
+<span class="c1"># 3:</span>
+<span class="c1"># get all predictions of the models \hat h_{-i}</span>
+<span class="n">missing_model_test_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">model_missing_data</span>
+<span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># 4: build interval</span>
+<span class="n">jackknife_plus_prediction</span><span class="p">,</span> <span class="n">jackknife_plus_interval</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">get_prediction_interval_through_scores</span><span class="p">(</span>
+        <span class="n">missing_model_test_predictions</span><span class="p">,</span> <span class="n">jackknife_non_conformity_scores</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jackknife_plus_interval</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">jackknife_plus_interval</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.26841832  1.94211998]
+ [-4.65597107 -2.42719945]]
+Mean interval width:  2.2145308720345076
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again using the MAPIE package we can achieve the same:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapie_jackknife_plus</span> <span class="o">=</span> <span class="n">MapieRegressor</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">base_model</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;plus&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+<span class="p">)</span>
+<span class="n">mapie_jackknife_plus</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred_jackknife_plus</span><span class="p">,</span> <span class="n">y_interval_jackknife_plus</span> <span class="o">=</span> <span class="n">mapie_jackknife_plus</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="n">y_interval_jackknife_plus</span> <span class="o">=</span> <span class="n">y_interval_jackknife_plus</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y_interval_jackknife_plus</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">y_interval_jackknife_plus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.26841832  1.94211998]
+ [-4.65597107 -2.42719945]]
+Mean interval width:  2.2145308720345076
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_data</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_jackknife_plus</span><span class="p">,</span>
+    <span class="n">y_pred_interval</span><span class="o">=</span><span class="n">y_interval_jackknife_plus</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Jackknife+&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/6b0bddd471fbcae164a1fffaddd4f5cf7711ba40fd825c7a5b0db478e597fc18.png" src="../_images/6b0bddd471fbcae164a1fffaddd4f5cf7711ba40fd825c7a5b0db478e597fc18.png" />
+</div>
+</div>
+</section>
+<section id="cv-method">
+<span id="content-jacknife-plus-cv"></span><h2>CV+ Method<a class="headerlink" href="#cv-method" title="Link to this heading">#</a></h2>
+<div align="justify">
+<p>While Jackknife and Jackknife+ improve the coverage of prediction sets, for increasing data points in gets very costly. Training a new model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> for each data point gets impractically for practical application.
+If we think of the amount of <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> as a controllable parameter we arrive at the so called CV+ method.
+It can again be expressed in five steps, only differing from Jackknife+ in the amount of <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> models.</p>
+<ol class="arabic simple">
+<li><p>Split the training data <span class="math notranslate nohighlight">\(x_1, \dots, x_{n}\)</span> into <span class="math notranslate nohighlight">\(m\)</span> disjoint partitions <span class="math notranslate nohighlight">\(S_1, \dots, S_t\)</span>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(j = 1, \dots, t\)</span> train a model <span class="math notranslate nohighlight">\(\hat{h}_{-S_j}\)</span> on all subsets excluding S_j.</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(i =1, \dots, n\)</span> training data points the non-conformity scores are computed: <span class="math notranslate nohighlight">\(\alpha_i = y_i - \hat{h}_{-S^i}\)</span> where <span class="math notranslate nohighlight">\(S^i\)</span> is the subset containing the data point <span class="math notranslate nohighlight">\(x_i\)</span>.</p></li>
+<li><p>Based on these scores <span class="math notranslate nohighlight">\(\alpha_1, \dots, \alpha_{n}\)</span> the corresponding quantile <span class="math notranslate nohighlight">\( q_{cv+} =\lceil (1-\epsilon)*(n+1)\rceil \text{-quantile of the sequence }(\alpha_{1}, \, \alpha_{2}, \ldots , \alpha_{n})\)</span> is calculated.</p></li>
+<li><p>The prediction interval for a new instance <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is calculated through :</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+    \left[q_{l+k,\epsilon}^{-}\left(\hat{h}_{-S^i}(x_{N+1}) - \alpha_i \right), \ q_{l+k,\epsilon}^{+}\left(\hat{h}_{-S^i}(x_{N+1}) + \alpha_i \right) \right]
+\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapie_jackknife_plus_cv</span> <span class="o">=</span> <span class="n">MapieRegressor</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">base_model</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;plus&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+<span class="p">)</span>
+<span class="n">mapie_jackknife_plus_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred_jackknife_plus_cv</span><span class="p">,</span> <span class="n">y_interval_jackknife_plus_cv</span> <span class="o">=</span> <span class="n">mapie_jackknife_plus_cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="n">y_interval_jackknife_plus_cv</span> <span class="o">=</span> <span class="n">y_interval_jackknife_plus_cv</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y_interval_jackknife_plus_cv</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">output_mean_interval_width</span><span class="p">(</span><span class="n">y_interval_jackknife_plus_cv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-3.9792325   1.94415344]
+ [-4.53034491  1.27407775]]
+Mean interval width:  2.5660014020522035
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_data</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_jackknife_plus_cv</span><span class="p">,</span>
+    <span class="n">y_pred_interval</span><span class="o">=</span><span class="n">y_interval_jackknife_plus_cv</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;CV+&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/2922aef342bc5df5db300f7b7790d39bae0d6cbb4b50dd1e2d8c3a3ca3c3f4c5.png" src="../_images/2922aef342bc5df5db300f7b7790d39bae0d6cbb4b50dd1e2d8c3a3ca3c3f4c5.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A general advice when to use which method can be found <a class="reference external" href="https://mapie.readthedocs.io/en/latest/theoretical_description_regression.html">here</a>, alongside some more methods for heteroscedastic data or time series.</p>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="uncertainty-quantification-in-conformal-regression">
+<h1>Uncertainty Quantification in Conformal Regression<a class="headerlink" href="#uncertainty-quantification-in-conformal-regression" title="Link to this heading">#</a></h1>
+<div align="justify">
+<p>Quantifying the uncertainty of conformal regression outputs can intuitively be done by looking at the interval widths.</p>
+<ul class="simple">
+<li><p>The split method gives all intervals the same width, making it not very useful for individual uncertainty quantification. \</p></li>
+<li><p>Similiarly Jackknife gives each point the same width, whilst much smaller. \</p></li>
+<li><p>Incorporating the randomness of the regression model, Jackknife+ assigns each point a individual interval width. Thus making it more useful determining the uncertainty of the model for each point. \</p></li>
+<li><p>Finally CV+ having fewer underlying <span class="math notranslate nohighlight">\(\hat h\)</span> gives us also individual intervals, whilst being better in quantifying the uncertainty of points, where only few data points were seen.</p></li>
+</ul>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Split&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife+&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife+_CV&quot;</span><span class="p">]</span>
+<span class="n">intervals</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_interval_split</span><span class="p">,</span> <span class="n">y_interval_jackknife</span><span class="p">,</span> <span class="n">y_interval_jackknife_plus</span><span class="p">,</span> <span class="n">y_interval_jackknife_plus_cv</span><span class="p">]</span>
+<span class="n">methods_to_intervals</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">methods</span><span class="p">,</span><span class="n">intervals</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">methods_to_intervals</span><span class="p">[</span><span class="n">method</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">methods_to_intervals</span><span class="p">[</span><span class="n">method</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Feature Values&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Prediction Interval widths&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/91a5ee827b52a213234c57650d3b2d6be7b7eb8c308f8c376390d5e1fe909828.png" src="../_images/91a5ee827b52a213234c57650d3b2d6be7b7eb8c308f8c376390d5e1fe909828.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -506,7 +1320,29 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Conformal prediction for regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">Split Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method-without-prefit">Split Method without Prefit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">Jackknife Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">Jackknife+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">CV+ Method</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Gaussian processes &#8212; My sample book</title>
+    <title>Excursus: Exchangability &#8212; My sample book</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-gaussianprocess/intro';</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_classification/exchangeability-excursus';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Deep neural network ensembles" href="../chapter-deep_neuralnetwork/dnn.html" />
-    <link rel="prev" title="Generative models" href="../chapter-generative_models/intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,6 +123,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -176,7 +178,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">Prelude</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
@@ -190,13 +192,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation and Ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">Conformal prediction for regression</a></li>
@@ -257,7 +259,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-gaussianprocess/intro.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-conformel_classification/exchangeability-excursus.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +307,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-gaussianprocess/intro.ipynb" target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-conformel_classification/exchangeability-excursus.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +324,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-gaussianprocess/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-conformel_classification/exchangeability-excursus.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -352,7 +354,7 @@
       
       
       
-      <li><a href="../_sources/chapter-gaussianprocess/intro.ipynb" target="_blank"
+      <li><a href="../_sources/chapter-conformel_classification/exchangeability-excursus.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -434,7 +436,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Gaussian processes</h1>
+    <h1>Excursus: Exchangability</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -448,9 +450,76 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="gaussian-processes">
-<h1>Gaussian processes<a class="headerlink" href="#gaussian-processes" title="Link to this heading">#</a></h1>
-</section>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="excursus-exchangability">
+<h1>Excursus: Exchangability<a class="headerlink" href="#excursus-exchangability" title="Link to this heading">#</a></h1>
+<div align="justify">
+<p>The concept of <em>exchangability</em> can be seen as a relaxation of the typical <em>i.i.d</em> (independently and identically distributed) assumption. Informally is means that the ordering of the random variables in the sequence is irrelevant for the joint probability. <br />
+More formally, a finite sequence of random variables <span class="math notranslate nohighlight">\(X_1, \dots, X_N\)</span> is <strong>exchangeable</strong>, if
+$<span class="math notranslate nohighlight">\(
+    P(X_1 = x_1, X_2 = x_2, \dots, X_N = x_N) = P(X_{\sigma(1)} = x_1, X_{\sigma(2)} = x_2, \dots, X_{\sigma(N)} = x_N)
+\)</span>$</p>
+<p>for every permutation  <span class="math notranslate nohighlight">\(\sigma : [N] \rightarrow [N]\)</span>.
+For an example we think of an urn with three red and two blue balls.
+We seek to draw all five from the urn <strong>without</strong> replacement.
+Pouring the example into a probabilistic framework the i-th drawn ball is denoted by a random variable <span class="math notranslate nohighlight">\(X_i = 1\)</span> if the ball is red and <span class="math notranslate nohighlight">\(X_i = 0\)</span> otherwise.
+We now are interested in the probability of any sequence <span class="math notranslate nohighlight">\(X_1 = x_1, \dots, X_5 = x_5\)</span>.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">get_all_sequences</span><span class="p">(</span><span class="n">urn</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="n">urn</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">urn</span><span class="p">)))))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">),</span> <span class="n">b</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">calculate_probability_sequence</span><span class="p">(</span><span class="n">urn</span><span class="p">,</span> <span class="n">sequence</span><span class="p">):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">urn</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">probability</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">probability</span> <span class="o">*=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">probability</span>
+
+<span class="k">def</span> <span class="nf">visualize_all_probabilities</span><span class="p">(</span><span class="n">urn</span><span class="p">):</span>
+    <span class="n">sequences</span><span class="p">,</span> <span class="n">probabilites</span><span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">[(</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sequence</span><span class="p">),</span> <span class="n">calculate_probability_sequence</span><span class="p">(</span><span class="n">urn</span><span class="p">,</span> <span class="n">sequence</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">get_all_sequences</span><span class="p">(</span><span class="n">urn</span><span class="p">)]</span>
+        <span class="p">))</span>
+    <span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sequences</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">probabilites</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticks</span><span class="p">())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sequences&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probabilities&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Probability of any possible sequence in the urn&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">visualize_all_probabilities</span><span class="p">(</span><span class="n">urn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d7674bd28050f1081c131e631ebfc4e088351732167b445d7c08b29b3e74ea21.png" src="../_images/d7674bd28050f1081c131e631ebfc4e088351732167b445d7c08b29b3e74ea21.png" />
+</div>
+</div>
+<div align="justify">
+<p>While it is not surprising that each sequence has equal probability it shows us that this sequence fulfills the property of <em>exchangeability</em>.
+Also the individual random variables are not independent, as the <span class="math notranslate nohighlight">\(i\)</span>-th realisation drawn ball influences the probability of the next <span class="math notranslate nohighlight">\((i+1)\)</span>-th realisation.
+If the random variables were independent (resulting in a binomial distribution), the <span class="math notranslate nohighlight">\(P(X_1,\dots, X_5) =\)</span> <span class="output text_plain">0.346</span>.</p>
+</div></section>
 
     <script type="text/x-thebe-config">
     {
@@ -465,7 +534,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./chapter-gaussianprocess"
+            path: "./chapter-conformel_classification"
         },
         predefinedOutput: true
     }
@@ -482,24 +551,6 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter-generative_models/intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Generative models</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../chapter-deep_neuralnetwork/dnn.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Deep neural network ensembles</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
