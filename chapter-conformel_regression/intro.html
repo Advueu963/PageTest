@@ -489,7 +489,22 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell tag_hide-output tag_remove-output docutils container">
+<div align="justify">
+<p>We now discuss Conformal prediction applied to regression tasks. We recommend reading the Chapter on <a class="reference internal" href="../chapter-conformel_classification/intro.html"><span class="doc std std-doc">Conformal Classification</span></a> as it covers the general idea. Regression is done through inductive conformal prediction which can be briefly described in four steps:</p>
+<ol class="arabic simple">
+<li><p>Divide the <span class="math notranslate nohighlight">\(x_1, \dots, x_n\)</span> data points into <span class="math notranslate nohighlight">\(x_1, \dots, x_k\)</span> training points and <span class="math notranslate nohighlight">\(x_{k+1}, \dots, x_{k+l-1}, x_{n}\)</span> validation points such that <span class="math notranslate nohighlight">\(n = k + l\)</span>.</p></li>
+<li><p>Train a arbitrary machine learning model on the  training set.</p></li>
+<li><p>Calculate the non-conformity scores based on the calibration set.</p></li>
+<li><p>Based on these value create a prediction interval for each new observation <span class="math notranslate nohighlight">\(x_{n+1}\)</span>.</p></li>
+</ol>
+<p>The non-conformity function <span class="math notranslate nohighlight">\(f\)</span> can be seen as the ‘’weirdness’ of a label <span class="math notranslate nohighlight">\(y\)</span> given the features <span class="math notranslate nohighlight">\(x\)</span>.
+For the non-conformity function <span class="math notranslate nohighlight">\(f\)</span> we use the <em>absolute residual score</em> one of the most commonly used non-conformity score functions:</p>
+<div class="math notranslate nohighlight">
+\[
+    f_h(x,y) = | y - h(x) |
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h\)</span> is the underlying machine learning model we use.</p>
+</div><div class="cell tag_hide-output tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># paramters that can be tweaked</span>
 <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span>
@@ -600,22 +615,7 @@ document.write(`
 </div>
 </div>
 </div>
-<div align="justify">
-<p>We now discuss Conformal prediction applied to regression tasks. We recommend reading the Chapter on <a class="reference internal" href="../chapter-conformel_classification/intro.html"><span class="doc std std-doc">Conformal Classification</span></a> as it covers the general idea. Regression is done through inductive conformal prediction which can be briefly described in four steps:</p>
-<ol class="arabic simple">
-<li><p>Divide the <span class="math notranslate nohighlight">\(x_1, \dots, x_n\)</span> data points into <span class="math notranslate nohighlight">\(x_1, \dots, x_k\)</span> training points and <span class="math notranslate nohighlight">\(x_{k+1}, \dots, x_{k+l-1}, x_{n}\)</span> validation points such that <span class="math notranslate nohighlight">\(n = k + l\)</span>.</p></li>
-<li><p>Train a arbitrary machine learning model on the  training set.</p></li>
-<li><p>Calculate the non-conformity scores based on the calibration set.</p></li>
-<li><p>Based on these value create a prediction interval for each new observation <span class="math notranslate nohighlight">\(x_{n+1}\)</span>.</p></li>
-</ol>
-<p>The non-conformity function <span class="math notranslate nohighlight">\(f\)</span> can be seen as the ‘’weirdness’ of a label <span class="math notranslate nohighlight">\(y\)</span> given the features <span class="math notranslate nohighlight">\(x\)</span>.
-For the non-conformity function <span class="math notranslate nohighlight">\(f\)</span> we use the <em>absolute residual score</em> one of the most commonly used non-conformity score functions:</p>
-<div class="math notranslate nohighlight">
-\[
-    f_h(x,y) = | y - h(x) |
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(h\)</span> is the underlying machine learning model we use.\</p>
-</div><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">absolute_residual_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
@@ -651,11 +651,12 @@ It can be described by the following steps</p>
 <li><p>Split the <span class="math notranslate nohighlight">\(n\)</span> training data points into <span class="math notranslate nohighlight">\(k\)</span> proper training and <span class="math notranslate nohighlight">\(l\)</span> validation points and fit a model <span class="math notranslate nohighlight">\(\hat{h}\)</span> on the training data.</p></li>
 <li><p>Given <span class="math notranslate nohighlight">\(i = l, l+1, \dots, l+k-1, n\)</span> validation points calculate the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_i = f_{\hat{h}}(y_i, x_i)\)</span>.</p></li>
 <li><p>Calculate the Quantile <span class="math notranslate nohighlight">\( q_{split} = \lceil (1-\epsilon)*(l+1)\rceil \text{-Quantile of the sequence }(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n})\)</span> for a predefined significance level <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
-<li><p>Build the prediction interval <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> for a new data point <span class="math notranslate nohighlight">\(x_{n+1}\)</span>:
-$<span class="math notranslate nohighlight">\(
- Y_\epsilon = [\hat{h}(X_{n+1} - q_{split} \ , \ \hat h(x_{n+1})  + q_{split})]
-\)</span>$</p></li>
+<li><p>Build the prediction interval <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> for a new data point <span class="math notranslate nohighlight">\(x_{n+1}\)</span>:</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[
+    Y_\epsilon = [\hat{h}(X_{n+1} - q_{split} \ , \ \hat h(x_{n+1})  + q_{split})].
+\]</div>
 <p>Given the above data, we firstly split the training into proper training and validation data.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -766,13 +767,15 @@ Mean interval width:  2.352423753035558
 </div>
 </div>
 <div align="justify">
-<p>An equal approach is firstly adding/subtracting the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n}\)</span> from the predictions and then computing the upper bound <span class="math notranslate nohighlight">\(q_{l,\epsilon}^+\)</span> and <span class="math notranslate nohighlight">\(q_{l,\epsilon}^-\)</span> which are calculated as follows:
-$<span class="math notranslate nohighlight">\(
+<p>An equal approach is firstly adding/subtracting the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n}\)</span> from the predictions and then computing the upper bound <span class="math notranslate nohighlight">\(q_{l,\epsilon}^+\)</span> and <span class="math notranslate nohighlight">\(q_{l,\epsilon}^-\)</span> which are calculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[
     q_{m,\epsilon}^{+}(v_i) = \lceil (1-\epsilon)*(m+1)\rceil \text{-Quantile of the sequence }(v_1, v_2, \ldots , v_m)
-\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<div class="math notranslate nohighlight">
+\[
     q_{m,\epsilon}^{-}(v_i) = \lfloor \epsilon*(m+1)\rfloor \text{-Quantile of the sequence }(v_1, v_2, \ldots , v_m) = -q_{n,\epsilon}^{+}(-v_i)
-\)</span>$</p>
+\]</div>
 <p>The corresponding prediction interval <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> for a new data point <span class="math notranslate nohighlight">\(x_{n+1}\)</span> would then be:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -848,11 +851,9 @@ Mean interval width:  2.352423753035558
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The MAPIE package supports predicting the intervals with multiple alpha/epsilon values. \
-Because we are only using one alpha/epsilon value we can safely apply `y_interval_split_prefit.reshape(-1, 2)`. \
-When using multiple values this is not recommended!
-</pre></div>
-</div>
+<p>The MAPIE package supports predicting the intervals with multiple alpha/epsilon values. <br />
+Because we are only using one alpha/epsilon value we can safely apply <code class="docutils literal notranslate"><span class="pre">y_interval_split_prefit.reshape(-1,</span> <span class="pre">2)</span></code>. <br />
+When using multiple values this is not recommended!</p>
 </div>
 </section>
 <section id="split-method-without-prefit">
@@ -916,14 +917,15 @@ It consists of the following four steps:</p>
 <li><p>For each training instance <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span> fit a model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> on all data points excluding i.</p></li>
 <li><p>Given <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> the non-conformity scores are computed: <span class="math notranslate nohighlight">\(\alpha_i^{jack} = f_{\hat{h}_{-i}}(y_i,x_i)\)</span> for each <span class="math notranslate nohighlight">\(i =1, \dots, n\)</span>.</p></li>
 <li><p>Based on these scores <span class="math notranslate nohighlight">\(\alpha_1^{jack}, \dots, \alpha_{n}^{jack}\)</span> the corresponding quantile <span class="math notranslate nohighlight">\( q_{jack} =\lceil (1-\epsilon)*(n+1)\rceil \text{-quantile of the sequence }(\alpha_{1}^{jack},\alpha_{2}^{jack} \dots , \alpha_{n}^{jack})\)</span> is calculated.</p></li>
-<li><p>The prediction interval for a new instance <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is calculated through <span class="math notranslate nohighlight">\(\pm \ q_{jack}\)</span>:
-$<span class="math notranslate nohighlight">\(
- [\hat{h}(x_{n+1}) - q_{jack} , \hat{h}(x_{n+1}) + q_{jack}]
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\hat{h}<span class="math notranslate nohighlight">\( is the model trained on all \)</span>n$ data points.</p></li>
+<li><p>The prediction interval for a new instance <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is calculated through <span class="math notranslate nohighlight">\(\pm \ q_{jack}\)</span>:</p></li>
 </ol>
-<p>Let us start with fitting the corresponding models <span class="math notranslate nohighlight">\(\hat{h}_{-i}.
-Doing this we can directly compute the corresponding \)</span>\alpha_i^{jack} = f_{\hat{h}_{-i}}(y_i,x_i)$.</p>
+<div class="math notranslate nohighlight">
+\[
+    [\hat{h}(x_{n+1}) - q_{jack} , \hat{h}(x_{n+1}) + q_{jack}],
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{h}\)</span> is the model trained on all <span class="math notranslate nohighlight">\(n\)</span> data points.</p>
+<p>Let us start with fitting the corresponding models <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span>.
+Doing this we can directly compute the corresponding <span class="math notranslate nohighlight">\(\alpha_i^{jack} = f_{\hat{h}_{-i}}(y_i,x_i)\)</span>.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_missing_data</span> <span class="o">=</span> <span class="p">[]</span>
@@ -987,10 +989,11 @@ Mean interval width:  2.2105382958182296
 </div>
 </div>
 </div>
-<p>Again as above in <em>Split</em>(see Section <span class="xref std std-ref">split</span>) we can firstly add the <code class="docutils literal notranslate"><span class="pre">jackknife_non_conformity_scores</span></code> to the prediction <span class="math notranslate nohighlight">\(\hat{h(x_{n+1})}\)</span> and then take the corresponding Quantiles as bounds.
-$<span class="math notranslate nohighlight">\(
-    Y_\epsilon = [ q_{n,\epsilon}^{-}(\hat{h}(x_{n+1}) - \alpha_i^{jack}) \ , \ q_{n,\epsilon}^{+}(\hat{h}(x_{n+1}) + \alpha_i^{jack})]
-\)</span>$</p>
+<p>Again as above in <em>Split</em>(see Section <span class="xref std std-ref">split</span>) we can firstly add the <code class="docutils literal notranslate"><span class="pre">jackknife_non_conformity_scores</span></code> to the prediction <span class="math notranslate nohighlight">\(\hat{h(x_{n+1})}\)</span> and then take the corresponding Quantiles as bounds.</p>
+<div class="math notranslate nohighlight">
+\[
+    Y_\epsilon = [ q_{n,\epsilon}^{-}(\hat{h}(x_{n+1}) - \alpha_i^{jack}) \ , \ q_{n,\epsilon}^{+}(\hat{h}(x_{n+1}) + \alpha_i^{jack})].
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4</span>
@@ -1074,11 +1077,12 @@ We again distinguish four steps:</p>
 <li><p>For each training instance <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span> fit a model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> on all data points excluding i.</p></li>
 <li><p>Given <span class="math notranslate nohighlight">\(i =1, \dots, n\)</span> models <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> the non-conformity scores are computed: <span class="math notranslate nohighlight">\(\alpha_i = y_i - \hat{h}_{-i}\)</span>.</p></li>
 <li><p>Based on these scores <span class="math notranslate nohighlight">\(\alpha_1, \dots, \alpha_{n}\)</span> the corresponding quantile <span class="math notranslate nohighlight">\( q_{jack} =\lceil (1-\epsilon)*(n+1)\rceil \text{-quantile of the sequence }(\alpha_{1}, \, \alpha_{l+2}, \ldots , \alpha_{n})\)</span> is calculated.</p></li>
-<li><p>The prediction interval for a new instance <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is calculated through :
-$<span class="math notranslate nohighlight">\(
- \left[q_{n,\epsilon}^{-}\left(\hat{h}_{-i}(x_{n+1}) - \alpha_i \right), \ q_{n,\epsilon}^{+}\left(\hat{h}_{-i}(x_{n+1}) + \alpha_i \right) \right]
-\)</span>$</p></li>
+<li><p>The prediction interval for a new instance <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is calculated through :</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[
+    \left[q_{n,\epsilon}^{-}\left(\hat{h}_{-i}(x_{n+1}) - \alpha_i \right), \ q_{n,\epsilon}^{+}\left(\hat{h}_{-i}(x_{n+1}) + \alpha_i \right) \right]
+\]</div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1: this is done above in jackknife</span>
@@ -1235,9 +1239,9 @@ Mean interval width:  2.5660014020522035
 <div align="justify">
 <p>Quantifying the uncertainty of conformal regression outputs can intuitively be done by looking at the interval widths.</p>
 <ul class="simple">
-<li><p>The split method gives all intervals the same width, making it not very useful for individual uncertainty quantification. \</p></li>
-<li><p>Similiarly Jackknife gives each point the same width, whilst much smaller. \</p></li>
-<li><p>Incorporating the randomness of the regression model, Jackknife+ assigns each point a individual interval width. Thus making it more useful determining the uncertainty of the model for each point. \</p></li>
+<li><p>The split method gives all intervals the same width, making it not very useful for individual uncertainty quantification.</p></li>
+<li><p>Similarly Jackknife gives each point the same width, whilst much smaller.</p></li>
+<li><p>Incorporating the randomness of the regression model, Jackknife+ assigns each point a individual interval width. Thus making it more useful determining the uncertainty of the model for each point.</p></li>
 <li><p>Finally CV+ having fewer underlying <span class="math notranslate nohighlight">\(\hat h\)</span> gives us also individual intervals, whilst being better in quantifying the uncertainty of points, where only few data points were seen.</p></li>
 </ul>
 </div><div class="cell docutils container">
