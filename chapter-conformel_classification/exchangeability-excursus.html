@@ -464,10 +464,11 @@ document.write(`
 <h1>Excursus: Exchangability<a class="headerlink" href="#excursus-exchangability" title="Link to this heading">#</a></h1>
 <div align="justify">
 <p>The concept of <em>exchangability</em> can be seen as a relaxation of the typical <em>i.i.d</em> (independently and identically distributed) assumption. Informally is means that the ordering of the random variables in the sequence is irrelevant for the joint probability. <br />
-More formally, a finite sequence of random variables <span class="math notranslate nohighlight">\(X_1, \dots, X_N\)</span> is <strong>exchangeable</strong>, if
-$<span class="math notranslate nohighlight">\(
+More formally, a finite sequence of random variables <span class="math notranslate nohighlight">\(X_1, \dots, X_N\)</span> is <strong>exchangeable</strong>, if</p>
+<div class="math notranslate nohighlight">
+\[
     P(X_1 = x_1, X_2 = x_2, \dots, X_N = x_N) = P(X_{\sigma(1)} = x_1, X_{\sigma(2)} = x_2, \dots, X_{\sigma(N)} = x_N)
-\)</span>$</p>
+\]</div>
 <p>for every permutation  <span class="math notranslate nohighlight">\(\sigma : [N] \rightarrow [N]\)</span>.
 For an example we think of an urn with three red and two blue balls.
 We seek to draw all five from the urn <strong>without</strong> replacement.
