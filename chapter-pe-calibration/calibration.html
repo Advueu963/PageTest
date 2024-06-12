@@ -423,7 +423,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -439,6 +441,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier Calibration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressor-calibration">Regressor Calibration</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -465,7 +476,13 @@ logistic scaling (<span id="id4">Platt [<a class="reference internal" href="../r
 and improvements thereof (<span id="id5">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2186" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>),
 as well as the use of Venn predictors (<span id="id6">Johansson <em>et al.</em> [<a class="reference internal" href="../references.html#id237" title="U. Johansson, T. Löfström, H. Sundell, H. Linusson, A. Gidenstam, and H. Boström. Venn predictors for well-calibrated probability estimation trees. In Proc. COPA, 7th Symposium on Conformal and Probabilistic Prediction and Applications, 3–14. Maastricht, The Netherlands, 2018.">JLofstromS+18</a>]</span>).
 Calibration is still a topic of ongoing research.</p>
-</div></section>
+</div><section id="classifier-calibration">
+<h2>Classifier Calibration<a class="headerlink" href="#classifier-calibration" title="Link to this heading">#</a></h2>
+</section>
+<section id="regressor-calibration">
+<h2>Regressor Calibration<a class="headerlink" href="#regressor-calibration" title="Link to this heading">#</a></h2>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -522,7 +539,21 @@ Calibration is still a topic of ongoing research.</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier Calibration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressor-calibration">Regressor Calibration</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
