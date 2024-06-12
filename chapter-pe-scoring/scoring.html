@@ -509,7 +509,7 @@ as well as various techniques in the realm of <a class="reference internal" href
 i.e., loss functions that enforce “correct” (conditional) probabilities as predictions.
 In this regard, <code class="docutils literal notranslate"><span class="pre">proper</span> <span class="pre">scoring</span> <span class="pre">rules</span></code> (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2203" title="T. Gneiting and A.E. Raftery. Strictly proper scoring rules, prediction, and estimation. Technical Report 463R, Department of Statistics, University of Washington, 2005.">GR05</a>]</span>)
 play an important role,
-including the log-loss as a well-known special case.
+including the <code class="docutils literal notranslate"><span class="pre">log-loss</span></code> as a well-known special case.
 Sometimes, however, estimates are also obtained in a very simple way,
 following basic frequentist techniques for probability estimation,
 like in Naïve Bayes or nearest neighbor classification.</p>
@@ -683,6 +683,14 @@ R^2 = 1 - \frac{\sum_{i=1}^N (y_i-\hat{y_i})^2}{\sum_{i=1}^N (y_i-\bar{y_i})^2}.
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><span class="math notranslate nohighlight">\(N\)</span> denotes the number of observations or data points in the dataset.</p>
+</div>
+</div><div align="justify">
+<div class="important admonition">
+<p class="admonition-title">Summary</p>
+<p>All proper scoring rules are equal to weighted sums (integral with a non-negative weighting functional) of the losses in a set of simple two-alternative decision problems that use the probabilistic prediction,
+each such decision problem having a particular combination of associated cost parameters for false positive and false negative decisions.
+A strictly proper scoring rule corresponds to having a nonzero weighting for all possible decision thresholds.
+Any given proper scoring rule is equal to the expected losses with respect to a particular probability distribution over the decision thresholds.</p>
 </div>
 </div></section>
 </section>

@@ -446,6 +446,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">Isotonic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier Calibration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressor-calibration">Regressor Calibration</a></li>
 </ul>
@@ -461,6 +462,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-and-calibration">
 <h1>Probability Estimation and Calibration<a class="headerlink" href="#probability-estimation-and-calibration" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div align="justify">
 <p>The predictions delivered by corresponding methods are at best “pseudo-probabilities” that are often not very accurate.
 Besides, there are many methods that deliver natural scores,
@@ -476,8 +485,20 @@ logistic scaling (<span id="id4">Platt [<a class="reference internal" href="../r
 and improvements thereof (<span id="id5">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2186" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>),
 as well as the use of Venn predictors (<span id="id6">Johansson <em>et al.</em> [<a class="reference internal" href="../references.html#id237" title="U. Johansson, T. Löfström, H. Sundell, H. Linusson, A. Gidenstam, and H. Boström. Venn predictors for well-calibrated probability estimation trees. In Proc. COPA, 7th Symposium on Conformal and Probabilistic Prediction and Applications, 3–14. Maastricht, The Netherlands, 2018.">JLofstromS+18</a>]</span>).
 Calibration is still a topic of ongoing research.</p>
-</div><section id="classifier-calibration">
+</div><section id="isotonic-regression">
+<h2>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/isotonic.html">https://scikit-learn.org/stable/modules/isotonic.html</a></p>
+<p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_isotonic_regression.html#sphx-glr-auto-examples-miscellaneous-plot-isotonic-regression-py">https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_isotonic_regression.html#sphx-glr-auto-examples-miscellaneous-plot-isotonic-regression-py</a></p>
+</section>
+<section id="classifier-calibration">
 <h2>Classifier Calibration<a class="headerlink" href="#classifier-calibration" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A lower Brier loss, for instance, does not necessarily mean a better calibrated model, it could also mean a worse calibrated model with much more discriminatory power, e.g. using many more features.</p>
+</div>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/calibration.html">https://scikit-learn.org/stable/modules/calibration.html</a></p>
+<p><a class="reference external" href="https://arxiv.org/pdf/2112.10327">https://arxiv.org/pdf/2112.10327</a></p>
+<p>(<span id="id7">de Menezes e Silva Filho <em>et al.</em> [<a class="reference internal" href="../references.html#id2276" title="Telmo de Menezes e Silva Filho, Hao Song, Miquel Perelló-Nieto, Raúl Santos-Rodr\'ıguez, Meelis Kull, and Peter A. Flach. Classifier calibration: a survey on how to assess and improve predicted class probabilities. Mach. Learn., 112(9):3211–3260, 2023. URL: https://doi.org/10.1007/s10994-023-06336-7, doi:10.1007/S10994-023-06336-7.">dMeSFSPerelloNieto+23</a>]</span>)</p>
 </section>
 <section id="regressor-calibration">
 <h2>Regressor Calibration<a class="headerlink" href="#regressor-calibration" title="Link to this heading">#</a></h2>
@@ -548,6 +569,7 @@ Calibration is still a topic of ongoing research.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">Isotonic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier Calibration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressor-calibration">Regressor Calibration</a></li>
 </ul>

@@ -452,6 +452,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-and-ensembles">
 <h1>Probability Estimation and Ensembles<a class="headerlink" href="#probability-estimation-and-ensembles" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div align="justify">
 <p>Another import class of methods is <em>ensemble learning</em>, such as bagging or boosting, which are especially popular in machine learning due to their ability to improve accuracy of (point) predictions.
 Since such methods produce a (large) set of predictors <span class="math notranslate nohighlight">\(h_1, \ldots, h_M\)</span> instead of a single hypothesis, it is tempting to produce probability estimates following basic frequentist principles. In the simplest case (of classification), each prediction <span class="math notranslate nohighlight">\(h_i(\vec{x})\)</span> can be interpreted as a “vote” in favor of a class <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, and probabilities can be estimated by relative frequencies,—,needless to say, probabilities constructed in this way tend to be biased and are not necessarily well calibrated. Especially important in this field are tree-based methods such as random forests (<span id="id1">Breiman [<a class="reference internal" href="../references.html#id2179" title="L. Breiman. Random forests. Machine Learning, 45(1):5–32, 2001.">Bre01</a>], Kruppa <em>et al.</em> [<a class="reference internal" href="../references.html#id2190" title="J. Kruppa, Y. Liu, G. Biau, M. Kohler, I.R. König, J.D. Malley, and A. Ziegler. Probability estimation with machine learning methods for dichotomous and multi-category outcome: Theory. Biometrical Journal, 56(4):534–563, 2014.">KLB+14</a>]</span>).</p>
