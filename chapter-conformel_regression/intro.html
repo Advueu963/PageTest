@@ -522,14 +522,6 @@ For the non-conformity function <span class="math notranslate nohighlight">\(f\)
 <span class="n">norm_quantile</span> <span class="o">=</span> <span class="n">sps</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span> 
 
 
-<span class="c1">##### Jupyter Book auxiliary########</span>
-<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
-<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># makes the vairble mu abailable in markdown cell with {glue:}`mu`</span>
-<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;noise&quot;</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1">###################################</span>
-
-
 
 <span class="k">def</span> <span class="nf">are_both_intervals_equal</span><span class="p">(</span><span class="n">interval1</span><span class="p">,</span><span class="n">interval2</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are both inervals equal?&quot;</span><span class="p">)</span>
@@ -673,9 +665,10 @@ It can be described by the following steps</p>
 </div>
 </div>
 </div>
+<div align="justify">
 <p>In the next step we fit an arbitrary machine learning algorithm to the training data.
-Here we will use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html">GradienBoostingRegressor</a>.</p>
-<div class="cell tag_remove-output docutils container">
+Through out the page we will use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html">GradienBoostingRegressor</a>.</p>
+</div><div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_model</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span>
     <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;squared_error&quot;</span><span class="p">,</span>
@@ -686,8 +679,9 @@ Here we will use the <a class="reference external" href="https://scikit-learn.or
 </div>
 </div>
 </div>
+<div align="justify">
 <p>Then we apply the non-conformity function <span class="math notranslate nohighlight">\(f\)</span> to the validation dataset.</p>
-<div class="cell tag_scroll-output tag_hide-output docutils container">
+</div><div class="cell tag_scroll-output tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct the sequence of residuals</span>
 <span class="n">split_non_conformity_scores</span> <span class="o">=</span> <span class="n">absolute_residual_score</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">base_model</span><span class="p">,</span><span class="n">X</span><span class="o">=</span><span class="n">X_val</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_val</span><span class="p">)</span>
@@ -731,8 +725,9 @@ Here we will use the <a class="reference external" href="https://scikit-learn.or
 </div>
 </details>
 </div>
+<div align="justify">
 <p>Now we must calculate the <span class="math notranslate nohighlight">\(\lceil (1-\epsilon)*(l+1)\rceil\)</span> Quantile on <span class="math notranslate nohighlight">\(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n}\)</span>.</p>
-<div class="cell docutils container">
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split_quantile</span> <span class="o">=</span> <span class="n">calculate_quantile</span><span class="p">(</span><span class="n">split_non_conformity_scores</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span>
 <span class="n">split_quantile</span>
@@ -923,7 +918,7 @@ Mean interval width:  2.352423753035558
 <section id="jackknife-method">
 <span id="content-jackknife"></span><h2>Jackknife Method<a class="headerlink" href="#jackknife-method" title="Link to this heading">#</a></h2>
 <div align="justify">
-<p>Instead of only using one calibration split to compute <span class="math notranslate nohighlight">\(l\)</span> non-conformity scores as in the <em>Split Method</em> <span class="xref std std-ref">split</span>, the Jackknife (or Leave-one-out) methods computes a <span class="math notranslate nohighlight">\(\alpha_i\)</span> for each training point <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span>.
+<p>Instead of only using one calibration split to compute <span class="math notranslate nohighlight">\(l\)</span> non-conformity scores as in the <a class="reference internal" href="#content-split"><span class="std std-ref">Split Method</span></a>, the Jackknife (or Leave-one-out) methods computes a <span class="math notranslate nohighlight">\(\alpha_i\)</span> for each training point <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span>.
 It consists of the following four steps:</p>
 <ol class="arabic simple">
 <li><p>For each training instance <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span> fit a model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> on all data points excluding i.</p></li>
