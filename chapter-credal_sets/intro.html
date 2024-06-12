@@ -472,15 +472,28 @@ document.write(`
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">combinations</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span><span class="p">,</span> <span class="n">make_moons</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span><span class="p">,</span> <span class="n">CategoricalNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">KBinsDiscretizer</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span><span class="p">,</span> <span class="n">load_wine</span>
+
+<span class="kn">import</span> <span class="nn">mpltern</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">dirichlet</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">KBinsDiscretizer</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span><span class="p">,</span> <span class="n">load_wine</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">mpltern</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">dirichlet</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;mpltern&#39;
 </pre></div>
 </div>
 </div>
@@ -501,186 +514,410 @@ etc.) is replaced by a set of such values or quantities. An important example of
 an approach is robust inference for categorical data with the imprecise Dirichlet model,
 which is an extension of inference with the Dirichlet distribution as a conjugate prior for
 the multinomial distribution (Bernardo, 2005).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize credal sets simplex</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># example dirichlet model</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>For demonstration we generate a simple dataset consisting of three classes that form gaussian clusters:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate dataset</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span>
-
-<span class="c1"># split into train and test data</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize dataset</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sample dataset with three classes&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/a1ac8902fd948d2558c811a2882a84ed8a36d0496b2075c1c86edd2a19564f75.png" src="../_images/a1ac8902fd948d2558c811a2882a84ed8a36d0496b2075c1c86edd2a19564f75.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train three Naive bayes classifiers on subsets of training data</span>
-
-<span class="c1">#classifiers = []</span>
-
-<span class="c1">#for _ in range(3):</span>
-<span class="c1">#    indices = np.random.choice(len(X_train), 30, replace=False)</span>
-<span class="c1">#    X_subset, y_subset = X_train[indices], y_train[indices]</span>
-    
-<span class="c1">#    model = GaussianNB()</span>
-<span class="c1">#    model.fit(X_subset, y_subset)</span>
-    
-<span class="c1">#    classifiers.append(model)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We now obtain a credal set for each query</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_posterior_credal_set</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">):</span>
-    
-    <span class="c1"># get posterior class probabilities</span>
-    <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">classifier</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
-                     <span class="k">for</span> <span class="n">classifier</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">]</span>
-    
-    <span class="c1"># combine posteriors into credal sets</span>
-    <span class="n">credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probabilities</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">credal_sets</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span> <span class="o">=</span> <span class="n">get_posterior_credal_set</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">)</span>
-<span class="n">credal_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">credal_sets</span> <span class="o">=</span> <span class="n">get_posterior_credal_set</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">credal_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="ne">NameError</span>: name &#39;classifiers&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 <p>Methods of that kind have also been used in the context of machine learning, for example in the framework of the Na”ive Credal Classifier \citep{zaffalon2002,cora_lr08} or more recently as an extension of sum-product networks \citep{dera_cs17}. As for the former, we can think of a Na”ive Bayes (NB) classifier as a hypothesis <span class="math notranslate nohighlight">\(h = h_{\vec{\theta}}\)</span> specified by a parameter vector <span class="math notranslate nohighlight">\({\vec{\theta}}\)</span> that comprises a prior probability <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class <span class="math notranslate nohighlight">\(y_k \in \set{Y}\)</span> and a conditional probability <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> for observing the <span class="math notranslate nohighlight">\(i^{th}\)</span> value <span class="math notranslate nohighlight">\(a_{i,j}\)</span> of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. For a given query instance specified by attributes <span class="math notranslate nohighlight">\((a_{i_1,1}, \ldots , a_{i_J,J})\)</span>, the posterior class probabilities are then given by
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-088c6613-35c0-4089-8ab3-99d3fac3aeb7">
-<span class="eqno">(12)<a class="headerlink" href="#equation-088c6613-35c0-4089-8ab3-99d3fac3aeb7" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
+<div class="amsmath math notranslate nohighlight" id="equation-3668b361-7673-40e2-ae75-40764fdb4fdb">
+<span class="eqno">(12)<a class="headerlink" href="#equation-3668b361-7673-40e2-ae75-40764fdb4fdb" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
 p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_j,j,k} \, .
 \end{equation}\]</div>
 <p>$$</p>
-<p>In the Na”ive Credal Classifier, the <span class="math notranslate nohighlight">\(\theta_k\)</span> and <span class="math notranslate nohighlight">\(\theta_{i_j,j,k}\)</span> are specified in terms of (local) credal sets\footnote{These could be derived from empirical data, for example, by doing generalized Bayesian inference with the imprecise Dirichlet model.}, i.e., there is a class of probability distributions <span class="math notranslate nohighlight">\(Q\)</span> on <span class="math notranslate nohighlight">\(\set{Y}\)</span> playing the role of candidate priors, and a class of probability distributions <span class="math notranslate nohighlight">\(Q_{j,k}\)</span> specifying possible distributions on the attribute values of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. A single posterior class probability (\ref{eq:spo}) is then replaced by the set (interval) of such probabilities that can be produced by taking <span class="math notranslate nohighlight">\(\theta_k\)</span> from a distribution in <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(\theta_{i_j,j,k}\)</span> from a distribution in <span class="math notranslate nohighlight">\(Q_{j,k}\)</span>. As an aside, let us note that the computations involved may of course become costly.</p>
-<p>To o</p>
+<p>For illustration we use the wine dataset.  We discretize it to make it suitable for categorical naive bayes and also drop some attributes to introduce more uncertainty:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_dirichlet_prior</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    
-    <span class="n">alpha</span> <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="n">t</span>
-    
-    <span class="n">priors</span> <span class="o">=</span> <span class="p">[]</span>
-    
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
-        
-        <span class="n">deviate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-        
-        <span class="n">prior</span> <span class="o">=</span> <span class="n">dirichlet</span><span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">deviate</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        
-        <span class="n">priors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prior</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        
-    <span class="k">return</span> <span class="n">priors</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_ncc</span><span class="p">(</span><span class="n">n_classifiers</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
-    
-    <span class="n">classifiers</span> <span class="o">=</span> <span class="p">[]</span>
-    
-    <span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
-    
-    <span class="n">relative_frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_train</span><span class="o">==</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">])</span>
-    
-    <span class="n">dirichlet_priors</span> <span class="o">=</span> <span class="n">get_dirichlet_prior</span><span class="p">(</span><span class="n">relative_frequencies</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="n">n_classifiers</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Wine dataset</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classifiers</span><span class="p">):</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">wine</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">target_names</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">target_names</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)[</span><span class="n">columns</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># discretize data </span>
+<span class="n">discretizer</span> <span class="o">=</span> <span class="n">KBinsDiscretizer</span><span class="p">(</span><span class="n">n_bins</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">encode</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">)</span>
+<span class="n">X_binned</span> <span class="o">=</span> <span class="n">discretizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># create df for visualization</span>
+<span class="n">bin_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]</span>
+<span class="n">X_binned_labeled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_binned</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">bin_labels</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<span class="n">y_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+<span class="n">y_df</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_df</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">target_names</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+<span class="n">wine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_binned_labeled</span><span class="p">,</span> <span class="n">y_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># split into train and test data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_binned</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>                                                                   
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alcohol</th>
+      <th>malic_acid</th>
+      <th>ash</th>
+      <th>alcalinity_of_ash</th>
+      <th>target</th>
+      <th>target_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>high</td>
+      <td>low</td>
+      <td>medium</td>
+      <td>low</td>
+      <td>0</td>
+      <td>class_0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>medium</td>
+      <td>low</td>
+      <td>medium</td>
+      <td>low</td>
+      <td>0</td>
+      <td>class_0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>medium</td>
+      <td>low</td>
+      <td>high</td>
+      <td>medium</td>
+      <td>0</td>
+      <td>class_0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>high</td>
+      <td>low</td>
+      <td>medium</td>
+      <td>low</td>
+      <td>0</td>
+      <td>class_0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>medium</td>
+      <td>medium</td>
+      <td>high</td>
+      <td>medium</td>
+      <td>0</td>
+      <td>class_0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>When we train a regular categorical Naive Bayes classifier the prior probabilities <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class are calculated as the relative frequencies of class <span class="math notranslate nohighlight">\(k\)</span> in the whole dataset. The conditionals <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> as the share of observations belonging to class <span class="math notranslate nohighlight">\(k\)</span> out of all observations for which attribute <span class="math notranslate nohighlight">\(j\)</span> has value <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init categori1cal NB without laplace smoothing</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">CategoricalNB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+
+<span class="c1"># train NB</span>
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># get prior probabilites from model</span>
+<span class="n">prior_probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">class_log_prior_</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Prior probabilities:</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">{</span><span class="n">c</span> <span class="p">:</span> <span class="n">p</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">target_names</span><span class="p">,</span> <span class="n">prior_probabilities</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prior probabilities:
+{&#39;class_0&#39;: 0.317, &#39;class_1&#39;: 0.401, &#39;class_2&#39;: 0.282}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get conditional probabilities from model</span>
+<span class="n">conditionals</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_log_prob_</span>
+
+<span class="n">conditionals_alcohol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">conditionals</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conditional probabilities of feature 1 values given targets:&#39;</span><span class="p">)</span>
+<span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="p">{</span><span class="n">v</span> <span class="p">:</span> <span class="n">conditionals_alcohol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">])}</span>
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">target_names</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conditional probabilities of feature 1 values given targets:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;class_0&#39;: {&#39;low&#39;: 0.021, &#39;medium&#39;: 0.396, &#39;high&#39;: 0.583},
+ &#39;class_1&#39;: {&#39;low&#39;: 0.55, &#39;medium&#39;: 0.4, &#39;high&#39;: 0.05},
+ &#39;class_2&#39;: {&#39;low&#39;: 0.093, &#39;medium&#39;: 0.651, &#39;high&#39;: 0.256}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>After that point predictions are made by computing the likelihood of a query as the product of the respective priors and conditionals:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point_predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">point_predictions</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.898, 0.032, 0.07 ],
+       [0.205, 0.048, 0.747],
+       [0.08 , 0.111, 0.809],
+       [0.828, 0.064, 0.109],
+       [0.042, 0.929, 0.029],
+       [0.828, 0.064, 0.109],
+       [0.009, 0.655, 0.336],
+       [0.057, 0.159, 0.784],
+       [0.038, 0.91 , 0.051],
+       [0.057, 0.159, 0.784]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the Na”ive Credal Classifier, the <span class="math notranslate nohighlight">\(\theta_k\)</span> and <span class="math notranslate nohighlight">\(\theta_{i_j,j,k}\)</span> are specified in terms of (local) credal sets\footnote{These could be derived from empirical data, for example, by doing generalized Bayesian inference with the imprecise Dirichlet model.}, i.e., there is a class of probability distributions <span class="math notranslate nohighlight">\(Q\)</span> on <span class="math notranslate nohighlight">\(\set{Y}\)</span> playing the role of candidate priors, and a class of probability distributions <span class="math notranslate nohighlight">\(Q_{j,k}\)</span> specifying possible distributions on the attribute values of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. A single posterior class probability (\ref{eq:spo}) is then replaced by the set (interval) of such probabilities that can be produced by taking <span class="math notranslate nohighlight">\(\theta_k\)</span> from a distribution in <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(\theta_{i_j,j,k}\)</span> from a distribution in <span class="math notranslate nohighlight">\(Q_{j,k}\)</span>. As an aside, let us note that the computations involved may of course become costly.</p>
+<p>To obtain the credal sets over priors and conditionals the imprecise dirchlet model can be used. The key idea is to model uncertainty about the observations by drawing random samples around them from a dirichlet distribution. For this the concentration parameters <span class="math notranslate nohighlight">\(\alpha=(\alpha_{1},...,\alpha_{k})\)</span> of the dirichlet distribution are parametrized as <span class="math notranslate nohighlight">\(st\)</span>. The empirical priors and conditionals as used in the normal Naive Bayes are used as the parameter <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">prior_probabilities</span>
+<span class="n">prior_credal</span> <span class="o">=</span> <span class="n">dirichlet</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Empirical prior:</span><span class="si">{</span><span class="n">prior_probabilities</span><span class="si">}</span><span class="se">\n</span><span class="s1">Prior credal_set:&#39;</span> <span class="p">)</span>
+<span class="n">prior_credal</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empirical prior:[0.317 0.401 0.282]
+Prior credal_set:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.4784, 0.2556, 0.266 ],
+       [0.2228, 0.7245, 0.0527],
+       [0.1298, 0.3619, 0.5083]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The parameter <span class="math notranslate nohighlight">\(s &gt; 0\)</span> is a fixed constant that can be used to express the degree of believe into the observations. Choosing <span class="math notranslate nohighlight">\(s\)</span> to be high will cause the distribution to be more concentrated around <span class="math notranslate nohighlight">\(t\)</span>. Thus the distribution is less spread out and the uncertainty reduced.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_ternary_plots</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span> <span class="s1">&#39;ternary&#39;</span><span class="p">})</span>
+    <span class="n">s_vals</span><span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">dirichlet</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
         
-        <span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">(</span><span class="n">priors</span><span class="o">=</span><span class="n">dirichlet_priors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-        <span class="c1">#print(dirichlet_priors[i])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">samples</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">samples</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;s=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">&#39;Credal sets generated by dirichlet model for different values of s.</span><span class="se">\n</span><span class="s1"> Each blue point corresponds to one distribution, the red point to the empirical distribution.&#39;</span><span class="p">,</span> 
+                           <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">create_ternary_plots</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/030ab6f3869fc8dd7382e61ced5b7dc1d64aa8003f9421a649fc0f2ad298fdd8.png" src="../_images/030ab6f3869fc8dd7382e61ced5b7dc1d64aa8003f9421a649fc0f2ad298fdd8.png" />
+</div>
+</div>
+<p>The Naive Credal Classifier produces set predictions as credal sets of posterior distributions. This is done by computing a posterior distribution for each combination of prior and conditional distributions out of the prior and conditional credal sets. While this is impractical we can approximate the true solution by computing the posterior for a fixed number of samples from the prior and posterior credal sets:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CategoricalNCC</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">CategoricalNB</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         
-        <span class="n">classifiers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">classifiers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">class_log_prior_</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conditional_frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> 
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">feature_log_prob_</span><span class="p">]</span>
+        
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        
+        <span class="c1">#s = self.data_size / 10</span>
+        
+        <span class="n">posterior_credal_sets</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+            
+            <span class="c1"># sample priors</span>
+            <span class="n">dirichlet_priors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">class_frequencies</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+            
+            <span class="c1"># sample conditionals</span>
+            <span class="n">dirichlet_conditionals</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">freq</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">])</span> 
+                                               <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">conditional_frequencies</span><span class="p">]</span>
+            
+            <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">class_log_prior_</span> <span class="o">=</span> <span class="n">dirichlet_priors</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">feature_log_prob_</span> <span class="o">=</span> <span class="n">dirichlet_conditionals</span>
+            <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            
+            <span class="n">posterior_credal_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+            
+        <span class="n">posterior_credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">posterior_credal_sets</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">posterior_credal_sets</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this we can train the Naive Credal Classifier on the test data and obtain a posterior credal set for each query in the training data. Each distribution in the credal represents probabilities for each class equivalently to the point predictions obtained earlier. This resulting credal set could now be analyzed using the methods below. Prediction could be made in the form of set predictions as discussed in link section…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">CategoricalNCC</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_ncc_prediction</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">):</span>
-    
-    <span class="c1"># get posterior class probabilities</span>
-    <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">classifier</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
-                     <span class="k">for</span> <span class="n">classifier</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">]</span>
-    
-    <span class="c1"># combine posteriors into credal sets</span>
-    <span class="n">credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probabilities</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">credal_sets</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_credal_sets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">classifiers</span> <span class="o">=</span> <span class="n">train_ncc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_credal_sets</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(36, 1000, 3)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span> <span class="o">=</span> <span class="n">get_ncc_prediction</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first duistributions of posterior credal set for first query</span>
+<span class="n">wine_credal_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.949, 0.01 , 0.041],
+       [0.874, 0.072, 0.053],
+       [0.78 , 0.024, 0.196],
+       [0.785, 0.13 , 0.084],
+       [0.935, 0.026, 0.039],
+       [0.935, 0.013, 0.052],
+       [0.94 , 0.048, 0.012],
+       [0.88 , 0.014, 0.106],
+       [0.925, 0.01 , 0.065],
+       [0.865, 0.054, 0.081]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># point prediction for first query</span>
+<span class="n">point_predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.898, 0.032, 0.07 ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_posterior_plot</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">,</span> <span class="n">point_predictions</span><span class="p">,</span> <span class="n">ridx</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span> <span class="s1">&#39;ternary&#39;</span><span class="p">})</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+
+        <span class="n">credal_set</span> <span class="o">=</span> <span class="n">credal_sets</span><span class="p">[</span><span class="n">ridx</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="n">point_predictions</span><span class="p">[</span><span class="n">ridx</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">credal_set</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">credal_set</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">credal_set</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="c1">#ax.scatter(*credal_set[:,:], marker=&#39;.&#39;, s=10, alpha=0.5, color=&#39;blue&#39;)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">point</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s2">&quot;&quot;&quot;Posterior credal sets for three random queries. Point prediction in red&quot;&quot;&quot;</span><span class="p">,</span> 
+                           <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize credal sets of 3 random queries</span>
+<span class="n">ridx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">)),</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">create_posterior_plot</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">point_predictions</span><span class="p">,</span> <span class="n">ridx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e075866c1c075fc1461062c9ef455e875c03a5ff0c2f36caf042f4b378e8f3db.png" src="../_images/e075866c1c075fc1461062c9ef455e875c03a5ff0c2f36caf042f4b378e8f3db.png" />
 </div>
 </div>
 <section id="uncertainty-measures-for-credal-sets">
@@ -732,8 +969,8 @@ H(A) = \log( |A|)  \, ,
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{m}_Q: \,  2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> is the M”obius inverse of the capacity function <span class="math notranslate nohighlight">\(\nu :\, 2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> defined by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-81ba98cf-30aa-4bb4-a337-b3f707e91c95">
-<span class="eqno">(13)<a class="headerlink" href="#equation-81ba98cf-30aa-4bb4-a337-b3f707e91c95" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
+<div class="amsmath math notranslate nohighlight" id="equation-31bcd5ba-075e-42ca-9238-dfc55c100db8">
+<span class="eqno">(13)<a class="headerlink" href="#equation-31bcd5ba-075e-42ca-9238-dfc55c100db8" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
 \nu_Q(A) \defeq \inf_{q \in Q} q(A) 
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(A \subseteq \mathcal{Y}\)</span>, that is,</p>
@@ -752,12 +989,8 @@ H(A) = \log( |A|)  \, ,
 <span class="k">def</span> <span class="nf">vq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">credal_sets</span><span class="p">):</span>
     
     <span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    
-    <span class="c1"># get inf q(A)</span>
-    <span class="c1">#vq = np.min(np.sum(credal_set[:,idx], axis=1))</span>
     <span class="n">vq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">[:,:,</span><span class="n">idx</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1">#print(np.sum(credal_set[0][:,idx], axis=1))</span>
-    <span class="c1">#print(np.sum(credal_set[:,idx], axis=1)[0])</span>
+
     <span class="k">return</span> <span class="n">vq</span>
     
 <span class="k">def</span> <span class="nf">mq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">credal_sets</span><span class="p">):</span>
@@ -789,9 +1022,186 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 </div>
+<p>To demonstrate the different uncertainty measures another simple dataset consisting of three gaussians will be used:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">measure</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate dataset</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span>
+
+<span class="c1"># split into train and test data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize dataset</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sample dataset with three classes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/0475d32ddb77609a3d5efd2f028fe6aee4b00c7d59b5d9364d529e5db5ed921d.png" src="../_images/0475d32ddb77609a3d5efd2f028fe6aee4b00c7d59b5d9364d529e5db5ed921d.png" />
+</div>
+</div>
+<p>Three Gaussian Naive Bayes classifiers are trained on different subsets of the dataset to produce predictions. Their predictions are then combined into a credal set. The idea is to obtain three conflicting classifiers and a simple credal set. This allows us to easily visualize the impact of aleatoric and epistemic uncertainty on the differnt measures:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train three Naive bayes classifiers on subsets of training data</span>
+
+<span class="n">classifiers</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">X_subset</span><span class="p">,</span> <span class="n">y_subset</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_subset</span><span class="p">,</span> <span class="n">y_subset</span><span class="p">)</span>
+    
+    <span class="n">classifiers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_posterior_credal_set</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">):</span>
+    
+    <span class="c1"># get posterior class probabilities</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">classifier</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+                     <span class="k">for</span> <span class="n">classifier</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">]</span>
+    
+    <span class="c1"># combine posteriors into credal sets</span>
+    <span class="n">credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probabilities</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">credal_sets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span> <span class="o">=</span> <span class="n">get_posterior_credal_set</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">credal_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.762, 0.035, 0.202],
+       [0.938, 0.039, 0.023],
+       [0.775, 0.033, 0.192]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(60, 3, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can visualize the decision boundaries of the three classifiers to understand where they will generate conflicting predictions. Those are the areas in which we expect a high epistemic uncertainty whereas the areas where the gaussians overlap should show a high aleatoric uncertainty.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_decision_boundary</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    
+    <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span><span class="n">x_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">xv</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yv</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+    
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+    <span class="c1">#plt.contourf(x,y,labels,cmap=&#39;RdBu&#39;)</span>
+    <span class="c1">#plt.show()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">plot_decision_boundary</span><span class="p">(</span><span class="n">classifiers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Classifier </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Decision boundaries of the three classifiers&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/d2e01436b6a529f200a8c257c45466c9e443fb88b96890ff71588df0b4aa8983.png" src="../_images/d2e01436b6a529f200a8c257c45466c9e443fb88b96890ff71588df0b4aa8983.png" />
+</div>
+</div>
+<p>Now we compute a first uncertainty measure on our posterior credal sets by computing the generalized hartley measure on them. We can get a feeling for it by inspecting the credal sets for which the measure is the lowest and the highest:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gh</span> <span class="o">=</span> <span class="n">get_gh_measure</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">gh</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.022, 0.018, 0.96 ],
+       [0.88 , 0.033, 0.087],
+       [0.05 , 0.   , 0.95 ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">gh</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.015, 0.978, 0.007],
+       [0.011, 0.989, 0.   ],
+       [0.007, 0.991, 0.002]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">measure</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
     <span class="c1"># helper function to uniformly visualize uncertainty measures</span>
     
     <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
@@ -822,139 +1232,76 @@ H(A) = \log( |A|)  \, ,
     
     <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     
     <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
     <span class="n">contour</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">y_grid</span><span class="p">,</span> <span class="n">measure_res</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
 
     <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">contour</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: comments input output shape !</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now we can compute a first uncertainty measure on our posterior credal sets by computing the generalized hartley measure on them:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gh</span> <span class="o">=</span> <span class="n">get_gh_measure</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">)</span>
-<span class="n">gh</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Generalized Hartley measure in difference areas&#39;</span>
+<span class="n">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">get_gh_measure</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.05166015, 0.08403609, 0.06022556, 0.09339549, 0.02407519,
-       0.04181052, 0.05847067, 0.0953203 , 0.08769624, 0.00841504,
-       0.08681052, 0.0776406 , 0.08683007, 0.07890526, 0.03690526,
-       0.02041504, 0.05147067, 0.08741504, 0.06056541, 0.09566015,
-       0.05649022, 0.00883007, 0.0956406 , 0.08305564, 0.08973534,
-       0.03583007, 0.01949022, 0.09386616, 0.07647067, 0.09249022,
-       0.05139549, 0.09281052, 0.08766015, 0.0783203 , 0.006     ,
-       0.08707519, 0.0666406 , 0.06456541, 0.06790526, 0.07139549,
-       0.014     , 0.04166015, 0.001     , 0.01024511, 0.07866015,
-       0.001     , 0.05956541, 0.074     , 0.08149022, 0.09354586,
-       0.09254586, 0.08666015, 0.08956541, 0.02041504, 0.02507519,
-       0.05566015, 0.09024511, 0.05466015, 0.063     , 0.08835639])
-</pre></div>
+<img alt="../_images/d2de03dcee354d5f84059cd044ed22852dbc661ede0b30ba0b820a65313161a5.png" src="../_images/d2de03dcee354d5f84059cd044ed22852dbc661ede0b30ba0b820a65313161a5.png" />
 </div>
 </div>
-</div>
-<div class="cell docutils container">
+<p>For a different illustration we also compute the uncertainty measures on the posterior credal set of the wine data that we obtained earlier and visualize the credal sets with the highest and lowest uncertainty:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">gh</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.014, 0.506, 0.48 ],
-       [0.018, 0.563, 0.419],
-       [0.018, 0.469, 0.513]])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">gh</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.003, 0.996, 0.001],
-       [0.003, 0.996, 0.001],
-       [0.004, 0.995, 0.001]])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_decision_boundary</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-    
-    <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
-    
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span><span class="n">x_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_uncertainty_triangle</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">,</span> <span class="n">measure_res</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+	<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span> <span class="s1">&#39;ternary&#39;</span><span class="p">})</span>
 
-    <span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+	<span class="n">ridx</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">measure_res</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">measure_res</span><span class="p">)]</span>
+	<span class="n">val</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">measure_res</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measure_res</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
     
-    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">xv</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yv</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
-    
-    <span class="n">labels</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
-    <span class="c1">#plt.contourf(x,y,labels,cmap=&#39;RdBu&#39;)</span>
-    <span class="c1">#plt.show()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;hhhh&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+
+		<span class="n">credal_set</span> <span class="o">=</span> <span class="n">credal_sets</span><span class="p">[</span><span class="n">ridx</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+		<span class="n">point</span> <span class="o">=</span> <span class="n">point_predictions</span><span class="p">[</span><span class="n">ridx</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        
+		<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">credal_set</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">credal_set</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">credal_set</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="c1">#ax.scatter(*credal_set[:,:], marker=&#39;.&#39;, s=10, alpha=0.5, color=&#39;blue&#39;)</span>
+		<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">point</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+		<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+	<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Credal sets for minimal and maximal </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> measure.&quot;&quot;&quot;</span><span class="p">,</span> 
+                           <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+	<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">get_gh_measure</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_hartley_measure</span> <span class="o">=</span> <span class="n">get_gh_measure</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">)</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Generalized Hartley Measure&#39;</span>
+<span class="n">plot_uncertainty_triangle</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">wine_hartley_measure</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/aa7d15aade49879c5b91874035b244b4a0af4940c8d3a8e81eb73842f64c7071.png" src="../_images/aa7d15aade49879c5b91874035b244b4a0af4940c8d3a8e81eb73842f64c7071.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
-    <span class="n">plot_decision_boundary</span><span class="p">(</span><span class="n">classifiers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Decision boundaries of the three classifiers&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f7c256edb18ae4eca6c4e6286702bd0d93a627a770d244ef5d1ced98d51f25ed.png" src="../_images/f7c256edb18ae4eca6c4e6286702bd0d93a627a770d244ef5d1ced98d51f25ed.png" />
-</div>
-</div>
-<p>Explain plot…</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: get mean, max, min etc... plot ?</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: contourplot Hartley measure ! GET better dataset !</span>
-</pre></div>
-</div>
+<img alt="../_images/cdfcff14b3b33b6eeb457bf15a859728539b92e6d9c8e24d3a50dbeb392f1158.png" src="../_images/cdfcff14b3b33b6eeb457bf15a859728539b92e6d9c8e24d3a50dbeb392f1158.png" />
 </div>
 </div>
 <p>The generalization of the Shannon entropy <span class="math notranslate nohighlight">\(H\)</span> as a measure of conflict turned out to be more difficult. The upper and lower Shannon entropy play an important role in this regard:</p>
@@ -1008,35 +1355,14 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: comment shape etc</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>With this we can compute a second uncertainty measure on our credal sets:</p>
+<p>With this we can compute the upper and lower shannon entropy on our credal sets. Again we look at the credal sets that show the lowest and highest uncertainty and visualize the measure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upper_shannon</span> <span class="o">=</span> <span class="n">get_upper_shannon</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">)</span>
-<span class="n">upper_shannon</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.8243, 1.4367, 1.104 , 1.304 , 0.5131, 0.8618, 1.1187, 1.205 ,
-       1.4715, 0.2219, 1.2526, 1.2399, 1.0445, 1.1217, 0.71  , 0.4096,
-       1.03  , 1.0255, 1.0079, 1.1106, 0.9212, 0.2371, 1.3375, 1.3137,
-       1.2261, 0.6031, 0.4831, 1.5101, 1.2351, 1.1505, 0.9594, 1.2845,
-       1.0799, 1.14  , 0.1753, 1.0969, 1.1775, 1.1097, 1.0793, 1.184 ,
-       0.294 , 0.7411, 0.0322, 0.2815, 1.0554, 0.049 , 1.0395, 0.9075,
-       1.1018, 1.4337, 1.4022, 1.1021, 1.2456, 0.4103, 0.5362, 0.8943,
-       1.0926, 0.842 , 0.8238, 1.5254])
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can look at the credal sets with highest and lowest upper shannon entropy to get some idea what it means:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">upper_shannon</span><span class="p">)]</span>
@@ -1044,9 +1370,9 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.417, 0.378, 0.205],
-       [0.468, 0.373, 0.159],
-       [0.49 , 0.314, 0.196]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.333, 0.137, 0.53 ],
+       [0.647, 0.078, 0.276],
+       [0.382, 0.28 , 0.338]])
 </pre></div>
 </div>
 </div>
@@ -1058,40 +1384,40 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.001, 0.998, 0.002],
-       [0.001, 0.998, 0.001],
-       [0.001, 0.997, 0.002]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.015, 0.978, 0.007],
+       [0.011, 0.989, 0.   ],
+       [0.007, 0.991, 0.002]])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">get_upper_shannon</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">get_upper_shannon</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">,</span> <span class="s1">&#39;Upper shannon entropy&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8ace3a78676e5d61a904702b87c253a82e284fb2e39228eb82d2c71d9a7dac52.png" src="../_images/8ace3a78676e5d61a904702b87c253a82e284fb2e39228eb82d2c71d9a7dac52.png" />
+<img alt="../_images/7af7d9a72f612c44637c91c26dfbbc7c6115c6c644f5c3806f6ee82d5d0bd934.png" src="../_images/7af7d9a72f612c44637c91c26dfbbc7c6115c6c644f5c3806f6ee82d5d0bd934.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_upper_shannon</span> <span class="o">=</span> <span class="n">get_upper_shannon</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">)</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Upper shannon entropy&#39;</span>
+<span class="n">plot_uncertainty_triangle</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">wine_upper_shannon</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bacc39b0cf5d095841fd8c2f84e6e43634fa5496df38ea3a79da3462efa46c0c.png" src="../_images/bacc39b0cf5d095841fd8c2f84e6e43634fa5496df38ea3a79da3462efa46c0c.png" />
 </div>
 </div>
 <p>Describe plot… also plot decision boundaries ??</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lower_shannon</span> <span class="o">=</span> <span class="n">get_lower_shannon</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">)</span>
-<span class="n">lower_shannon</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.7028, 1.3238, 0.9584, 1.2482, 0.4185, 0.7385, 0.985 , 1.1723,
-       1.3784, 0.1733, 1.1593, 1.1383, 0.9854, 1.0065, 0.5863, 0.3245,
-       0.8909, 0.9663, 0.8879, 1.0918, 0.7783, 0.1913, 1.2902, 1.1955,
-       1.1539, 0.4887, 0.398 , 1.4469, 1.1107, 1.0969, 0.8155, 1.229 ,
-       1.0073, 1.0237, 0.1376, 1.0352, 1.0338, 0.9824, 0.9606, 1.0439,
-       0.225 , 0.6299, 0.0228, 0.2235, 0.9389, 0.0409, 0.8894, 0.8044,
-       0.9983, 1.3647, 1.3535, 1.0759, 1.1644, 0.3246, 0.4371, 0.7571,
-       1.043 , 0.7082, 0.7084, 1.4652])
 </pre></div>
 </div>
 </div>
@@ -1103,9 +1429,9 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.417, 0.378, 0.205],
-       [0.468, 0.373, 0.159],
-       [0.49 , 0.314, 0.196]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.185, 0.26 , 0.555],
+       [0.39 , 0.143, 0.467],
+       [0.181, 0.523, 0.296]])
 </pre></div>
 </div>
 </div>
@@ -1117,21 +1443,34 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.001, 0.998, 0.002],
-       [0.001, 0.998, 0.001],
-       [0.001, 0.997, 0.002]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.001, 0.028, 0.972],
+       [0.305, 0.024, 0.671],
+       [0.008, 0.   , 0.992]])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">get_lower_shannon</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_measure_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">get_lower_shannon</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">,</span> <span class="s1">&#39;lower shannon entropy&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5232ae0a1772097c41e8acb8eda17863ba7648397c0418097234202500634542.png" src="../_images/5232ae0a1772097c41e8acb8eda17863ba7648397c0418097234202500634542.png" />
+<img alt="../_images/2672f38fd797f1adad571ad156df09aee5cec8c74cd8121270d041f34c410ebe.png" src="../_images/2672f38fd797f1adad571ad156df09aee5cec8c74cd8121270d041f34c410ebe.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_lower_shannon</span> <span class="o">=</span> <span class="n">get_upper_shannon</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">)</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Lower shannon entropy&#39;</span>
+<span class="n">plot_uncertainty_triangle</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">wine_upper_shannon</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e59b6cedf9660b168115c026f2e76ba2ca3002af3d360de8d9ad0c81ac500d3d.png" src="../_images/e59b6cedf9660b168115c026f2e76ba2ca3002af3d360de8d9ad0c81ac500d3d.png" />
 </div>
 </div>
 <p>Based on these measures, the following disaggregations of total uncertainty (\ref{eq:aggregate}) have been proposed \citep{abel_dt06}:</p>
@@ -1197,9 +1536,9 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.014, 0.506, 0.48 ],
-       [0.018, 0.563, 0.419],
-       [0.018, 0.469, 0.513]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.022, 0.018, 0.96 ],
+       [0.88 , 0.033, 0.087],
+       [0.05 , 0.   , 0.95 ]])
 </pre></div>
 </div>
 </div>
@@ -1212,9 +1551,9 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.114, 0.077, 0.809],
-       [0.154, 0.092, 0.754],
-       [0.138, 0.066, 0.796]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.001, 0.028, 0.972],
+       [0.305, 0.024, 0.671],
+       [0.008, 0.   , 0.992]])
 </pre></div>
 </div>
 </div>
@@ -1228,9 +1567,9 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.417, 0.378, 0.205],
-       [0.468, 0.373, 0.159],
-       [0.49 , 0.314, 0.196]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.035, 0.539, 0.426],
+       [0.078, 0.421, 0.501],
+       [0.041, 0.526, 0.433]])
 </pre></div>
 </div>
 </div>
@@ -1243,11 +1582,38 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.417, 0.378, 0.205],
-       [0.468, 0.373, 0.159],
-       [0.49 , 0.314, 0.196]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.185, 0.26 , 0.555],
+       [0.39 , 0.143, 0.467],
+       [0.181, 0.523, 0.296]])
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aleatoric1_w</span><span class="p">,</span> <span class="n">epistemic1_w</span> <span class="o">=</span> <span class="n">decomposition_2</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_uncertainty_triangle</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">aleatoric1_w</span><span class="p">,</span> <span class="s1">&#39;Epistemic uncertainty decomposition&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/44f36244f9c2eea93fc875aef116f0e159f00715b5555b7d4d7ba123e90c5e27.png" src="../_images/44f36244f9c2eea93fc875aef116f0e159f00715b5555b7d4d7ba123e90c5e27.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_uncertainty_triangle</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">epistemic1_w</span><span class="p">,</span> <span class="s1">&#39;Epistemic uncertainty decomposition&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f3e3c057527d859209a5b34e58baafeef1af0f8fcb5c79d14f0968ad7dc0d7cf.png" src="../_images/f3e3c057527d859209a5b34e58baafeef1af0f8fcb5c79d14f0968ad7dc0d7cf.png" />
 </div>
 </div>
 </section>
@@ -1255,8 +1621,8 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 <h2>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Link to this heading">#</a></h2>
 <p>Credal classifiers are used for “indeterminate” prediction, that is, to produce reliable set-valued predictions that are likely to cover the true outcome. In this regard, the notion of <em>dominance</em> plays an important role: An outcome <span class="math notranslate nohighlight">\(y\)</span> dominates another outcome <span class="math notranslate nohighlight">\(y'\)</span> if <span class="math notranslate nohighlight">\(y\)</span> is more probable than <span class="math notranslate nohighlight">\(y'\)</span> for each distribution in the credal set, that is,
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cb64096e-3652-4ff7-bd06-ac2502a9fdc0">
-<span class="eqno">(14)<a class="headerlink" href="#equation-cb64096e-3652-4ff7-bd06-ac2502a9fdc0" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:dominance}
+<div class="amsmath math notranslate nohighlight" id="equation-708fa0e7-247a-4c3f-ad89-2a05acfc783b">
+<span class="eqno">(14)<a class="headerlink" href="#equation-708fa0e7-247a-4c3f-ad89-2a05acfc783b" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:dominance}
 \gamma(y,y', \vec{x}) \defeq
 \inf_{h \in C} \frac{p( y \given \vec{x}_q, h)}{p(y' \given \vec{x}_q, h)}  &gt; 1 \, ,
 \end{align}\]</div>
@@ -1266,12 +1632,12 @@ The set-valued prediction for a query \)</span>\vec{x}_q<span class="math notran
 Practically, the computations are based on the interval-valued probabilities 
 \)</span>[\underline{p}(y \given \vec{x}_q), \overline{p}(y \given \vec{x}_q)]<span class="math notranslate nohighlight">\(
 assigned to each class \)</span>y \in \set{Y}$, where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-789b760a-b068-41ca-b7a5-6f8dc7ea129e">
-<span class="eqno">(15)<a class="headerlink" href="#equation-789b760a-b068-41ca-b7a5-6f8dc7ea129e" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:inter_pro}
+<div class="amsmath math notranslate nohighlight" id="equation-43561c66-b3f2-4ecd-9d36-1d7dc4ea9a56">
+<span class="eqno">(15)<a class="headerlink" href="#equation-43561c66-b3f2-4ecd-9d36-1d7dc4ea9a56" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:inter_pro}
 \underline{p}(y \given \vec{x}_q) \defeq \inf_{h \in C} p(y \given \vec{x}_q, h)\, , \quad \overline{p}(y \given \vec{x}_q) \defeq \sup_{h \in C} p(y \given \vec{x}_q, h) \, .
 \end{align}\]</div>
 <p>Note that the upper probabilities <span class="math notranslate nohighlight">\(\overline{p}(y \given \vec{x}_q)\)</span> are very much in the spirit of the plausibility degrees (\ref{eq:plaus}).</p>
-<p>First we define a function to capture the notion of dominance within a credal set.</p>
+<p>First we define a function to capture the notion of dominance within a credal set:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_dominated</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yprime</span><span class="p">,</span> <span class="n">credal_sets</span><span class="p">):</span>
@@ -1314,9 +1680,9 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.796, 0.02 , 0.184],
-       [0.846, 0.019, 0.135],
-       [0.829, 0.015, 0.156]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.762, 0.035, 0.202],
+       [0.938, 0.039, 0.023],
+       [0.775, 0.033, 0.192]])
 </pre></div>
 </div>
 </div>
@@ -1381,14 +1747,14 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([0]),
- array([2]),
- array([1]),
+ array([1, 2]),
+ array([0, 1]),
  array([0, 2]),
  array([2]),
  array([0]),
  array([0]),
  array([1, 2]),
- array([2]),
+ array([1, 2]),
  array([0])]
 </pre></div>
 </div>
@@ -1409,7 +1775,7 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2])
 </pre></div>
 </div>
 </div>
@@ -1421,7 +1787,7 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 2])
 </pre></div>
 </div>
 </div>
@@ -1433,7 +1799,7 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 2])
 </pre></div>
 </div>
 </div>
@@ -1450,11 +1816,107 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: plot...</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_cardinality_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="c1"># helper function to uniformly visualize uncertainty measures</span>
+    
+    <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span><span class="n">x_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">y_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span><span class="n">y_grid</span><span class="p">)</span>
+    
+    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">xv</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yv</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+    
+    <span class="n">mesh_probabilities</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">classifier</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="n">mesh_probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="n">mesh_credal_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh_probabilities</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="n">set_predictions</span> <span class="o">=</span> <span class="n">get_set_predictions</span><span class="p">(</span><span class="n">mesh_credal_sets</span><span class="p">)</span>
+    <span class="n">cardinalities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">set_predictions</span><span class="p">])</span>
+    <span class="n">measure_res</span> <span class="o">=</span> <span class="n">cardinalities</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">contour</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">y_grid</span><span class="p">,</span> <span class="n">measure_res</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">contour</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</details>
+</div>
+<p>We again visualize using a countout plot, this time depending on the cardinality of the prediction sets. We can see that in the areas where the classes are clearly seperated we get point predictions. In the areas where no information is available or the clusters overlap the cardinality of the prediction sets is higher.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cardinality_contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">,</span> <span class="s1">&#39;ahhh&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/43536d0a06dcac5bab72f2f635befc04944abbecfbb696d92c735c8f2829f6f1.png" src="../_images/43536d0a06dcac5bab72f2f635befc04944abbecfbb696d92c735c8f2829f6f1.png" />
+</div>
+</div>
+<p>Now we can also create a set prediction for the wine credal set we obtained at the beginning. We visualize three credal sets for which we received different sized set predictions, in the same way as before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine_set_predictions</span> <span class="o">=</span> <span class="n">get_set_predictions</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">)</span>
+<span class="n">wine_set_predictions</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([0, 2]),
+ array([0, 2]),
+ array([1, 2]),
+ array([0]),
+ array([1]),
+ array([0]),
+ array([1, 2]),
+ array([1, 2]),
+ array([1]),
+ array([1, 2])]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ridx</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">wine_set_predictions</span><span class="p">])</span><span class="o">==</span><span class="n">i</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">create_posterior_plot</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">point_predictions</span><span class="p">,</span> <span class="n">ridx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3b887e2ca76b6a1c4116a7903fb0adf85d7fd37acd9ab45b04bed5dc3bb067dd.png" src="../_images/3b887e2ca76b6a1c4116a7903fb0adf85d7fd37acd9ab45b04bed5dc3bb067dd.png" />
 </div>
 </div>
 <p>Interestingly, uncertainty degrees can be derived on the basis of dominance degrees (\ref{eq:dominance}). For example, the following uncertainty score has been proposed by \citet{antonucci2012} in the context of uncertainty sampling for active learning:</p>
@@ -1500,23 +1962,20 @@ s(\vec{x}_q) \defeq - \max \big(\gamma(+1, -1, \vec{x}_q ), \gamma(-1, +1, \vec{
 <p>We can also compute the uncertainty degrees on our credal sets:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dominance_scores</span> <span class="o">=</span> <span class="n">get_dominance_scores</span><span class="p">(</span><span class="n">credal_sets</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">wine_dominance_scores</span> <span class="o">=</span> <span class="n">get_dominance_scores</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credal_sets</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dominance_scores</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_uncertainty_triangle</span><span class="p">(</span><span class="n">wine_credal_sets</span><span class="p">,</span> <span class="n">wine_dominance_scores</span><span class="p">,</span> <span class="s1">&#39;Dominance score&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.417, 0.378, 0.205],
-       [0.468, 0.373, 0.159],
-       [0.49 , 0.314, 0.196]])
-</pre></div>
-</div>
+<img alt="../_images/7d40d8249637133f4d59f65739dafb74bbf505a4754c2f279c3bf8355fd3a226.png" src="../_images/7d40d8249637133f4d59f65739dafb74bbf505a4754c2f279c3bf8355fd3a226.png" />
 </div>
 </div>
 </section>
