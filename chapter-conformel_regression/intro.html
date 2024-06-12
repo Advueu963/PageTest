@@ -504,7 +504,12 @@ For the non-conformity function <span class="math notranslate nohighlight">\(f\)
     f_h(x,y) = | y - h(x) |
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(h\)</span> is the underlying machine learning model we use.</p>
-</div><div class="cell tag_hide-output tag_remove-output docutils container">
+</div><div class="cell tag_hide-output tag_remove-output tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># paramters that can be tweaked</span>
 <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span>
@@ -614,6 +619,7 @@ For the non-conformity function <span class="math notranslate nohighlight">\(f\)
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -626,7 +632,7 @@ For the non-conformity function <span class="math notranslate nohighlight">\(f\)
 <div align="justify">
 <p>There are different ways of calculating the non-conformity scores and prediction intervals namely <a class="reference internal" href="#content-split"><span class="std std-ref">Split</span></a>,<a class="reference internal" href="#content-jackknife"><span class="std std-ref">Jackknife</span></a> , <a class="reference internal" href="#content-jackknife-plus"><span class="std std-ref">Jackknife+</span></a> and <a class="reference internal" href="#content:jackknife_plus_cv"><span class="xref myst">Jackknife+_CV</span></a> which we will present. <br />
 We apply these methods to synthetic data, with features X being drawn from a Gaussian distribution with parameters <span class="math notranslate nohighlight">\(\mu = \)</span> <span class="output text_plain">0</span>, <span class="math notranslate nohighlight">\(\sigma=\)</span> <span class="output text_plain">2</span>.
-The relationship between the X values and target y is described by the function <span class="math notranslate nohighlight">\(x \mapsto x\sin(x)\cos(x)\)</span>.
+The relationship between the X values and target y is described by the function <span class="math notranslate nohighlight">\(x \mapsto x\sin(x)^2\)</span>.
 Noise was added to y drawn from a Gaussian distribution with <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=\)</span><span class="output text_plain">0.5</span>.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -639,7 +645,7 @@ Noise was added to y drawn from a Gaussian distribution with <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" src="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" />
+<img alt="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" src="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" />
 </div>
 </div>
 <section id="split-method">
@@ -681,14 +687,19 @@ Here we will use the <a class="reference external" href="https://scikit-learn.or
 </div>
 </div>
 <p>Then we apply the non-conformity function <span class="math notranslate nohighlight">\(f\)</span> to the validation dataset.</p>
-<div class="cell tag_scroll-output docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_scroll-output tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct the sequence of residuals</span>
 <span class="n">split_non_conformity_scores</span> <span class="o">=</span> <span class="n">absolute_residual_score</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">base_model</span><span class="p">,</span><span class="n">X</span><span class="o">=</span><span class="n">X_val</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_val</span><span class="p">)</span>
 <span class="n">split_non_conformity_scores</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.17621188e+00, 1.29941504e-01, 2.19041871e-01, 2.19637592e-02,
        8.65203580e-02, 7.72014317e-01, 3.68429832e-01, 7.22305073e-01,
@@ -718,6 +729,7 @@ Here we will use the <a class="reference external" href="https://scikit-learn.or
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <p>Now we must calculate the <span class="math notranslate nohighlight">\(\lceil (1-\epsilon)*(l+1)\rceil\)</span> Quantile on <span class="math notranslate nohighlight">\(\alpha_{l}, \, \alpha_{l+1}, \ldots , \alpha_{n}\)</span>.</p>
 <div class="cell docutils container">
@@ -904,7 +916,7 @@ Mean interval width:  2.352423753035558
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5188a01faa7880a830bbffbb1bf8f80f155a0cf740811fbe7bed4849e1337f51.png" src="../_images/5188a01faa7880a830bbffbb1bf8f80f155a0cf740811fbe7bed4849e1337f51.png" />
+<img alt="../_images/dd3c59e5bbe8e5a81ded3098cda27b2064db9b02546518290335c6e213bf7e49.png" src="../_images/dd3c59e5bbe8e5a81ded3098cda27b2064db9b02546518290335c6e213bf7e49.png" />
 </div>
 </div>
 </section>
@@ -960,7 +972,7 @@ Doing this we can directly compute the corresponding <span class="math notransla
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1052691479091148
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.105269147909115
 </pre></div>
 </div>
 </div>
@@ -984,12 +996,12 @@ For a new data points <span class="math notranslate nohighlight">\(x_{n+1}\)</sp
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.27175184  1.93878646]
  [-4.66435625 -2.45381795]]
-Mean interval width:  2.2105382958182296
+Mean interval width:  2.21053829581823
 </pre></div>
 </div>
 </div>
 </div>
-<p>Again as above in <em>Split</em>(see Section <span class="xref std std-ref">split</span>) we can firstly add the <code class="docutils literal notranslate"><span class="pre">jackknife_non_conformity_scores</span></code> to the prediction <span class="math notranslate nohighlight">\(\hat{h(x_{n+1})}\)</span> and then take the corresponding Quantiles as bounds.</p>
+<p>Again as above in [Split]<code class="docutils literal notranslate"><span class="pre">content:split</span></code> we can firstly add the <code class="docutils literal notranslate"><span class="pre">jackknife_non_conformity_scores</span></code> to the prediction <span class="math notranslate nohighlight">\(\hat{h(x_{n+1})}\)</span> and then take the corresponding Quantiles as bounds.</p>
 <div class="math notranslate nohighlight">
 \[
     Y_\epsilon = [ q_{n,\epsilon}^{-}(\hat{h}(x_{n+1}) - \alpha_i^{jack}) \ , \ q_{n,\epsilon}^{+}(\hat{h}(x_{n+1}) + \alpha_i^{jack})].
@@ -1011,7 +1023,7 @@ Mean interval width:  2.2105382958182296
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.27175184  1.93878646]
  [-4.66435625 -2.45381795]]
-Mean interval width:  2.2105382958182296
+Mean interval width:  2.21053829581823
 </pre></div>
 </div>
 </div>
@@ -1040,7 +1052,7 @@ But in scenarios where a regression model is less stable (samples size equal to 
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.27175184  1.93878646]
  [-4.66435625 -2.45381795]]
-Mean interval width:  2.2105382958182296
+Mean interval width:  2.21053829581823
 </pre></div>
 </div>
 </div>
@@ -1060,7 +1072,7 @@ Mean interval width:  2.2105382958182296
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/29bc5cf4f5d741c6bbfb5687601b2f018a4d8f8a643a5741c0c37eb198b87e67.png" src="../_images/29bc5cf4f5d741c6bbfb5687601b2f018a4d8f8a643a5741c0c37eb198b87e67.png" />
+<img alt="../_images/f4ed50b10c1571cd7376bf9dca051b370ddb9aabea591dff13e9ba2107f9613c.png" src="../_images/f4ed50b10c1571cd7376bf9dca051b370ddb9aabea591dff13e9ba2107f9613c.png" />
 </div>
 </div>
 </section>
@@ -1085,14 +1097,13 @@ We again distinguish four steps:</p>
 \]</div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1: this is done above in jackknife</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1: see above in chapter Jackknife</span>
 <span class="n">model_missing_data</span>
-<span class="c1"># 2: see above in jackknife</span>
+<span class="c1"># 2: see above in chapter Jackknife</span>
 <span class="n">jackknife_non_conformity_scores</span>
-<span class="c1"># 3:</span>
-<span class="c1"># get all predictions of the models \hat h_{-i}</span>
+<span class="c1"># 3: get all predictions of the models \hat h_{-i}</span>
 <span class="n">missing_model_test_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">model_missing_data</span>
+    <span class="n">h_missing_i</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="k">for</span> <span class="n">h_missing_i</span> <span class="ow">in</span> <span class="n">model_missing_data</span>
 <span class="p">])</span><span class="o">.</span><span class="n">T</span>
 
 <span class="c1"># 4: build interval</span>
@@ -1109,7 +1120,7 @@ We again distinguish four steps:</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.26841832  1.94211998]
  [-4.65597107 -2.42719945]]
-Mean interval width:  2.2145308720345076
+Mean interval width:  2.214530872034507
 </pre></div>
 </div>
 </div>
@@ -1133,7 +1144,7 @@ Mean interval width:  2.2145308720345076
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.26841832  1.94211998]
  [-4.65597107 -2.42719945]]
-Mean interval width:  2.2145308720345076
+Mean interval width:  2.214530872034507
 </pre></div>
 </div>
 </div>
@@ -1159,7 +1170,7 @@ Mean interval width:  2.2145308720345076
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/6b0bddd471fbcae164a1fffaddd4f5cf7711ba40fd825c7a5b0db478e597fc18.png" src="../_images/6b0bddd471fbcae164a1fffaddd4f5cf7711ba40fd825c7a5b0db478e597fc18.png" />
+<img alt="../_images/8948af3678a331741c36cd3f01c17176af9a4b6f62e9bcb0e0185d9b2c7d73ac.png" src="../_images/8948af3678a331741c36cd3f01c17176af9a4b6f62e9bcb0e0185d9b2c7d73ac.png" />
 </div>
 </div>
 </section>
@@ -1199,7 +1210,7 @@ It can again be expressed in five steps, only differing from Jackknife+ in the a
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-3.9792325   1.94415344]
  [-4.53034491  1.27407775]]
-Mean interval width:  2.5660014020522035
+Mean interval width:  2.566001402052204
 </pre></div>
 </div>
 </div>
@@ -1225,7 +1236,7 @@ Mean interval width:  2.5660014020522035
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/2922aef342bc5df5db300f7b7790d39bae0d6cbb4b50dd1e2d8c3a3ca3c3f4c5.png" src="../_images/2922aef342bc5df5db300f7b7790d39bae0d6cbb4b50dd1e2d8c3a3ca3c3f4c5.png" />
+<img alt="../_images/f15a8ad79496e0dfbcdace10b4f9619411ac1c5fc38d5e23c8494dd4422b99cf.png" src="../_images/f15a8ad79496e0dfbcdace10b4f9619411ac1c5fc38d5e23c8494dd4422b99cf.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -1240,7 +1251,7 @@ Mean interval width:  2.5660014020522035
 <p>Quantifying the uncertainty of conformal regression outputs can intuitively be done by looking at the interval widths.</p>
 <ul class="simple">
 <li><p>The split method gives all intervals the same width, making it not very useful for individual uncertainty quantification.</p></li>
-<li><p>Similarly Jackknife gives each point the same width, whilst much smaller.</p></li>
+<li><p>Similiarly Jackknife gives each point the same width, whilst much smaller.</p></li>
 <li><p>Incorporating the randomness of the regression model, Jackknife+ assigns each point a individual interval width. Thus making it more useful determining the uncertainty of the model for each point.</p></li>
 <li><p>Finally CV+ having fewer underlying <span class="math notranslate nohighlight">\(\hat h\)</span> gives us also individual intervals, whilst being better in quantifying the uncertainty of points, where only few data points were seen.</p></li>
 </ul>
@@ -1248,7 +1259,7 @@ Mean interval width:  2.5660014020522035
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
-<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Split&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife+&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife+_CV&quot;</span><span class="p">]</span>
+<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Split&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife&quot;</span><span class="p">,</span><span class="s2">&quot;Jackknife+&quot;</span><span class="p">,</span><span class="s2">&quot;CV+&quot;</span><span class="p">]</span>
 <span class="n">intervals</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_interval_split</span><span class="p">,</span> <span class="n">y_interval_jackknife</span><span class="p">,</span> <span class="n">y_interval_jackknife_plus</span><span class="p">,</span> <span class="n">y_interval_jackknife_plus_cv</span><span class="p">]</span>
 <span class="n">methods_to_intervals</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">methods</span><span class="p">,</span><span class="n">intervals</span><span class="p">))</span>
 
@@ -1264,7 +1275,7 @@ Mean interval width:  2.5660014020522035
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/91a5ee827b52a213234c57650d3b2d6be7b7eb8c308f8c376390d5e1fe909828.png" src="../_images/91a5ee827b52a213234c57650d3b2d6be7b7eb8c308f8c376390d5e1fe909828.png" />
+<img alt="../_images/d03ad07a78a7913b0506303e0aa2c9b497fe22b58adbc3d9abb7fdc0f5794e19.png" src="../_images/d03ad07a78a7913b0506303e0aa2c9b497fe22b58adbc3d9abb7fdc0f5794e19.png" />
 </div>
 </div>
 </section>

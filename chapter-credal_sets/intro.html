@@ -540,7 +540,7 @@ the multinomial distribution (Bernardo, 2005).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a1ac8902fd948d2558c811a2882a84ed8a36d0496b2075c1c86edd2a19564f75.png" src="../_images/a1ac8902fd948d2558c811a2882a84ed8a36d0496b2075c1c86edd2a19564f75.png" />
+<img alt="../_images/db927ded1e3b8fd5f976ae4006869e192bccab041186d41873fdedf2562048c6.png" src="../_images/db927ded1e3b8fd5f976ae4006869e192bccab041186d41873fdedf2562048c6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -599,8 +599,8 @@ the multinomial distribution (Bernardo, 2005).</p>
 </div>
 <p>Methods of that kind have also been used in the context of machine learning, for example in the framework of the Na”ive Credal Classifier \citep{zaffalon2002,cora_lr08} or more recently as an extension of sum-product networks \citep{dera_cs17}. As for the former, we can think of a Na”ive Bayes (NB) classifier as a hypothesis <span class="math notranslate nohighlight">\(h = h_{\vec{\theta}}\)</span> specified by a parameter vector <span class="math notranslate nohighlight">\({\vec{\theta}}\)</span> that comprises a prior probability <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class <span class="math notranslate nohighlight">\(y_k \in \set{Y}\)</span> and a conditional probability <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> for observing the <span class="math notranslate nohighlight">\(i^{th}\)</span> value <span class="math notranslate nohighlight">\(a_{i,j}\)</span> of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. For a given query instance specified by attributes <span class="math notranslate nohighlight">\((a_{i_1,1}, \ldots , a_{i_J,J})\)</span>, the posterior class probabilities are then given by
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b8310776-fbd2-413f-b51c-97e2fd61e289">
-<span class="eqno">(12)<a class="headerlink" href="#equation-b8310776-fbd2-413f-b51c-97e2fd61e289" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
+<div class="amsmath math notranslate nohighlight" id="equation-9688fb8c-8d8d-4a76-9e8a-8e9905053c11">
+<span class="eqno">(12)<a class="headerlink" href="#equation-9688fb8c-8d8d-4a76-9e8a-8e9905053c11" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
 p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_j,j,k} \, .
 \end{equation}\]</div>
 <p>$$</p>
@@ -732,8 +732,8 @@ H(A) = \log( |A|)  \, ,
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{m}_Q: \,  2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> is the M”obius inverse of the capacity function <span class="math notranslate nohighlight">\(\nu :\, 2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> defined by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-30199073-8fb3-4d96-8a20-2382f0fe870c">
-<span class="eqno">(13)<a class="headerlink" href="#equation-30199073-8fb3-4d96-8a20-2382f0fe870c" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
+<div class="amsmath math notranslate nohighlight" id="equation-070b628e-dbbc-46f2-a416-9f255540b7bf">
+<span class="eqno">(13)<a class="headerlink" href="#equation-070b628e-dbbc-46f2-a416-9f255540b7bf" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
 \nu_Q(A) \defeq \inf_{q \in Q} q(A) 
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(A \subseteq \mathcal{Y}\)</span>, that is,</p>
@@ -1255,8 +1255,8 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 <h2>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Link to this heading">#</a></h2>
 <p>Credal classifiers are used for “indeterminate” prediction, that is, to produce reliable set-valued predictions that are likely to cover the true outcome. In this regard, the notion of <em>dominance</em> plays an important role: An outcome <span class="math notranslate nohighlight">\(y\)</span> dominates another outcome <span class="math notranslate nohighlight">\(y'\)</span> if <span class="math notranslate nohighlight">\(y\)</span> is more probable than <span class="math notranslate nohighlight">\(y'\)</span> for each distribution in the credal set, that is,
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad9f1b17-c430-44d7-9408-cfb6f8e933fe">
-<span class="eqno">(14)<a class="headerlink" href="#equation-ad9f1b17-c430-44d7-9408-cfb6f8e933fe" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:dominance}
+<div class="amsmath math notranslate nohighlight" id="equation-7067606d-ed20-4ef8-b92b-416827b25d96">
+<span class="eqno">(14)<a class="headerlink" href="#equation-7067606d-ed20-4ef8-b92b-416827b25d96" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:dominance}
 \gamma(y,y', \vec{x}) \defeq
 \inf_{h \in C} \frac{p( y \given \vec{x}_q, h)}{p(y' \given \vec{x}_q, h)}  &gt; 1 \, ,
 \end{align}\]</div>
@@ -1266,8 +1266,8 @@ The set-valued prediction for a query \)</span>\vec{x}_q<span class="math notran
 Practically, the computations are based on the interval-valued probabilities 
 \)</span>[\underline{p}(y \given \vec{x}_q), \overline{p}(y \given \vec{x}_q)]<span class="math notranslate nohighlight">\(
 assigned to each class \)</span>y \in \set{Y}$, where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2aa98f78-d2c4-4738-8fab-c104912f89e5">
-<span class="eqno">(15)<a class="headerlink" href="#equation-2aa98f78-d2c4-4738-8fab-c104912f89e5" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:inter_pro}
+<div class="amsmath math notranslate nohighlight" id="equation-f6f03a63-693f-4e86-aa17-ab20d6b508ba">
+<span class="eqno">(15)<a class="headerlink" href="#equation-f6f03a63-693f-4e86-aa17-ab20d6b508ba" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:inter_pro}
 \underline{p}(y \given \vec{x}_q) \defeq \inf_{h \in C} p(y \given \vec{x}_q, h)\, , \quad \overline{p}(y \given \vec{x}_q) \defeq \sup_{h \in C} p(y \given \vec{x}_q, h) \, .
 \end{align}\]</div>
 <p>Note that the upper probabilities <span class="math notranslate nohighlight">\(\overline{p}(y \given \vec{x}_q)\)</span> are very much in the spirit of the plausibility degrees (\ref{eq:plaus}).</p>
