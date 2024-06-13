@@ -483,20 +483,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">KBinsDiscretizer</span><span class="p">,</span> <span class="n">LabelEncoder</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span><span class="p">,</span> <span class="n">load_wine</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">mpltern</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">dirichlet</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;mpltern&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>The theory of imprecise probabilities (Walley, 1991) is largely built on the idea to specify
 knowledge in terms of a set <span class="math notranslate nohighlight">\(Q\)</span> of probability distributions instead of a single distribution.
@@ -516,8 +502,8 @@ which is an extension of inference with the Dirichlet distribution as a conjugat
 the multinomial distribution (Bernardo, 2005).</p>
 <p>Methods of that kind have also been used in the context of machine learning, for example in the framework of the Na”ive Credal Classifier \citep{zaffalon2002,cora_lr08} or more recently as an extension of sum-product networks \citep{dera_cs17}. As for the former, we can think of a Na”ive Bayes (NB) classifier as a hypothesis <span class="math notranslate nohighlight">\(h = h_{\vec{\theta}}\)</span> specified by a parameter vector <span class="math notranslate nohighlight">\({\vec{\theta}}\)</span> that comprises a prior probability <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class <span class="math notranslate nohighlight">\(y_k \in \set{Y}\)</span> and a conditional probability <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> for observing the <span class="math notranslate nohighlight">\(i^{th}\)</span> value <span class="math notranslate nohighlight">\(a_{i,j}\)</span> of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. For a given query instance specified by attributes <span class="math notranslate nohighlight">\((a_{i_1,1}, \ldots , a_{i_J,J})\)</span>, the posterior class probabilities are then given by
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3668b361-7673-40e2-ae75-40764fdb4fdb">
-<span class="eqno">(12)<a class="headerlink" href="#equation-3668b361-7673-40e2-ae75-40764fdb4fdb" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
+<div class="amsmath math notranslate nohighlight" id="equation-c34e5586-c7ff-4f31-8e15-abc892c10018">
+<span class="eqno">(12)<a class="headerlink" href="#equation-c34e5586-c7ff-4f31-8e15-abc892c10018" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:spo}
 p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_j,j,k} \, .
 \end{equation}\]</div>
 <p>$$</p>
@@ -552,6 +538,14 @@ p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_
 
 <span class="c1"># split into train and test data</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_binned</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>                                                                   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/santothies/miniforge3/envs/kaggle2/lib/python3.12/site-packages/sklearn/preprocessing/_discretization.py:239: FutureWarning: In version 1.5 onwards, subsample=200_000 will be used by default. Set subsample explicitly to silence this warning in the mean time. Set subsample=None to disable subsampling explicitly.
+  warnings.warn(
+/var/folders/r0/h4rkplrj2qldt4_b_tdjz3cc0000gn/T/ipykernel_52278/4104909904.py:7: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  X_binned_labeled = pd.DataFrame(X_binned, columns=feature_names).applymap(lambda x: bin_labels[int(x)])
 </pre></div>
 </div>
 </div>
@@ -728,9 +722,9 @@ p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_
 Prior credal_set:
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.4784, 0.2556, 0.266 ],
-       [0.2228, 0.7245, 0.0527],
-       [0.1298, 0.3619, 0.5083]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.4719, 0.5005, 0.0276],
+       [0.1864, 0.541 , 0.2726],
+       [0.1917, 0.6438, 0.1644]])
 </pre></div>
 </div>
 </div>
@@ -769,7 +763,7 @@ Prior credal_set:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/030ab6f3869fc8dd7382e61ced5b7dc1d64aa8003f9421a649fc0f2ad298fdd8.png" src="../_images/030ab6f3869fc8dd7382e61ced5b7dc1d64aa8003f9421a649fc0f2ad298fdd8.png" />
+<img alt="../_images/700cf27ff1e9dcf9d9788d8845690e4caa7bb05171b30c5324068595e6a71aff.png" src="../_images/700cf27ff1e9dcf9d9788d8845690e4caa7bb05171b30c5324068595e6a71aff.png" />
 </div>
 </div>
 <p>The Naive Credal Classifier produces set predictions as credal sets of posterior distributions. This is done by computing a posterior distribution for each combination of prior and conditional distributions out of the prior and conditional credal sets. While this is impractical we can approximate the true solution by computing the posterior for a fixed number of samples from the prior and posterior credal sets:</p>
@@ -854,16 +848,16 @@ Prior credal_set:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.949, 0.01 , 0.041],
-       [0.874, 0.072, 0.053],
-       [0.78 , 0.024, 0.196],
-       [0.785, 0.13 , 0.084],
-       [0.935, 0.026, 0.039],
-       [0.935, 0.013, 0.052],
-       [0.94 , 0.048, 0.012],
-       [0.88 , 0.014, 0.106],
-       [0.925, 0.01 , 0.065],
-       [0.865, 0.054, 0.081]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.876, 0.03 , 0.094],
+       [0.948, 0.042, 0.01 ],
+       [0.949, 0.016, 0.036],
+       [0.883, 0.024, 0.092],
+       [0.929, 0.018, 0.053],
+       [0.979, 0.002, 0.019],
+       [0.805, 0.043, 0.152],
+       [0.965, 0.025, 0.011],
+       [0.788, 0.046, 0.167],
+       [0.445, 0.012, 0.543]])
 </pre></div>
 </div>
 </div>
@@ -917,7 +911,7 @@ Prior credal_set:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e075866c1c075fc1461062c9ef455e875c03a5ff0c2f36caf042f4b378e8f3db.png" src="../_images/e075866c1c075fc1461062c9ef455e875c03a5ff0c2f36caf042f4b378e8f3db.png" />
+<img alt="../_images/b5d3a15e442f856574296d6b77fbc9ffcc8f3a5d813bf3de3d227cd5e32cb055.png" src="../_images/b5d3a15e442f856574296d6b77fbc9ffcc8f3a5d813bf3de3d227cd5e32cb055.png" />
 </div>
 </div>
 <section id="uncertainty-measures-for-credal-sets">
@@ -949,7 +943,7 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/22e86dfd943f9eed0df95da2d10630dfff03c78345fb61d1b2d7f328847e6107.png" src="../_images/22e86dfd943f9eed0df95da2d10630dfff03c78345fb61d1b2d7f328847e6107.png" />
+<img alt="../_images/6d3d2dbf51fe8b16a388f2c0669547f9279a8fb3a38488a8abff1f9f40e5c484.png" src="../_images/6d3d2dbf51fe8b16a388f2c0669547f9279a8fb3a38488a8abff1f9f40e5c484.png" />
 </div>
 </div>
 <p>Just like the Shannon entropy (\ref{eq:shannon}), this measure can be justified axiomatically\footnote{For example, see Chapter IX, pages 540–616, in the book by \cite{reny_pt}.}.</p>
@@ -969,8 +963,8 @@ H(A) = \log( |A|)  \, ,
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{m}_Q: \,  2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> is the M”obius inverse of the capacity function <span class="math notranslate nohighlight">\(\nu :\, 2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> defined by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-31bcd5ba-075e-42ca-9238-dfc55c100db8">
-<span class="eqno">(13)<a class="headerlink" href="#equation-31bcd5ba-075e-42ca-9238-dfc55c100db8" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
+<div class="amsmath math notranslate nohighlight" id="equation-d611abe1-226b-440c-9412-d4cc130a59f9">
+<span class="eqno">(13)<a class="headerlink" href="#equation-d611abe1-226b-440c-9412-d4cc130a59f9" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:cap}
 \nu_Q(A) \defeq \inf_{q \in Q} q(A) 
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(A \subseteq \mathcal{Y}\)</span>, that is,</p>
@@ -1053,7 +1047,7 @@ H(A) = \log( |A|)  \, ,
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/0475d32ddb77609a3d5efd2f028fe6aee4b00c7d59b5d9364d529e5db5ed921d.png" src="../_images/0475d32ddb77609a3d5efd2f028fe6aee4b00c7d59b5d9364d529e5db5ed921d.png" />
+<img alt="../_images/db927ded1e3b8fd5f976ae4006869e192bccab041186d41873fdedf2562048c6.png" src="../_images/db927ded1e3b8fd5f976ae4006869e192bccab041186d41873fdedf2562048c6.png" />
 </div>
 </div>
 <p>Three Gaussian Naive Bayes classifiers are trained on different subsets of the dataset to produce predictions. Their predictions are then combined into a credal set. The idea is to obtain three conflicting classifiers and a simple credal set. This allows us to easily visualize the impact of aleatoric and epistemic uncertainty on the differnt measures:</p>
@@ -1099,9 +1093,9 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.762, 0.035, 0.202],
-       [0.938, 0.039, 0.023],
-       [0.775, 0.033, 0.192]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.907, 0.033, 0.06 ],
+       [0.936, 0.013, 0.051],
+       [0.926, 0.018, 0.056]])
 </pre></div>
 </div>
 </div>
@@ -1155,7 +1149,7 @@ H(A) = \log( |A|)  \, ,
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/d2e01436b6a529f200a8c257c45466c9e443fb88b96890ff71588df0b4aa8983.png" src="../_images/d2e01436b6a529f200a8c257c45466c9e443fb88b96890ff71588df0b4aa8983.png" />
+<img alt="../_images/e69c663256b0355da40a9a116fba770be78b5c16311a04d9cada9d66b51af75f.png" src="../_images/e69c663256b0355da40a9a116fba770be78b5c16311a04d9cada9d66b51af75f.png" />
 </div>
 </div>
 <p>Now we compute a first uncertainty measure on our posterior credal sets by computing the generalized hartley measure on them. We can get a feeling for it by inspecting the credal sets for which the measure is the lowest and the highest:</p>
@@ -1173,9 +1167,9 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.022, 0.018, 0.96 ],
-       [0.88 , 0.033, 0.087],
-       [0.05 , 0.   , 0.95 ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.002, 0.   , 0.998],
+       [0.288, 0.008, 0.703],
+       [0.989, 0.007, 0.004]])
 </pre></div>
 </div>
 </div>
@@ -1187,9 +1181,9 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.015, 0.978, 0.007],
-       [0.011, 0.989, 0.   ],
-       [0.007, 0.991, 0.002]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.005, 0.995, 0.   ],
+       [0.   , 0.998, 0.001],
+       [0.   , 1.   , 0.   ]])
 </pre></div>
 </div>
 </div>
@@ -1257,7 +1251,7 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d2de03dcee354d5f84059cd044ed22852dbc661ede0b30ba0b820a65313161a5.png" src="../_images/d2de03dcee354d5f84059cd044ed22852dbc661ede0b30ba0b820a65313161a5.png" />
+<img alt="../_images/ca3a4eecc3087c8f91f7a7e0ca08d97e6af51e81cce52df920217b15ec679f23.png" src="../_images/ca3a4eecc3087c8f91f7a7e0ca08d97e6af51e81cce52df920217b15ec679f23.png" />
 </div>
 </div>
 <p>For a different illustration we also compute the uncertainty measures on the posterior credal set of the wine data that we obtained earlier and visualize the credal sets with the highest and lowest uncertainty:</p>
@@ -1301,7 +1295,7 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cdfcff14b3b33b6eeb457bf15a859728539b92e6d9c8e24d3a50dbeb392f1158.png" src="../_images/cdfcff14b3b33b6eeb457bf15a859728539b92e6d9c8e24d3a50dbeb392f1158.png" />
+<img alt="../_images/35d10bb60ced4f96401c48a065e040dd6b4924e804202b1904099dfa5715d56a.png" src="../_images/35d10bb60ced4f96401c48a065e040dd6b4924e804202b1904099dfa5715d56a.png" />
 </div>
 </div>
 <p>The generalization of the Shannon entropy <span class="math notranslate nohighlight">\(H\)</span> as a measure of conflict turned out to be more difficult. The upper and lower Shannon entropy play an important role in this regard:</p>
@@ -1370,9 +1364,9 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.333, 0.137, 0.53 ],
-       [0.647, 0.078, 0.276],
-       [0.382, 0.28 , 0.338]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.408, 0.128, 0.464],
+       [0.398, 0.167, 0.435],
+       [0.361, 0.256, 0.382]])
 </pre></div>
 </div>
 </div>
@@ -1384,9 +1378,9 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.015, 0.978, 0.007],
-       [0.011, 0.989, 0.   ],
-       [0.007, 0.991, 0.002]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.005, 0.995, 0.   ],
+       [0.   , 0.998, 0.001],
+       [0.   , 1.   , 0.   ]])
 </pre></div>
 </div>
 </div>
@@ -1398,7 +1392,7 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7af7d9a72f612c44637c91c26dfbbc7c6115c6c644f5c3806f6ee82d5d0bd934.png" src="../_images/7af7d9a72f612c44637c91c26dfbbc7c6115c6c644f5c3806f6ee82d5d0bd934.png" />
+<img alt="../_images/3cfea9294dde99007073dd803c4e895b99deca69d02cbf818bb70ee143e0fe6c.png" src="../_images/3cfea9294dde99007073dd803c4e895b99deca69d02cbf818bb70ee143e0fe6c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1411,7 +1405,7 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bacc39b0cf5d095841fd8c2f84e6e43634fa5496df38ea3a79da3462efa46c0c.png" src="../_images/bacc39b0cf5d095841fd8c2f84e6e43634fa5496df38ea3a79da3462efa46c0c.png" />
+<img alt="../_images/f7b31da535bc1c12e0200b6242dae104351c86b0b56e442a2950556e7f5bb612.png" src="../_images/f7b31da535bc1c12e0200b6242dae104351c86b0b56e442a2950556e7f5bb612.png" />
 </div>
 </div>
 <p>Describe plot… also plot decision boundaries ??</p>
@@ -1429,9 +1423,9 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.185, 0.26 , 0.555],
-       [0.39 , 0.143, 0.467],
-       [0.181, 0.523, 0.296]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.408, 0.128, 0.464],
+       [0.398, 0.167, 0.435],
+       [0.361, 0.256, 0.382]])
 </pre></div>
 </div>
 </div>
@@ -1443,9 +1437,9 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.001, 0.028, 0.972],
-       [0.305, 0.024, 0.671],
-       [0.008, 0.   , 0.992]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.005, 0.995, 0.   ],
+       [0.   , 0.998, 0.001],
+       [0.   , 1.   , 0.   ]])
 </pre></div>
 </div>
 </div>
@@ -1457,7 +1451,7 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2672f38fd797f1adad571ad156df09aee5cec8c74cd8121270d041f34c410ebe.png" src="../_images/2672f38fd797f1adad571ad156df09aee5cec8c74cd8121270d041f34c410ebe.png" />
+<img alt="../_images/97249791fa1c23b87e945d1dba064dc66e7c0c9643e40046bb3275246911f5eb.png" src="../_images/97249791fa1c23b87e945d1dba064dc66e7c0c9643e40046bb3275246911f5eb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1470,7 +1464,7 @@ H_*(Q) \defeq \min_{q \in Q} H(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e59b6cedf9660b168115c026f2e76ba2ca3002af3d360de8d9ad0c81ac500d3d.png" src="../_images/e59b6cedf9660b168115c026f2e76ba2ca3002af3d360de8d9ad0c81ac500d3d.png" />
+<img alt="../_images/ceafe5b3ffbb21cb4775d615b752a3c81692fc074a356d34bf93f43c8f9a39ea.png" src="../_images/ceafe5b3ffbb21cb4775d615b752a3c81692fc074a356d34bf93f43c8f9a39ea.png" />
 </div>
 </div>
 <p>Based on these measures, the following disaggregations of total uncertainty (\ref{eq:aggregate}) have been proposed \citep{abel_dt06}:</p>
@@ -1536,9 +1530,9 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.022, 0.018, 0.96 ],
-       [0.88 , 0.033, 0.087],
-       [0.05 , 0.   , 0.95 ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.002, 0.   , 0.998],
+       [0.288, 0.008, 0.703],
+       [0.989, 0.007, 0.004]])
 </pre></div>
 </div>
 </div>
@@ -1551,9 +1545,9 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.001, 0.028, 0.972],
-       [0.305, 0.024, 0.671],
-       [0.008, 0.   , 0.992]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.003, 0.004, 0.993],
+       [0.016, 0.056, 0.928],
+       [0.477, 0.417, 0.106]])
 </pre></div>
 </div>
 </div>
@@ -1567,9 +1561,9 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.035, 0.539, 0.426],
-       [0.078, 0.421, 0.501],
-       [0.041, 0.526, 0.433]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.408, 0.128, 0.464],
+       [0.398, 0.167, 0.435],
+       [0.361, 0.256, 0.382]])
 </pre></div>
 </div>
 </div>
@@ -1582,9 +1576,9 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.185, 0.26 , 0.555],
-       [0.39 , 0.143, 0.467],
-       [0.181, 0.523, 0.296]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.408, 0.128, 0.464],
+       [0.398, 0.167, 0.435],
+       [0.361, 0.256, 0.382]])
 </pre></div>
 </div>
 </div>
@@ -1603,7 +1597,7 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/44f36244f9c2eea93fc875aef116f0e159f00715b5555b7d4d7ba123e90c5e27.png" src="../_images/44f36244f9c2eea93fc875aef116f0e159f00715b5555b7d4d7ba123e90c5e27.png" />
+<img alt="../_images/f124d12b7497c74e5734ac88eddce0cd84c76257be6ca116f93b50e3a8c09e27.png" src="../_images/f124d12b7497c74e5734ac88eddce0cd84c76257be6ca116f93b50e3a8c09e27.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1613,7 +1607,7 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f3e3c057527d859209a5b34e58baafeef1af0f8fcb5c79d14f0968ad7dc0d7cf.png" src="../_images/f3e3c057527d859209a5b34e58baafeef1af0f8fcb5c79d14f0968ad7dc0d7cf.png" />
+<img alt="../_images/7d49ab80fa5dc96784d5910a335120603f4c300ea96f1bf28a7494001aeb19fb.png" src="../_images/7d49ab80fa5dc96784d5910a335120603f4c300ea96f1bf28a7494001aeb19fb.png" />
 </div>
 </div>
 </section>
@@ -1621,8 +1615,8 @@ H^*(Q) &amp; = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)   \label{eq:unc2}
 <h2>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Link to this heading">#</a></h2>
 <p>Credal classifiers are used for “indeterminate” prediction, that is, to produce reliable set-valued predictions that are likely to cover the true outcome. In this regard, the notion of <em>dominance</em> plays an important role: An outcome <span class="math notranslate nohighlight">\(y\)</span> dominates another outcome <span class="math notranslate nohighlight">\(y'\)</span> if <span class="math notranslate nohighlight">\(y\)</span> is more probable than <span class="math notranslate nohighlight">\(y'\)</span> for each distribution in the credal set, that is,
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-708fa0e7-247a-4c3f-ad89-2a05acfc783b">
-<span class="eqno">(14)<a class="headerlink" href="#equation-708fa0e7-247a-4c3f-ad89-2a05acfc783b" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:dominance}
+<div class="amsmath math notranslate nohighlight" id="equation-819893be-d49c-4bdf-8e57-4257e0162835">
+<span class="eqno">(14)<a class="headerlink" href="#equation-819893be-d49c-4bdf-8e57-4257e0162835" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:dominance}
 \gamma(y,y', \vec{x}) \defeq
 \inf_{h \in C} \frac{p( y \given \vec{x}_q, h)}{p(y' \given \vec{x}_q, h)}  &gt; 1 \, ,
 \end{align}\]</div>
@@ -1632,8 +1626,8 @@ The set-valued prediction for a query \)</span>\vec{x}_q<span class="math notran
 Practically, the computations are based on the interval-valued probabilities 
 \)</span>[\underline{p}(y \given \vec{x}_q), \overline{p}(y \given \vec{x}_q)]<span class="math notranslate nohighlight">\(
 assigned to each class \)</span>y \in \set{Y}$, where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-43561c66-b3f2-4ecd-9d36-1d7dc4ea9a56">
-<span class="eqno">(15)<a class="headerlink" href="#equation-43561c66-b3f2-4ecd-9d36-1d7dc4ea9a56" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:inter_pro}
+<div class="amsmath math notranslate nohighlight" id="equation-641c98d9-ab1d-43b7-8ec8-3f08ffe0f7b6">
+<span class="eqno">(15)<a class="headerlink" href="#equation-641c98d9-ab1d-43b7-8ec8-3f08ffe0f7b6" title="Permalink to this equation">#</a></span>\[\begin{align} \label{eq:inter_pro}
 \underline{p}(y \given \vec{x}_q) \defeq \inf_{h \in C} p(y \given \vec{x}_q, h)\, , \quad \overline{p}(y \given \vec{x}_q) \defeq \sup_{h \in C} p(y \given \vec{x}_q, h) \, .
 \end{align}\]</div>
 <p>Note that the upper probabilities <span class="math notranslate nohighlight">\(\overline{p}(y \given \vec{x}_q)\)</span> are very much in the spirit of the plausibility degrees (\ref{eq:plaus}).</p>
@@ -1680,9 +1674,9 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.762, 0.035, 0.202],
-       [0.938, 0.039, 0.023],
-       [0.775, 0.033, 0.192]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.907, 0.033, 0.06 ],
+       [0.936, 0.013, 0.051],
+       [0.926, 0.018, 0.056]])
 </pre></div>
 </div>
 </div>
@@ -1747,14 +1741,14 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([0]),
- array([1, 2]),
- array([0, 1]),
+ array([2]),
+ array([1]),
  array([0, 2]),
  array([2]),
  array([0]),
  array([0]),
  array([1, 2]),
- array([1, 2]),
+ array([2]),
  array([0])]
 </pre></div>
 </div>
@@ -1775,7 +1769,7 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2])
 </pre></div>
 </div>
 </div>
@@ -1882,7 +1876,7 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/43536d0a06dcac5bab72f2f635befc04944abbecfbb696d92c735c8f2829f6f1.png" src="../_images/43536d0a06dcac5bab72f2f635befc04944abbecfbb696d92c735c8f2829f6f1.png" />
+<img alt="../_images/dfddf79ce8e981d663a553dfd677ff87f9e09a0809aaa86d1f0f6beafb399d73.png" src="../_images/dfddf79ce8e981d663a553dfd677ff87f9e09a0809aaa86d1f0f6beafb399d73.png" />
 </div>
 </div>
 <p>Now we can also create a set prediction for the wine credal set we obtained at the beginning. We visualize three credal sets for which we received different sized set predictions, in the same way as before:</p>
@@ -1896,10 +1890,10 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([0, 2]),
  array([0, 2]),
- array([1, 2]),
- array([0]),
+ array([0, 1, 2]),
+ array([0, 1, 2]),
  array([1]),
- array([0]),
+ array([0, 1, 2]),
  array([1, 2]),
  array([1, 2]),
  array([1]),
@@ -1916,7 +1910,7 @@ assigned to each class \)</span>y \in \set{Y}$, where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3b887e2ca76b6a1c4116a7903fb0adf85d7fd37acd9ab45b04bed5dc3bb067dd.png" src="../_images/3b887e2ca76b6a1c4116a7903fb0adf85d7fd37acd9ab45b04bed5dc3bb067dd.png" />
+<img alt="../_images/8055dbffafb4b37aab110f0663fa5073b3850dcd6569234a8f704f9d41444a97.png" src="../_images/8055dbffafb4b37aab110f0663fa5073b3850dcd6569234a8f704f9d41444a97.png" />
 </div>
 </div>
 <p>Interestingly, uncertainty degrees can be derived on the basis of dominance degrees (\ref{eq:dominance}). For example, the following uncertainty score has been proposed by \citet{antonucci2012} in the context of uncertainty sampling for active learning:</p>
@@ -1975,7 +1969,7 @@ s(\vec{x}_q) \defeq - \max \big(\gamma(+1, -1, \vec{x}_q ), \gamma(-1, +1, \vec{
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7d40d8249637133f4d59f65739dafb74bbf505a4754c2f279c3bf8355fd3a226.png" src="../_images/7d40d8249637133f4d59f65739dafb74bbf505a4754c2f279c3bf8355fd3a226.png" />
+<img alt="../_images/14edd35452b64fb7a07bd8480b610140cee778a47a8a396e9be03d1a772075d9.png" src="../_images/14edd35452b64fb7a07bd8480b610140cee778a47a8a396e9be03d1a772075d9.png" />
 </div>
 </div>
 </section>
