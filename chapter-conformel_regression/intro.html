@@ -202,7 +202,6 @@
 </ul>
 </li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Conformal prediction for regression</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">Set-valued prediction based on utility maximization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
@@ -448,17 +447,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Conformal prediction for regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">Split Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method-without-prefit">Split Method without Prefit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">Jackknife Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">Jackknife+ Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">CV+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -637,7 +632,7 @@ Noise was added to y drawn from a Gaussian distribution with <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" src="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" />
+<img alt="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" src="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" />
 </div>
 </div>
 <section id="split-method">
@@ -734,7 +729,7 @@ Through out the page we will use the <a class="reference external" href="https:/
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2789923161830963
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.278992316183096
 </pre></div>
 </div>
 </div>
@@ -910,7 +905,7 @@ Mean interval width:  2.557984632366192
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/87cdeffd32e37e3b01ddc7b6e28c544836bc97852cbfe2faa1bcb8288ec910eb.png" src="../_images/87cdeffd32e37e3b01ddc7b6e28c544836bc97852cbfe2faa1bcb8288ec910eb.png" />
+<img alt="../_images/22e3d42849d5f0ca1a37519c958b75843c62f458b83ed2cb65f52be5c723da23.png" src="../_images/22e3d42849d5f0ca1a37519c958b75843c62f458b83ed2cb65f52be5c723da23.png" />
 </div>
 </div>
 </section>
@@ -1066,7 +1061,7 @@ Mean interval width:  2.415146303777198
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ec303b512b83508c931472535a35699942caf3c05055e7c69ec8048a2cb7a397.png" src="../_images/ec303b512b83508c931472535a35699942caf3c05055e7c69ec8048a2cb7a397.png" />
+<img alt="../_images/38259cf2e2980ef8fd6ab4b632e1b5a701bb3f1e8ad23f28647d68b135a21fe1.png" src="../_images/38259cf2e2980ef8fd6ab4b632e1b5a701bb3f1e8ad23f28647d68b135a21fe1.png" />
 </div>
 </div>
 </section>
@@ -1164,7 +1159,7 @@ Mean interval width:  2.435070750699638
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/fac096212eb30752b86890ac213b3eb79564826b4b7cdbc4808f65d4286b40e9.png" src="../_images/fac096212eb30752b86890ac213b3eb79564826b4b7cdbc4808f65d4286b40e9.png" />
+<img alt="../_images/b302a31a261f08a4ece8596f6355f8cbc4b76585faed7e4ef40bdc1f567a01fa.png" src="../_images/b302a31a261f08a4ece8596f6355f8cbc4b76585faed7e4ef40bdc1f567a01fa.png" />
 </div>
 </div>
 <div align="justify">
@@ -1207,7 +1202,7 @@ It can again be expressed in five steps, only differing from Jackknife+ in the a
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-4.27810704  0.71431485]
  [-4.27810704  0.0219347 ]]
-Mean interval width:  2.660851433801548
+Mean interval width:  2.6608514338015476
 </pre></div>
 </div>
 </div>
@@ -1233,7 +1228,7 @@ Mean interval width:  2.660851433801548
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/8c179fdb04d9c31af104bdd6b6ef8df6ae0eba1e03bb1c626c444bf94a26dc5a.png" src="../_images/8c179fdb04d9c31af104bdd6b6ef8df6ae0eba1e03bb1c626c444bf94a26dc5a.png" />
+<img alt="../_images/2d27fb7c95c094ddddbeb8489fe6388db14dd78e0935e9917d7f03b1a9b29b16.png" src="../_images/2d27fb7c95c094ddddbeb8489fe6388db14dd78e0935e9917d7f03b1a9b29b16.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -1241,9 +1236,8 @@ Mean interval width:  2.660851433801548
 <p>A general advice when to use which method can be found <a class="reference external" href="https://mapie.readthedocs.io/en/latest/theoretical_description_regression.html">here</a>, alongside some more methods for heteroscedastic data or time series.</p>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="uncertainty-quantification-in-conformal-regression">
-<span id="content-uncertainty-quant"></span><h1>Uncertainty Quantification in Conformal Regression<a class="headerlink" href="#uncertainty-quantification-in-conformal-regression" title="Link to this heading">#</a></h1>
+<section id="uncertainty-quantification-in-conformal-regression">
+<span id="content-uncertainty-quant"></span><h2>Uncertainty Quantification in Conformal Regression<a class="headerlink" href="#uncertainty-quantification-in-conformal-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Quantifying the uncertainty of conformal regression outputs can intuitively be done by looking at the interval widths.</p>
 <ul class="simple">
@@ -1272,9 +1266,10 @@ Mean interval width:  2.660851433801548
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/401fddece0de4ccc1d041ad3ce9b5368074083ece1373a2b2dce799d7f4f5b16.png" src="../_images/401fddece0de4ccc1d041ad3ce9b5368074083ece1373a2b2dce799d7f4f5b16.png" />
+<img alt="../_images/499256ef2420ad8c5ba6526cd4ccf9c2462338bcd7693089ed16e0e51bd244b6.png" src="../_images/499256ef2420ad8c5ba6526cd4ccf9c2462338bcd7693089ed16e0e51bd244b6.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1341,17 +1336,13 @@ Mean interval width:  2.660851433801548
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Conformal prediction for regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">Split Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method-without-prefit">Split Method without Prefit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">Jackknife Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">Jackknife+ Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">CV+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>
