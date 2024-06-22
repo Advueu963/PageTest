@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-calibration/calibration';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -446,7 +448,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-hyperplane-in-support-vector-machines">Separating Hyperplane in Support Vector Machines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#platt-scaling">Platt scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binning">binning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">Isotonic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-scaling">logistic scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improvements-thereof">improvements thereof</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venn-predictors">Venn predictors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier Calibration</a></li>
@@ -485,7 +492,7 @@ but which do not immediately qualify as probabilities either.
 The idea of <em>scaling</em> or <em>calibration methods</em> is to turn such scores into proper,
 well-calibrated probabilities, that is,
 to learn a mapping from scores to the unit interval that can be applied to the output of a predictor as a kind of post-processing step (<span id="id1">Flach [<a class="reference internal" href="../references.html#id2186" title="P.A. Flach. Classifier calibration. In Encyclopedia of Machine Learning and Data Mining, pages 210–217. Springer, 2017.">Fla17</a>]</span>).
-Examples of such methods include binning (<span id="id2">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">ZE01</a>]</span>),
+Examples of such methods include binning (<span id="id2">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">ZE01a</a>]</span>),
 isotonic regression (<span id="id3">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">ZE02</a>]</span>),
 logistic scaling (<span id="id4">Platt [<a class="reference internal" href="../references.html#id212" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">Pla99</a>]</span>)
 and improvements thereof (<span id="id5">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>),
@@ -510,7 +517,7 @@ Calibration is still a topic of ongoing research.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/fd0d4fccaba18e451f9e9a0f6de84be321b26971897965a546de92acbb39cf6c.png" src="../_images/fd0d4fccaba18e451f9e9a0f6de84be321b26971897965a546de92acbb39cf6c.png" />
+<img alt="../_images/29e4c935b7a1e22a1e855eb7c1afc5e9f87506ebf9176f46606acf56a2e83168.png" src="../_images/29e4c935b7a1e22a1e855eb7c1afc5e9f87506ebf9176f46606acf56a2e83168.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -528,24 +535,108 @@ Calibration is still a topic of ongoing research.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e48e9b2b4d1185a325f0b5ca140c5f6fb67847b5eee928b37556820d94347c51.png" src="../_images/e48e9b2b4d1185a325f0b5ca140c5f6fb67847b5eee928b37556820d94347c51.png" />
+<img alt="../_images/a1f0a6234e36132a93000fb760e90222638793d55b4dddbfcb0afb273611b915.png" src="../_images/a1f0a6234e36132a93000fb760e90222638793d55b4dddbfcb0afb273611b915.png" />
 </div>
 </div>
+<section id="platt-scaling">
+<h3>Platt scaling<a class="headerlink" href="#platt-scaling" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>Introduced by <span id="id7">Platt and others [<a class="reference internal" href="../references.html#id2282" title="John Platt and others. Probabilistic outputs for support vector machines and comparisons to regularized likelihood methods. Advances in large margin classifiers, 10(3):61–74, 1999.">P+99</a>]</span>, Platt scaling was originally a method for calibrating support vector machines.
+It works by finding the parameters of a sigmoid function maximizing the likelihood of the training set.</p>
+</div>
+</section>
+<section id="binning">
+<h3>binning<a class="headerlink" href="#binning" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>Binning assigns the same probability estimate to all examples in each bin,
+the ranking of examples inside bins is lost.
+The number of different probability estimates that binning can yield is limited by the number of alternative bins.</p>
+<p>Binning reduces the resolution, i.e. the degree of detail,
+of conditional probability estimates,
+while improving the accuracy of these estimates by reducing both variance and bias compared to uncalibrated estimates.</p>
+<p>If the shape of the mapping function is unknown, we can resort to a non-parametric method such as binning.
+In binning, the training examples are sorted according to their scores and the sorted set is divided into <span class="math notranslate nohighlight">\(b\)</span> subsets of equal size, called bins.</p>
+<p>For each bin, we compute lower and upper boundary <span class="math notranslate nohighlight">\(s(\cdot)\)</span> scores.
+Given a test example <span class="math notranslate nohighlight">\(x\)</span>, we place it in a bin according to its score <span class="math notranslate nohighlight">\(s(x)\)</span>.
+We then estimate the corrected probability that <span class="math notranslate nohighlight">\(x\)</span> belongs to class <span class="math notranslate nohighlight">\(c\)</span> as the fraction of training examples in the bin that actually belong to <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p>(<span id="id8">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">ZE01a</a>], Zadrozny and Elkan [<a class="reference internal" href="../references.html#id2278" title="Bianca Zadrozny and Charles Elkan. Learning and making decisions when costs and probabilities are both unknown. In Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining, 204–213. 2001.">ZE01b</a>]</span>)</p>
+</div></section>
 <section id="isotonic-regression">
 <h3>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>A difficulty of the binning method is that we have to choose the number of bins by cross-validation.
+If the dataset is small, or highly unbalanced, cross-validation is not likely to indicate the optimal number of bins.
+Also, the size of the bins is fixed and the position of the boundaries is chosen arbitrarily.
+If the boundaries are such that we average together the labels of examples that clearly should have different probability estimates,
+the binning method will fail to produce accurate probability estimates.</p>
+<p>Isotonic regression,
+an intermediary approach between sigmoid fitting and binning,
+is a non-parametric form of regression in which we assume that the function is chosen from the class of all isotonic (i.e. non-decreasing) functions.</p>
+<p>If we assume that the classifier ranks examples correctly,
+the mapping from scores into probabilities is non-decreasing,
+and we can use isotonic regression to learn this mapping.
+A commonly used algorithm for computing the isotonic regression is pair-adjacent violators (PAV) (<span id="id9">Ayer <em>et al.</em> [<a class="reference internal" href="../references.html#id2277" title="Miriam Ayer, H Daniel Brunk, George M Ewing, William T Reid, and Edward Silverman. An empirical distribution function for sampling with incomplete information. The annals of mathematical statistics, pages 641–647, 1955.">ABE+55</a>]</span>).
+This algorithm finds the stepwise-constant isotonic function that best fits the data according to a mean-squared error criterion.</p>
+<p>(<span id="id10">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">ZE02</a>]</span>)</p>
+</div>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/isotonic.html">https://scikit-learn.org/stable/modules/isotonic.html</a></p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_isotonic_regression.html#sphx-glr-auto-examples-miscellaneous-plot-isotonic-regression-py">https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_isotonic_regression.html#sphx-glr-auto-examples-miscellaneous-plot-isotonic-regression-py</a></p>
 </section>
+<section id="logistic-scaling">
+<h3>logistic scaling<a class="headerlink" href="#logistic-scaling" title="Link to this heading">#</a></h3>
+</section>
+<section id="improvements-thereof">
+<h3>improvements thereof<a class="headerlink" href="#improvements-thereof" title="Link to this heading">#</a></h3>
+</section>
+<section id="venn-predictors">
+<h3>Venn predictors<a class="headerlink" href="#venn-predictors" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>Introduced by <span id="id11">Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id2280" title="Vladimir Vovk, Glenn Shafer, and Ilia Nouretdinov. Self-calibrating probability forecasting. Advances in neural information processing systems, 2003.">VSN03</a>]</span>,
+Venn predictors are multi-probabilistic predictors with proven validity properties.
+The impossibility result described earlier for probabilistic prediction is circumvented in two ways:
+(i) multiple probabilities for each label are outputted, with one of them being the valid one;
+(ii) the statistical tests for validity are restricted to calibration.
+More specifically, the probabilities must be matched by observed frequencies.
+As an example, if we make a number of probabilistic predictions with the probability estimate 0.9 these predictions should be correct in about 90% of the cases.</p>
+</div><div align="justify">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Venn predictors are related to the more well-known Conformal Prediction (CP) framework,
+which was introduced as an approach for associating predictions with confidence measures (<span id="id12">Saunders <em>et al.</em> [<a class="reference internal" href="../references.html#id2281">SGV99</a>]</span>).</p>
+</div>
+</div></section>
 </section>
 <section id="classifier-calibration">
 <h2>Classifier Calibration<a class="headerlink" href="#classifier-calibration" title="Link to this heading">#</a></h2>
-<div class="admonition note">
+<div align="justify">
+<p>The aim of calibration in binary classification is to take an uncalibrated scoring classifier <span class="math notranslate nohighlight">\(s=f(x)\)</span> and apply a calibration map <span class="math notranslate nohighlight">\(\mu\)</span> on top of it to produce calibrated probabilities <span class="math notranslate nohighlight">\(\mu(f(x))\)</span>.
+Formally, a scoring classifier is perfectly calibrated on a dataset if for each of its output scores <span class="math notranslate nohighlight">\(s\)</span> the proportion of positives within instances with model output score <span class="math notranslate nohighlight">\(s\)</span> is equal to <span class="math notranslate nohighlight">\(s\)</span>.
+Denoting the instances in the dataset by <span class="math notranslate nohighlight">\(\vec{x}_1, \cdots, \vec{x}_n\)</span> and their binary labels by <span class="math notranslate nohighlight">\(y_1, \cdot, y_n\)</span>,
+a model <span class="math notranslate nohighlight">\(f\)</span> is calibrated on this dataset if for each of its possible outputs <span class="math notranslate nohighlight">\(s_i = f(x_i)\)</span> the following holds:</p>
+<div class="math notranslate nohighlight">
+\[
+s_i = \mathbb{E}[Y\vert f(X)=s_i],
+\]</div>
+<p>where the random variables <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span> denote respectively the features and label of a uniformly randomly drawn instance from the dataset,
+where the labels <span class="math notranslate nohighlight">\(Y = 1\)</span> and <span class="math notranslate nohighlight">\(Y = 0\)</span> stand for a positive and negative, respectively.
+This expectation can be rewritten as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[Y\vert f(X)=s_i] = \frac{\sum_{j=1}^n y_j \cdot I[f(x_j)=s_i]}{\sum_{j=1}^n I[f(x_j)=s_i]},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(I[\cdot]\)</span> is the indicator function.
+For any fixed model <span class="math notranslate nohighlight">\(f\)</span> there exists a uniquely determined calibration map which produces perfectly calibrated probabilities on the given dataset.
+That calibration map can be defined as <span class="math notranslate nohighlight">\(\mu(s_i) = \mathbb{E}[Y\vert f(X)=s_i]\)</span>.
+However, usually we do not want to learn perfect calibration maps on the training data,
+because these would overfit and would be far from being calibrated on the test data.</p>
+<p>(<span id="id13">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>)</p>
+</div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>A lower Brier loss, for instance, does not necessarily mean a better calibrated model, it could also mean a worse calibrated model with much more discriminatory power, e.g. using many more features.</p>
 </div>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/calibration.html">https://scikit-learn.org/stable/modules/calibration.html</a></p>
 <p><a class="reference external" href="https://arxiv.org/pdf/2112.10327">https://arxiv.org/pdf/2112.10327</a></p>
-<p>(<span id="id7">Silva Filho <em>et al.</em> [<a class="reference internal" href="../references.html#id2275" title="Telmo Silva Filho, Hao Song, Miquel Perello-Nieto, Raul Santos-Rodriguez, Meelis Kull, and Peter Flach. Classifier calibration: a survey on how to assess and improve predicted class probabilities. Machine Learning, 112(9):3211–3260, 2023.">SFSPN+23</a>]</span>)</p>
+<p>(<span id="id14">Silva Filho <em>et al.</em> [<a class="reference internal" href="../references.html#id2275" title="Telmo Silva Filho, Hao Song, Miquel Perello-Nieto, Raul Santos-Rodriguez, Meelis Kull, and Peter Flach. Classifier calibration: a survey on how to assess and improve predicted class probabilities. Machine Learning, 112(9):3211–3260, 2023.">SFSPN+23</a>]</span>)</p>
 </section>
 <section id="regressor-calibration">
 <h2>Regressor Calibration<a class="headerlink" href="#regressor-calibration" title="Link to this heading">#</a></h2>
@@ -617,7 +708,12 @@ Calibration is still a topic of ongoing research.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-hyperplane-in-support-vector-machines">Separating Hyperplane in Support Vector Machines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#platt-scaling">Platt scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binning">binning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">Isotonic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-scaling">logistic scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improvements-thereof">improvements thereof</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venn-predictors">Venn predictors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier Calibration</a></li>

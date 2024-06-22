@@ -507,9 +507,12 @@ as well as various techniques in the realm of <a class="reference internal" href
 </div><section id="example-probabilistic-predictor-with-logistic-regression">
 <h2>1. Example: Probabilistic Predictor with Logistic Regression<a class="headerlink" href="#example-probabilistic-predictor-with-logistic-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
-<p>Let us first take a look at an example in the classification task.
+<p>Since there is no standard metric for comparing the accuracy of probability estimates,
+we use three different metrics to compare the probability estimates given by each example. <br />
+Let us first take a look at an example in the classification task.
 Logistic regression is a widely used supervised machine learning method for binary classification that provides probabilistic outputs.
-Below is an example using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Let us first make a synthetic binary classification dataset.
+Below is an example using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.
+We make a synthetic binary classification dataset.
 Since the dataset has 20 features,
 it can be challenging to visualize all features at once. Instead, we use the first two features for a simple scatter plot.</p>
 </div><div class="cell docutils container">
@@ -531,7 +534,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12c7cd3c0878b355cae7b5bbdb631668f70e8a6d7608b0aa005067009d68595f.png" src="../_images/12c7cd3c0878b355cae7b5bbdb631668f70e8a6d7608b0aa005067009d68595f.png" />
+<img alt="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" src="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" />
 </div>
 </div>
 <div align="justify">
@@ -562,7 +565,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b7385dcd66a8076c3c9b09f24183302f5022d380e4892e4fe9c0371ff15aa332.png" src="../_images/b7385dcd66a8076c3c9b09f24183302f5022d380e4892e4fe9c0371ff15aa332.png" />
+<img alt="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" src="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" />
 </div>
 </div>
 <div align="justify">
@@ -586,7 +589,8 @@ In these mathematical formulas,
 </div><section id="brier-score">
 <h3>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>The Brier Score (Quadratic Score) is a strictly proper scoring rule which measures the accuracy of probabilistic predictions,</p>
+<p>The Brier Score (<span id="id3">Brier [<a class="reference internal" href="../references.html#id2279" title="Glenn W Brier. Verification of forecasts expressed in terms of probability. Monthly weather review, 78(1):1–3, 1950.">Bri50</a>]</span>)
+(Quadratic Score) is a strictly proper scoring rule which measures the accuracy of probabilistic predictions,</p>
 <div class="math notranslate nohighlight">
 \[
 S_{\text{Brier}}= \frac{1}{N} \sum_{i=1}^N (p_i-y_i)^2.
@@ -712,7 +716,7 @@ In statistics, linear regression is a statistical model used for predicting a co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1eed006705cd676c32343dfdf6a9050bccd0086e4b7f72ff63f4ae84c0b9ce29.png" src="../_images/1eed006705cd676c32343dfdf6a9050bccd0086e4b7f72ff63f4ae84c0b9ce29.png" />
+<img alt="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" src="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" />
 </div>
 </div>
 <div align="justify">
@@ -736,13 +740,13 @@ In statistics, linear regression is a statistical model used for predicting a co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/24c64816d1ceab8bb07348db175e36f6c1c5c035ba30703feeaa81c2fda4fb21.png" src="../_images/24c64816d1ceab8bb07348db175e36f6c1c5c035ba30703feeaa81c2fda4fb21.png" />
+<img alt="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" src="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" />
 </div>
 </div>
 <section id="continuous-ranked-probability-score">
 <h3>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>The Continuous Ranked Probability Score (CRPS) applies to probabilistic forecasts that take the form of predictive cumulative distribution functions. It generalizes the absolute error and forms a special case of a new and very general type of score, the energy score. Like many other scoring rules, the energy score admits a kernel representation in terms of negative definite functions, with links to inequalities of Hoeffding type, in both univariate and multivariate settings (<span id="id3">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>).</p>
+<p>The Continuous Ranked Probability Score (CRPS) applies to probabilistic forecasts that take the form of predictive cumulative distribution functions. It generalizes the absolute error and forms a special case of a new and very general type of score, the energy score. Like many other scoring rules, the energy score admits a kernel representation in terms of negative definite functions, with links to inequalities of Hoeffding type, in both univariate and multivariate settings (<span id="id4">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>).</p>
 <p>The CRPS is defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -789,13 +793,19 @@ the CRPS can be computed using a closed-form solution:</p>
 \[
 \text{MSE} = \frac{1}{N} \sum_{i=1}^N (\hat{y_i}-y_i)^2.
 \]</div>
-</div><div class="cell docutils container">
+</div><div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_mse</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div align="justify">
 <div class="admonition note">
@@ -853,8 +863,8 @@ R^2 Score: 0.7647
 <div align="justify">
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We here calculate the Mean Squared Error (MSE), <span class="math notranslate nohighlight">\(R^2\)</span>, and Continuous Ranked Probability Score (CRPS) for this regression problem because Brier Score and Logarithmic Score are typically used for probabilistic classification models. \ 
-Thus, forecast evaluators should routinely consider choosing scoring rules from these families that are tailored to the domain, as opposed to relying on popular, default scoring rules (<span id="id4">Merkle and Steyvers [<a class="reference internal" href="../references.html#id2276" title="Edgar C Merkle and Mark Steyvers. Choosing a strictly proper scoring rule. Decision Analysis, 10(4):292–304, 2013.">MS13</a>]</span>).</p>
+<p>We here calculate the Mean Squared Error (MSE), <span class="math notranslate nohighlight">\(R^2\)</span>, and Continuous Ranked Probability Score (CRPS) for this regression problem because Brier Score and Logarithmic Score are typically used for probabilistic classification models.
+Thus, forecast evaluators should routinely consider choosing scoring rules from these families that are tailored to the domain, as opposed to relying on popular, default scoring rules (<span id="id5">Merkle and Steyvers [<a class="reference internal" href="../references.html#id2276" title="Edgar C Merkle and Mark Steyvers. Choosing a strictly proper scoring rule. Decision Analysis, 10(4):292–304, 2013.">MS13</a>]</span>).</p>
 </div>
 </div></section>
 </section>
