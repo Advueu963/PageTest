@@ -602,7 +602,7 @@ As an example, if we make a number of probabilistic predictions with the probabi
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Venn predictors are related to the more well-known Conformal Prediction (CP) framework,
-which was introduced as an approach for associating predictions with confidence measures (<span id="id12">Saunders <em>et al.</em> [<a class="reference internal" href="../references.html#id2281">SGV99</a>]</span>).</p>
+which was introduced as an approach for associating predictions with confidence measures (<span id="id12">Saunders <em>et al.</em> [<a class="reference internal" href="../references.html#id2281" title="Craig Saunders, Alex Gammerman, and Volodya Vovk. Transduction with confidence and credibility. In Thomas Dean, editor, Proceedings of the Sixteenth International Joint Conference on Artificial Intelligence, IJCAI 99, Stockholm, Sweden, July 31 - August 6, 1999. 2 Volumes, 1450 pages, 722–726. Morgan Kaufmann, 1999. URL: http://ijcai.org/Proceedings/99-2/Papers/010.pdf.">SGV99</a>]</span>).</p>
 </div>
 </div></section>
 </section>
@@ -611,7 +611,7 @@ which was introduced as an approach for associating predictions with confidence 
 <div align="justify">
 <p>The aim of calibration in binary classification is to take an uncalibrated scoring classifier <span class="math notranslate nohighlight">\(s=f(x)\)</span> and apply a calibration map <span class="math notranslate nohighlight">\(\mu\)</span> on top of it to produce calibrated probabilities <span class="math notranslate nohighlight">\(\mu(f(x))\)</span>.
 Formally, a scoring classifier is perfectly calibrated on a dataset if for each of its output scores <span class="math notranslate nohighlight">\(s\)</span> the proportion of positives within instances with model output score <span class="math notranslate nohighlight">\(s\)</span> is equal to <span class="math notranslate nohighlight">\(s\)</span>.
-Denoting the instances in the dataset by <span class="math notranslate nohighlight">\(\vec{x}_1, \cdots, \vec{x}_n\)</span> and their binary labels by <span class="math notranslate nohighlight">\(y_1, \cdot, y_n\)</span>,
+Denoting the instances in the dataset by <span class="math notranslate nohighlight">\(\vec{x}_1, \cdots, \vec{x}_n\)</span> and their binary labels by <span class="math notranslate nohighlight">\(y_1, \cdots, y_n\)</span>,
 a model <span class="math notranslate nohighlight">\(f\)</span> is calibrated on this dataset if for each of its possible outputs <span class="math notranslate nohighlight">\(s_i = f(x_i)\)</span> the following holds:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -630,9 +630,13 @@ That calibration map can be defined as <span class="math notranslate nohighlight
 However, usually we do not want to learn perfect calibration maps on the training data,
 because these would overfit and would be far from being calibrated on the test data.</p>
 <p>(<span id="id13">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>)</p>
-</div><div class="admonition note">
+</div><div align="justify">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A lower Brier loss, for instance, does not necessarily mean a better calibrated model, it could also mean a worse calibrated model with much more discriminatory power, e.g. using many more features.</p>
+<p>A lower Brier loss, for instance, does not necessarily mean a better calibrated model,
+it could also mean a worse calibrated model with much more discriminatory power,
+e.g., using many more features.</p>
+</div>
 </div>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/calibration.html">https://scikit-learn.org/stable/modules/calibration.html</a></p>
 <p><a class="reference external" href="https://arxiv.org/pdf/2112.10327">https://arxiv.org/pdf/2112.10327</a></p>
