@@ -451,6 +451,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">Logarithmic Score</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">Log Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-the-receiver-operating-characteristic-curve">Area Under the Receiver Operating Characteristic Curve</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a><ul class="nav section-nav flex-column">
@@ -481,8 +482,9 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LinearRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">brier_score_loss</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">brier_score_loss</span><span class="p">,</span> <span class="n">roc_auc_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">check_random_state</span>
 </pre></div>
 </div>
 </div>
@@ -525,7 +527,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Synthetic Binary Classification Dataset&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Synthetic binary classification dataset&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -534,7 +536,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" src="../_images/ee817ba6f9da8ce484feff9305956eeb6a7bfbf1e831485c2d45c9ab82aa5853.png" />
+<img alt="../_images/7c928e17b35551ab94981d2cdafe43beb6a8928bd9c03cbc5f0fd1d807905a30.png" src="../_images/7c928e17b35551ab94981d2cdafe43beb6a8928bd9c03cbc5f0fd1d807905a30.png" />
 </div>
 </div>
 <div align="justify">
@@ -556,7 +558,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Decision Boundary (First Two Features)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Decision boundary (first two features)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -565,20 +567,20 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" src="../_images/85fd6ce1929465a3530a80023f68aa4f191c4c5e38b42c350225e5cb50a8441d.png" />
+<img alt="../_images/131f0c3e409a24f5594a89f42f65198286914def2be557acaa739463c62e8aba.png" src="../_images/131f0c3e409a24f5594a89f42f65198286914def2be557acaa739463c62e8aba.png" />
 </div>
 </div>
 <div align="justify">
 <p>Training probabilistic predictors is typically accomplished by minimizing suitable loss functions,
 i.e., loss functions that enforce “correct” (conditional) probabilities as predictions.
-In this regard, <code class="docutils literal notranslate"><span class="pre">proper</span> <span class="pre">scoring</span> <span class="pre">rules</span></code> (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>)
+In this regard, <code class="docutils literal notranslate"><span class="pre">proper</span> <span class="pre">scoring</span> <span class="pre">rules</span></code> (<span id="id1">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2201" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>)
 play an important role,
 including the <code class="docutils literal notranslate"><span class="pre">log-loss</span></code> as a well-known special case.
 Sometimes, however, estimates are also obtained in a very simple way,
 following basic frequentist techniques for probability estimation,
 like in Naïve Bayes or nearest neighbor classification.</p>
 </div><div align="justify">
-<p>Scoring rules assess the quality of probabilistic forecasts, by assigning a numerical score based on the predictive distribution and on the event or value that materializes. A scoring rule is proper if the forecaster maximizes the expected score for an observation drawn from the distribution <span class="math notranslate nohighlight">\(F\)</span> if he or she issues the probabilistic forecast <span class="math notranslate nohighlight">\(F\)</span>, rather than <span class="math notranslate nohighlight">\(G \neq F\)</span>. It is strictly proper if the maximum is unique. In prediction problems, proper scoring rules encourage the forecaster to make careful assessments and to be honest. In estimation problems, strictly proper scoring rules provide attractive loss and utility functions that can be tailored to the problem at hand (<span id="id2">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>).</p>
+<p>Scoring rules assess the quality of probabilistic forecasts, by assigning a numerical score based on the predictive distribution and on the event or value that materializes. A scoring rule is proper if the forecaster maximizes the expected score for an observation drawn from the distribution <span class="math notranslate nohighlight">\(F\)</span> if he or she issues the probabilistic forecast <span class="math notranslate nohighlight">\(F\)</span>, rather than <span class="math notranslate nohighlight">\(G \neq F\)</span>. It is strictly proper if the maximum is unique. In prediction problems, proper scoring rules encourage the forecaster to make careful assessments and to be honest. In estimation problems, strictly proper scoring rules provide attractive loss and utility functions that can be tailored to the problem at hand (<span id="id2">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2201" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>).</p>
 </div><div align="justify">
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
@@ -589,7 +591,7 @@ In these mathematical formulas,
 </div><section id="brier-score">
 <h3>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>The Brier Score (<span id="id3">Brier [<a class="reference internal" href="../references.html#id2279" title="Glenn W Brier. Verification of forecasts expressed in terms of probability. Monthly weather review, 78(1):1–3, 1950.">Bri50</a>]</span>)
+<p>The Brier Score (<span id="id3">Brier [<a class="reference internal" href="../references.html#id2278" title="Glenn W Brier. Verification of forecasts expressed in terms of probability. Monthly weather review, 78(1):1–3, 1950.">Bri50</a>]</span>)
 (Quadratic Score) is a strictly proper scoring rule which measures the accuracy of probabilistic predictions,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -664,6 +666,15 @@ L = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(p_i) + (1-y_i) \log(1-p_i) \right).
 <p class="admonition-title">Hint</p>
 <p>The Log Loss, Logarithmic Loss, Logistic Loss, and Cross-entropy Loss are used interchangeably.</p>
 </div>
+</div></section>
+<section id="area-under-the-receiver-operating-characteristic-curve">
+<h3>Area Under the Receiver Operating Characteristic Curve<a class="headerlink" href="#area-under-the-receiver-operating-characteristic-curve" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>The area under the curve (AUC) is widely used to measure the accuracy of diagnostic tests.
+The receiver operating characteristic (ROC) curve aims to classify the state as either positive or negative based on test results and to find the optimal cut-off value with the best diagnostic performance.
+The ROC curve is also used to evaluate the overall diagnostic performance of a test and to compare the performance of two or more tests.
+The closer the ROC curve is to the upper left corner of the graph, the higher the accuracy of the test because in the upper left corner,
+and vice versa (<span id="id4">Nahm [<a class="reference internal" href="../references.html#id2282" title="Francis Sahngun Nahm. Receiver operating characteristic curve: overview and practical use for clinicians. Korean journal of anesthesiology, 75(1):25, 2022.">Nah22</a>]</span>) .</p>
 </div><div align="justify">
 <p>Now we leverage these score (loss) function to see the performance of the logistic regression.
 For simplicity, we directly show the performance using metric functions imported from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> if there already exists the implementation.</p>
@@ -676,11 +687,13 @@ For simplicity, we directly show the performance using metric functions imported
 <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 <span class="n">brier_score</span> <span class="o">=</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">)</span>
 <span class="n">log_score</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_pred</span><span class="p">[</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">aucroc_score</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_pred</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Log Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Brier Score: </span><span class="si">{</span><span class="n">brier_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logarithmic Score: </span><span class="si">{</span><span class="n">log_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUCROC Score: </span><span class="si">{</span><span class="n">aucroc_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -689,6 +702,7 @@ For simplicity, we directly show the performance using metric functions imported
 Accuracy: 0.6850
 Brier Score: 0.2039
 Logarithmic Score: 0.6852
+AUCROC Score: 0.7533
 </pre></div>
 </div>
 </div>
@@ -702,21 +716,22 @@ Logarithmic Score: 0.6852
 In statistics, linear regression is a statistical model used for predicting a continuous target variable. Let us also plot a synthetic regression dataset first.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">rs</span> <span class="o">=</span> <span class="n">check_random_state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,))</span> <span class="o">+</span> <span class="mf">50.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Synthetic Regression Dataset&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Synthetic regression dataset&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" src="../_images/751c14757b1a6c0540845c19d99055a1eb5d0946ea604251a4b2a6678c340834.png" />
+<img alt="../_images/77bc615b0d30012d7e94a63397cb7586e204027c4df9781c3f7b823e48013e57.png" src="../_images/77bc615b0d30012d7e94a63397cb7586e204027c4df9781c3f7b823e48013e57.png" />
 </div>
 </div>
 <div align="justify">
@@ -724,29 +739,29 @@ In statistics, linear regression is a statistical model used for predicting a co
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Regressor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Linear Regressor&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Linear Regression on the Synthetic Dataset&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Linear regression fit on the synthetic dataset&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" src="../_images/c0b77e90dfaec4fd0ef6c7e61e09a27a4da14393eb913b6defe66c9e74614161.png" />
+<img alt="../_images/e874fd4cc623e8c23ef763442e3820a862261e42c542bc81da281f461f787c08.png" src="../_images/e874fd4cc623e8c23ef763442e3820a862261e42c542bc81da281f461f787c08.png" />
 </div>
 </div>
 <section id="continuous-ranked-probability-score">
 <h3>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>The Continuous Ranked Probability Score (CRPS) applies to probabilistic forecasts that take the form of predictive cumulative distribution functions. It generalizes the absolute error and forms a special case of a new and very general type of score, the energy score. Like many other scoring rules, the energy score admits a kernel representation in terms of negative definite functions, with links to inequalities of Hoeffding type, in both univariate and multivariate settings (<span id="id4">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>).</p>
+<p>The Continuous Ranked Probability Score (CRPS) applies to probabilistic forecasts that take the form of predictive cumulative distribution functions. It generalizes the absolute error and forms a special case of a new and very general type of score, the energy score. Like many other scoring rules, the energy score admits a kernel representation in terms of negative definite functions, with links to inequalities of Hoeffding type, in both univariate and multivariate settings (<span id="id5">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2201" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">GR07</a>]</span>).</p>
 <p>The CRPS is defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -853,9 +868,9 @@ For simplicity, we directly show the performance using metric functions imported
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Continuous Ranked Probability Score: 0.7551
-Mean Squared Error: 0.9338
-R^2 Score: 0.7647
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Continuous Ranked Probability Score: 27.2093
+Mean Squared Error: 1194.3476
+R^2 Score: 0.5921
 </pre></div>
 </div>
 </div>
@@ -864,7 +879,7 @@ R^2 Score: 0.7647
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We here calculate the Mean Squared Error (MSE), <span class="math notranslate nohighlight">\(R^2\)</span>, and Continuous Ranked Probability Score (CRPS) for this regression problem because Brier Score and Logarithmic Score are typically used for probabilistic classification models.
-Thus, forecast evaluators should routinely consider choosing scoring rules from these families that are tailored to the domain, as opposed to relying on popular, default scoring rules (<span id="id5">Merkle and Steyvers [<a class="reference internal" href="../references.html#id2276" title="Edgar C Merkle and Mark Steyvers. Choosing a strictly proper scoring rule. Decision Analysis, 10(4):292–304, 2013.">MS13</a>]</span>).</p>
+Thus, forecast evaluators should routinely consider choosing scoring rules from these families that are tailored to the domain, as opposed to relying on popular, default scoring rules (<span id="id6">Merkle and Steyvers [<a class="reference internal" href="../references.html#id2275" title="Edgar C Merkle and Mark Steyvers. Choosing a strictly proper scoring rule. Decision Analysis, 10(4):292–304, 2013.">MS13</a>]</span>).</p>
 </div>
 </div></section>
 </section>
@@ -938,6 +953,7 @@ Thus, forecast evaluators should routinely consider choosing scoring rules from 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">Logarithmic Score</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">Log Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-the-receiver-operating-characteristic-curve">Area Under the Receiver Operating Characteristic Curve</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a><ul class="nav section-nav flex-column">
