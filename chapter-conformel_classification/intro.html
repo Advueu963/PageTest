@@ -477,7 +477,7 @@ document.write(`
 <p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1895" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">2014</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1896" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">2008</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1985" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">2003</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
 Given a sequence of training observations and a new query <span class="math notranslate nohighlight">\(\vec{x}_{N+1}\)</span> (which we denoted by <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> before and in the following plot is marked red) with unknown outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-cpseq">
-<span class="eqno">(16)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
 (\vec{x}_1, y_1), \,  (\vec{x}_2, y_2), \ldots ,  (\vec{x}_N, y_N), \, (\vec{x}_{N+1}, \bullet)
 \enspace ,
 \]</div>
@@ -550,7 +550,7 @@ Given a sequence of training observations and a new query <span class="math notr
 f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(d_i^+\)</span> is the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled y, and <span class="math notranslate nohighlight">\(d_i^-\)</span> the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled differently.
-Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(16)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 1), yields a sequence of scores</p>
+Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(23)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 1), yields a sequence of scores</p>
 <div class="math notranslate nohighlight">
 \[
 \alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1} \enspace .
@@ -688,7 +688,7 @@ Applying this function to the sequence <a class="reference internal" href="#equa
 <div align="justify">
 <p>Denote by <span class="math notranslate nohighlight">\(\sigma\)</span> the permutation of <span class="math notranslate nohighlight">\(\{1, \ldots , N+1\}\)</span> that sorts the scores in increasing order, i.e., such that <span class="math notranslate nohighlight">\(\alpha_{\sigma(1)} \leq \ldots \leq \alpha_{\sigma(N+1)}\)</span>. Under the assumption that the hypothetical choice of <span class="math notranslate nohighlight">\(y_{N+1}\)</span> is in agreement with the true data-generating process, and that this process has the property of exchangeability<a class="footnote-reference brackets" href="#exchangeability" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> (which is weaker than the assumption of independence and essentially means that the order of observations is irrelevant), every permutation <span class="math notranslate nohighlight">\(\sigma\)</span> has the same probability of occurrence. Consequently, the probability that <span class="math notranslate nohighlight">\(\alpha_{N+1}\)</span> is among the <span class="math notranslate nohighlight">\(\epsilon\)</span>,% highest nonconformity scores should be low. This notion can be captured by the <span class="math notranslate nohighlight">\(p\)</span>-values associated with the candidate <span class="math notranslate nohighlight">\(y\)</span>, defined as</p>
 <div class="math notranslate nohighlight" id="equation-probability-y-highestnonconformity">
-<span class="eqno">(17)<a class="headerlink" href="#equation-probability-y-highestnonconformity" title="Link to this equation">#</a></span>\[
+<span class="eqno">(24)<a class="headerlink" href="#equation-probability-y-highestnonconformity" title="Link to this equation">#</a></span>\[
 p(y)   := \frac{\# \{ i \given \alpha_i \geq \alpha_{N+1} \}}{N+1}
 \]</div>
 </div><div class="cell docutils container">
@@ -827,7 +827,7 @@ Here we want to illustrate therefore we choose <code class="docutils literal not
 </div>
 </div>
 <div align="justify">
-<p>Now given a <span class="math notranslate nohighlight">\(\epsilon\)</span> one can define based on the above distribution an threshold <span class="math notranslate nohighlight">\(q\)</span> such that all candidates <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span> can be rejected if <span class="math notranslate nohighlight">\(f(x_{N+1},y_{N+1}) \geq q\)</span>. The value of <span class="math notranslate nohighlight">\(q\)</span> is chosen such that <a class="reference internal" href="#equation-probability-y-highestnonconformity">(17)</a> holds. The resulting prediction set is as follows:</p>
+<p>Now given a <span class="math notranslate nohighlight">\(\epsilon\)</span> one can define based on the above distribution an threshold <span class="math notranslate nohighlight">\(q\)</span> such that all candidates <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span> can be rejected if <span class="math notranslate nohighlight">\(f(x_{N+1},y_{N+1}) \geq q\)</span>. The value of <span class="math notranslate nohighlight">\(q\)</span> is chosen such that <a class="reference internal" href="#equation-probability-y-highestnonconformity">(24)</a> holds. The resulting prediction set is as follows:</p>
 <div class="math notranslate nohighlight">
 \[
     Y^\epsilon = \{
