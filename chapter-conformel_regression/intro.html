@@ -616,7 +616,12 @@ Barebone implementations of all presented methods can be found here: <a class="r
 We apply these methods to synthetic data, with features X being drawn from a Gaussian distribution with parameters <span class="math notranslate nohighlight">\(\mu = \)</span> <span class="output text_plain">0</span>, <span class="math notranslate nohighlight">\(\sigma=\)</span> <span class="output text_plain">2</span>.
 The relationship between the X values and target y is described by the function <span class="math notranslate nohighlight">\(x \mapsto x\sin(x)^2\)</span>.
 Noise was added to y drawn from a Gaussian distribution with <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=\)</span><span class="output text_plain">0.5</span>.</p>
-</div><div class="cell docutils container">
+</div><div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">create_regression_data</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span>
                                                        <span class="n">sigma</span><span class="p">,</span>
@@ -626,6 +631,7 @@ Noise was added to y drawn from a Gaussian distribution with <span class="math n
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" src="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" />
 </div>
@@ -772,7 +778,12 @@ RMWS:  2.415146303777198
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_data</span><span class="p">(</span>
     <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
@@ -786,6 +797,7 @@ RMWS:  2.415146303777198
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../_images/1ad7a108c69442b0c3bb5275fd8edeb7b4af179fad5d4da154952229e9a2a174.png" src="../_images/1ad7a108c69442b0c3bb5275fd8edeb7b4af179fad5d4da154952229e9a2a174.png" />
 </div>
