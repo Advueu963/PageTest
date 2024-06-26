@@ -474,7 +474,7 @@ document.write(`
 </div>
 </div>
 <div align="justify">
-<p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1895" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">BHV14</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1896" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">SV08</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1985" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">VGS03</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
+<p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1895" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">2014</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1896" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">2008</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1985" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">2003</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
 Given a sequence of training observations and a new query <span class="math notranslate nohighlight">\(\vec{x}_{N+1}\)</span> (which we denoted by <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> before and in the following plot is marked red) with unknown outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-cpseq">
 <span class="eqno">(16)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
@@ -533,7 +533,7 @@ Given a sequence of training observations and a new query <span class="math notr
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/fcce53cd64dd0e2214c75caaf0513f507aa59d66c40f918454ac499ac0c564da.png" src="../_images/fcce53cd64dd0e2214c75caaf0513f507aa59d66c40f918454ac499ac0c564da.png" />
+<img alt="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" src="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" />
 </div>
 </div>
 <div align="justify">
@@ -682,7 +682,7 @@ Applying this function to the sequence <a class="reference internal" href="#equa
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/f9f2399e0e0f3fa49436cd0574f193c50c78711a863f73c6390cdc3304be1ba2.png" src="../_images/f9f2399e0e0f3fa49436cd0574f193c50c78711a863f73c6390cdc3304be1ba2.png" />
+<img alt="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" src="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" />
 </div>
 </div>
 <div align="justify">
@@ -742,7 +742,7 @@ The complete <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> ca
 </div>
 </div>
 <div align="justify">
-<p>Conformal prediction as outlined above realizes transductive inference, although inductive variants also exist (<span id="id5">Papadopoulos [<a class="reference internal" href="../references.html#id1986" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">Pap08</a>]</span>). For transductive inference the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1}\)</span> have to re-calculated for each new proposal <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span>. In inductive inference this problem is solved by using an <em>calibration</em> dataset. Many packages have already been published implementing the inductive inference, such as <a class="reference external" href="https://mapie.readthedocs.io/en/latest/index.html">MAPIE</a>. We again use the above mentioned synthetic dataset and split it into <span class="math notranslate nohighlight">\(l\)</span> training, <span class="math notranslate nohighlight">\(N-l\)</span> testing points.</p>
+<p>Conformal prediction as outlined above realizes transductive inference, although inductive variants also exist (<span id="id5">Papadopoulos [<a class="reference internal" href="../references.html#id1986" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">2008</a>]</span>). For transductive inference the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1}\)</span> have to re-calculated for each new proposal <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span>. In inductive inference this problem is solved by using an <em>calibration</em> dataset. Many packages have already been published implementing the inductive inference, such as <a class="reference external" href="https://mapie.readthedocs.io/en/latest/index.html">MAPIE</a>. We again use the above mentioned synthetic dataset and split it into <span class="math notranslate nohighlight">\(l\)</span> training, <span class="math notranslate nohighlight">\(N-l\)</span> testing points.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
@@ -768,12 +768,12 @@ The complete <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> ca
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/63bfdf91cc68d94b4d09d2b55950596fc8c1d20d9e1b7c5d149dc311d5ec54b8.png" src="../_images/63bfdf91cc68d94b4d09d2b55950596fc8c1d20d9e1b7c5d149dc311d5ec54b8.png" />
+<img alt="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" src="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" />
 </div>
 </div>
 <div align="justify">
 <p>In the next step we take an arbitrary classifier such as the <a class="reference external" href="https://scikit-learn.org/stable/modules/naive_bayes.html">Gaussian Naive Bayes classifier</a> and train it on the classification dataset. Then on the validation dataset the corresponding non-conformity scores are computed for which we use the wrapper <a class="reference external" href="https://mapie.readthedocs.io/en/latest/generated/mapie.classification.MapieClassifier.html#mapie.classification.MapieClassifier">MapieClassifier</a>. For this a corresponding non-conformity function <span class="math notranslate nohighlight">\(f\)</span> has to be defined.
-We will use the <em>Least Ambiguous Set-Valued Classifier</em> (LAC) method from <span id="id6">Sadinle <em>et al.</em> [<a class="reference internal" href="../references.html#id570" title="M. Sadinle, J. Lei, and L. Wasserman. Least ambiguous set-valued classifiers with bounded error levels. Journal of the American Statistical Association, 114(525):223–234, 2019.">SLW19</a>]</span>.</p>
+We will use the <em>Least Ambiguous Set-Valued Classifier</em> (LAC) method from <span id="id6">Sadinle <em>et al.</em> [<a class="reference internal" href="../references.html#id570" title="M. Sadinle, J. Lei, and L. Wasserman. Least ambiguous set-valued classifiers with bounded error levels. Journal of the American Statistical Association, 114(525):223–234, 2019.">2019</a>]</span>.</p>
 <div class="math notranslate nohighlight">
 \[
     f(\vec{x},y) = 1 - \hath(\vec{x})_y
@@ -823,7 +823,7 @@ Here we want to illustrate therefore we choose <code class="docutils literal not
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/a4efd61e58d7881c1d8f3ddbcfeb252b24e5585036a52520c91de196d4f4c6fa.png" src="../_images/a4efd61e58d7881c1d8f3ddbcfeb252b24e5585036a52520c91de196d4f4c6fa.png" />
+<img alt="../_images/94654749d9bb5ef19ddb287a013daa770819da8ca25efbdf3508ef0630a2b143.png" src="../_images/94654749d9bb5ef19ddb287a013daa770819da8ca25efbdf3508ef0630a2b143.png" />
 </div>
 </div>
 <div align="justify">
@@ -984,7 +984,7 @@ Prediction set for epsilon = 10%:  set()
 </div><section id="uncertainty-quantification-in-conformal-prediction">
 <h2>Uncertainty Quantification in Conformal prediction<a class="headerlink" href="#uncertainty-quantification-in-conformal-prediction" title="Link to this heading">#</a></h2>
 <div align="justify">
-<p>Although conformal prediction is mainly concerned with constructing prediction regions, the scores produced in the course of this construction can also be used for quantifying uncertainty. In this regard, the notions of <em>confidence</em> and <em>credibility</em> have been introduced (<span id="id7">Gammerman and Vovk [<a class="reference internal" href="../references.html#id2173" title="A. Gammerman and V. Vovk. Prediction algorithms and confidence measures based on algorithmic randomness theory. Theoretical Computer Science, 287:209–217, 2002.">GV02</a>]</span>): Let <span class="math notranslate nohighlight">\(p_1, \ldots , p_K\)</span> denote the <span class="math notranslate nohighlight">\(p\)</span>-values that correspond, respectively, to the candidate outcomes <span class="math notranslate nohighlight">\(y_1, \ldots , y_K\)</span> in a classification problem.
+<p>Although conformal prediction is mainly concerned with constructing prediction regions, the scores produced in the course of this construction can also be used for quantifying uncertainty. In this regard, the notions of <em>confidence</em> and <em>credibility</em> have been introduced (<span id="id7">Gammerman and Vovk [<a class="reference internal" href="../references.html#id2174" title="A. Gammerman and V. Vovk. Prediction algorithms and confidence measures based on algorithmic randomness theory. Theoretical Computer Science, 287:209–217, 2002.">2002</a>]</span>): Let <span class="math notranslate nohighlight">\(p_1, \ldots , p_K\)</span> denote the <span class="math notranslate nohighlight">\(p\)</span>-values that correspond, respectively, to the candidate outcomes <span class="math notranslate nohighlight">\(y_1, \ldots , y_K\)</span> in a classification problem.
 In the transductive case the <span class="math notranslate nohighlight">\(p\)</span>-values are directly calculated, while here in the inductive we need to calculate them separately. Let us assume a <span class="math notranslate nohighlight">\(\epsilon=0.05\)</span>.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1016,7 +1016,7 @@ The p-value of y = 4 is p(y) = 0.099.
 </div>
 </div>
 <div align="justify">
-<p>If a definite choice (point prediction) <span class="math notranslate nohighlight">\(\hat{y}\)</span> has to be made, it is natural to pick the <span class="math notranslate nohighlight">\(y_i\)</span> with the highest <span class="math notranslate nohighlight">\(p\)</span>-value. The value <span class="math notranslate nohighlight">\(p_i\)</span> itself is then a natural measure of credibility, since the larger (closer to 1) this value, the more likely the prediction is correct. Note that the value also corresponds to the largest significance level <span class="math notranslate nohighlight">\(\epsilon\)</span> for which the prediction region <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> would be empty (since all candidates would be rejected). In other words, it is a degree to which <span class="math notranslate nohighlight">\(y_i\)</span> is indeed a plausible candidate that cannot be excluded. In our example we have a low credibility (0.099) indicating a that the model has difficulty correctly classifying the <span class="math notranslate nohighlight">\(x_{N+1}\)</span> given the training points (<span id="id8">Papadopoulos [<a class="reference internal" href="../references.html#id1986" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">Pap08</a>]</span>). This  relates to a high epistemic uncertainty. Reasoning for this can be found when looking at the above plot, were we can see that <span class="math notranslate nohighlight">\(x_{N+1}\)</span> lies close to both examples of class two and four.</p>
+<p>If a definite choice (point prediction) <span class="math notranslate nohighlight">\(\hat{y}\)</span> has to be made, it is natural to pick the <span class="math notranslate nohighlight">\(y_i\)</span> with the highest <span class="math notranslate nohighlight">\(p\)</span>-value. The value <span class="math notranslate nohighlight">\(p_i\)</span> itself is then a natural measure of credibility, since the larger (closer to 1) this value, the more likely the prediction is correct. Note that the value also corresponds to the largest significance level <span class="math notranslate nohighlight">\(\epsilon\)</span> for which the prediction region <span class="math notranslate nohighlight">\(Y^\epsilon\)</span> would be empty (since all candidates would be rejected). In other words, it is a degree to which <span class="math notranslate nohighlight">\(y_i\)</span> is indeed a plausible candidate that cannot be excluded. In our example we have a low credibility (0.099) indicating a that the model has difficulty correctly classifying the <span class="math notranslate nohighlight">\(x_{N+1}\)</span> given the training points (<span id="id8">Papadopoulos [<a class="reference internal" href="../references.html#id1986" title="H. Papadopoulos. Inductive conformal prediction: theory and application to neural networks. Tools in Artificial Intelligence, 18(2):315–330, 2008.">2008</a>]</span>). This  relates to a high epistemic uncertainty. Reasoning for this can be found when looking at the above plot, were we can see that <span class="math notranslate nohighlight">\(x_{N+1}\)</span> lies close to both examples of class two and four.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_pointPrediction_uncertainty</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
@@ -1054,7 +1054,7 @@ The p-value of y = 4 is p(y) = 0.099.
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>There also have been other methods for quantifying the uncertainty of a point prediction in the context of conformal prediction been proposed (<span id="id9">Linusson <em>et al.</em> [<a class="reference internal" href="../references.html#id235" title="H. Linusson, U. Johansson, H. Boström, and T. Löfström. Reliable confidence predictions using conformal prediction. In Proc. PAKDD, 20th Pacific-Asia Conference on Knowledge Discovery and Data Mining. Auckland, New Zealand, 2016.">LJBostromLofstrom16</a>]</span>).</p>
+<p>There also have been other methods for quantifying the uncertainty of a point prediction in the context of conformal prediction been proposed (<span id="id9">Linusson <em>et al.</em> [<a class="reference internal" href="../references.html#id235" title="H. Linusson, U. Johansson, H. Boström, and T. Löfström. Reliable confidence predictions using conformal prediction. In Proc. PAKDD, 20th Pacific-Asia Conference on Knowledge Discovery and Data Mining. Auckland, New Zealand, 2016.">2016</a>]</span>).</p>
 </div>
 <div align="justify">
 <p>To conclude the Uncertainty quantification we now display different combinations of credibility and confidence capturing both epistemic and aleatoric uncertainty respectively. For each example the new data point is again highlighted red.
@@ -1088,7 +1088,7 @@ The last figure depicting a point in between two classes. Thus indicating a cert
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/419c9a7c742041fea397c16007e6b6cde5e28934bf9546945869cd51b8ac4a6b.png" src="../_images/419c9a7c742041fea397c16007e6b6cde5e28934bf9546945869cd51b8ac4a6b.png" />
+<img alt="../_images/378be645b832beffd4d646948243b47c6f0c3d93fbbe3b80ab0e2f35b48b0f58.png" src="../_images/378be645b832beffd4d646948243b47c6f0c3d93fbbe3b80ab0e2f35b48b0f58.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />

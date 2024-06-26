@@ -497,12 +497,12 @@ intuitively expressing a degree of confidence
 but which do not immediately qualify as probabilities either.
 The idea of <em>scaling</em> or <em>calibration methods</em> is to turn such scores into proper,
 well-calibrated probabilities, that is,
-to learn a mapping from scores to the unit interval that can be applied to the output of a predictor as a kind of post-processing step (<span id="id1">Flach [<a class="reference internal" href="../references.html#id2185" title="P.A. Flach. Classifier calibration. In Encyclopedia of Machine Learning and Data Mining, pages 210–217. Springer, 2017.">Fla17</a>]</span>).
-Examples of such methods include binning (<span id="id2">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">ZE01a</a>]</span>),
-isotonic regression (<span id="id3">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">ZE02</a>]</span>),
-logistic scaling (<span id="id4">Platt [<a class="reference internal" href="../references.html#id2281" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">Pla99</a>]</span>)
-and improvements thereof (<span id="id5">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2184" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>),
-as well as the use of Venn predictors (<span id="id6">Johansson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="U. Johansson, T. Löfström, H. Sundell, H. Linusson, A. Gidenstam, and H. Boström. Venn predictors for well-calibrated probability estimation trees. In Proc. COPA, 7th Symposium on Conformal and Probabilistic Prediction and Applications, 3–14. Maastricht, The Netherlands, 2018.">JLofstromS+18</a>]</span>).
+to learn a mapping from scores to the unit interval that can be applied to the output of a predictor as a kind of post-processing step (<span id="id1">Flach [<a class="reference internal" href="../references.html#id2186" title="P.A. Flach. Classifier calibration. In Encyclopedia of Machine Learning and Data Mining, pages 210–217. Springer, 2017.">2017</a>]</span>).
+Examples of such methods include binning (<span id="id2">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">2001</a>]</span>),
+isotonic regression (<span id="id3">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">2002</a>]</span>),
+logistic scaling (<span id="id4">Platt [<a class="reference internal" href="../references.html#id2282" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">1999</a>]</span>)
+and improvements thereof (<span id="id5">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">2017</a>]</span>),
+as well as the use of Venn predictors (<span id="id6">Johansson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="U. Johansson, T. Löfström, H. Sundell, H. Linusson, A. Gidenstam, and H. Boström. Venn predictors for well-calibrated probability estimation trees. In Proc. COPA, 7th Symposium on Conformal and Probabilistic Prediction and Applications, 3–14. Maastricht, The Netherlands, 2018.">2018</a>]</span>).
 Calibration is still a topic of ongoing research.</p>
 </div><section id="separating-hyperplane-in-support-vector-machines">
 <h2>Separating Hyperplane in Support Vector Machines<a class="headerlink" href="#separating-hyperplane-in-support-vector-machines" title="Link to this heading">#</a></h2>
@@ -534,7 +534,7 @@ Calibration is still a topic of ongoing research.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/53a14639a4b073a3fd6f44a068fea861e48c5f3ae702e9fac9fd17c8c030fcf9.png" src="../_images/53a14639a4b073a3fd6f44a068fea861e48c5f3ae702e9fac9fd17c8c030fcf9.png" />
+<img alt="../_images/a0b85286ebff07de22d3de82d014a123fcb90e623b6164ce73eb7953ac1801fc.png" src="../_images/a0b85286ebff07de22d3de82d014a123fcb90e623b6164ce73eb7953ac1801fc.png" />
 </div>
 </div>
 <section id="binning">
@@ -551,7 +551,7 @@ In binning, the training examples are sorted according to their scores and the s
 <p>For each bin, we compute lower and upper boundary <span class="math notranslate nohighlight">\(s(\cdot)\)</span> scores.
 Given a test example <span class="math notranslate nohighlight">\(x\)</span>, we place it in a bin according to its score <span class="math notranslate nohighlight">\(s(x)\)</span>.
 We then estimate the corrected probability that <span class="math notranslate nohighlight">\(x\)</span> belongs to class <span class="math notranslate nohighlight">\(c\)</span> as the fraction of training examples in the bin that actually belong to <span class="math notranslate nohighlight">\(c\)</span>.</p>
-<p>(<span id="id7">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">ZE01a</a>], Zadrozny and Elkan [<a class="reference internal" href="../references.html#id2277" title="Bianca Zadrozny and Charles Elkan. Learning and making decisions when costs and probabilities are both unknown. In Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining, 204–213. 2001.">ZE01b</a>]</span>)</p>
+<p>(<span id="id7">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">2001</a>], Zadrozny and Elkan [<a class="reference internal" href="../references.html#id2278" title="Bianca Zadrozny and Charles Elkan. Learning and making decisions when costs and probabilities are both unknown. In Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining, 204–213. 2001.">2001</a>]</span>)</p>
 </div></section>
 <section id="isotonic-regression">
 <h3>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Link to this heading">#</a></h3>
@@ -567,8 +567,8 @@ is a non-parametric form of regression in which we assume that the function is c
 <p>If we assume that the classifier ranks examples correctly,
 the mapping from scores into probabilities is non-decreasing,
 and we can use isotonic regression to learn this mapping.
-A commonly used algorithm for computing the isotonic regression is pair-adjacent violators (PAV) (<span id="id8">Ayer <em>et al.</em> [<a class="reference internal" href="../references.html#id2276" title="Miriam Ayer, H Daniel Brunk, George M Ewing, William T Reid, and Edward Silverman. An empirical distribution function for sampling with incomplete information. The annals of mathematical statistics, pages 641–647, 1955.">ABE+55</a>]</span>).
-This algorithm finds the stepwise-constant isotonic function that best fits the data according to a mean-squared error criterion (<span id="id9">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">ZE02</a>]</span>).</p>
+A commonly used algorithm for computing the isotonic regression is pair-adjacent violators (PAV) (<span id="id8">Ayer <em>et al.</em> [<a class="reference internal" href="../references.html#id2277" title="Miriam Ayer, H Daniel Brunk, George M Ewing, William T Reid, and Edward Silverman. An empirical distribution function for sampling with incomplete information. The annals of mathematical statistics, pages 641–647, 1955.">1955</a>]</span>).
+This algorithm finds the stepwise-constant isotonic function that best fits the data according to a mean-squared error criterion (<span id="id9">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">2002</a>]</span>).</p>
 <p>Based on the <a class="reference internal" href="../chapter-pe-scoring/scoring.html"><span class="doc std std-doc">previous chapter</span></a>,
 we utilize the Isotonic Regression for a comparison on the same dataset.</p>
 </div><div class="cell docutils container">
@@ -610,21 +610,21 @@ we utilize the Isotonic Regression for a comparison on the same dataset.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19a68b33e23fe9966c6e903db3f4c105eb13b4d88cbff628217b03b0bee63ce1.png" src="../_images/19a68b33e23fe9966c6e903db3f4c105eb13b4d88cbff628217b03b0bee63ce1.png" />
+<img alt="../_images/b0b8639fa8105fc495d14f8e1c397080c2608153628a138e1227af9b6ee7b981.png" src="../_images/b0b8639fa8105fc495d14f8e1c397080c2608153628a138e1227af9b6ee7b981.png" />
 </div>
 </div>
 </section>
 <section id="logistic-scaling">
 <h3>logistic scaling<a class="headerlink" href="#logistic-scaling" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>Introduced by <span id="id10">Platt [<a class="reference internal" href="../references.html#id2281" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">Pla99</a>]</span>, logistic (Platt) scaling was originally a method for calibrating support vector machines.
+<p>Introduced by <span id="id10">Platt [<a class="reference internal" href="../references.html#id2282" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">1999</a>]</span>, logistic (Platt) scaling was originally a method for calibrating support vector machines.
 It works by finding the parameters of a sigmoid function maximizing the likelihood of the training set.</p>
 </div>
 </section>
 <section id="venn-predictors">
 <h3>Venn predictors<a class="headerlink" href="#venn-predictors" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>Introduced by <span id="id11">Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id2279" title="Vladimir Vovk, Glenn Shafer, and Ilia Nouretdinov. Self-calibrating probability forecasting. Advances in neural information processing systems, 2003.">VSN03</a>]</span>,
+<p>Introduced by <span id="id11">Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id2280" title="Vladimir Vovk, Glenn Shafer, and Ilia Nouretdinov. Self-calibrating probability forecasting. Advances in neural information processing systems, 2003.">2003</a>]</span>,
 Venn predictors are multi-probabilistic predictors with proven validity properties.
 The impossibility result described earlier for probabilistic prediction is circumvented in two ways:</p>
 <ol class="arabic simple">
@@ -662,14 +662,14 @@ As an example, if we make a number of probabilistic predictions with the probabi
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6d8cf1e66bbdd645055805f451e8ae1b2ab52ed087bfc46749acec1d6f541de6.png" src="../_images/6d8cf1e66bbdd645055805f451e8ae1b2ab52ed087bfc46749acec1d6f541de6.png" />
+<img alt="../_images/63b245bf7cf6d11cde360c3b373cf8722c93ad5fb5b80143a6484e63137b3f26.png" src="../_images/63b245bf7cf6d11cde360c3b373cf8722c93ad5fb5b80143a6484e63137b3f26.png" />
 </div>
 </div>
 <div align="justify">
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Venn predictors are related to the more well-known Conformal Prediction (CP) framework,
-which was introduced as an approach for associating predictions with confidence measures (<span id="id12">Saunders <em>et al.</em> [<a class="reference internal" href="../references.html#id2280" title="Craig Saunders, Alex Gammerman, and Volodya Vovk. Transduction with confidence and credibility. In Thomas Dean, editor, Proceedings of the Sixteenth International Joint Conference on Artificial Intelligence, IJCAI 99, Stockholm, Sweden, July 31 - August 6, 1999. 2 Volumes, 1450 pages, 722–726. Morgan Kaufmann, 1999. URL: http://ijcai.org/Proceedings/99-2/Papers/010.pdf.">SGV99</a>]</span>).</p>
+which was introduced as an approach for associating predictions with confidence measures (<span id="id12">Saunders <em>et al.</em> [<a class="reference internal" href="../references.html#id2281" title="Craig Saunders, Alex Gammerman, and Volodya Vovk. Transduction with confidence and credibility. In Thomas Dean, editor, Proceedings of the Sixteenth International Joint Conference on Artificial Intelligence, IJCAI 99, Stockholm, Sweden, July 31 - August 6, 1999. 2 Volumes, 1450 pages, 722–726. Morgan Kaufmann, 1999. URL: http://ijcai.org/Proceedings/99-2/Papers/010.pdf.">1999</a>]</span>).</p>
 </div>
 </div></section>
 </section>
@@ -696,7 +696,7 @@ For any fixed model <span class="math notranslate nohighlight">\(f\)</span> ther
 That calibration map can be defined as <span class="math notranslate nohighlight">\(\mu(s_i) = \mathbb{E}[Y\vert f(X)=s_i]\)</span>.
 However, usually we do not want to learn perfect calibration maps on the training data,
 because these would overfit and would be far from being calibrated on the test data.</p>
-<p>(<span id="id13">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2184" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">KdMFF17</a>]</span>)</p>
+<p>(<span id="id13">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">2017</a>]</span>)</p>
 </div><div align="justify">
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -707,7 +707,7 @@ e.g., using many more features.</p>
 </div>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/calibration.html">https://scikit-learn.org/stable/modules/calibration.html</a></p>
 <p><a class="reference external" href="https://arxiv.org/pdf/2112.10327">https://arxiv.org/pdf/2112.10327</a></p>
-<p>(<span id="id14">Silva Filho <em>et al.</em> [<a class="reference internal" href="../references.html#id2274" title="Telmo Silva Filho, Hao Song, Miquel Perello-Nieto, Raul Santos-Rodriguez, Meelis Kull, and Peter Flach. Classifier calibration: a survey on how to assess and improve predicted class probabilities. Machine Learning, 112(9):3211–3260, 2023.">SFSPN+23</a>]</span>)</p>
+<p>(<span id="id14">Silva Filho <em>et al.</em> [<a class="reference internal" href="../references.html#id2275" title="Telmo Silva Filho, Hao Song, Miquel Perello-Nieto, Raul Santos-Rodriguez, Meelis Kull, and Peter Flach. Classifier calibration: a survey on how to assess and improve predicted class probabilities. Machine Learning, 112(9):3211–3260, 2023.">2023</a>]</span>)</p>
 </section>
 </section>
 
