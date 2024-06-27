@@ -8,51 +8,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Conformal prediction for regression &#8212; My sample book</title>
+    <title>17. Conformal prediction for regression &#8212; My sample book</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_regression/intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Set-valued prediction based on utility maximization" href="../chapter-setValued_utilityMaximization/intro.html" />
-    <link rel="prev" title="Excursus: Hypothesis testing" href="../chapter-conformel_classification/hypothesis-excurs.html" />
+    <link rel="next" title="18. Set-valued prediction based on utility maximization" href="../chapter-setValued_utilityMaximization/intro.html" />
+    <link rel="prev" title="16.2. Excursus: Hypothesis testing" href="../chapter-conformel_classification/hypothesis-excurs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -73,23 +73,27 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,13 +115,8 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
     </header>
   
 
@@ -180,31 +179,31 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">Prelude</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">Set-based versus distributional representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">1. Prelude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">3. Sources of uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">4. Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">5. Modelling Approximation Uncertainty</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">5.4. Set-based versus distributional representations</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation and Calibration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation and Ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">6. Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">7. Probability Estimation and Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">9. Maximum Likelihood and Fisher Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">10. Generative models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">11. Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian neural networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">14. Credal sets and classifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">15. Reliable Classification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">16. Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">16.2. Excursus: Hypothesis testing</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conformal prediction for regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">Set-valued prediction based on utility maximization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Conformal prediction for regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">18. Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">19. References</a></li>
 </ul>
 
     </div>
@@ -220,7 +219,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -229,14 +228,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -261,14 +260,14 @@
       
       <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-conformel_regression/intro.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+    <img src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -425,9 +424,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -448,11 +447,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">Split Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">Jackknife Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">Jackknife+ Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">CV+ Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">17.1. Split Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">17.2. Jackknife Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">17.3. Jackknife+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">17.4. CV+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">17.5. Uncertainty Quantification in Conformal Regression</a></li>
 </ul>
             </nav>
         </div>
@@ -465,7 +464,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="conformal-prediction-for-regression">
-<h1>Conformal prediction for regression<a class="headerlink" href="#conformal-prediction-for-regression" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">17. </span>Conformal prediction for regression<a class="headerlink" href="#conformal-prediction-for-regression" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
@@ -634,7 +633,7 @@ Noise was added to y drawn from a Gaussian distribution with <span class="math n
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/1f592cf78cb1b6a3d3e5daf886af9bf16846cac38a8457957ea48190e7ea9124.png" src="../_images/1f592cf78cb1b6a3d3e5daf886af9bf16846cac38a8457957ea48190e7ea9124.png" />
+<img alt="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" src="../_images/8e2c8a5e8a1cd27af033e8a739a021e71d4c0b3856924514bb52276df496c30e.png" />
 </div>
 </div>
 <p>To compare the presented methods we compute the <em>Regression coverage score (RCS)</em></p>
@@ -644,7 +643,7 @@ Noise was added to y drawn from a Gaussian distribution with <span class="math n
 <div class="math notranslate nohighlight">
 \[\text{RMWS} = \frac{1}{n} \sum_{i=1}^{n} (\hat y^{\text{up}}_{i} - \hat y^{\text{low}}_{i})\]</div>
 <section id="split-method">
-<span id="content-split"></span><h2>Split Method<a class="headerlink" href="#split-method" title="Link to this heading">#</a></h2>
+<span id="content-split"></span><h2><span class="section-number">17.1. </span>Split Method<a class="headerlink" href="#split-method" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>This method uses  only a single train/validation split to compute the non-conformity scores and is the most simplest approach.
 It can be described by the following steps:</p>
@@ -733,14 +732,14 @@ RMWS:  2.557984632366192
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c4d540f83d558ea08c0fa62fae2700603e5027c2c886d5bef38468344ce6b524.png" src="../_images/c4d540f83d558ea08c0fa62fae2700603e5027c2c886d5bef38468344ce6b524.png" />
+<img alt="../_images/0c08b79c8af653aff0c5702a247ca6bda650301dd277cf28e31afd5137a0c76b.png" src="../_images/0c08b79c8af653aff0c5702a247ca6bda650301dd277cf28e31afd5137a0c76b.png" />
 </div>
 </div>
 <div align="justify">
 <p>We see that the Split method coverages almost everything except for the three far left test points. It should be pointed out that the intervals created through the Split method with the defined non-conformity function always predicts intervals with equal width. While already having satisfactory <em>RCS</em> the methods is heavily dependent on the split size.</p>
 </div></section>
 <section id="jackknife-method">
-<span id="content-jackknife"></span><h2>Jackknife Method<a class="headerlink" href="#jackknife-method" title="Link to this heading">#</a></h2>
+<span id="content-jackknife"></span><h2><span class="section-number">17.2. </span>Jackknife Method<a class="headerlink" href="#jackknife-method" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Instead of only using one calibration split to compute <span class="math notranslate nohighlight">\(l\)</span> non-conformity scores as in the <a class="reference internal" href="#content-split"><span class="std std-ref">Split Method</span></a>, the Jackknife (or Leave-one-out) methods computes a <span class="math notranslate nohighlight">\(\alpha_i\)</span> for each training point <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span>.
 It consists of the following four steps:</p>
@@ -800,7 +799,7 @@ RMWS:  2.415146303777198
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/2d00a1e236447d532e15d501c8ca35be6a857ead8e836c1ddacfd84c9a8c3f28.png" src="../_images/2d00a1e236447d532e15d501c8ca35be6a857ead8e836c1ddacfd84c9a8c3f28.png" />
+<img alt="../_images/1ad7a108c69442b0c3bb5275fd8edeb7b4af179fad5d4da154952229e9a2a174.png" src="../_images/1ad7a108c69442b0c3bb5275fd8edeb7b4af179fad5d4da154952229e9a2a174.png" />
 </div>
 </div>
 <div align="justify">
@@ -812,7 +811,7 @@ But in scenarios where a regression model is less stable (samples size equal to 
 </div>
 </section>
 <section id="content-jackknife-plus">
-<span id="id2"></span><h2>Jackknife+ Method<a class="headerlink" href="#content-jackknife-plus" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2><span class="section-number">17.3. </span>Jackknife+ Method<a class="headerlink" href="#content-jackknife-plus" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>In Jackknife we build the intervals based on <span class="math notranslate nohighlight">\(\hat{h}(x_{N+1})\)</span> and the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_i^{jack}\)</span>.
 As seen in our example it perform better than just using one split, but no theoretical guarantee on the coverage can be given (see <span id="id3">[<a class="reference internal" href="../references.html#id2167" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">Barber <em>et al.</em>, 2019</a>]</span>).
@@ -886,7 +885,7 @@ RMWS:  2.435070750699638
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/3123e722d80ad2f1ba737dd1a166e78f1a1fe78a45f666c5aa1f61a3365283b0.png" src="../_images/3123e722d80ad2f1ba737dd1a166e78f1a1fe78a45f666c5aa1f61a3365283b0.png" />
+<img alt="../_images/5798a51816cdf4ce57eeeb0fb8e4cf432852cf7e9d87e678104de61aa38f8fcb.png" src="../_images/5798a51816cdf4ce57eeeb0fb8e4cf432852cf7e9d87e678104de61aa38f8fcb.png" />
 </div>
 </div>
 <div align="justify">
@@ -894,7 +893,7 @@ RMWS:  2.435070750699638
 Whereas Jackknife construct intervals around the model <span class="math notranslate nohighlight">\(\hat{h} \pm \alpha_i^{jack}\)</span> trained on all data points, Jackknife+ constructs a interval around the individual <span class="math notranslate nohighlight">\(\hat{h}_{-i} \pm \alpha_i^{jack}\)</span>. Therefore as can bee seen in the section on <a class="reference internal" href="#content-uncertainty-quant"><span class="std std-ref">Uncertainty Quantificaion</span></a>, Jackknife+ gives each point a individual interval width whereas in Jackknife each point gets identical interval widths.</p>
 </div></section>
 <section id="cv-method">
-<span id="content-cv-plus"></span><h2>CV+ Method<a class="headerlink" href="#cv-method" title="Link to this heading">#</a></h2>
+<span id="content-cv-plus"></span><h2><span class="section-number">17.4. </span>CV+ Method<a class="headerlink" href="#cv-method" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>While Jackknife and Jackknife+ improve the coverage of prediction sets, for increasing data points in gets very costly. Training a new model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> for each data point gets impractically for practical application.
 If we think of the amount of <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> as a controllable parameter we arrive at the <em>K-fold CV+</em> method <span id="id6">[<a class="reference internal" href="../references.html#id2167" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">Barber <em>et al.</em>, 2019</a>]</span>, which we will call CV+ for simplicity.
@@ -932,7 +931,7 @@ It can again be expressed in five steps, only differing from Jackknife+ in the a
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RCS:  1.0
-RMWS:  2.660851433801548
+RMWS:  2.6608514338015476
 </pre></div>
 </div>
 </div>
@@ -958,7 +957,7 @@ RMWS:  2.660851433801548
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/8f6f52728bc1e1dd1ab3cd83f055c355f5399e35e4218f1ebfbaad00418faa87.png" src="../_images/8f6f52728bc1e1dd1ab3cd83f055c355f5399e35e4218f1ebfbaad00418faa87.png" />
+<img alt="../_images/6b598d774b3d76a4f1474b3b88ab56312b87e312d0f065c66a4f1ea59c62a98b.png" src="../_images/6b598d774b3d76a4f1474b3b88ab56312b87e312d0f065c66a4f1ea59c62a98b.png" />
 </div>
 </div>
 <p>We now achieve a coverage of 100 percent, as we predict very large intervals for the far left test points.</p>
@@ -968,7 +967,7 @@ RMWS:  2.660851433801548
 </div>
 </section>
 <section id="uncertainty-quantification-in-conformal-regression">
-<span id="content-uncertainty-quant"></span><h2>Uncertainty Quantification in Conformal Regression<a class="headerlink" href="#uncertainty-quantification-in-conformal-regression" title="Link to this heading">#</a></h2>
+<span id="content-uncertainty-quant"></span><h2><span class="section-number">17.5. </span>Uncertainty Quantification in Conformal Regression<a class="headerlink" href="#uncertainty-quantification-in-conformal-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Quantifying the uncertainty of conformal regression outputs can intuitively be done by looking at the interval widths.</p>
 <ul class="simple">
@@ -998,7 +997,7 @@ RMWS:  2.660851433801548
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d3b444ebd7d0b2b9bd74da144695b9c379964c44a6fb0057faa978c8a6de1508.png" src="../_images/d3b444ebd7d0b2b9bd74da144695b9c379964c44a6fb0057faa978c8a6de1508.png" />
+<img alt="../_images/922a3f692c3d624943c7a7d39c08b7297d893f250819e695cec44638ae4c8e13.png" src="../_images/922a3f692c3d624943c7a7d39c08b7297d893f250819e695cec44638ae4c8e13.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />
@@ -1038,7 +1037,7 @@ RMWS:  2.660851433801548
               
               
               
-                <footer class="prev-next-footer d-print-none">
+                <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1047,7 +1046,7 @@ RMWS:  2.660851433801548
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Excursus: Hypothesis testing</p>
+        <p class="prev-next-title"><span class="section-number">16.2. </span>Excursus: Hypothesis testing</p>
       </div>
     </a>
     <a class="right-next"
@@ -1055,7 +1054,7 @@ RMWS:  2.660851433801548
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Set-valued prediction based on utility maximization</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Set-valued prediction based on utility maximization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1075,11 +1074,11 @@ RMWS:  2.660851433801548
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">Split Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">Jackknife Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">Jackknife+ Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">CV+ Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">Uncertainty Quantification in Conformal Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-method">17.1. Split Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife-method">17.2. Jackknife Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-jackknife-plus">17.3. Jackknife+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cv-method">17.4. CV+ Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-regression">17.5. Uncertainty Quantification in Conformal Regression</a></li>
 </ul>
   </nav></div>
 
@@ -1147,8 +1146,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

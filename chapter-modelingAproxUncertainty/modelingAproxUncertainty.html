@@ -8,62 +8,65 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Modelling Approximation Uncertainty &#8212; My sample book</title>
+    <title>5. Modelling Approximation Uncertainty &#8212; My sample book</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"4fccd9ee86f04c7eb47d221cafcc7958": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7d5b682796ab49d3a8b031657c552a20": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_4fccd9ee86f04c7eb47d221cafcc7958", "msg_id": "", "outputs": [{"data": {"text/html": "<pre style=\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\">Sampling 4 chains, 0 divergences <span style=\"color: #008000; text-decoration-color: #008000\">\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501</span> <span style=\"color: #800080; text-decoration-color: #800080\">100%</span> <span style=\"color: #008080; text-decoration-color: #008080\">0:00:00</span> / <span style=\"color: #808000; text-decoration-color: #808000\">0:00:01</span>\n</pre>\n", "text/plain": "Sampling 4 chains, 0 divergences \u001b[32m\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u001b[0m \u001b[35m100%\u001b[0m \u001b[36m0:00:00\u001b[0m / \u001b[33m0:00:01\u001b[0m\n"}, "metadata": {}, "output_type": "display_data"}], "tabbable": null, "tooltip": null}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-modelingAproxUncertainty/modelingAproxUncertainty';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Set-based versus distributional representations" href="set-based-versus-distributional-representations.html" />
-    <link rel="prev" title="Auxiliary sites on information-theory, probability theory and other mathematical" href="../chapter-auxilary/intro.html" />
+    <link rel="next" title="5.4. Set-based versus distributional representations" href="set-based-versus-distributional-representations.html" />
+    <link rel="prev" title="4. Auxiliary sites on information-theory, probability theory and other mathematical" href="../chapter-auxilary/intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -73,23 +76,27 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,13 +118,8 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
     </header>
   
 
@@ -180,31 +182,31 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">Prelude</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Modelling Approximation Uncertainty</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="set-based-versus-distributional-representations.html">Set-based versus distributional representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">1. Prelude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">3. Sources of uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">4. Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">5. Modelling Approximation Uncertainty</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="set-based-versus-distributional-representations.html">5.4. Set-based versus distributional representations</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation and Calibration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation and Ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">6. Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">7. Probability Estimation and Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">9. Maximum Likelihood and Fisher Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">10. Generative models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">11. Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian neural networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">14. Credal sets and classifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">15. Reliable Classification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">16. Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">16.2. Excursus: Hypothesis testing</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">Conformal prediction for regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">Set-valued prediction based on utility maximization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">17. Conformal prediction for regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">18. Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">19. References</a></li>
 </ul>
 
     </div>
@@ -220,7 +222,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -229,14 +231,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -261,14 +263,14 @@
       
       <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-modelingAproxUncertainty/modelingAproxUncertainty.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+    <img src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -425,9 +427,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -448,9 +450,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-space-learning">Version Space Learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference">Bayesian Inference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-a-lack-of-knowledge">Representing a lack of knowledge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-space-learning">5.1. Version Space Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference">5.2. Bayesian Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-a-lack-of-knowledge">5.3. Representing a lack of knowledge</a></li>
 </ul>
             </nav>
         </div>
@@ -463,9 +465,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="modelling-approximation-uncertainty">
-<span id="sbvd"></span><h1>Modelling Approximation Uncertainty<a class="headerlink" href="#modelling-approximation-uncertainty" title="Link to this heading">#</a></h1>
+<span id="sbvd"></span><h1><span class="section-number">5. </span>Modelling Approximation Uncertainty<a class="headerlink" href="#modelling-approximation-uncertainty" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">multivariate_normal</span>
@@ -476,26 +478,15 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING (pytensor.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 <div align="justify">
 <p>Bayesian inference can be seen as the main representative of probabilistic methods and provides a coherent framework for statistical reasoning that is well-established in machine learning (and beyond). Version space learning can be seen as a “logical” (and in a sense simplified) counterpart of Bayesian inference, in which hypotheses and predictions are not assessed numerically in terms of probabilities, but only qualified (deterministically) as being possible or impossible. In spite of its limited practical usefulness, version space learning is interesting for various reasons. In particular, in light of our discussion about uncertainty, it constitutes an interesting case: By construction, version space learning is free of aleatoric uncertainty, i.e., all uncertainty is epistemic.</p>
 </div><section id="version-space-learning">
-<span id="vsl"></span><h2>Version Space Learning<a class="headerlink" href="#version-space-learning" title="Link to this heading">#</a></h2>
+<span id="vsl"></span><h2><span class="section-number">5.1. </span>Version Space Learning<a class="headerlink" href="#version-space-learning" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>In the idealized setting of version space learning, we assume a deterministic dependency <span class="math notranslate nohighlight">\(f^*:\, \cX \longrightarrow \cY\)</span>,  i.e., the distribution <code class="xref eq docutils literal notranslate"><span class="pre">ccp</span></code> degenerates to</p>
 <div class="math notranslate nohighlight" id="equation-ccpvs">
-<span class="eqno">(1)<a class="headerlink" href="#equation-ccpvs" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-ccpvs" title="Link to this equation">#</a></span>\[\begin{split}
 P( y \vert \vec{x}_{q}) = \left\{ \begin{array}{ll}
 1 &amp; \text{ if } y = f^*(\vec{x}_{q}) \\
 0 &amp; \text{ if } y \neq f^*(\vec{x}_{q}) \\
@@ -512,19 +503,19 @@ P( y \vert \vec{x}_{q}) = \left\{ \begin{array}{ll}
 </div><div align="justify">
 <p>If a prediction <span class="math notranslate nohighlight">\(\hat{y}_{q}\)</span> for a query instance <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> is sought, this query is submitted to all members <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> of the version space. Obviously, a unique prediction can only be made if all members agree on the outcome of <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span>. Otherwise, several outcomes <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span> may still appear possible. Formally, mimicking the logical conjunction with the minimum operator and the existential quantification with a maximum, we can express the degree of possibility or plausibility of an outcome <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span> as follows (<span class="math notranslate nohighlight">\(\llbracket \cdot \rrbracket\)</span> denotes the indicator function):</p>
 <div class="math notranslate nohighlight" id="equation-ee1">
-<span class="eqno">(2)<a class="headerlink" href="#equation-ee1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-ee1" title="Link to this equation">#</a></span>\[
 \pi(y) := \max_{h \in \cH} \min \Big( \llbracket h \in \mathcal{V} \rrbracket , \llbracket h(\vec{x}_q) = y \rrbracket \Big)
 \]</div>
 <p>Thus, <span class="math notranslate nohighlight">\(\pi(y)=1\)</span> if there exists a candidate hypothesis <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\(h(\vec{x}_{q}) = y\)</span>, and <span class="math notranslate nohighlight">\(\pi(y)=0\)</span> otherwise. In other words, the prediction produced in version space learning is a subset</p>
 <div class="math notranslate nohighlight" id="equation-vss">
-<span class="eqno">(3)<a class="headerlink" href="#equation-vss" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.3)<a class="headerlink" href="#equation-vss" title="Link to this equation">#</a></span>\[
 Y = Y(\vec{x}_q) := \{ h(\vec{x}_q) \vert h \in \mathcal{V} \} = \{ y \vert \pi(y) = 1 \} \subseteq \mathcal{Y}
 \]</div>
-<p>See <a class="reference internal" href="#vs"><span class="std std-numref">Fig. 1</span></a> for an illustration.</p>
+<p>See <a class="reference internal" href="#vs"><span class="std std-numref">Fig. 5.1</span></a> for an illustration.</p>
 </div><figure class="align-default" id="vs">
 <a class="reference internal image-reference" href="../_images/pic-version-space.png"><img alt="version-space" src="../_images/pic-version-space.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Set-based versus distributional knowledge representation on the level of predictions, hypotheses, and models. In version space learning, the model class is fixed, and knowledge about hypotheses and outcomes is represented in terms of sets (blue color). In Bayesian inference, sets are replaced by probability distributions (gray shading). Theories like possibility and evidence theory are in-between, essentially working with sets of distributions. Credal inference (cf. Section <span class="xref std std-ref">credal</span>) generalizes Bayesian inference by replacing a single prior with a set of prior distributions (here identified by a set of hyper-parameters). In hierarchical Bayesian modeling, this set is again replaced by a distribution, i.e., a second-order probability.</span><a class="headerlink" href="#vs" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Set-based versus distributional knowledge representation on the level of predictions, hypotheses, and models. In version space learning, the model class is fixed, and knowledge about hypotheses and outcomes is represented in terms of sets (blue color). In Bayesian inference, sets are replaced by probability distributions (gray shading). Theories like possibility and evidence theory are in-between, essentially working with sets of distributions. Credal inference (cf. Section <span class="xref std std-ref">credal</span>) generalizes Bayesian inference by replacing a single prior with a set of prior distributions (here identified by a set of hyper-parameters). In hierarchical Bayesian modeling, this set is again replaced by a distribution, i.e., a second-order probability.</span><a class="headerlink" href="#vs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div align="justify">
@@ -572,7 +563,7 @@ Y = Y(\vec{x}_q) := \{ h(\vec{x}_q) \vert h \in \mathcal{V} \} = \{ y \vert \pi(
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/b6d3dc2bb6d8b1109290931b01f59216ab01d8e6985cfb142b4364389f5d057f.png" src="../_images/b6d3dc2bb6d8b1109290931b01f59216ab01d8e6985cfb142b4364389f5d057f.png" />
+<img alt="../_images/9b983cbd06702298582d39a51f33878e0f1b58a83cdb5efa501a372f4be85a56.png" src="../_images/9b983cbd06702298582d39a51f33878e0f1b58a83cdb5efa501a372f4be85a56.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -665,7 +656,7 @@ Y = Y(\vec{x}_q) := \{ h(\vec{x}_q) \vert h \in \mathcal{V} \} = \{ y \vert \pi(
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c5c96795f507d3dd7b1596952c370cfecd8248460bb8a5ac6782d6a83a187dfe.png" src="../_images/c5c96795f507d3dd7b1596952c370cfecd8248460bb8a5ac6782d6a83a187dfe.png" />
+<img alt="../_images/f9f5650057c83086652f11af895a3ca41354377370aad4a127847ba9ee694651.png" src="../_images/f9f5650057c83086652f11af895a3ca41354377370aad4a127847ba9ee694651.png" />
 </div>
 </div>
 <div align="justify">
@@ -723,59 +714,59 @@ Y = Y(\vec{x}_q) := \{ h(\vec{x}_q) \vert h \in \mathcal{V} \} = \{ y \vert \pi(
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/6544464b0038e02f6117acf1406170380fd87bc318c30c292dfdd2386fd29eb1.png" src="../_images/6544464b0038e02f6117acf1406170380fd87bc318c30c292dfdd2386fd29eb1.png" />
+<img alt="../_images/0570f183f927419680d149c441e1ffc93b67ddb3f47a51890e16aa7e867a4d73.png" src="../_images/0570f183f927419680d149c441e1ffc93b67ddb3f47a51890e16aa7e867a4d73.png" />
 </div>
 </div>
 <div align="justify">
-<p>Note that the inference <a class="reference internal" href="#equation-ee1">(2)</a> can be seen as a kind of constraint propagation, in which the constraint <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> on the hypothesis space <span class="math notranslate nohighlight">\(\cH\)</span> is propagated to a constraint on <span class="math notranslate nohighlight">\(\cY\)</span>, expressed in the form of the subset <a class="reference internal" href="#equation-vss">(3)</a> of possible outcomes; or symbolically:</p>
+<p>Note that the inference <a class="reference internal" href="#equation-ee1">(5.2)</a> can be seen as a kind of constraint propagation, in which the constraint <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span> on the hypothesis space <span class="math notranslate nohighlight">\(\cH\)</span> is propagated to a constraint on <span class="math notranslate nohighlight">\(\cY\)</span>, expressed in the form of the subset <a class="reference internal" href="#equation-vss">(5.3)</a> of possible outcomes; or symbolically:</p>
 <div class="math notranslate nohighlight" id="equation-cbi">
-<span class="eqno">(4)<a class="headerlink" href="#equation-cbi" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.4)<a class="headerlink" href="#equation-cbi" title="Link to this equation">#</a></span>\[
 \cH , \cD , \vec{x}_{q}  \models Y
 \]</div>
-<p>This view highlights the interaction between prior knowledge and data: It shows that what can be said about the possible outcomes <span class="math notranslate nohighlight">\(y_{q}\)</span> not only depends on the data <span class="math notranslate nohighlight">\(\cD\)</span> but also on the hypothesis space <span class="math notranslate nohighlight">\(\cH\)</span>, i.e., the <em>model assumptions</em> the learner starts with. The specification of <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> always comes with an <em>inductive bias</em>, which is indeed essential for learning from data <span id="id2">Mitchell [<a class="reference internal" href="../references.html#id1612" title="T.M. Mitchell. The need for biases in learning generalizations. Technical Report TR CBM–TR–117, Rutgers University, 1980.">1980</a>]</span>. In general, both aleatoric and epistemic uncertainty (ignorance) depend on the way in which prior knowledge and data interact with each other. Roughly speaking, the stronger the knowledge the learning process starts with, the less data is needed to resolve uncertainty. In the extreme case, the true model is already known, and data is completely superfluous. Normally, however, prior knowledge is specified by assuming a certain type of model, for example a linear relationship between inputs <span class="math notranslate nohighlight">\(\vec{x}\)</span> and outputs <span class="math notranslate nohighlight">\(y\)</span>. Then, all else (namely the data) being equal, the degree of predictive uncertainty depends on how flexible the corresponding model class is. Informally speaking, the more restrictive the model assumptions are, the smaller the uncertainty will be. This is illustrated in <a class="reference internal" href="#vsli"><span class="std std-numref">Fig. 2</span></a> for the case of binary classification.</p>
+<p>This view highlights the interaction between prior knowledge and data: It shows that what can be said about the possible outcomes <span class="math notranslate nohighlight">\(y_{q}\)</span> not only depends on the data <span class="math notranslate nohighlight">\(\cD\)</span> but also on the hypothesis space <span class="math notranslate nohighlight">\(\cH\)</span>, i.e., the <em>model assumptions</em> the learner starts with. The specification of <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> always comes with an <em>inductive bias</em>, which is indeed essential for learning from data <span id="id2">Mitchell [<a class="reference internal" href="../references.html#id1612" title="T.M. Mitchell. The need for biases in learning generalizations. Technical Report TR CBM–TR–117, Rutgers University, 1980.">1980</a>]</span>. In general, both aleatoric and epistemic uncertainty (ignorance) depend on the way in which prior knowledge and data interact with each other. Roughly speaking, the stronger the knowledge the learning process starts with, the less data is needed to resolve uncertainty. In the extreme case, the true model is already known, and data is completely superfluous. Normally, however, prior knowledge is specified by assuming a certain type of model, for example a linear relationship between inputs <span class="math notranslate nohighlight">\(\vec{x}\)</span> and outputs <span class="math notranslate nohighlight">\(y\)</span>. Then, all else (namely the data) being equal, the degree of predictive uncertainty depends on how flexible the corresponding model class is. Informally speaking, the more restrictive the model assumptions are, the smaller the uncertainty will be. This is illustrated in <a class="reference internal" href="#vsli"><span class="std std-numref">Fig. 5.2</span></a> for the case of binary classification.</p>
 </div><figure class="align-default" id="vsli">
 <a class="reference internal image-reference" href="../_images/combined_figure.png"><img alt="version-space" src="../_images/combined_figure.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Two examples illustrating predictive uncertainty in version space learning for the case of binary classification.
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Two examples illustrating predictive uncertainty in version space learning for the case of binary classification.
 In the first example (above), the hypothesis space is given in terms of rectangles (assigning interior instances to the positive class and instances outside to the negative class). Both pictures show some of the (infinitely many) elements of the version space. Top left: Restricting <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> to axis-parallel rectangles, the first query point is necessarily positive, the second one necessarily negative, because these predictions are produced by all <span class="math notranslate nohighlight">\(h \in \mathcal{V}\)</span>. As opposed to this, both positive and negative predictions can be produced for the third query. Top right: Increasing flexibility (or weakening prior knowledge) by enriching the hypothesis space and also allowing for non-axis-parallel rectangles, none of the queries can be classified with certainty anymore. In the second example (below), hypotheses are linear and quadratic discriminant functions, respectively. Bottom left: If the hypothesis space is given by linear discriminant functions, all hypothesis consistent with the data will predict the query instance as positive. Bottom right: Enriching the hypothesis space with quadratic discriminants, the members of the version space will no longer vote unanimously: some of them predict the positive and others the negative class.</span><a class="headerlink" href="#vsli" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div align="justify">
-<p>Coming back to our discussion about uncertainty, it is clear that version space learning as outlined above does not involve any kind of aleatoric uncertainty. Instead, the only source of uncertainty is a lack of knowledge about <span class="math notranslate nohighlight">\(h^*\)</span>, and hence of epistemic nature. On the model level, the amount of uncertainty is in direct correspondence with the size of the version space <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> and reduces with an increasing sample size. Likewise, the predictive uncertainty could be measured in terms of the size of the set <a class="reference internal" href="#equation-vss">(3)</a> of candidate outcomes. Obviously, this uncertainty may differ from instance to instance, or, stated differently, approximation uncertainty may translate into prediction uncertainty in different ways.</p>
+<p>Coming back to our discussion about uncertainty, it is clear that version space learning as outlined above does not involve any kind of aleatoric uncertainty. Instead, the only source of uncertainty is a lack of knowledge about <span class="math notranslate nohighlight">\(h^*\)</span>, and hence of epistemic nature. On the model level, the amount of uncertainty is in direct correspondence with the size of the version space <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> and reduces with an increasing sample size. Likewise, the predictive uncertainty could be measured in terms of the size of the set <a class="reference internal" href="#equation-vss">(5.3)</a> of candidate outcomes. Obviously, this uncertainty may differ from instance to instance, or, stated differently, approximation uncertainty may translate into prediction uncertainty in different ways.</p>
 <p>In version space learning, uncertainty is represented in a purely set-based manner: the version space <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> and prediction set <span class="math notranslate nohighlight">\(Y(x_q)\)</span> are subsets of <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, respectively. In other words, hypotheses <span class="math notranslate nohighlight">\(h \in \mathcal{H}\)</span> and outcomes <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span> are only qualified in terms of being possible or not. In the following, we discuss the Bayesian approach, in which hypotheses and predictions are qualified more gradually in terms of probabilities.</p>
 </div></section>
 <section id="bayesian-inference">
-<h2>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Consider a hypothesis space <span class="math notranslate nohighlight">\(\cH\)</span> consisting of probabilistic predictors, that is, hypotheses <span class="math notranslate nohighlight">\(h\)</span> that deliver probabilistic predictions <span class="math notranslate nohighlight">\(p_h(y \given \vec{x}) = p(y \vert \vec{x}, h)\)</span> of outcomes <span class="math notranslate nohighlight">\(y\)</span> given an instance <span class="math notranslate nohighlight">\(\vec{x}\)</span>. In the Bayesian approach, <span class="math notranslate nohighlight">\(\cH\)</span> is supposed to be equipped with a prior distribution <span class="math notranslate nohighlight">\(p(\cdot)\)</span>, and learning essentially consists of replacing the prior by the posterior distribution:</p>
 <div class="math notranslate nohighlight" id="equation-bpost">
-<span class="eqno">(5)<a class="headerlink" href="#equation-bpost" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.5)<a class="headerlink" href="#equation-bpost" title="Link to this equation">#</a></span>\[
 p(h \vert \cD) \, = \frac{p(h) \cdot p(\cD \vert h)}{p(\cD)} \,  \propto \, p(h) \cdot p(\cD \vert h) \, ,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(p(\cD \vert h)\)</span> is the probability of the data given <span class="math notranslate nohighlight">\(h\)</span> (the likelihood of <span class="math notranslate nohighlight">\(h\)</span>).
-Intuitively, <span class="math notranslate nohighlight">\(p( \cdot \vert \cD)\)</span> captures the learner’s state of knowledge, and hence its epistemic uncertainty: The more “peaked” this distribution, i.e., the more concentrated the probability mass in a small region in <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, the less uncertain the learner is. Just like the version space <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> in version space learning, the posterior distribution on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> provides global (averaged/aggregated over the entire instance space) instead of local, <em>per-instance</em> information. For a given query instance <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span>, this information may translate into quite different representations of the uncertainty regarding the prediction <span class="math notranslate nohighlight">\(\haty_{q}\)</span> (cf.<a class="reference internal" href="#bayesian"><span class="std std-numref">Fig. 3</span></a>).</p>
+Intuitively, <span class="math notranslate nohighlight">\(p( \cdot \vert \cD)\)</span> captures the learner’s state of knowledge, and hence its epistemic uncertainty: The more “peaked” this distribution, i.e., the more concentrated the probability mass in a small region in <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, the less uncertain the learner is. Just like the version space <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> in version space learning, the posterior distribution on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> provides global (averaged/aggregated over the entire instance space) instead of local, <em>per-instance</em> information. For a given query instance <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span>, this information may translate into quite different representations of the uncertainty regarding the prediction <span class="math notranslate nohighlight">\(\haty_{q}\)</span> (cf.<a class="reference internal" href="#bayesian"><span class="std std-numref">Fig. 5.3</span></a>).</p>
 </div><figure class="align-default" id="bayesian">
 <a class="reference internal image-reference" href="../_images/pic-bayesian.png"><img alt="settings" src="../_images/pic-bayesian.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Illustration of Bayesian inference. Updating a prior distribution on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> based on training data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, a posterior distribution <span class="math notranslate nohighlight">\(\prob(h \vert \mathcal{D})\)</span> is obtained, which represents the state of knowledge of the learner (middle). Given a query <span class="math notranslate nohighlight">\(\vec{x}_{q} \in \mathcal{X}\)</span>, the predictive posterior distribution on <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> is then obtained through Bayesian model averaging: Different hypotheses <span class="math notranslate nohighlight">\(h \in \mathcal{H}\)</span> provide predictions, which are aggregated in terms of a weighted average.</span><a class="headerlink" href="#bayesian" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">Illustration of Bayesian inference. Updating a prior distribution on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> based on training data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, a posterior distribution <span class="math notranslate nohighlight">\(\prob(h \vert \mathcal{D})\)</span> is obtained, which represents the state of knowledge of the learner (middle). Given a query <span class="math notranslate nohighlight">\(\vec{x}_{q} \in \mathcal{X}\)</span>, the predictive posterior distribution on <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> is then obtained through Bayesian model averaging: Different hypotheses <span class="math notranslate nohighlight">\(h \in \mathcal{H}\)</span> provide predictions, which are aggregated in terms of a weighted average.</span><a class="headerlink" href="#bayesian" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div align="justify">
 <p>More specifically, the representation of uncertainty about a prediction <span class="math notranslate nohighlight">\(\haty_{q}\)</span> is given by the image of the posterior <span class="math notranslate nohighlight">\(p( h \vert \cD)\)</span> under the mapping <span class="math notranslate nohighlight">\(h \mapsto p(y \vert \vec{x}_{q}, h)\)</span> from hypotheses to probabilities of outcomes. This yields the predictive posterior distribution</p>
 <div class="math notranslate nohighlight" id="equation-pd">
-<span class="eqno">(6)<a class="headerlink" href="#equation-pd" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.6)<a class="headerlink" href="#equation-pd" title="Link to this equation">#</a></span>\[
 p(y \vert \vec{x}_{q}) = 
 \int_\cH p(y \vert \vec{x}_{q} , h) \, d\, p(h \vert \set{D}) \enspace .
 \]</div>
-<p>In this type of (proper) Bayesian inference, a final prediction is thus produced by \emph{model averaging}: The predicted probability of an outcome <span class="math notranslate nohighlight">\(y \in \cY\)</span> is the \emph{expected} probability <span class="math notranslate nohighlight">\(p(y \vert \vec{x}_{q}, h)\)</span>, where the expectation over the hypotheses is taken with respect to the posterior distribution on <span class="math notranslate nohighlight">\(\cH\)</span>; or, stated differently, the probability of an outcome is a weighted average over its probabilities under all hypotheses in <span class="math notranslate nohighlight">\(\cH\)</span>, with the weight of each hypothesis <span class="math notranslate nohighlight">\(h\)</span> given by its posterior probability <span class="math notranslate nohighlight">\(p( h \vert \cD)\)</span>.
+<p>In this type of (proper) Bayesian inference, a final prediction is thus produced by <em>model averaging</em>: The predicted probability of an outcome <span class="math notranslate nohighlight">\(y \in \cY\)</span> is the <em>expected</em> probability <span class="math notranslate nohighlight">\(p(y \vert \vec{x}_{q}, h)\)</span>, where the expectation over the hypotheses is taken with respect to the posterior distribution on <span class="math notranslate nohighlight">\(\cH\)</span>; or, stated differently, the probability of an outcome is a weighted average over its probabilities under all hypotheses in <span class="math notranslate nohighlight">\(\cH\)</span>, with the weight of each hypothesis <span class="math notranslate nohighlight">\(h\)</span> given by its posterior probability <span class="math notranslate nohighlight">\(p( h \vert \cD)\)</span>.
 Since model averaging is often difficult and computationally costly, sometimes only the single hypothesis</p>
 <div class="math notranslate nohighlight" id="equation-map">
-<span class="eqno">(7)<a class="headerlink" href="#equation-map" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.7)<a class="headerlink" href="#equation-map" title="Link to this equation">#</a></span>\[
 h^{map} := \argmax_{h \in \cH} p( h \vert \cD) 
 \]</div>
 <p>with the highest posterior probability is adopted, and predictions on outcomes are derived from this hypothesis.</p>
 </div><div align="justify">
-<p>To further understand how Bayesian inference can be applied, let’s see a practical example that utilizes advanced probabilistic programming with PyMC and the bambi library for a more streamlined approach. The following section breaks down the process, from data generation to model estimation and analysis, highlighting the advantages of Bayesian methods in statistical modeling.</p>
+<p>To further understand how Bayesian inference can be applied, let’s see a practical example that utilizes advanced probabilistic programming with <a class="reference external" href="https://www.pymc.io/welcome.html">PyMC</a> and the <a class="reference external" href="https://bambinos.github.io/bambi/">bambi</a> library for a more streamlined approach. The following section breaks down the process, from data generation to model estimation and analysis, highlighting the advantages of Bayesian methods in statistical modeling.</p>
 </div><div align="justify">
 <p>First, we need to generate a set of simulated data to mimic the relationship between house area and selling price. This data will serve as the input for our model, helping us understand how changes in house size could potentially affect pricing.</p>
 </div><div class="cell docutils container">
@@ -817,7 +808,7 @@ h^{map} := \argmax_{h \in \cH} p( h \vert \cD)
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/b670787dc754294c66eb28c1bc827efef36c36849a3e8e8b5ed16ca8dbafddde.png" src="../_images/b670787dc754294c66eb28c1bc827efef36c36849a3e8e8b5ed16ca8dbafddde.png" />
+<img alt="../_images/f12ff3093130d1c9177575e6fd04fe044dbbe46cea7e2a5b91e32dd2e923f069.png" src="../_images/f12ff3093130d1c9177575e6fd04fe044dbbe46cea7e2a5b91e32dd2e923f069.png" />
 </div>
 </div>
 <div align="justify">
@@ -859,11 +850,7 @@ h^{map} := \argmax_{h \in \cH} p( h \vert \cD)
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [sigma, Intercept, Slope]
 </pre></div>
 </div>
-<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/rich/live.py:231: UserWarning: 
-install "ipywidgets" for Jupyter support
-  warnings.warn('install "ipywidgets" for Jupyter support')
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "7d5b682796ab49d3a8b031657c552a20", "version_major": 2, "version_minor": 0}</script><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
 </pre>
 </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
@@ -881,14 +868,14 @@ install "ipywidgets" for Jupyter support
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="s1">&#39;Slope&#39;</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="s1">&#39;Slope&#39;</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/8079ae300f6a2c7abb49a6163413b5fe8fb6c72180f2bc1a41c46fdc3c97788b.png" src="../_images/8079ae300f6a2c7abb49a6163413b5fe8fb6c72180f2bc1a41c46fdc3c97788b.png" />
+<img alt="../_images/b64234be9f19af4449b535cc9c966f82dd689a4fa0b61ce7a44e1983225557c1.png" src="../_images/b64234be9f19af4449b535cc9c966f82dd689a4fa0b61ce7a44e1983225557c1.png" />
 </div>
 </div>
 <div align="justify">
@@ -900,7 +887,7 @@ install "ipywidgets" for Jupyter support
 </div>
 </div>
 </div>
-<div class="cell tag_hide-input docutils container">
+<div class="cell tag_hide-input tag_remove-output docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
@@ -916,47 +903,37 @@ install "ipywidgets" for Jupyter support
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/arviz/plots/lmplot.py:212: UserWarning: posterior_predictive not found in idata
-  warnings.warn(&quot;posterior_predictive not found in idata&quot;, UserWarning)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Price (thousand dollars)&#39;)
-</pre></div>
-</div>
-<img alt="../_images/678fb41304f20ff26643408fa513b81c92d5337e2f7a3fa72d36d7441778f4bc.png" src="../_images/678fb41304f20ff26643408fa513b81c92d5337e2f7a3fa72d36d7441778f4bc.png" />
-</div>
 </div>
 <div align="justify">
-<p>In <a class="reference internal" href="#equation-pd">(6)</a>, aleatoric and epistemic uncertainty are not distinguished any more, because epistemic uncertainty is “averaged out.” Consider the example of coin flipping, and let the hypothesis space be given by <span class="math notranslate nohighlight">\(\mathcal{H} \{ h_\alpha \with 0 \leq \alpha \leq 1 \}\)</span>, where <span class="math notranslate nohighlight">\(h_\alpha\)</span> is modeling a biased coin landing heads up with a probability of <span class="math notranslate nohighlight">\(\alpha\)</span> and tails up with a probability of <span class="math notranslate nohighlight">\(1- \alpha\)</span>. According to <a class="reference internal" href="#equation-pd">(6)</a>, we derive a probability of <span class="math notranslate nohighlight">\(1/2\)</span> for heads and tails, regardless of whether the (posterior) distribution on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is given by the uniform distribution (all coins are equally probable, i.e., the case of complete ignorance) or the one-point measure assigning probability 1 to <span class="math notranslate nohighlight">\(h_{1/2}\)</span> (the coin is known to be fair with complete certainty):</p>
+<p>In <a class="reference internal" href="#equation-pd">(5.6)</a>, aleatoric and epistemic uncertainty are not distinguished any more, because epistemic uncertainty is “averaged out.” Consider the example of coin flipping, and let the hypothesis space be given by <span class="math notranslate nohighlight">\(\mathcal{H} \{ h_\alpha \with 0 \leq \alpha \leq 1 \}\)</span>, where <span class="math notranslate nohighlight">\(h_\alpha\)</span> is modeling a biased coin landing heads up with a probability of <span class="math notranslate nohighlight">\(\alpha\)</span> and tails up with a probability of <span class="math notranslate nohighlight">\(1- \alpha\)</span>. According to <a class="reference internal" href="#equation-pd">(5.6)</a>, we derive a probability of <span class="math notranslate nohighlight">\(1/2\)</span> for heads and tails, regardless of whether the (posterior) distribution on <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is given by the uniform distribution (all coins are equally probable, i.e., the case of complete ignorance) or the one-point measure assigning probability 1 to <span class="math notranslate nohighlight">\(h_{1/2}\)</span> (the coin is known to be fair with complete certainty):</p>
 <div class="math notranslate nohighlight">
 \[
 p(y ) = 
 \int_\cH \alpha \, d\, p  = \frac{1}{2} = \int_\cH \alpha \, d\, p'  
 \]</div>
 <p>for the uniform measure <span class="math notranslate nohighlight">\(p\)</span> (with probability density function <span class="math notranslate nohighlight">\(p(\alpha) \equiv 1\)</span>) as well as the measure <span class="math notranslate nohighlight">\(p'\)</span> with probability mass function <span class="math notranslate nohighlight">\(p'(\alpha) = 1\)</span> if <span class="math notranslate nohighlight">\(\alpha = \frac{1}{2}\)</span> and <span class="math notranslate nohighlight">\(= 0\)</span> for <span class="math notranslate nohighlight">\(\alpha \neq \frac{1}{2}\)</span>.
-Obviously, MAP inference <a class="reference internal" href="#equation-map">(7)</a> does not capture epistemic uncertainty either.</p>
+Obviously, MAP inference <a class="reference internal" href="#equation-map">(5.7)</a> does not capture epistemic uncertainty either.</p>
 </div><div align="justify">
-<p>More generally, consider the case of binary classification with <span class="math notranslate nohighlight">\(\cY \{ -1, +1 \}\)</span> and <span class="math notranslate nohighlight">\(p_h(+1 \vert \vec{x}_{q})\)</span> the probability predicted by the hypothesis <span class="math notranslate nohighlight">\(h\)</span> for the positive class. Instead of deriving a distribution on <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> according to <a class="reference internal" href="#equation-pd">(6)</a>, one could also derive a predictive distribution for the (unknown) probability <span class="math notranslate nohighlight">\(q p(+1 \vert \vec{x}_q)\)</span> of the positive class:</p>
+<p>More generally, consider the case of binary classification with <span class="math notranslate nohighlight">\(\cY \{ -1, +1 \}\)</span> and <span class="math notranslate nohighlight">\(p_h(+1 \vert \vec{x}_{q})\)</span> the probability predicted by the hypothesis <span class="math notranslate nohighlight">\(h\)</span> for the positive class. Instead of deriving a distribution on <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> according to <a class="reference internal" href="#equation-pd">(5.6)</a>, one could also derive a predictive distribution for the (unknown) probability <span class="math notranslate nohighlight">\(q p(+1 \vert \vec{x}_q)\)</span> of the positive class:</p>
 <div class="math notranslate nohighlight" id="equation-sop">
-<span class="eqno">(8)<a class="headerlink" href="#equation-sop" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.8)<a class="headerlink" href="#equation-sop" title="Link to this equation">#</a></span>\[
 p(q \vert \vec{x}_{q}) = 
 \int_{\mathcal{H}} \, \llbracket \, p(+1 \vert \vec{x}_{q} , h) = q \, \rrbracket \, d\, p(h \vert \mathcal{D}) \enspace .
 \]</div>
-<p>This is a second-order probability, which still contains both aleatoric and epistemic uncertainty. The question of how to quantify the epistemic part of the uncertainty is not at all obvious, however. Intuitively, epistemic uncertainty should be reflected by the variability of the distribution <a class="reference internal" href="#equation-sop">(8)</a>: the more spread the probability mass over the unit interval, the higher the uncertainty seems to be. But how to put this into quantitative terms? Entropy is arguably not a good choice, for example, because this measure is invariant against redistribution of probability mass. For instance, the distributions <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(p'\)</span> with
+<p>This is a second-order probability, which still contains both aleatoric and epistemic uncertainty. The question of how to quantify the epistemic part of the uncertainty is not at all obvious, however. Intuitively, epistemic uncertainty should be reflected by the variability of the distribution <a class="reference internal" href="#equation-sop">(5.8)</a>: the more spread the probability mass over the unit interval, the higher the uncertainty seems to be. But how to put this into quantitative terms? Entropy is arguably not a good choice, for example, because this measure is invariant against redistribution of probability mass. For instance, the distributions <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(p'\)</span> with
 <span class="math notranslate nohighlight">\(p(q \vert \vec{x}_{q}) 12(q-\frac{1}{2})^2\)</span> and <span class="math notranslate nohighlight">\(p'(q \vert \vec{x}_{q})  3 - p(q \vert \vec{x}_{q})\)</span> both have the same entropy, although they correspond to quite different states of information.
 From this point of view, the variance of the distribution would be better suited, but this measure has other deficiencies (for example, it is not maximized by the uniform distribution, which could be considered as a case of minimal informedness).</p>
 <p>The difficulty of specifying epistemic uncertainty in the Bayesian approach is rooted in the more general difficulty of representing a lack of knowledge in probability theory. This issue will be discussed next.</p>
 </div></section>
 <section id="representing-a-lack-of-knowledge">
-<h2>Representing a lack of knowledge<a class="headerlink" href="#representing-a-lack-of-knowledge" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Representing a lack of knowledge<a class="headerlink" href="#representing-a-lack-of-knowledge" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>As already said, uncertainty is captured in a purely <em>set-based</em> way in version space learning: <span class="math notranslate nohighlight">\(\mathcal{V} \subseteq \mathcal{H}\)</span> is a set of candidate hypotheses, which translates into a set of candidate outcomes <span class="math notranslate nohighlight">\(Y \subseteq \mathcal{Y}\)</span> for a query <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span>. In the case of sets, there is a rather obvious correspondence between the degree of uncertainty in the sense of a lack of knowledge and the size of the set of candidates: Proceeding from a reference set <span class="math notranslate nohighlight">\(\Omega\)</span> of alternatives, assuming some ground-truth <span class="math notranslate nohighlight">\(\omega^* \in \Omega\)</span>, and expressing knowledge about the latter in terms of a subset <span class="math notranslate nohighlight">\(C \subseteq \Omega\)</span> of possible candidates, we can clearly say that the bigger <span class="math notranslate nohighlight">\(C\)</span>, the larger the lack of knowledge. More specifically, for finite <span class="math notranslate nohighlight">\(\Omega\)</span>, a common uncertainty measure in information theory is <span class="math notranslate nohighlight">\(\log(|C|)\)</span>. Consequently, knowledge gets weaker by adding additional elements to <span class="math notranslate nohighlight">\(C\)</span> and stronger by removing candidates.</p>
 <p>In standard probabilistic modeling and Bayesian inference, where knowledge is conveyed by a distribution <span class="math notranslate nohighlight">\(p\)</span> on <span class="math notranslate nohighlight">\(\Omega\)</span>, it is much less obvious how to “weaken” this knowledge. This is mainly because the total amount of belief is fixed in terms of a unit mass that can be distributed among the elements <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>. Unlike for sets, where an additional candidate <span class="math notranslate nohighlight">\(\omega\)</span> can be added or removed without changing the plausibility of all other candidates, increasing the weight of one alternative <span class="math notranslate nohighlight">\(\omega\)</span> requires decreasing the weight of another alternative <span class="math notranslate nohighlight">\(\omega'\)</span> by exactly the same amount.</p>
 </div><div align="justify">
 <p>Of course, there are also measures of uncertainty for probability distributions, most notably the (Shannon) entropy, which, for finite <span class="math notranslate nohighlight">\(\Omega\)</span>, is given as follows:</p>
 <div class="math notranslate nohighlight" id="equation-shannon">
-<span class="eqno">(9)<a class="headerlink" href="#equation-shannon" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.9)<a class="headerlink" href="#equation-shannon" title="Link to this equation">#</a></span>\[
 H(p) := - \sum_{\omega \in \Omega} p(\omega) \, \log p(\omega)  
 \]</div>
 <p>However, these measures are primarily capturing the shape of the distribution, namely its “peakedness” or non-uniformity <span id="id3">Dubois and Hüllermeier [<a class="reference internal" href="../references.html#id297" title="D. Dubois and E. Hüllermeier. Comparing probability measures using possibility theory: a notion of relative peakedness. International Journal of Approximate Reasoning, 45(2):364–385, 2007.">2007</a>]</span>, and hence inform about the predictability of the outcome of a random experiment. Seen from this point of view, they are more akin to aleatoric uncertainty, whereas the set-based approach (i.e., representing knowledge in terms of a subset <span class="math notranslate nohighlight">\(C \subseteq \Omega\)</span> of candidates) is arguably better suited for capturing epistemic uncertainty.</p>
@@ -966,11 +943,11 @@ For example, the case of <em>complete ignorance</em> is typically modeled in ter
 This was already pointed out by the famous Ronald Fisher, who noted that “<em>not knowing the chance of mutually exclusive events and knowing the chance to be equal are two quite different states of knowledge</em>.”</p>
 <p>Another problem in this regard is caused by the measure-theoretic grounding of probability and its additive nature. For example, the uniform distribution is not invariant under reparametrization (a uniform distribution on a parameter <span class="math notranslate nohighlight">\(\omega\)</span> does not translate into a uniform distribution on <span class="math notranslate nohighlight">\(1/\omega\)</span>, although ignorance about <span class="math notranslate nohighlight">\(\omega\)</span> implies ignorance about <span class="math notranslate nohighlight">\(1/\omega\)</span>). Likewise, expressing ignorance about the length <span class="math notranslate nohighlight">\(x\)</span> of a cube in terms of a uniform distribution on an interval <span class="math notranslate nohighlight">\([l,u]\)</span> does not yield a uniform distribution of <span class="math notranslate nohighlight">\(x^3\)</span> on <span class="math notranslate nohighlight">\([l^3 , u^3]\)</span>, thereby suggesting some degree of informedness about its volume. Problems of this kind render the use of a uniform prior distribution, often interpreted as representing epistemic uncertainty in Bayesian inference, at least debatable<a class="footnote-reference brackets" href="#footnoteidentifier2" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 </div><div align="justify">
-<p>The argument that a single (probability) distribution is not enough for representing uncertain knowledge is quite prominent in the literature. Correspondingly, various generalizations of standard probability theory have been proposed, including imprecise probability <span id="id7">Walley [<a class="reference internal" href="../references.html#id938" title="P. Walley. Statistical Reasoning with Imprecise Probabilities. Chapman and Hall, 1991.">1991</a>]</span>, evidence theory <span id="id8">Shafer [<a class="reference internal" href="../references.html#id855" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">1976</a>], Smets and Kennes [<a class="reference internal" href="../references.html#id1227" title="P. Smets and R. Kennes. The transferable belief model. Artificial Intelligence, 66:191-234, 1994.">1994</a>]</span>, and possibility theory <span id="id9">Dubois and Prade [<a class="reference internal" href="../references.html#id419" title="D. Dubois and H. Prade. Possibility Theory. Plenum Press, 1988.">1988</a>]</span>. These formalisms are essentially working with sets of probability distributions, i.e., they seek to take advantage of the complementary nature of sets and distributions, and to combine both representations in a meaningful way (cf. <a class="reference internal" href="#setting2"><span class="std std-numref">Fig. 4</span></a>). We also refer to the <a class="reference internal" href="set-based-versus-distributional-representations.html"><span class="std std-doc">subchapter</span></a> for a brief overview.</p>
+<p>The argument that a single (probability) distribution is not enough for representing uncertain knowledge is quite prominent in the literature. Correspondingly, various generalizations of standard probability theory have been proposed, including imprecise probability <span id="id7">Walley [<a class="reference internal" href="../references.html#id938" title="P. Walley. Statistical Reasoning with Imprecise Probabilities. Chapman and Hall, 1991.">1991</a>]</span>, evidence theory <span id="id8">Shafer [<a class="reference internal" href="../references.html#id855" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">1976</a>], Smets and Kennes [<a class="reference internal" href="../references.html#id1227" title="P. Smets and R. Kennes. The transferable belief model. Artificial Intelligence, 66:191-234, 1994.">1994</a>]</span>, and possibility theory <span id="id9">Dubois and Prade [<a class="reference internal" href="../references.html#id419" title="D. Dubois and H. Prade. Possibility Theory. Plenum Press, 1988.">1988</a>]</span>. These formalisms are essentially working with sets of probability distributions, i.e., they seek to take advantage of the complementary nature of sets and distributions, and to combine both representations in a meaningful way (cf. <a class="reference internal" href="#setting2"><span class="std std-numref">Fig. 5.4</span></a>). We also refer to the <a class="reference internal" href="set-based-versus-distributional-representations.html"><span class="std std-doc">subchapter</span></a> for a brief overview.</p>
 </div><figure class="align-default" id="setting2">
 <a class="reference internal image-reference" href="../_images/pic-settings.png"><img alt="settings" src="../_images/pic-settings.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Set-based versus distributional knowledge representation on the level of predictions, hypotheses, and models. In version space learning, the model class is fixed, and knowledge about hypotheses and outcomes is represented in terms of sets (blue color). In Bayesian inference, sets are replaced by probability distributions (gray shading). Theories like possibility and evidence theory are in-between, essentially working with sets of distributions. Credal inference (cf. Section <span class="xref std std-ref">credal</span>) generalizes Bayesian inference by replacing a single prior with a set of prior distributions (here identified by a set of hyper-parameters). In hierarchical Bayesian modeling, this set is again replaced by a distribution, i.e., a second-order probability.</span><a class="headerlink" href="#setting2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Set-based versus distributional knowledge representation on the level of predictions, hypotheses, and models. In version space learning, the model class is fixed, and knowledge about hypotheses and outcomes is represented in terms of sets (blue color). In Bayesian inference, sets are replaced by probability distributions (gray shading). Theories like possibility and evidence theory are in-between, essentially working with sets of distributions. Credal inference (cf. Section <span class="xref std std-ref">credal</span>) generalizes Bayesian inference by replacing a single prior with a set of prior distributions (here identified by a set of hyper-parameters). In hierarchical Bayesian modeling, this set is again replaced by a distribution, i.e., a second-order probability.</span><a class="headerlink" href="#setting2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <script type="text/x-mathjax-config">
@@ -1034,7 +1011,7 @@ This was already pointed out by the famous Ronald Fisher, who noted that “<em>
               
               
               
-                <footer class="prev-next-footer d-print-none">
+                <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1043,7 +1020,7 @@ This was already pointed out by the famous Ronald Fisher, who noted that “<em>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Auxiliary sites on information-theory, probability theory and other mathematical</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Auxiliary sites on information-theory, probability theory and other mathematical</p>
       </div>
     </a>
     <a class="right-next"
@@ -1051,7 +1028,7 @@ This was already pointed out by the famous Ronald Fisher, who noted that “<em>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Set-based versus distributional representations</p>
+        <p class="prev-next-title"><span class="section-number">5.4. </span>Set-based versus distributional representations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1071,9 +1048,9 @@ This was already pointed out by the famous Ronald Fisher, who noted that “<em>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-space-learning">Version Space Learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference">Bayesian Inference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-a-lack-of-knowledge">Representing a lack of knowledge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-space-learning">5.1. Version Space Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference">5.2. Bayesian Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-a-lack-of-knowledge">5.3. Representing a lack of knowledge</a></li>
 </ul>
   </nav></div>
 
@@ -1141,8 +1118,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

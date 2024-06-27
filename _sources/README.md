@@ -117,19 +117,29 @@ there is no space between the last character and the [^footNoteIdentifier]
 
 ### TODO: 
 - domain name (feedback link)
+- chapter number
+- color
 
 At least one example per chapter?
 
 ## Contributions
 | Package          | Presented by        | Verified by         |
 |:----------------:|:-------------------:|:-------------------:|
+|a                 |Evert Buzon          | |
+|b                 |Nico Plöhn           | |
 |c                 |Evert Buzon          | |
-|e                 |Longfei Zuo          | |
+|d                 |Longfei Zuo          | |
+|e                 |Longfei Zuo          |Santo Thies   |
 |f                 |Jiawen Wang          |Santo Thies   |
 |g                 |Jiawen Wang          | |
+|h                 |Jiawen Wang          | |
+|i                 |Longfei Zuo          | |
+|j                 |Evert Buzon          | |
 |k                 |Sven Morlock         | |
+|l                 |Sven Morlock         | |
 |m                 |Sven Morlock         | |
-|n                 |Nico Plöhn           | |
+|n                 |Nico Plöhn           |Santo Thies    |
+|o                 |Nico Plöhn           | |
 |p                 |Santo Thies          |Jiawen Wang & Sven Morlock|
 |q                 |Santo Thies          |Jiawen Wang |
 |r                 |Santo Thies          | |

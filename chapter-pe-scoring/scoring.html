@@ -8,51 +8,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Probability Estimation via Scoring &#8212; My sample book</title>
+    <title>6. Probability Estimation via Scoring &#8212; My sample book</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-scoring/scoring';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Probability Estimation and Calibration" href="../chapter-pe-calibration/calibration.html" />
-    <link rel="prev" title="Set-based versus distributional representations" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html" />
+    <link rel="next" title="7. Probability Estimation and Calibration" href="../chapter-pe-calibration/calibration.html" />
+    <link rel="prev" title="5.4. Set-based versus distributional representations" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -73,23 +73,27 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,13 +115,8 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
     </header>
   
 
@@ -180,31 +179,31 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">Prelude</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">Set-based versus distributional representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">1. Prelude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">3. Sources of uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">4. Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">5. Modelling Approximation Uncertainty</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">5.4. Set-based versus distributional representations</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Estimation via Scoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation and Calibration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation and Ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">Conformal prediction for classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">7. Probability Estimation and Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">9. Maximum Likelihood and Fisher Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">10. Generative models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">11. Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian neural networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">14. Credal sets and classifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">15. Reliable Classification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">16. Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">16.2. Excursus: Hypothesis testing</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">Conformal prediction for regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">Set-valued prediction based on utility maximization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">17. Conformal prediction for regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">18. Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">19. References</a></li>
 </ul>
 
     </div>
@@ -220,7 +219,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -229,14 +228,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -261,14 +260,14 @@
       
       <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-pe-scoring/scoring.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+    <img src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -425,9 +424,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -448,17 +447,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">Logarithmic Score</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">Log Loss</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-the-receiver-operating-characteristic-curve">Area Under the Receiver Operating Characteristic Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">6.1. 1. Example: Probabilistic Predictor with Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">6.1.1. Brier Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">6.1.2. Logarithmic Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">6.1.3. Log Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-the-receiver-operating-characteristic-curve">6.1.4. Area Under the Receiver Operating Characteristic Curve</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-error">Mean Square Error</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2"><span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">6.2. 2. Example: Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">6.2.1. Continuous Ranked Probability Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-error">6.2.2. Mean Square Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2">6.2.3. <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 </ul>
 </li>
 </ul>
@@ -473,7 +472,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-via-scoring">
-<h1>Probability Estimation via Scoring<a class="headerlink" href="#probability-estimation-via-scoring" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Probability Estimation via Scoring<a class="headerlink" href="#probability-estimation-via-scoring" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -508,7 +507,7 @@ and <code class="docutils literal notranslate"><span class="pre">linear</span> <
 Bayesian approaches such as <a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html"><span class="doc std std-doc">Bayesian neural networks</span></a> and <a class="reference internal" href="../chapter-gaussianprocess/intro.html"><span class="doc std std-doc">Gaussian processes</span></a>,
 as well as various techniques in the realm of <a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html"><span class="doc std std-doc">(deep) neural networks</span></a>.</p>
 </div><section id="example-probabilistic-predictor-with-logistic-regression">
-<h2>1. Example: Probabilistic Predictor with Logistic Regression<a class="headerlink" href="#example-probabilistic-predictor-with-logistic-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>1. Example: Probabilistic Predictor with Logistic Regression<a class="headerlink" href="#example-probabilistic-predictor-with-logistic-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Since there is no standard metric for comparing the accuracy of probability estimates,
 we use three different metrics to compare the probability estimates given by each example. <br />
@@ -537,7 +536,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a826f107d2bf19b311f952598ec6c86a54b01e68cb8e582c12c396f4f462af5e.png" src="../_images/a826f107d2bf19b311f952598ec6c86a54b01e68cb8e582c12c396f4f462af5e.png" />
+<img alt="../_images/ef93769834df971da5a0ea5baf6f7ec9c88a3e978794c081cac6098bad52ac01.png" src="../_images/ef93769834df971da5a0ea5baf6f7ec9c88a3e978794c081cac6098bad52ac01.png" />
 </div>
 </div>
 <div align="justify">
@@ -568,7 +567,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7fe29bbf2ac323f2b3e444ac7061e66155af7b84f8d05c19bae23f6ca6fff209.png" src="../_images/7fe29bbf2ac323f2b3e444ac7061e66155af7b84f8d05c19bae23f6ca6fff209.png" />
+<img alt="../_images/5feb8c0e2de01fee4273d1df9cedf89186996c034fce311a4fb2796f87996998.png" src="../_images/5feb8c0e2de01fee4273d1df9cedf89186996c034fce311a4fb2796f87996998.png" />
 </div>
 </div>
 <div align="justify">
@@ -590,7 +589,7 @@ In these mathematical formulas,
 <span class="math notranslate nohighlight">\(N\)</span> denotes the number of observations or data points in the dataset.</p>
 </div>
 </div><section id="brier-score">
-<h3>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>The Brier Score (<span id="id3">Brier [<a class="reference internal" href="../references.html#id2279" title="Glenn W Brier. Verification of forecasts expressed in terms of probability. Monthly weather review, 78(1):1–3, 1950.">1950</a>]</span>)
 (Quadratic Score) is a strictly proper scoring rule which measures the accuracy of probabilistic predictions,</p>
@@ -617,7 +616,7 @@ but it is inappropriate for ordinal variables which can take on three or more va
 </div>
 </div></section>
 <section id="logarithmic-score">
-<h3>Logarithmic Score<a class="headerlink" href="#logarithmic-score" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.2. </span>Logarithmic Score<a class="headerlink" href="#logarithmic-score" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>The Logarithmic (Log) Score is also often used in the context of probability forecasting,</p>
 <div class="math notranslate nohighlight">
@@ -643,7 +642,7 @@ S_{\text{Log}} = -\sum_{i=1}^N y_i \log(p_i).
 </div>
 </div></section>
 <section id="log-loss">
-<h3>Log Loss<a class="headerlink" href="#log-loss" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.3. </span>Log Loss<a class="headerlink" href="#log-loss" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>It measures the performance of a classification model where the prediction is a probability value between 0 and 1,</p>
 <div class="math notranslate nohighlight">
@@ -669,7 +668,7 @@ L = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(p_i) + (1-y_i) \log(1-p_i) \right).
 </div>
 </div></section>
 <section id="area-under-the-receiver-operating-characteristic-curve">
-<h3>Area Under the Receiver Operating Characteristic Curve<a class="headerlink" href="#area-under-the-receiver-operating-characteristic-curve" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.4. </span>Area Under the Receiver Operating Characteristic Curve<a class="headerlink" href="#area-under-the-receiver-operating-characteristic-curve" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>The area under the curve (AUC) is widely used to measure the accuracy of diagnostic tests.
 The receiver operating characteristic (ROC) curve aims to classify the state as either positive or negative based on test results and to find the optimal cut-off value with the best diagnostic performance.
@@ -711,7 +710,7 @@ AUCROC Score: 0.7533
 </section>
 </section>
 <section id="example-linear-regression">
-<h2>2. Example: Linear Regression<a class="headerlink" href="#example-linear-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>2. Example: Linear Regression<a class="headerlink" href="#example-linear-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Now we show another example for the regression task.
 In statistics, linear regression is a statistical model used for predicting a continuous target variable. Let us also plot a synthetic regression dataset first.</p>
@@ -732,7 +731,7 @@ In statistics, linear regression is a statistical model used for predicting a co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dd8bf50ce9065b1b263e5fe90e8472ea6ca2796b56f9c66872c9a2a4c206d438.png" src="../_images/dd8bf50ce9065b1b263e5fe90e8472ea6ca2796b56f9c66872c9a2a4c206d438.png" />
+<img alt="../_images/6a4130d813c457d3ebe20fc7f1da74d98015f9cf7f25ea91986503d985c9d613.png" src="../_images/6a4130d813c457d3ebe20fc7f1da74d98015f9cf7f25ea91986503d985c9d613.png" />
 </div>
 </div>
 <div align="justify">
@@ -756,11 +755,11 @@ In statistics, linear regression is a statistical model used for predicting a co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5b9761f9f5288b7f4d667a898de0a75cfe211c6d0625fc55829e70ad67db4570.png" src="../_images/5b9761f9f5288b7f4d667a898de0a75cfe211c6d0625fc55829e70ad67db4570.png" />
+<img alt="../_images/bda40aa0fd8ea41f79f3bf1d6ac117804096a54ab8830241518194a71777d8c8.png" src="../_images/bda40aa0fd8ea41f79f3bf1d6ac117804096a54ab8830241518194a71777d8c8.png" />
 </div>
 </div>
 <section id="continuous-ranked-probability-score">
-<h3>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>The Continuous Ranked Probability Score (CRPS) applies to probabilistic forecasts that take the form of predictive cumulative distribution functions. It generalizes the absolute error and forms a special case of a new and very general type of score, the energy score. Like many other scoring rules, the energy score admits a kernel representation in terms of negative definite functions, with links to inequalities of Hoeffding type, in both univariate and multivariate settings (<span id="id5">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">2007</a>]</span>).</p>
 <p>The CRPS is defined as follows:</p>
@@ -802,7 +801,7 @@ the CRPS can be computed using a closed-form solution:</p>
 </div>
 </section>
 <section id="mean-square-error">
-<h3>Mean Square Error<a class="headerlink" href="#mean-square-error" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.2. </span>Mean Square Error<a class="headerlink" href="#mean-square-error" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>In statistics, the mean squared error (MSE) or mean squared deviation (MSD) of an estimator (of a procedure for estimating an unobserved quantity) measures the average of the squares of the errors,</p>
 <div class="math notranslate nohighlight">
@@ -833,7 +832,7 @@ It measures the mean squared difference between predicted probabilities and the 
 </div>
 </div></section>
 <section id="r-2">
-<h3><span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#r-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.3. </span><span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#r-2" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>R-squared (coefficient of determination) measures the proportion of the variance in the dependent variable that is predictable from the independent variables, normally ranging from 0 to 1.
 Mathematically, it is defined as follows:</p>
@@ -913,7 +912,7 @@ Thus, forecast evaluators should routinely consider choosing scoring rules from 
               
               
               
-                <footer class="prev-next-footer d-print-none">
+                <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -922,7 +921,7 @@ Thus, forecast evaluators should routinely consider choosing scoring rules from 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Set-based versus distributional representations</p>
+        <p class="prev-next-title"><span class="section-number">5.4. </span>Set-based versus distributional representations</p>
       </div>
     </a>
     <a class="right-next"
@@ -930,7 +929,7 @@ Thus, forecast evaluators should routinely consider choosing scoring rules from 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Probability Estimation and Calibration</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Probability Estimation and Calibration</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -950,17 +949,17 @@ Thus, forecast evaluators should routinely consider choosing scoring rules from 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">1. Example: Probabilistic Predictor with Logistic Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">Brier Score</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">Logarithmic Score</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">Log Loss</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-the-receiver-operating-characteristic-curve">Area Under the Receiver Operating Characteristic Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probabilistic-predictor-with-logistic-regression">6.1. 1. Example: Probabilistic Predictor with Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brier-score">6.1.1. Brier Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-score">6.1.2. Logarithmic Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-loss">6.1.3. Log Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-the-receiver-operating-characteristic-curve">6.1.4. Area Under the Receiver Operating Characteristic Curve</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">2. Example: Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">Continuous Ranked Probability Score</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-error">Mean Square Error</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2"><span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-regression">6.2. 2. Example: Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-ranked-probability-score">6.2.1. Continuous Ranked Probability Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-error">6.2.2. Mean Square Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2">6.2.3. <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 </ul>
 </li>
 </ul>
@@ -1030,8 +1029,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -8,51 +8,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Conformal prediction for classification &#8212; My sample book</title>
+    <title>16. Conformal prediction for classification &#8212; My sample book</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_classification/intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Excursus: Hypothesis testing" href="hypothesis-excurs.html" />
-    <link rel="prev" title="Reliable Classification" href="../chapter-reliable_classification/intro.html" />
+    <link rel="next" title="16.2. Excursus: Hypothesis testing" href="hypothesis-excurs.html" />
+    <link rel="prev" title="15. Reliable Classification" href="../chapter-reliable_classification/intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -73,23 +73,27 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,13 +115,8 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
     </header>
   
 
@@ -180,31 +179,31 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">Prelude</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">Sources of uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">Modelling Approximation Uncertainty</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">Set-based versus distributional representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">1. Prelude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">3. Sources of uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">4. Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">5. Modelling Approximation Uncertainty</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">5.4. Set-based versus distributional representations</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">Probability Estimation via Scoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">Probability Estimation and Calibration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">Probability Estimation and Ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">Maximum Likelihood and Fisher Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">Generative models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">Deep neural network ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">Bayesian neural networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">Credal sets and classifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">Reliable Classification</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Conformal prediction for classification</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="hypothesis-excurs.html">Excursus: Hypothesis testing</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">6. Probability Estimation via Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">7. Probability Estimation and Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">9. Maximum Likelihood and Fisher Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">10. Generative models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">11. Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep neural network ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian neural networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">14. Credal sets and classifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">15. Reliable Classification</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">16. Conformal prediction for classification</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="hypothesis-excurs.html">16.2. Excursus: Hypothesis testing</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">Conformal prediction for regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">Set-valued prediction based on utility maximization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">17. Conformal prediction for regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">18. Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">19. References</a></li>
 </ul>
 
     </div>
@@ -220,7 +219,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -229,14 +228,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -261,14 +260,14 @@
       
       <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-conformel_classification/intro.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+    <img src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -425,9 +424,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -448,7 +447,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-prediction">Uncertainty Quantification in Conformal prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-prediction">16.1. Uncertainty Quantification in Conformal prediction</a></li>
 </ul>
             </nav>
         </div>
@@ -461,7 +460,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="conformal-prediction-for-classification">
-<h1>Conformal prediction for classification<a class="headerlink" href="#conformal-prediction-for-classification" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">16. </span>Conformal prediction for classification<a class="headerlink" href="#conformal-prediction-for-classification" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -478,7 +477,7 @@ document.write(`
 <p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1895" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">2014</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1896" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">2008</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1985" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">2003</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
 Given a sequence of training observations and a new query <span class="math notranslate nohighlight">\(\vec{x}_{N+1}\)</span> (which we denoted by <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> before and in the following plot is marked red) with unknown outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-cpseq">
-<span class="eqno">(23)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
 (\vec{x}_1, y_1), \,  (\vec{x}_2, y_2), \ldots ,  (\vec{x}_N, y_N), \, (\vec{x}_{N+1}, \bullet)
 \enspace ,
 \]</div>
@@ -534,7 +533,7 @@ Given a sequence of training observations and a new query <span class="math notr
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/330a590a227cef37d0ea80ef666e6e4162110ddd683ace3b1039cf17e349076e.png" src="../_images/330a590a227cef37d0ea80ef666e6e4162110ddd683ace3b1039cf17e349076e.png" />
+<img alt="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" src="../_images/6bf9c43c3ae48af7f031d5ff4109c0cc850872d5085d7638956d3380bee3351a.png" />
 </div>
 </div>
 <div align="justify">
@@ -551,7 +550,7 @@ Given a sequence of training observations and a new query <span class="math notr
 f(\vec{x},y) = \frac{\sum_{i=1}^k d_i^+}{\sum_{i=1}^k d_i^-}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(d_i^+\)</span> is the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled y, and <span class="math notranslate nohighlight">\(d_i^-\)</span> the distance from the <span class="math notranslate nohighlight">\(i^{th}\)</span> nearest neighbor labeled differently.
-Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(23)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 1), yields a sequence of scores</p>
+Applying this function to the sequence <a class="reference internal" href="#equation-cpseq">(16.1)</a>, with a specific (though hypothetical) choice of <span class="math notranslate nohighlight">\(y = y_{N+1}\)</span> (let us pick y = 1), yields a sequence of scores</p>
 <div class="math notranslate nohighlight">
 \[
 \alpha_1, \, \alpha_2, \ldots , \alpha_N , \, \alpha_{N+1} \enspace .
@@ -683,13 +682,13 @@ Applying this function to the sequence <a class="reference internal" href="#equa
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/04019fea6d6cf419d62c3ff06a6335e800ece1aea2dfb9bf774099218fe2f950.png" src="../_images/04019fea6d6cf419d62c3ff06a6335e800ece1aea2dfb9bf774099218fe2f950.png" />
+<img alt="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" src="../_images/3f11a55c651cb938272c1a1ead59119800d9502acfb95e2dabc6cc97434c72d8.png" />
 </div>
 </div>
 <div align="justify">
 <p>Denote by <span class="math notranslate nohighlight">\(\sigma\)</span> the permutation of <span class="math notranslate nohighlight">\(\{1, \ldots , N+1\}\)</span> that sorts the scores in increasing order, i.e., such that <span class="math notranslate nohighlight">\(\alpha_{\sigma(1)} \leq \ldots \leq \alpha_{\sigma(N+1)}\)</span>. Under the assumption that the hypothetical choice of <span class="math notranslate nohighlight">\(y_{N+1}\)</span> is in agreement with the true data-generating process, and that this process has the property of exchangeability<a class="footnote-reference brackets" href="#exchangeability" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> (which is weaker than the assumption of independence and essentially means that the order of observations is irrelevant), every permutation <span class="math notranslate nohighlight">\(\sigma\)</span> has the same probability of occurrence. Consequently, the probability that <span class="math notranslate nohighlight">\(\alpha_{N+1}\)</span> is among the <span class="math notranslate nohighlight">\(\epsilon\)</span>,% highest nonconformity scores should be low. This notion can be captured by the <span class="math notranslate nohighlight">\(p\)</span>-values associated with the candidate <span class="math notranslate nohighlight">\(y\)</span>, defined as</p>
 <div class="math notranslate nohighlight" id="equation-probability-y-highestnonconformity">
-<span class="eqno">(24)<a class="headerlink" href="#equation-probability-y-highestnonconformity" title="Link to this equation">#</a></span>\[
+<span class="eqno">(16.2)<a class="headerlink" href="#equation-probability-y-highestnonconformity" title="Link to this equation">#</a></span>\[
 p(y)   := \frac{\# \{ i \given \alpha_i \geq \alpha_{N+1} \}}{N+1}
 \]</div>
 </div><div class="cell docutils container">
@@ -769,7 +768,7 @@ The complete <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> ca
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/ddf4d86066bbad0dcfc4bef73bcef043b0cbd7d1567bc7f8c5724a7f01c34679.png" src="../_images/ddf4d86066bbad0dcfc4bef73bcef043b0cbd7d1567bc7f8c5724a7f01c34679.png" />
+<img alt="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" src="../_images/592415f87864b229749ed0581b4b4a2768eac703d11b598a074fe7c4d2b28548.png" />
 </div>
 </div>
 <div align="justify">
@@ -824,11 +823,11 @@ Here we want to illustrate therefore we choose <code class="docutils literal not
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/2282157cd75e5d84d76a12292e5d287ce848a5df1780747ea378dfb351504993.png" src="../_images/2282157cd75e5d84d76a12292e5d287ce848a5df1780747ea378dfb351504993.png" />
+<img alt="../_images/94654749d9bb5ef19ddb287a013daa770819da8ca25efbdf3508ef0630a2b143.png" src="../_images/94654749d9bb5ef19ddb287a013daa770819da8ca25efbdf3508ef0630a2b143.png" />
 </div>
 </div>
 <div align="justify">
-<p>Now given a <span class="math notranslate nohighlight">\(\epsilon\)</span> one can define based on the above distribution an threshold <span class="math notranslate nohighlight">\(q\)</span> such that all candidates <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span> can be rejected if <span class="math notranslate nohighlight">\(f(x_{N+1},y_{N+1}) \geq q\)</span>. The value of <span class="math notranslate nohighlight">\(q\)</span> is chosen such that <a class="reference internal" href="#equation-probability-y-highestnonconformity">(24)</a> holds. The resulting prediction set is as follows:</p>
+<p>Now given a <span class="math notranslate nohighlight">\(\epsilon\)</span> one can define based on the above distribution an threshold <span class="math notranslate nohighlight">\(q\)</span> such that all candidates <span class="math notranslate nohighlight">\(y_{N+1}=y\)</span> can be rejected if <span class="math notranslate nohighlight">\(f(x_{N+1},y_{N+1}) \geq q\)</span>. The value of <span class="math notranslate nohighlight">\(q\)</span> is chosen such that <a class="reference internal" href="#equation-probability-y-highestnonconformity">(16.2)</a> holds. The resulting prediction set is as follows:</p>
 <div class="math notranslate nohighlight">
 \[
     Y^\epsilon = \{
@@ -983,7 +982,7 @@ Prediction set for epsilon = 10%:  set()
 <div align="justify">
 <p>With its main concern of constructing valid prediction regions, conformal prediction differs from most other machine learning methods, which produce point predictions <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, whether equipped with a degree of uncertainty or not. In a sense, conformal prediction can even be seen as being orthogonal: It predefines the degree of uncertainty (level of confidence) and adjusts its prediction correspondingly, rather than the other way around.</p>
 </div><section id="uncertainty-quantification-in-conformal-prediction">
-<h2>Uncertainty Quantification in Conformal prediction<a class="headerlink" href="#uncertainty-quantification-in-conformal-prediction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">16.1. </span>Uncertainty Quantification in Conformal prediction<a class="headerlink" href="#uncertainty-quantification-in-conformal-prediction" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Although conformal prediction is mainly concerned with constructing prediction regions, the scores produced in the course of this construction can also be used for quantifying uncertainty. In this regard, the notions of <em>confidence</em> and <em>credibility</em> have been introduced (<span id="id7">Gammerman and Vovk [<a class="reference internal" href="../references.html#id2174" title="A. Gammerman and V. Vovk. Prediction algorithms and confidence measures based on algorithmic randomness theory. Theoretical Computer Science, 287:209–217, 2002.">2002</a>]</span>): Let <span class="math notranslate nohighlight">\(p_1, \ldots , p_K\)</span> denote the <span class="math notranslate nohighlight">\(p\)</span>-values that correspond, respectively, to the candidate outcomes <span class="math notranslate nohighlight">\(y_1, \ldots , y_K\)</span> in a classification problem.
 In the transductive case the <span class="math notranslate nohighlight">\(p\)</span>-values are directly calculated, while here in the inductive we need to calculate them separately. Let us assume a <span class="math notranslate nohighlight">\(\epsilon=0.05\)</span>.</p>
@@ -1089,7 +1088,7 @@ The last figure depicting a point in between two classes. Thus indicating a cert
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90a503b604d079b789188cb855e91ce407fb6b6bba564232361ccacff375a843.png" src="../_images/90a503b604d079b789188cb855e91ce407fb6b6bba564232361ccacff375a843.png" />
+<img alt="../_images/378be645b832beffd4d646948243b47c6f0c3d93fbbe3b80ab0e2f35b48b0f58.png" src="../_images/378be645b832beffd4d646948243b47c6f0c3d93fbbe3b80ab0e2f35b48b0f58.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />
@@ -1139,7 +1138,7 @@ The last figure depicting a point in between two classes. Thus indicating a cert
               
               
               
-                <footer class="prev-next-footer d-print-none">
+                <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1148,7 +1147,7 @@ The last figure depicting a point in between two classes. Thus indicating a cert
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Reliable Classification</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Reliable Classification</p>
       </div>
     </a>
     <a class="right-next"
@@ -1156,7 +1155,7 @@ The last figure depicting a point in between two classes. Thus indicating a cert
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Excursus: Hypothesis testing</p>
+        <p class="prev-next-title"><span class="section-number">16.2. </span>Excursus: Hypothesis testing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1176,7 +1175,7 @@ The last figure depicting a point in between two classes. Thus indicating a cert
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-prediction">Uncertainty Quantification in Conformal prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-in-conformal-prediction">16.1. Uncertainty Quantification in Conformal prediction</a></li>
 </ul>
   </nav></div>
 
@@ -1244,8 +1243,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
