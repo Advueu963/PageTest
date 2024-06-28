@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>14. Credal sets and classifiers &#8212; My sample book</title>
   
@@ -18,45 +19,49 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-credal_sets/intro';</script>
@@ -73,9 +78,10 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -116,14 +122,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -157,18 +160,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -471,10 +463,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="credal-sets-and-classifiers">
-<h1><span class="section-number">14. </span>Credal sets and classifiers<a class="headerlink" href="#credal-sets-and-classifiers" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">14. </span>Credal sets and classifiers<a class="headerlink" href="#credal-sets-and-classifiers" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -534,11 +526,11 @@ an approach is robust inference for categorical data with the imprecise Dirichle
 which is an extension of inference with the Dirichlet distribution as a conjugate prior for
 the multinomial distribution (<span id="id2">Bernardo [<a class="reference internal" href="../references.html#id11" title="J.M. Bernardo. An introduction to the imprecise Dirichlet model for multinomial data. International Journal of Approximate Reasoning, 39(2–3):123–150, 2005.">2005</a>]</span>).</p>
 </div><section id="naive-credal-classifier">
-<h2><span class="section-number">14.1. </span>Naive Credal Classifier<a class="headerlink" href="#naive-credal-classifier" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.1. </span>Naive Credal Classifier<a class="headerlink" href="#naive-credal-classifier" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Methods of that kind have also been used in the context of machine learning, for example in the framework of the Naïve Credal Classifier (<span id="id3">Corani and Zaffalon [<a class="reference internal" href="../references.html#id232" title="G. Corani and M. Zaffalon. Learning reliable classifiers from small or incomplete data sets: The naive credal classifier 2. Journal of Machine Learning Research, 9:581–621, 2008.">2008</a>], Zaffalon [<a class="reference internal" href="../references.html#id2265" title="Marco Zaffalon. The naive credal classifier. Journal of Statistical Planning and Inference, 105(1):5–21, 2002.">2002</a>]</span>) or more recently as an extension of sum-product networks (<span id="id4">Maau <em>et al.</em> [<a class="reference internal" href="../references.html#id10" title="D. Deratani Maau, F.G. Cozman, D. Conaty, and C. Polpo de Campos. Credal sum-product networks. In PMLR: Proceedings of Machine Learning Research (ISIPTA 2017), volume 62, 205-216. 2017.">2017</a>]</span>). As for the former, we can think of a Naïve Bayes (NB) classifier as a hypothesis <span class="math notranslate nohighlight">\(h = h_{\vec{\theta}}\)</span> specified by a parameter vector <span class="math notranslate nohighlight">\({\vec{\theta}}\)</span> that comprises a prior probability <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class <span class="math notranslate nohighlight">\(y_k \in \set{Y}\)</span> and a conditional probability <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> for observing the <span class="math notranslate nohighlight">\(i^{th}\)</span> value <span class="math notranslate nohighlight">\(a_{i,j}\)</span> of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. For a given query instance specified by attributes <span class="math notranslate nohighlight">\((a_{i_1,1}, \ldots , a_{i_J,J})\)</span>, the posterior class probabilities are then given by</p>
 <div class="math notranslate nohighlight" id="equation-spo">
-<span class="eqno">(14.1)<a class="headerlink" href="#equation-spo" title="Link to this equation">#</a></span>\[
+<span class="eqno">(14.1)<a class="headerlink" href="#equation-spo" title="Permalink to this equation">#</a></span>\[
 p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_j,j,k} \,.
 \enspace
 \]</div>
@@ -574,81 +566,25 @@ p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">/var/folders/m4/bdfxxbj17j90t407ws9bzdrm0000gn/T/ipykernel_31723/1167015669.py</span> in <span class="ni">?</span><span class="nt">()</span>
+<span class="ne">---&gt; </span><span class="mi">17</span> <span class="c1"># Load and discretize the Wine dataset</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> 
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">wine</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">()</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">~/.pyenv/versions/3.8.16/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">?</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5985</span>             <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accessors</span>
+<span class="g g-Whitespace">   </span><span class="mi">5986</span>             <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info_axis</span><span class="o">.</span><span class="n">_can_hold_identifiers_and_holds_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5987</span>         <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5988</span>             <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">5989</span>         <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>alcohol</th>
-      <th>malic_acid</th>
-      <th>ash</th>
-      <th>alcalinity_of_ash</th>
-      <th>target</th>
-      <th>target_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>high</td>
-      <td>low</td>
-      <td>medium</td>
-      <td>low</td>
-      <td>0</td>
-      <td>class_0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>medium</td>
-      <td>low</td>
-      <td>medium</td>
-      <td>low</td>
-      <td>0</td>
-      <td>class_0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>medium</td>
-      <td>low</td>
-      <td>high</td>
-      <td>medium</td>
-      <td>0</td>
-      <td>class_0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>high</td>
-      <td>low</td>
-      <td>medium</td>
-      <td>low</td>
-      <td>0</td>
-      <td>class_0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>medium</td>
-      <td>medium</td>
-      <td>high</td>
-      <td>medium</td>
-      <td>0</td>
-      <td>class_0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="ne">AttributeError</span>: &#39;DataFrame&#39; object has no attribute &#39;map&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div align="justify">
 <p>When we train a regular categorical Naive Bayes classifier the prior probabilities <span class="math notranslate nohighlight">\(\theta_k\)</span> for each class are calculated as the relative frequencies of class <span class="math notranslate nohighlight">\(k\)</span> in the whole dataset. The conditionals <span class="math notranslate nohighlight">\(\theta_{i,j,k}\)</span> as the share of observations for which attribute <span class="math notranslate nohighlight">\(j\)</span> has the value <span class="math notranslate nohighlight">\(i\)</span> given that the class is <span class="math notranslate nohighlight">\(k\)</span>.</p>
@@ -727,7 +663,7 @@ p(y_k | a_{i_1,1}, \ldots , a_{i_J,J}) \propto \theta_k \prod_{j=1}^J \theta_{i_
 <div align="justify">
 <p>In the Naïve Credal Classifier, the <span class="math notranslate nohighlight">\(\theta_k\)</span> and <span class="math notranslate nohighlight">\(\theta_{i_j,j,k}\)</span> are specified in terms of (local) credal sets, i.e., there is a class of probability distributions <span class="math notranslate nohighlight">\(Q\)</span> on <span class="math notranslate nohighlight">\(\set{Y}\)</span> playing the role of candidate priors, and a class of probability distributions <span class="math notranslate nohighlight">\(Q_{j,k}\)</span> specifying possible distributions on the attribute values of the <span class="math notranslate nohighlight">\(j^{th}\)</span> attribute given class <span class="math notranslate nohighlight">\(y_k\)</span>. A single posterior class probability <a class="reference internal" href="#equation-spo">(14.1)</a> is then replaced by the set (interval) of such probabilities that can be produced by taking <span class="math notranslate nohighlight">\(\theta_k\)</span> from a distribution in <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(\theta_{i_j,j,k}\)</span> from a distribution in <span class="math notranslate nohighlight">\(Q_{j,k}\)</span>. As an aside, let us note that the computations involved may of course become costly.</p>
 </div><section id="imprecise-dirichlet-model">
-<h3><span class="section-number">14.1.1. </span>Imprecise Dirichlet Model<a class="headerlink" href="#imprecise-dirichlet-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.1.1. </span>Imprecise Dirichlet Model<a class="headerlink" href="#imprecise-dirichlet-model" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>To obtain the credal sets over priors and conditionals the imprecise dirchlet model can be used.(<span id="id5">Zaffalon [<a class="reference internal" href="../references.html#id2265" title="Marco Zaffalon. The naive credal classifier. Journal of Statistical Planning and Inference, 105(1):5–21, 2002.">2002</a>]</span>) The key idea is to model uncertainty about the observations by drawing random samples around them from a dirichlet distribution. For this the concentration parameters <span class="math notranslate nohighlight">\(\alpha=(\alpha_{1},...,\alpha_{k})\)</span> of the dirichlet distribution are parametrized as <span class="math notranslate nohighlight">\(st\)</span>. The empirical priors and conditionals as used in the normal Naive Bayes are used as the parameter <span class="math notranslate nohighlight">\(t\)</span>:</p>
 </div><div class="cell docutils container">
@@ -782,7 +718,7 @@ Prior credal_set:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/d30aaacb844a451617f8c09b77e5b0084de4d38000b00c6e64268649b32a7b68.png" src="../_images/d30aaacb844a451617f8c09b77e5b0084de4d38000b00c6e64268649b32a7b68.png" />
+<img alt="../_images/e20526f608414fb495ff2309381455aa2936ce952f06da47323db63e9e5bf73a.png" src="../_images/e20526f608414fb495ff2309381455aa2936ce952f06da47323db63e9e5bf73a.png" />
 </div>
 </div>
 <div align="justify">
@@ -903,18 +839,18 @@ Naive Bayes prediction for first query:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c0b014359e25f5e2a8b59b02e102d388becd2c6889cb9528369f5ba72bd70840.png" src="../_images/c0b014359e25f5e2a8b59b02e102d388becd2c6889cb9528369f5ba72bd70840.png" />
+<img alt="../_images/48e4ac74d1255a6a9d4cb6a426228965f50434988234b0287af323eba7291923.png" src="../_images/48e4ac74d1255a6a9d4cb6a426228965f50434988234b0287af323eba7291923.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="uncertainty-measures-for-credal-sets">
-<span id="uncertainty-measures"></span><h2><span class="section-number">14.2. </span>Uncertainty measures for credal sets<a class="headerlink" href="#uncertainty-measures-for-credal-sets" title="Link to this heading">#</a></h2>
+<span id="uncertainty-measures"></span><h2><span class="section-number">14.2. </span>Uncertainty measures for credal sets<a class="headerlink" href="#uncertainty-measures-for-credal-sets" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Interestingly, there has been quite some work on defining uncertainty measures for credal sets and related representation, such as Dempster-Shafer evidence theory (<span id="id6">Klir [<a class="reference internal" href="../references.html#id1393" title="G.J. Klir. Measures of uncertainty in the Dempster-Shafer theory of evidence. In R.R. Yager, M. Fedrizzi, and J. Kacprzyk, editors, Advances in the Dempster-Shafer theory of evidence, pages 35-49. Wiley, New York, 1994.">1994</a>]</span>). Even more interestingly, a basic distinction between two types of uncertainty contained in a credal set, referred to as <em>conflict</em> (randomness, discord) and <em>non-specificity</em>, respectively, has been made by (<span id="id7">Yager [<a class="reference internal" href="../references.html#id1518" title="R.R. Yager. Entropy and specificity in a mathematical theory of evidence. International Journal of General Systems, 9:249-260, 1983.">1983</a>]</span>). The importance of this distinction was already emphasized by (<span id="id8">Kolmogorov [<a class="reference internal" href="../references.html#id2267" title="A.N. Kolmogorov. Three approaches to the quantitative definition of information. Problems Inform. Trans., 1(1):1–7, 1965.">1965</a>]</span>). These notions are in direct correspondence with what we call aleatoric and epistemic uncertainty.</p>
 </div><div align="justify">
 <section id="credal-set-for-demonstration-of-uncertainty-measures">
-<h3><span class="section-number">14.2.1. </span>Credal set for demonstration of uncertainty measures<a class="headerlink" href="#credal-set-for-demonstration-of-uncertainty-measures" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>Credal set for demonstration of uncertainty measures<a class="headerlink" href="#credal-set-for-demonstration-of-uncertainty-measures" title="Permalink to this heading">#</a></h3>
 <p>For illustration of the uncertainty measures we will introduce a second dataset that consists of two features and three classes. To obtain credal sets for all queries in the test set we train three different Gaussian Naive Bayes Classifiers on random subsets of the training set and combine the probability predictions. The idea is to obtain three conflicting predictions from the classifiers. This allows us to distinguish between different kinds of uncertainty. Aleatoric uncertainty will be high in the areas in which the three clusters overlap while epistemic uncertainty will be high in areas where we have no data or in which the classifiers produce different predictions. The two dimensionality of the data set allows us to easily visualize conflicting predictions as well as uncertainty in different regions.</p>
 <p>The new dataset consists of a gaussian cluster for each of the three classes:</p>
 </div><div class="cell tag_hide-input docutils container">
@@ -941,7 +877,7 @@ Naive Bayes prediction for first query:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c867978045b2ffb020c7cc1f8aef6959cc132a815d7b387c1dffe558163eafa0.png" src="../_images/c867978045b2ffb020c7cc1f8aef6959cc132a815d7b387c1dffe558163eafa0.png" />
+<img alt="../_images/b509b7f64059622859a45a109b31818e6732eb43be28a1694a50a39abafb662c.png" src="../_images/b509b7f64059622859a45a109b31818e6732eb43be28a1694a50a39abafb662c.png" />
 </div>
 </div>
 <div align="justify">
@@ -1122,7 +1058,7 @@ Naive Bayes prediction for first query:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/58098a9b223b278fe423faa33dc4789d2d279324abf548150fcd8e74b207b350.png" src="../_images/58098a9b223b278fe423faa33dc4789d2d279324abf548150fcd8e74b207b350.png" />
+<img alt="../_images/1ed68a019a9b1fbf14b06502cfc0550b267879b7b2aa256a24659fd1469f5989.png" src="../_images/1ed68a019a9b1fbf14b06502cfc0550b267879b7b2aa256a24659fd1469f5989.png" />
 </div>
 </div>
 <div align="justify">
@@ -1138,18 +1074,18 @@ Naive Bayes prediction for first query:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/62dea0d63367e1c8747a0d34f405a8eb31ac2542dab98214794028f123ef25ab.png" src="../_images/62dea0d63367e1c8747a0d34f405a8eb31ac2542dab98214794028f123ef25ab.png" />
+<img alt="../_images/8a9107dcc6cc0b1ec859b564a2d90680b4b43b369bae82cc5b3237c3528b171e.png" src="../_images/8a9107dcc6cc0b1ec859b564a2d90680b4b43b369bae82cc5b3237c3528b171e.png" />
 </div>
 </div>
 <div align="justify">
 <p>We will use this representation later to compare the results of the different uncertainty measures to.</p>
 </div></section>
 <section id="hartley-measure">
-<h3><span class="section-number">14.2.2. </span>Hartley Measure<a class="headerlink" href="#hartley-measure" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.2. </span>Hartley Measure<a class="headerlink" href="#hartley-measure" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>The standard uncertainty measure in classical possibility theory (where uncertain information is simply represented in the form of subsets <span class="math notranslate nohighlight">\(A \subseteq \mathcal{Y}\)</span> of possible alternatives) is the Hartley measure <a class="footnote-reference brackets" href="#beaware" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> (<span id="id10">Hartley [<a class="reference internal" href="../references.html#id40" title="R.V.L. Hartley. Transmission of information. Bell Syst. Tech. Journal, 7(3):535–563, 1928.">1928</a>]</span>)</p>
 <div class="math notranslate nohighlight" id="equation-hartley">
-<span class="eqno">(14.2)<a class="headerlink" href="#equation-hartley" title="Link to this equation">#</a></span>\[
+<span class="eqno">(14.2)<a class="headerlink" href="#equation-hartley" title="Permalink to this equation">#</a></span>\[
 \begin{equation}\label{eq:hartley}
 H(A) = \log( |A|)  \, ,
 \end{equation}
@@ -1180,14 +1116,14 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/668d4c78b0b842bca0c3b7d2591bf4de6837091eca9d38f4a0a2b7ca731957d4.png" src="../_images/668d4c78b0b842bca0c3b7d2591bf4de6837091eca9d38f4a0a2b7ca731957d4.png" />
+<img alt="../_images/6d3d2dbf51fe8b16a388f2c0669547f9279a8fb3a38488a8abff1f9f40e5c484.png" src="../_images/6d3d2dbf51fe8b16a388f2c0669547f9279a8fb3a38488a8abff1f9f40e5c484.png" />
 </div>
 </div>
 <div align="justify">
 <p>Just like the Shannon entropy (cf. <a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html"><span class="doc">Modelling Approximation Uncertainty</span></a>), this measure can be justified axiomatically<a class="footnote-reference brackets" href="#hartleymeasureaxiom" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 <p>Given the insight that conflict and non-specificity are two different, complementary sources of uncertainty, and standard (Shannon) entropy and (<a class="reference internal" href="#equation-hartley">(14.2)</a>) as well-established measures of these two types of uncertainty, a natural question in the context of credal sets is to ask for a generalized representation</p>
 <div class="math notranslate nohighlight" id="equation-aggregate">
-<span class="eqno">(14.3)<a class="headerlink" href="#equation-aggregate" title="Link to this equation">#</a></span>\[
+<span class="eqno">(14.3)<a class="headerlink" href="#equation-aggregate" title="Permalink to this equation">#</a></span>\[
 \begin{equation}
 \text{U}(Q) = \text{AU}(Q) + \text{EU}(Q) \, ,
 \end{equation}
@@ -1196,18 +1132,18 @@ H(A) = \log( |A|)  \, ,
 </div>
 </section>
 <section id="generalized-hartley-measure">
-<h3><span class="section-number">14.2.3. </span>Generalized Hartley Measure<a class="headerlink" href="#generalized-hartley-measure" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.3. </span>Generalized Hartley Measure<a class="headerlink" href="#generalized-hartley-measure" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>As for the non-specificity part in (<a class="reference internal" href="#equation-aggregate">(14.3)</a>), the following generalization of the Hartley measure to the case of graded possibilities has been proposed by various authors <span id="id12">Abellan and Moral [<a class="reference internal" href="../references.html#id44" title="J. Abellan and S. Moral. A non-specificity measure for convex sets of probability distributions. International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems, 8:357–367, 2000.">2000</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-gh">
-<span class="eqno">(14.4)<a class="headerlink" href="#equation-gh" title="Link to this equation">#</a></span>\[
+<span class="eqno">(14.4)<a class="headerlink" href="#equation-gh" title="Permalink to this equation">#</a></span>\[
 \begin{equation}
 GH(Q) := \sum_{A \subseteq \mathcal{Y}} \text{m}_Q(A) \, \log(|A|) \,,
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathrm{m}_Q: \,  2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> is the Möbius inverse of the capacity function <span class="math notranslate nohighlight">\(\nu :\, 2^{\mathcal{Y}} \longrightarrow [0,1]\)</span> defined by</p>
 <div class="math notranslate nohighlight" id="equation-cap">
-<span class="eqno">(14.5)<a class="headerlink" href="#equation-cap" title="Link to this equation">#</a></span>\[
+<span class="eqno">(14.5)<a class="headerlink" href="#equation-cap" title="Permalink to this equation">#</a></span>\[
 \begin{equation}
 \nu_Q(A) := \inf_{q \in Q} q(A) 
 \end{equation}
@@ -1366,7 +1302,7 @@ Comparing the result with the visualizations we created before shows the measure
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0fe7ee75dbc99d3878c33bb6433eb6a07bc05527c5ad5433a0c3ec9f34b4cb1f.png" src="../_images/0fe7ee75dbc99d3878c33bb6433eb6a07bc05527c5ad5433a0c3ec9f34b4cb1f.png" />
+<img alt="../_images/dcfaab7a723857a945536aa54ef40bf103e2af2df2d8d3bb41153788a805f3e6.png" src="../_images/dcfaab7a723857a945536aa54ef40bf103e2af2df2d8d3bb41153788a805f3e6.png" />
 </div>
 </div>
 <div align="justify">
@@ -1411,12 +1347,12 @@ Comparing the result with the visualizations we created before shows the measure
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/77172ddc37ec06b534cd86695acec5e3494aaf67907f4ccc76443a1698763eaa.png" src="../_images/77172ddc37ec06b534cd86695acec5e3494aaf67907f4ccc76443a1698763eaa.png" />
+<img alt="../_images/f35754bb7220a4937bcdcb025c2ae9e1a323b1d0e8d2d7a3936e9a82516ac435.png" src="../_images/f35754bb7220a4937bcdcb025c2ae9e1a323b1d0e8d2d7a3936e9a82516ac435.png" />
 </div>
 </div>
 </section>
 <section id="upper-and-lower-shannon-entropy">
-<h3><span class="section-number">14.2.4. </span>Upper and Lower Shannon entropy<a class="headerlink" href="#upper-and-lower-shannon-entropy" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.4. </span>Upper and Lower Shannon entropy<a class="headerlink" href="#upper-and-lower-shannon-entropy" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>The generalization of the Shannon entropy <span class="math notranslate nohighlight">\(H\)</span> as a measure of conflict turned out to be more difficult. The upper and lower Shannon entropy play an important role in this regard:</p>
 <div class="math notranslate nohighlight">
@@ -1501,7 +1437,7 @@ Credal set with minimal Upper Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/088f071d9a240e495c8cdfc2a444acc77bfe87d26ac300cac86860a7d9700351.png" src="../_images/088f071d9a240e495c8cdfc2a444acc77bfe87d26ac300cac86860a7d9700351.png" />
+<img alt="../_images/71b8d5083f0c34a6711b649adb9f25845aadd05ff8ffc30e7a9d56235f8ee812.png" src="../_images/71b8d5083f0c34a6711b649adb9f25845aadd05ff8ffc30e7a9d56235f8ee812.png" />
 </div>
 </div>
 <p>Again we also look at the wine credal sets with the highest and lowest uncertainty:</p>
@@ -1515,7 +1451,7 @@ Credal set with minimal Upper Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a61e18bd10d3d802ba244f6ee7ecbf8fa59b9c351a15bfd4ea05f51d2378e9fc.png" src="../_images/a61e18bd10d3d802ba244f6ee7ecbf8fa59b9c351a15bfd4ea05f51d2378e9fc.png" />
+<img alt="../_images/821d540c02ab4f9d5b77cbbd0fd7c52e38fb5897f679e43ad85c7726d4acc820.png" src="../_images/821d540c02ab4f9d5b77cbbd0fd7c52e38fb5897f679e43ad85c7726d4acc820.png" />
 </div>
 </div>
 <p>We do the same for the Lower Shannon Entropy:</p>
@@ -1551,7 +1487,7 @@ Credal set with minimal Lower Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7bb0b0972a883fba7b33db3863c761648d5a9f712416060de85dca752123ec1e.png" src="../_images/7bb0b0972a883fba7b33db3863c761648d5a9f712416060de85dca752123ec1e.png" />
+<img alt="../_images/4c0b5d571518436362d09d8314fe069e12e62e1a08207ab37d02fcd64baa08a3.png" src="../_images/4c0b5d571518436362d09d8314fe069e12e62e1a08207ab37d02fcd64baa08a3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1564,22 +1500,22 @@ Credal set with minimal Lower Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e4e711952f6ba19fa0fb6561c75a8300a1fd916a742cd440247ce1dded635a4e.png" src="../_images/e4e711952f6ba19fa0fb6561c75a8300a1fd916a742cd440247ce1dded635a4e.png" />
+<img alt="../_images/12c280fabccbca27bd7a2d0ab073b596d4529da3fcb2aa4d09a81fa67d865d4f.png" src="../_images/12c280fabccbca27bd7a2d0ab073b596d4529da3fcb2aa4d09a81fa67d865d4f.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="uncertainty-decomposition">
-<h2><span class="section-number">14.3. </span>Uncertainty Decomposition<a class="headerlink" href="#uncertainty-decomposition" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.3. </span>Uncertainty Decomposition<a class="headerlink" href="#uncertainty-decomposition" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Based on these measures, the following disaggregations of total uncertainty <a class="reference internal" href="#equation-aggregate">(14.3)</a> have been proposed <span id="id14">Abellan <em>et al.</em> [<a class="reference internal" href="../references.html#id45" title="J. Abellan, J. Klir, and S. Moral. Disaggregated total uncertainty measure for credal sets. International Journal of General Systems, 2006.">2006</a>]</span>:
 a</p>
-<div class="amsmath math notranslate nohighlight" id="equation-582f47e3-28d1-4cb2-bd5c-cd98dcb8e9c2">
-<span class="eqno">(14.6)<a class="headerlink" href="#equation-582f47e3-28d1-4cb2-bd5c-cd98dcb8e9c2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5a2eeb04-5c93-4d89-9ec9-2ddce13aa408">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-5a2eeb04-5c93-4d89-9ec9-2ddce13aa408" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = \big(H^*(Q) - \text{GH}(Q) \big)  + \text{GH}(Q)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-9b0b4a12-5ca0-4fba-b5d0-85c33d54f10a">
-<span class="eqno">(14.7)<a class="headerlink" href="#equation-9b0b4a12-5ca0-4fba-b5d0-85c33d54f10a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bc30db4b-242b-47de-ab0a-0af3168af3a2">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-bc30db4b-242b-47de-ab0a-0af3168af3a2" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)
 \end{align}\]</div>
 <p>In both cases, upper entropy serves as a measure of total uncertainty <span class="math notranslate nohighlight">\(U(Q)\)</span>, which is again justified on an axiomatic basis. In the first case, the generalized Hartley measure is used for quantifying epistemic uncertainty, and aleatoric uncertainty is obtained as the difference between total and epistemic uncertainty. In the second case, epistemic uncertainty is specified in terms of the difference between upper and lower entropy.</p>
@@ -1689,7 +1625,7 @@ Max aleatoric uncertainty. Decomposition 2:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/190ffa6f6ee534dc0007933fcff6419d91b0bf86d74926f89b17a26b4c6b6022.png" src="../_images/190ffa6f6ee534dc0007933fcff6419d91b0bf86d74926f89b17a26b4c6b6022.png" />
+<img alt="../_images/e2de8b96c7ad9c2f89ed95bdaf130a61d6e51e01c1027965a1db7b91cce9b5a2.png" src="../_images/e2de8b96c7ad9c2f89ed95bdaf130a61d6e51e01c1027965a1db7b91cce9b5a2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1699,16 +1635,16 @@ Max aleatoric uncertainty. Decomposition 2:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/745ec517163d7fa80cd88e98578a156b65f3303932eef0d40e2be7007250e84c.png" src="../_images/745ec517163d7fa80cd88e98578a156b65f3303932eef0d40e2be7007250e84c.png" />
+<img alt="../_images/a1381fe2c99843b114fb51df00a677dd19a0692633f198ee61580d6d34142641.png" src="../_images/a1381fe2c99843b114fb51df00a677dd19a0692633f198ee61580d6d34142641.png" />
 </div>
 </div>
 </section>
 <section id="set-valued-prediction">
-<span id="set-predictions"></span><h2><span class="section-number">14.4. </span>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Link to this heading">#</a></h2>
+<span id="set-predictions"></span><h2><span class="section-number">14.4. </span>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Credal classifiers are used for “indeterminate” prediction, that is, to produce reliable set-valued predictions that are likely to cover the true outcome. In this regard, the notion of <em>dominance</em> plays an important role: An outcome <span class="math notranslate nohighlight">\(y\)</span> dominates another outcome <span class="math notranslate nohighlight">\(y'\)</span> if <span class="math notranslate nohighlight">\(y\)</span> is more probable than <span class="math notranslate nohighlight">\(y'\)</span> for each distribution in the credal set, that is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-06da82b8-ed57-4adf-89e8-a0c3acdb2436">
-<span class="eqno">(14.8)<a class="headerlink" href="#equation-06da82b8-ed57-4adf-89e8-a0c3acdb2436" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f6088eb3-b635-430a-b82c-6590b29f52a1">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-f6088eb3-b635-430a-b82c-6590b29f52a1" title="Permalink to this equation">#</a></span>\[\begin{align}
 \gamma(y,y', \vec{x}) :=
 \inf_{h \in C} \frac{p( y | \vec{x}_q, h)}{p(y' | \vec{x}_q, h)}  &gt; 1 \, ,
 \end{align}\]</div>
@@ -1748,8 +1684,8 @@ Max aleatoric uncertainty. Decomposition 2:
 Practically, the computations are based on the interval-valued probabilities
 <span class="math notranslate nohighlight">\([\underline{p}(y | \vec{x}_q), \overline{p}(y || \vec{x}_q)]\)</span>
 assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y}\)</span>, where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c5f7f103-5c7c-4d42-9042-410acb6d6fa1">
-<span class="eqno">(14.9)<a class="headerlink" href="#equation-c5f7f103-5c7c-4d42-9042-410acb6d6fa1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-aafa1f93-ecc2-42ea-b7a9-4ef4c8228387">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-aafa1f93-ecc2-42ea-b7a9-4ef4c8228387" title="Permalink to this equation">#</a></span>\[\begin{align}
 \underline{p}(y | \vec{x}_q) := \inf_{h \in C} p(y | \vec{x}_q, h)\, , \quad \overline{p}(y | \vec{x}_q) := \sup_{h \in C} p(y | \vec{x}_q, h) \, .
 \end{align}\]</div>
 <p>Note that the upper probabilities <span class="math notranslate nohighlight">\(\overline{p}(y | \vec{x}_q)\)</span> are very much in the spirit of the plausibility degrees (\ref{eq:plaus}) (equation in chapter 4.7 not there yet).</p>
@@ -1970,7 +1906,7 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 100)
 </pre></div>
 </div>
-<img alt="../_images/21231ebe42438c85663530f66731129884e6e972cc02c765f08503e11adef7f6.png" src="../_images/21231ebe42438c85663530f66731129884e6e972cc02c765f08503e11adef7f6.png" />
+<img alt="../_images/6d793cb162eaebd386a9e6767544936276ccc8209dfceccb02cd9cd5d32181fe.png" src="../_images/6d793cb162eaebd386a9e6767544936276ccc8209dfceccb02cd9cd5d32181fe.png" />
 </div>
 </div>
 <div align="justify">
@@ -2007,20 +1943,20 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bf901a59b4250f156a8abd966041cf351779d7496ff6e7f4d70a8e17074009fe.png" src="../_images/bf901a59b4250f156a8abd966041cf351779d7496ff6e7f4d70a8e17074009fe.png" />
+<img alt="../_images/e6bcdc219247453f8a2f2bb8ec024ad76f2c72dc5b95df6e4a85b9884ab455c8.png" src="../_images/e6bcdc219247453f8a2f2bb8ec024ad76f2c72dc5b95df6e4a85b9884ab455c8.png" />
 </div>
 </div>
 <section id="dominance-degrees">
-<h3><span class="section-number">14.4.1. </span>Dominance degrees<a class="headerlink" href="#dominance-degrees" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.4.1. </span>Dominance degrees<a class="headerlink" href="#dominance-degrees" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>Interestingly, uncertainty degrees can be derived on the basis of dominance degrees (\ref{eq:dominance}). For example, the following uncertainty score has been proposed by <span id="id15">Antonucci <em>et al.</em> [<a class="reference internal" href="../references.html#id2266" title="Alessandro Antonucci, Giorgio Corani, and Sandra Gabaglio. Active learning by the naive credal classifier. In Proceedings of the Sixth European Workshop on Probabilistic Graphical Models (PGM), 3–10. 2012.">2012</a>]</span> in the context of uncertainty sampling for active learning:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b48ee1e6-25ca-4df6-92ba-4ca07534a321">
-<span class="eqno">(14.10)<a class="headerlink" href="#equation-b48ee1e6-25ca-4df6-92ba-4ca07534a321" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ae348b85-97f0-44ea-b41f-fccd0ee462ff">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-ae348b85-97f0-44ea-b41f-fccd0ee462ff" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \max \big(\gamma(+1, -1, \vec{x}_q ), \gamma(-1, +1, \vec{x}_q ) \big) \, .
 \end{align}\]</div>
 <p>For data sets with more than two classes the score generalizes as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3d605bf4-d15f-4579-a8da-4bfac0f5f1d1">
-<span class="eqno">(14.11)<a class="headerlink" href="#equation-3d605bf4-d15f-4579-a8da-4bfac0f5f1d1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c246138f-93a1-48bb-8a3e-8dadbd29b734">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-c246138f-93a1-48bb-8a3e-8dadbd29b734" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus \{c'\}} \max[\gamma(c', c''), \gamma(c'', c')]
 \end{align}\]</div>
 </div>
@@ -2111,21 +2047,19 @@ s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/f897667963135d9cc306b036858be7d9c815f5fa0022cf63fcb8093dbeb0c4c5.png" src="../_images/f897667963135d9cc306b036858be7d9c815f5fa0022cf63fcb8093dbeb0c4c5.png" />
+<img alt="../_images/f9e864fbb435a854ef17768a80396741bba56ee7105cae2f54e9998eb9d9f969.png" src="../_images/f9e864fbb435a854ef17768a80396741bba56ee7105cae2f54e9998eb9d9f969.png" />
 </div>
 </div>
 <div align="justify">
 <p><span id="id16">Lassiter [<a class="reference internal" href="../references.html#id8" title="D. Lassiter. Representing credal imprecision: from sets of measures to hierarchical Bayesian models. Philosophical Studies, 2020. forthcoming.">2020</a>]</span> discusses the modeling of <em>credal imprecision</em> by means of sets of measures in a critical way and contrasts this approach with hierarchical probabilistic (Bayesian) models, i.e., distributions of measures. Among several arguments put forward against sets-of-measures models, one aspect is specifically interesting from a machine learning perspective, namely the problem that modeling a lack of knowledge in a set-based manner may hamper the possibility of inductive inference, up to a point where learning from empirical data is not possible any more. This is closely connected to the insight that learning from data necessarily requires an inductive bias, and learning without assumptions is not possible <span id="id17">Wolpert [<a class="reference internal" href="../references.html#id12" title="D.H. Wolpert. The lack of a priori distinctions between learning algorithms. Neural Computation, 8(7):1341–1390, 1996.">1996</a>]</span>. To illustrate the point, consider the case of complete ignorance as an example, which could be modeled by the credal set <span class="math notranslate nohighlight">\(\mathbb{P}_{all}\)</span> that contains all probability measures (on a hypothesis space) as candidate priors. Updating this set by pointwise conditioning on observed data will essentially reproduce the same set as a credal set of posteriors. Roughly speaking, this is because <span class="math notranslate nohighlight">\(\mathbb{P}_{all}\)</span> will contain very extreme priors, which will remain extreme even after updating with a sample of finite size. In other words, no finite sample is enough to annihilate a sufficiently extreme prior belief. Replacing <span class="math notranslate nohighlight">\(\mathbb{P}_{all}\)</span> by a proper subset of measures may avoid this problem, but any such choice (implying a sharp transition between possible and excluded priors) will appear somewhat arbitrary. According to <span id="id18">Lassiter [<a class="reference internal" href="../references.html#id8" title="D. Lassiter. Representing credal imprecision: from sets of measures to hierarchical Bayesian models. Philosophical Studies, 2020. forthcoming.">2020</a>]</span>, an appealing alternative is using a probability distribution instead of a set, like in hierarchical Bayesian modeling.</p>
 </div><hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="beaware" role="doc-footnote">
+<aside class="footnote brackets" id="beaware" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">1</a><span class="fn-bracket">]</span></span>
 <p>Be aware that we denote both the Hartley measure and the Shannon entropy by <span class="math notranslate nohighlight">\(H\)</span>, which is common in the literature. The meaning should be clear from the context.</p>
 </aside>
-<aside class="footnote brackets" id="hartleymeasureaxiom" role="doc-footnote">
+<aside class="footnote brackets" id="hartleymeasureaxiom" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">2</a><span class="fn-bracket">]</span></span>
 <p>For example, see Chapter IX, pages 540–616, in the book by <span id="id19">Rényi [<a class="reference internal" href="../references.html#id42" title="A. Rényi. Probability Theory. North-Holland, Amsterdam, 1970.">1970</a>]</span>.</p>
-</aside>
 </aside>
 </section>
 </section>
@@ -2188,7 +2122,6 @@ s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus 
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -2235,7 +2168,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -2278,8 +2211,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>17. Conformal prediction for regression &#8212; My sample book</title>
   
@@ -18,45 +19,49 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_regression/intro';</script>
@@ -73,9 +78,10 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -116,14 +122,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -157,18 +160,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -472,10 +464,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="conformal-prediction-for-regression">
-<h1><span class="section-number">17. </span>Conformal prediction for regression<a class="headerlink" href="#conformal-prediction-for-regression" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">17. </span>Conformal prediction for regression<a class="headerlink" href="#conformal-prediction-for-regression" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
@@ -634,7 +626,7 @@ Noise was added to y drawn from a Gaussian distribution with <span class="math n
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" src="../_images/5e138fb562a155f09aca34e90ecb0de5472183012f4f61647e36fbbcffd798ec.png" />
+<img alt="../_images/c37bf5742291c26743f241a91f2627fd0d0bb2012618186dd9e2adadac722f89.png" src="../_images/c37bf5742291c26743f241a91f2627fd0d0bb2012618186dd9e2adadac722f89.png" />
 </div>
 </div>
 <p>To compare the presented methods we compute the <em>Regression coverage score (RCS)</em></p>
@@ -644,7 +636,7 @@ Noise was added to y drawn from a Gaussian distribution with <span class="math n
 <div class="math notranslate nohighlight">
 \[\text{RMWS} = \frac{1}{n} \sum_{i=1}^{n} (\hat y^{\text{up}}_{i} - \hat y^{\text{low}}_{i})\]</div>
 <section id="split-method">
-<span id="content-split"></span><h2><span class="section-number">17.1. </span>Split Method<a class="headerlink" href="#split-method" title="Link to this heading">#</a></h2>
+<span id="content-split"></span><h2><span class="section-number">17.1. </span>Split Method<a class="headerlink" href="#split-method" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>This method uses  only a single train/validation split to compute the non-conformity scores and is the most simplest approach.
 It can be described by the following steps:</p>
@@ -733,13 +725,13 @@ RMWS:  2.557984632366192
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/722894777192e078d53ce58813cb0de7fcc76e220e41f310575e39280c4b66c3.png" src="../_images/722894777192e078d53ce58813cb0de7fcc76e220e41f310575e39280c4b66c3.png" />
+<img alt="../_images/ed889519df9f126e82a90e92a233b85548d78bc759c4cc75c9978226c3e27b47.png" src="../_images/ed889519df9f126e82a90e92a233b85548d78bc759c4cc75c9978226c3e27b47.png" />
 </div>
 </div>
 <div align="justify">
 <p>We see that the Split method coverages almost everything except for the three far left test points. It should be pointed out that the intervals created through the Split method with the defined non-conformity function always predicts intervals with equal width. While already having satisfactory <em>RCS</em> the methods is heavily dependent on the split size.</p>
 </div><section id="barebone-split-implementation">
-<h3><span class="section-number">17.1.1. </span>Barebone Split Implementation<a class="headerlink" href="#barebone-split-implementation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.1.1. </span>Barebone Split Implementation<a class="headerlink" href="#barebone-split-implementation" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -791,7 +783,7 @@ RMWS:  2.557984632366192
 </section>
 </section>
 <section id="jackknife-method">
-<span id="content-jackknife"></span><h2><span class="section-number">17.2. </span>Jackknife Method<a class="headerlink" href="#jackknife-method" title="Link to this heading">#</a></h2>
+<span id="content-jackknife"></span><h2><span class="section-number">17.2. </span>Jackknife Method<a class="headerlink" href="#jackknife-method" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Instead of only using one calibration split to compute <span class="math notranslate nohighlight">\(l\)</span> non-conformity scores as in the <a class="reference internal" href="#content-split"><span class="std std-ref">Split Method</span></a>, the Jackknife (or Leave-one-out) methods computes a <span class="math notranslate nohighlight">\(\alpha_i\)</span> for each training point <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span>.
 It consists of the following four steps:</p>
@@ -851,7 +843,7 @@ RMWS:  2.415146303777198
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/45eadbb64a2256c71e26ccaa5c70d41b3ed402c7232b49bb1db03a741eaf618e.png" src="../_images/45eadbb64a2256c71e26ccaa5c70d41b3ed402c7232b49bb1db03a741eaf618e.png" />
+<img alt="../_images/75b6d5a6fd0c0e406d4cde531035e9de397f5356442dbda57bf7955c6bd93a61.png" src="../_images/75b6d5a6fd0c0e406d4cde531035e9de397f5356442dbda57bf7955c6bd93a61.png" />
 </div>
 </div>
 <div align="justify">
@@ -862,7 +854,7 @@ RMWS:  2.415146303777198
 But in scenarios where a regression model is less stable (samples size equal to number of features) the coverage might be less than <span class="math notranslate nohighlight">\(1-\epsilon\)</span>. We refer to for further details <span id="id1">Barber <em>et al.</em> [<a class="reference internal" href="../references.html#id2167" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">2019</a>]</span>.</p>
 </div>
 <section id="barebone-jackknife-implementation">
-<h3><span class="section-number">17.2.1. </span>Barebone Jackknife Implementation<a class="headerlink" href="#barebone-jackknife-implementation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.2.1. </span>Barebone Jackknife Implementation<a class="headerlink" href="#barebone-jackknife-implementation" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -909,7 +901,7 @@ But in scenarios where a regression model is less stable (samples size equal to 
 </section>
 </section>
 <section id="content-jackknife-plus">
-<span id="id2"></span><h2><span class="section-number">17.3. </span>Jackknife+ Method<a class="headerlink" href="#content-jackknife-plus" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2><span class="section-number">17.3. </span>Jackknife+ Method<a class="headerlink" href="#content-jackknife-plus" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>In Jackknife we build the intervals based on <span class="math notranslate nohighlight">\(\hat{h}(x_{N+1})\)</span> and the non-conformity scores <span class="math notranslate nohighlight">\(\alpha_i^{jack}\)</span>.
 As seen in our example it perform better than just using one split, but no theoretical guarantee on the coverage can be given (see <span id="id3">[<a class="reference internal" href="../references.html#id2167" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">Barber <em>et al.</em>, 2019</a>]</span>).
@@ -982,14 +974,14 @@ RMWS:  2.435070750699638
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/6255918c5b1b5f74481de41c324c275969d00bc83ae95b336b56895f1c76efd0.png" src="../_images/6255918c5b1b5f74481de41c324c275969d00bc83ae95b336b56895f1c76efd0.png" />
+<img alt="../_images/547ffd72c5b98452d0ca8996de54f87616e9119a7cd7f2ea4d51e52bab5f3929.png" src="../_images/547ffd72c5b98452d0ca8996de54f87616e9119a7cd7f2ea4d51e52bab5f3929.png" />
 </div>
 </div>
 <div align="justify">
 <p>Comparing both Jackknife+ and Jackknife the coverage has not changed, which can often happen as both empirically often show similar performance <span id="id5">[<a class="reference internal" href="../references.html#id2167" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">Barber <em>et al.</em>, 2019</a>]</span>. The main difference is how the intervals are constructed.
 Whereas Jackknife construct intervals around the model <span class="math notranslate nohighlight">\(\hat{h} \pm \alpha_i^{jack}\)</span> trained on all data points, Jackknife+ constructs a interval around the individual <span class="math notranslate nohighlight">\(\hat{h}_{-i} \pm \alpha_i^{jack}\)</span>. Therefore as can bee seen in the section on <a class="reference internal" href="#content-uncertainty-quant"><span class="std std-ref">Uncertainty Quantificaion</span></a>, Jackknife+ gives each point a individual interval width whereas in Jackknife each point gets identical interval widths.</p>
 </div><section id="id6">
-<h3><span class="section-number">17.3.1. </span>Barebone Jackknife+ Implementation<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.3.1. </span>Barebone Jackknife+ Implementation<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1047,7 +1039,7 @@ Whereas Jackknife construct intervals around the model <span class="math notrans
 </section>
 </section>
 <section id="cv-method">
-<span id="content-cv-plus"></span><h2><span class="section-number">17.4. </span>CV+ Method<a class="headerlink" href="#cv-method" title="Link to this heading">#</a></h2>
+<span id="content-cv-plus"></span><h2><span class="section-number">17.4. </span>CV+ Method<a class="headerlink" href="#cv-method" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>While Jackknife and Jackknife+ improve the coverage of prediction sets, for increasing data points in gets very costly. Training a new model <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> for each data point gets impractically for practical application.
 If we think of the amount of <span class="math notranslate nohighlight">\(\hat{h}_{-i}\)</span> as a controllable parameter we arrive at the <em>K-fold CV+</em> method <span id="id7">[<a class="reference internal" href="../references.html#id2167" title="Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, and Ryan J. Tibshirani. Predictive inference with the jackknife+. The Annals of Statistics, 2019. URL: https://api.semanticscholar.org/CorpusID:147704029.">Barber <em>et al.</em>, 2019</a>]</span>, which we will call CV+ for simplicity.
@@ -1110,7 +1102,7 @@ RMWS:  2.660851433801548
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/bd3f34340ecbc76454c9e235cf597b2ffc91822cfd4f33672b70b4833fcf5555.png" src="../_images/bd3f34340ecbc76454c9e235cf597b2ffc91822cfd4f33672b70b4833fcf5555.png" />
+<img alt="../_images/fb97ee7603ff6b345990dc41f6d61a269f27dc3ce3ee44d908d388b7fb42d057.png" src="../_images/fb97ee7603ff6b345990dc41f6d61a269f27dc3ce3ee44d908d388b7fb42d057.png" />
 </div>
 </div>
 <p>We now achieve a coverage of 100 percent, as we predict very large intervals for the far left test points.</p>
@@ -1119,7 +1111,7 @@ RMWS:  2.660851433801548
 <p>A general advice when to use which method is provided by MAPIE <a class="reference external" href="https://mapie.readthedocs.io/en/latest/theoretical_description_regression.html">here</a>, alongside some more methods for heteroscedastic data or time series.</p>
 </div>
 <section id="barebone-cv-implementation">
-<h3><span class="section-number">17.4.1. </span>Barebone CV+ Implementation<a class="headerlink" href="#barebone-cv-implementation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.4.1. </span>Barebone CV+ Implementation<a class="headerlink" href="#barebone-cv-implementation" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1173,7 +1165,7 @@ RMWS:  2.660851433801548
 </section>
 </section>
 <section id="uncertainty-quantification-in-conformal-regression">
-<span id="content-uncertainty-quant"></span><h2><span class="section-number">17.5. </span>Uncertainty Quantification in Conformal Regression<a class="headerlink" href="#uncertainty-quantification-in-conformal-regression" title="Link to this heading">#</a></h2>
+<span id="content-uncertainty-quant"></span><h2><span class="section-number">17.5. </span>Uncertainty Quantification in Conformal Regression<a class="headerlink" href="#uncertainty-quantification-in-conformal-regression" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Quantifying the uncertainty of conformal regression outputs can intuitively be done by looking at the interval widths.</p>
 <ul class="simple">
@@ -1203,15 +1195,13 @@ RMWS:  2.660851433801548
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e30369b6678512c8a70e09255fedc3ee84753eed0fbe72c63eb7fc4e5e55ad08.png" src="../_images/e30369b6678512c8a70e09255fedc3ee84753eed0fbe72c63eb7fc4e5e55ad08.png" />
+<img alt="../_images/da35082b9cb619c024a9ab87dc23e746407cf9f61c5762466e0f8bbcb57c1252.png" src="../_images/da35082b9cb619c024a9ab87dc23e746407cf9f61c5762466e0f8bbcb57c1252.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="exchangeability" role="doc-footnote">
+<aside class="footnote brackets" id="exchangeability" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
 <p>A small example for exchangeability can be found here: <a class="reference internal" href="../chapter-conformel_classification/exchangeability-excursus.html"><span class="doc">Excursus: Exchangeability</span></a></p>
-</aside>
 </aside>
 </section>
 </section>
@@ -1273,7 +1263,6 @@ RMWS:  2.660851433801548
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -1321,7 +1310,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -1364,8 +1353,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
