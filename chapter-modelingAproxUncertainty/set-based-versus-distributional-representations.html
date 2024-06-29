@@ -179,10 +179,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">1. Prelude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/prelude.html">1. Prelude</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">2. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">3. Sources of uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">4. Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/src.html">3. Sources of Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/auxilary.html">4. Auxiliary Sites on Information Theory, Probability Theory and Other Mathematical Concepts</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="modelingAproxUncertainty.html">5. Modelling Approximation Uncertainty</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">5.4. Set-based versus distributional representations</a></li>
 </ul>
@@ -190,19 +190,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">6. Probability Estimation via Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">7. Probability Estimation and Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">9. Maximum Likelihood and Fisher Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">10. Generative models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/mle.html">9. Maximum Likelihood and Fisher Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/gm.html">10. Generative Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">11. Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep neural network ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian neural networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">14. Credal sets and classifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">15. Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">16. Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep Neural Network Ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/credal_sets.html">14. Credal Sets and Classifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/reliable_classification.html">15. Reliable Classification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/conformel_classification.html">16. Conformal Prediction for Classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">16.2. Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">17. Conformal prediction for regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">18. Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/conformel_regression.html">17. Conformal Prediction for Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/set.html">18. Set-valued Prediction Based on Utility Maximization</a></li>
 </ul>
 
     </div>
@@ -504,7 +504,7 @@ document.write(`
 <h2><span class="section-number">5.4.3. </span>Sets of distributions<a class="headerlink" href="#sets-of-distributions" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Given the complementary nature of sets and distributions, and the observation that both have advantages and disadvantages, one may wonder whether the two could not be combined in a meaningful way. Indeed, the argument that a single (probability) distribution is not enough for representing uncertain knowledge is quite prominent in the literature, and many generalized theories of uncertainty can be considered as a combination of that kind (<span id="id14"></span>;<span id="id15">Walley [<a class="reference internal" href="../references.html#id938" title="P. Walley. Statistical Reasoning with Imprecise Probabilities. Chapman and Hall, 1991.">1991</a>]</span>;<span id="id16">Shafer [<a class="reference internal" href="../references.html#id855" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">1976</a>]</span>;<span id="id17">Smets and Kennes [<a class="reference internal" href="../references.html#id1227" title="P. Smets and R. Kennes. The transferable belief model. Artificial Intelligence, 66:191-234, 1994.">1994</a>]</span>).</p>
-<p>Since we are specifically interested in aleatoric and epistemic uncertainty, and since these two types of uncertainty are reasonably captured in terms of sets and probability distributions, respectively, a natural idea is to consider <em>sets of probability distributions</em>. In the literature on imprecise probability, these are also called <a class="reference internal" href="../chapter-credal_sets/intro.html"><span class="doc std std-doc">credal sets</span></a> (<span id="id18">Cozman [<a class="reference internal" href="../references.html#id1726" title="F.G. Cozman. Credal networks. Artificial Intelligence, 120(2):199–233, 2000.">2000</a>]</span>;<span id="id19">Zaffalon [<a class="reference internal" href="../references.html#id1725" title="M. Zaffalon. The naive credal classifier. Journal of Statistical Planning and Inference, 105(1):5–21, 2002.">2002</a>]</span>). An illustration is given in cf. <a class="reference internal" href="#bary"><span class="std std-numref">Fig. 5.6</span></a>, where probability distributions on <span class="math notranslate nohighlight">\(\Omega = \{ a,b,c \}\)</span> are represented as points in a Barycentric coordinate systems. A credal set then corresponds to a subset of such points, suggesting a lack of knowledge about the true distribution but restricting it in terms of a set of possible candidates.</p>
+<p>Since we are specifically interested in aleatoric and epistemic uncertainty, and since these two types of uncertainty are reasonably captured in terms of sets and probability distributions, respectively, a natural idea is to consider <em>sets of probability distributions</em>. In the literature on imprecise probability, these are also called <a class="reference internal" href="#../chapter-credal_sets/intro"><span class="xref myst">credal sets</span></a> (<span id="id18">Cozman [<a class="reference internal" href="../references.html#id1726" title="F.G. Cozman. Credal networks. Artificial Intelligence, 120(2):199–233, 2000.">2000</a>]</span>;<span id="id19">Zaffalon [<a class="reference internal" href="../references.html#id1725" title="M. Zaffalon. The naive credal classifier. Journal of Statistical Planning and Inference, 105(1):5–21, 2002.">2002</a>]</span>). An illustration is given in cf. <a class="reference internal" href="#bary"><span class="std std-numref">Fig. 5.6</span></a>, where probability distributions on <span class="math notranslate nohighlight">\(\Omega = \{ a,b,c \}\)</span> are represented as points in a Barycentric coordinate systems. A credal set then corresponds to a subset of such points, suggesting a lack of knowledge about the true distribution but restricting it in terms of a set of possible candidates.</p>
 </div><figure class="align-default" id="bary">
 <a class="reference internal image-reference" href="../_images/pic-bary.png"><img alt="settings" src="../_images/pic-bary.png" style="width: 600px;" /></a>
 <figcaption>

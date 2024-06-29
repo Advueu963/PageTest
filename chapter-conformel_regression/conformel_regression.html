@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>17. Conformal prediction for regression &#8212; My sample book</title>
+    <title>17. Conformal Prediction for Regression &#8212; My sample book</title>
   
   
   
@@ -59,10 +59,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_regression/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_regression/conformel_regression';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18. Set-valued prediction based on utility maximization" href="../chapter-setValued_utilityMaximization/intro.html" />
+    <link rel="next" title="18. Set-valued Prediction Based on Utility Maximization" href="../chapter-setValued_utilityMaximization/set.html" />
     <link rel="prev" title="16.2. Excursus: Hypothesis testing" href="../chapter-conformel_classification/hypothesis-excurs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -179,10 +179,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">1. Prelude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/prelude.html">1. Prelude</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">2. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">3. Sources of uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">4. Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/src.html">3. Sources of Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/auxilary.html">4. Auxiliary Sites on Information Theory, Probability Theory and Other Mathematical Concepts</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">5. Modelling Approximation Uncertainty</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">5.4. Set-based versus distributional representations</a></li>
 </ul>
@@ -190,19 +190,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">6. Probability Estimation via Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">7. Probability Estimation and Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">9. Maximum Likelihood and Fisher Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">10. Generative models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/mle.html">9. Maximum Likelihood and Fisher Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/gm.html">10. Generative Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">11. Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep neural network ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian neural networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/intro.html">14. Credal sets and classifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">15. Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">16. Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep Neural Network Ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/credal_sets.html">14. Credal Sets and Classifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/reliable_classification.html">15. Reliable Classification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/conformel_classification.html">16. Conformal Prediction for Classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">16.2. Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Conformal prediction for regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">18. Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Conformal Prediction for Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/set.html">18. Set-valued Prediction Based on Utility Maximization</a></li>
 </ul>
 
     </div>
@@ -257,7 +257,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-conformel_regression/intro.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-conformel_regression/conformel_regression.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +305,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-conformel_regression/intro.ipynb" target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-conformel_regression/conformel_regression.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +322,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-conformel_regression/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-conformel_regression/conformel_regression.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -352,7 +352,7 @@
       
       
       
-      <li><a href="../_sources/chapter-conformel_regression/intro.ipynb" target="_blank"
+      <li><a href="../_sources/chapter-conformel_regression/conformel_regression.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -436,7 +436,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Conformal prediction for regression</h1>
+    <h1>Conformal Prediction for Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -475,7 +475,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="conformal-prediction-for-regression">
-<h1><span class="section-number">17. </span>Conformal prediction for regression<a class="headerlink" href="#conformal-prediction-for-regression" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">17. </span>Conformal Prediction for Regression<a class="headerlink" href="#conformal-prediction-for-regression" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
@@ -494,7 +494,7 @@ document.write(`
 </div>
 </div>
 <div align="justify">
-<p>We now discuss Conformal prediction applied to regression tasks. We recommend reading the Chapter on <a class="reference internal" href="../chapter-conformel_classification/intro.html"><span class="doc std std-doc">Conformal Classification</span></a> as it covers the general idea. Regression is done through inductive conformal prediction which can be briefly described in four steps:</p>
+<p>We now discuss Conformal prediction applied to regression tasks. We recommend reading the Chapter on <a class="reference internal" href="#../chapter-conformel_classification/intro"><span class="xref myst">Conformal Classification</span></a> as it covers the general idea. Regression is done through inductive conformal prediction which can be briefly described in four steps:</p>
 <ol class="arabic simple">
 <li><p>Divide the <span class="math notranslate nohighlight">\(x_1, \dots, x_n\)</span> data points into <span class="math notranslate nohighlight">\(x_1, \dots, x_k\)</span> training points and <span class="math notranslate nohighlight">\(x_{k+1}, \dots, x_{k+l-1}, x_{n}\)</span> validation points such that <span class="math notranslate nohighlight">\(n = k + l\)</span>.</p></li>
 <li><p>Train a arbitrary machine learning model on the  training set.</p></li>
@@ -1256,11 +1256,11 @@ RMWS:  2.660851433801548
       </div>
     </a>
     <a class="right-next"
-       href="../chapter-setValued_utilityMaximization/intro.html"
+       href="../chapter-setValued_utilityMaximization/set.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>Set-valued prediction based on utility maximization</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Set-valued Prediction Based on Utility Maximization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

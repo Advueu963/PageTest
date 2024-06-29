@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>14. Credal sets and classifiers &#8212; My sample book</title>
+    <title>14. Credal Sets and Classifiers &#8212; My sample book</title>
   
   
   
@@ -59,11 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-credal_sets/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-credal_sets/credal_sets';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Reliable Classification" href="../chapter-reliable_classification/intro.html" />
-    <link rel="prev" title="13. Bayesian neural networks" href="../chapter-bayesian_neuralnetwork/bayesian.html" />
+    <link rel="next" title="15. Reliable Classification" href="../chapter-reliable_classification/reliable_classification.html" />
+    <link rel="prev" title="13. Bayesian Neural Networks" href="../chapter-bayesian_neuralnetwork/bayesian.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,10 +179,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/intro.html">1. Prelude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-prelude/prelude.html">1. Prelude</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-intro/intro.html">2. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/intro.html">3. Sources of uncertainty</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/intro.html">4. Auxiliary sites on information-theory, probability theory and other mathematical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-srcUncertainty/src.html">3. Sources of Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-auxilary/auxilary.html">4. Auxiliary Sites on Information Theory, Probability Theory and Other Mathematical Concepts</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-modelingAproxUncertainty/modelingAproxUncertainty.html">5. Modelling Approximation Uncertainty</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-modelingAproxUncertainty/set-based-versus-distributional-representations.html">5.4. Set-based versus distributional representations</a></li>
 </ul>
@@ -190,19 +190,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-scoring/scoring.html">6. Probability Estimation via Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-calibration/calibration.html">7. Probability Estimation and Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/intro.html">9. Maximum Likelihood and Fisher Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/intro.html">10. Generative models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/mle.html">9. Maximum Likelihood and Fisher Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/gm.html">10. Generative Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-gaussianprocess/intro.html">11. Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep neural network ensembles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian neural networks</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Credal sets and classifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/intro.html">15. Reliable Classification</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/intro.html">16. Conformal prediction for classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep Neural Network Ensembles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian Neural Networks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Credal Sets and Classifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-reliable_classification/reliable_classification.html">15. Reliable Classification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter-conformel_classification/conformel_classification.html">16. Conformal Prediction for Classification</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter-conformel_classification/hypothesis-excurs.html">16.2. Excursus: Hypothesis testing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/intro.html">17. Conformal prediction for regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/intro.html">18. Set-valued prediction based on utility maximization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-conformel_regression/conformel_regression.html">17. Conformal Prediction for Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter-setValued_utilityMaximization/set.html">18. Set-valued Prediction Based on Utility Maximization</a></li>
 </ul>
 
     </div>
@@ -257,7 +257,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-credal_sets/intro.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-credal_sets/credal_sets.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +305,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-credal_sets/intro.ipynb" target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-credal_sets/credal_sets.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +322,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-credal_sets/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-credal_sets/credal_sets.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -352,7 +352,7 @@
       
       
       
-      <li><a href="../_sources/chapter-credal_sets/intro.ipynb" target="_blank"
+      <li><a href="../_sources/chapter-credal_sets/credal_sets.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -436,7 +436,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Credal sets and classifiers</h1>
+    <h1>Credal Sets and Classifiers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -474,7 +474,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="credal-sets-and-classifiers">
-<h1><span class="section-number">14. </span>Credal sets and classifiers<a class="headerlink" href="#credal-sets-and-classifiers" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">14. </span>Credal Sets and Classifiers<a class="headerlink" href="#credal-sets-and-classifiers" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1574,12 +1574,12 @@ Credal set with minimal Lower Shannon entropy:
 <div align="justify">
 <p>Based on these measures, the following disaggregations of total uncertainty <a class="reference internal" href="#equation-aggregate">(14.3)</a> have been proposed <span id="id14">Abellan <em>et al.</em> [<a class="reference internal" href="../references.html#id45" title="J. Abellan, J. Klir, and S. Moral. Disaggregated total uncertainty measure for credal sets. International Journal of General Systems, 2006.">2006</a>]</span>:
 a</p>
-<div class="amsmath math notranslate nohighlight" id="equation-60d50d2d-f0f1-4ef1-bc27-b94181e39457">
-<span class="eqno">(14.6)<a class="headerlink" href="#equation-60d50d2d-f0f1-4ef1-bc27-b94181e39457" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b6d45c9a-4606-46dc-ad86-1e4facc1333a">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-b6d45c9a-4606-46dc-ad86-1e4facc1333a" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = \big(H^*(Q) - \text{GH}(Q) \big)  + \text{GH}(Q)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-997f8579-8c78-4b88-bdd3-f6d667bd828f">
-<span class="eqno">(14.7)<a class="headerlink" href="#equation-997f8579-8c78-4b88-bdd3-f6d667bd828f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c611bb21-19c3-4864-a257-76fc550381b8">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-c611bb21-19c3-4864-a257-76fc550381b8" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)
 \end{align}\]</div>
 <p>In both cases, upper entropy serves as a measure of total uncertainty <span class="math notranslate nohighlight">\(U(Q)\)</span>, which is again justified on an axiomatic basis. In the first case, the generalized Hartley measure is used for quantifying epistemic uncertainty, and aleatoric uncertainty is obtained as the difference between total and epistemic uncertainty. In the second case, epistemic uncertainty is specified in terms of the difference between upper and lower entropy.</p>
@@ -1707,8 +1707,8 @@ Max aleatoric uncertainty. Decomposition 2:
 <span id="set-predictions"></span><h2><span class="section-number">14.4. </span>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Credal classifiers are used for “indeterminate” prediction, that is, to produce reliable set-valued predictions that are likely to cover the true outcome. In this regard, the notion of <em>dominance</em> plays an important role: An outcome <span class="math notranslate nohighlight">\(y\)</span> dominates another outcome <span class="math notranslate nohighlight">\(y'\)</span> if <span class="math notranslate nohighlight">\(y\)</span> is more probable than <span class="math notranslate nohighlight">\(y'\)</span> for each distribution in the credal set, that is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4c269758-f87c-48be-8bf4-0d2cc1f4329f">
-<span class="eqno">(14.8)<a class="headerlink" href="#equation-4c269758-f87c-48be-8bf4-0d2cc1f4329f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9093453c-9fd2-4932-a4e4-81c45d686bc2">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-9093453c-9fd2-4932-a4e4-81c45d686bc2" title="Permalink to this equation">#</a></span>\[\begin{align}
 \gamma(y,y', \vec{x}) :=
 \inf_{h \in C} \frac{p( y | \vec{x}_q, h)}{p(y' | \vec{x}_q, h)}  &gt; 1 \, ,
 \end{align}\]</div>
@@ -1748,8 +1748,8 @@ Max aleatoric uncertainty. Decomposition 2:
 Practically, the computations are based on the interval-valued probabilities
 <span class="math notranslate nohighlight">\([\underline{p}(y | \vec{x}_q), \overline{p}(y || \vec{x}_q)]\)</span>
 assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y}\)</span>, where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-59441929-7b96-4ef1-8617-145730a4b167">
-<span class="eqno">(14.9)<a class="headerlink" href="#equation-59441929-7b96-4ef1-8617-145730a4b167" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-de310e7e-6b50-4613-b939-468e3698aac3">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-de310e7e-6b50-4613-b939-468e3698aac3" title="Permalink to this equation">#</a></span>\[\begin{align}
 \underline{p}(y | \vec{x}_q) := \inf_{h \in C} p(y | \vec{x}_q, h)\, , \quad \overline{p}(y | \vec{x}_q) := \sup_{h \in C} p(y | \vec{x}_q, h) \, .
 \end{align}\]</div>
 <p>Note that the upper probabilities <span class="math notranslate nohighlight">\(\overline{p}(y | \vec{x}_q)\)</span> are very much in the spirit of the plausibility degrees (\ref{eq:plaus}) (equation in chapter 4.7 not there yet).</p>
@@ -2014,13 +2014,13 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 <h3><span class="section-number">14.4.1. </span>Dominance degrees<a class="headerlink" href="#dominance-degrees" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>Interestingly, uncertainty degrees can be derived on the basis of dominance degrees (\ref{eq:dominance}). For example, the following uncertainty score has been proposed by <span id="id15">Antonucci <em>et al.</em> [<a class="reference internal" href="../references.html#id2266" title="Alessandro Antonucci, Giorgio Corani, and Sandra Gabaglio. Active learning by the naive credal classifier. In Proceedings of the Sixth European Workshop on Probabilistic Graphical Models (PGM), 3–10. 2012.">2012</a>]</span> in the context of uncertainty sampling for active learning:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e0171802-e313-4da1-9270-f5d7b9161b11">
-<span class="eqno">(14.10)<a class="headerlink" href="#equation-e0171802-e313-4da1-9270-f5d7b9161b11" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e11a0404-9ac2-450a-89a5-27dc5b4abe69">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-e11a0404-9ac2-450a-89a5-27dc5b4abe69" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \max \big(\gamma(+1, -1, \vec{x}_q ), \gamma(-1, +1, \vec{x}_q ) \big) \, .
 \end{align}\]</div>
 <p>For data sets with more than two classes the score generalizes as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2885f6ba-e177-407d-a005-a3bc70d861a9">
-<span class="eqno">(14.11)<a class="headerlink" href="#equation-2885f6ba-e177-407d-a005-a3bc70d861a9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d0349395-6098-4de3-8fa3-bbb0e2e8b6ac">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-d0349395-6098-4de3-8fa3-bbb0e2e8b6ac" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus \{c'\}} \max[\gamma(c', c''), \gamma(c'', c')]
 \end{align}\]</div>
 </div>
@@ -2167,11 +2167,11 @@ s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Bayesian neural networks</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Bayesian Neural Networks</p>
       </div>
     </a>
     <a class="right-next"
-       href="../chapter-reliable_classification/intro.html"
+       href="../chapter-reliable_classification/reliable_classification.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
