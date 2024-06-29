@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>11. Gaussian processes &#8212; My sample book</title>
+    <title>11. Gaussian Processes &#8212; My sample book</title>
   
   
   
@@ -57,7 +57,7 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-gaussianprocess/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-gaussianprocess/gaussianprocess';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="12. Deep Neural Network Ensembles" href="../chapter-deep_neuralnetwork/dnn.html" />
@@ -190,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter-pe-ensemble/ensemble.html">8. Probability Estimation and Ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-mle_and_fisher/mle.html">9. Maximum Likelihood and Fisher Information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-generative_models/gm.html">10. Generative Models</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Gaussian processes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Gaussian Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html">12. Deep Neural Network Ensembles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html">13. Bayesian Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter-credal_sets/credal_sets.html">14. Credal Sets and Classifiers</a></li>
@@ -255,7 +255,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-gaussianprocess/intro.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Advueu963/PageTest/blob/main/chapter-gaussianprocess/gaussianprocess.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,7 +303,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-gaussianprocess/intro.ipynb" target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/edit/main/chapter-gaussianprocess/gaussianprocess.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -320,7 +320,7 @@
       
       
       
-      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-gaussianprocess/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Advueu963/PageTest/issues/new?title=Issue%20on%20page%20%2Fchapter-gaussianprocess/gaussianprocess.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -350,7 +350,7 @@
       
       
       
-      <li><a href="../_sources/chapter-gaussianprocess/intro.ipynb" target="_blank"
+      <li><a href="../_sources/chapter-gaussianprocess/gaussianprocess.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -432,7 +432,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Gaussian processes</h1>
+    <h1>Gaussian Processes</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -447,7 +447,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="gaussian-processes">
-<h1><span class="section-number">11. </span>Gaussian processes<a class="headerlink" href="#gaussian-processes" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>Gaussian Processes<a class="headerlink" href="#gaussian-processes" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
