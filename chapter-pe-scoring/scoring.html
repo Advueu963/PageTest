@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>6. Probability Estimation via Scoring &#8212; My sample book</title>
   
@@ -18,45 +19,49 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-scoring/scoring';</script>
@@ -73,9 +78,10 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -116,14 +122,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -157,18 +160,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -468,10 +460,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-via-scoring">
-<h1><span class="section-number">6. </span>Probability Estimation via Scoring<a class="headerlink" href="#probability-estimation-via-scoring" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Probability Estimation via Scoring<a class="headerlink" href="#probability-estimation-via-scoring" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -506,7 +498,7 @@ and <code class="docutils literal notranslate"><span class="pre">linear</span> <
 Bayesian approaches such as <a class="reference internal" href="../chapter-bayesian_neuralnetwork/bayesian.html"><span class="doc std std-doc">Bayesian neural networks</span></a> and <a class="reference internal" href="../chapter-gaussianprocess/intro.html"><span class="doc std std-doc">Gaussian processes</span></a>,
 as well as various techniques in the realm of <a class="reference internal" href="../chapter-deep_neuralnetwork/dnn.html"><span class="doc std std-doc">(deep) neural networks</span></a>.</p>
 </div><section id="probabilistic-predictor-with-logistic-regression">
-<span id="logistic"></span><h2><span class="section-number">6.1. </span>Probabilistic Predictor with Logistic Regression<a class="headerlink" href="#probabilistic-predictor-with-logistic-regression" title="Link to this heading">#</a></h2>
+<span id="logistic"></span><h2><span class="section-number">6.1. </span>Probabilistic Predictor with Logistic Regression<a class="headerlink" href="#probabilistic-predictor-with-logistic-regression" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Since there is no standard metric for comparing the accuracy of probability estimates,
 we use three different metrics to compare the probability estimates given by each example. <br />
@@ -535,7 +527,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7c928e17b35551ab94981d2cdafe43beb6a8928bd9c03cbc5f0fd1d807905a30.png" src="../_images/7c928e17b35551ab94981d2cdafe43beb6a8928bd9c03cbc5f0fd1d807905a30.png" />
+<img alt="../_images/a826f107d2bf19b311f952598ec6c86a54b01e68cb8e582c12c396f4f462af5e.png" src="../_images/a826f107d2bf19b311f952598ec6c86a54b01e68cb8e582c12c396f4f462af5e.png" />
 </div>
 </div>
 <div align="justify">
@@ -566,7 +558,7 @@ it can be challenging to visualize all features at once. Instead, we use the fir
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/131f0c3e409a24f5594a89f42f65198286914def2be557acaa739463c62e8aba.png" src="../_images/131f0c3e409a24f5594a89f42f65198286914def2be557acaa739463c62e8aba.png" />
+<img alt="../_images/7fe29bbf2ac323f2b3e444ac7061e66155af7b84f8d05c19bae23f6ca6fff209.png" src="../_images/7fe29bbf2ac323f2b3e444ac7061e66155af7b84f8d05c19bae23f6ca6fff209.png" />
 </div>
 </div>
 <div align="justify">
@@ -588,7 +580,7 @@ In these mathematical formulas,
 <span class="math notranslate nohighlight">\(N\)</span> denotes the number of observations or data points in the dataset.</p>
 </div>
 </div><section id="brier-score">
-<h3><span class="section-number">6.1.1. </span>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Brier Score<a class="headerlink" href="#brier-score" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>The Brier Score (<span id="id3">Brier [<a class="reference internal" href="../references.html#id2279" title="Glenn W Brier. Verification of forecasts expressed in terms of probability. Monthly weather review, 78(1):1–3, 1950.">1950</a>]</span>)
 (Quadratic Score) is a strictly proper scoring rule which measures the accuracy of probabilistic predictions,</p>
@@ -615,7 +607,7 @@ but it is inappropriate for ordinal variables which can take on three or more va
 </div>
 </div></section>
 <section id="logarithmic-score">
-<h3><span class="section-number">6.1.2. </span>Logarithmic Score<a class="headerlink" href="#logarithmic-score" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.2. </span>Logarithmic Score<a class="headerlink" href="#logarithmic-score" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>The Logarithmic (Log) Score is also often used in the context of probability forecasting,</p>
 <div class="math notranslate nohighlight">
@@ -641,7 +633,7 @@ S_{\text{Log}} = -\sum_{i=1}^N y_i \log(p_i).
 </div>
 </div></section>
 <section id="log-loss">
-<h3><span class="section-number">6.1.3. </span>Log Loss<a class="headerlink" href="#log-loss" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.3. </span>Log Loss<a class="headerlink" href="#log-loss" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>It measures the performance of a classification model where the prediction is a probability value between 0 and 1,</p>
 <div class="math notranslate nohighlight">
@@ -667,7 +659,7 @@ L = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(p_i) + (1-y_i) \log(1-p_i) \right).
 </div>
 </div></section>
 <section id="area-under-the-receiver-operating-characteristic-curve">
-<h3><span class="section-number">6.1.4. </span>Area Under the Receiver Operating Characteristic Curve<a class="headerlink" href="#area-under-the-receiver-operating-characteristic-curve" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.4. </span>Area Under the Receiver Operating Characteristic Curve<a class="headerlink" href="#area-under-the-receiver-operating-characteristic-curve" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>The area under the curve (AUC) is widely used to measure the accuracy of diagnostic tests.
 The receiver operating characteristic (ROC) curve aims to classify the state as either positive or negative based on test results and to find the optimal cut-off value with the best diagnostic performance.
@@ -709,7 +701,7 @@ AUCROC Score: 0.7533
 </section>
 </section>
 <section id="linear-regression">
-<span id="linear"></span><h2><span class="section-number">6.2. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
+<span id="linear"></span><h2><span class="section-number">6.2. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Now we show another example for the regression task.
 In statistics, linear regression is a statistical model used for predicting a continuous target variable. Let us also plot a synthetic regression dataset first.</p>
@@ -730,7 +722,7 @@ In statistics, linear regression is a statistical model used for predicting a co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/77bc615b0d30012d7e94a63397cb7586e204027c4df9781c3f7b823e48013e57.png" src="../_images/77bc615b0d30012d7e94a63397cb7586e204027c4df9781c3f7b823e48013e57.png" />
+<img alt="../_images/dd8bf50ce9065b1b263e5fe90e8472ea6ca2796b56f9c66872c9a2a4c206d438.png" src="../_images/dd8bf50ce9065b1b263e5fe90e8472ea6ca2796b56f9c66872c9a2a4c206d438.png" />
 </div>
 </div>
 <div align="justify">
@@ -754,11 +746,11 @@ In statistics, linear regression is a statistical model used for predicting a co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e874fd4cc623e8c23ef763442e3820a862261e42c542bc81da281f461f787c08.png" src="../_images/e874fd4cc623e8c23ef763442e3820a862261e42c542bc81da281f461f787c08.png" />
+<img alt="../_images/5b9761f9f5288b7f4d667a898de0a75cfe211c6d0625fc55829e70ad67db4570.png" src="../_images/5b9761f9f5288b7f4d667a898de0a75cfe211c6d0625fc55829e70ad67db4570.png" />
 </div>
 </div>
 <section id="continuous-ranked-probability-score">
-<h3><span class="section-number">6.2.1. </span>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>Continuous Ranked Probability Score<a class="headerlink" href="#continuous-ranked-probability-score" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>The Continuous Ranked Probability Score (CRPS) applies to probabilistic forecasts that take the form of predictive cumulative distribution functions. It generalizes the absolute error and forms a special case of a new and very general type of score, the energy score. Like many other scoring rules, the energy score admits a kernel representation in terms of negative definite functions, with links to inequalities of Hoeffding type, in both univariate and multivariate settings (<span id="id5">Gneiting and Raftery [<a class="reference internal" href="../references.html#id2202" title="Tilmann Gneiting and Adrian E Raftery. Strictly proper scoring rules, prediction, and estimation. Journal of the American statistical Association, 102(477):359–378, 2007.">2007</a>]</span>).</p>
 <p>The CRPS is defined as follows:</p>
@@ -800,7 +792,7 @@ the CRPS can be computed using a closed-form solution:</p>
 </div>
 </section>
 <section id="mean-square-error">
-<h3><span class="section-number">6.2.2. </span>Mean Square Error<a class="headerlink" href="#mean-square-error" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.2. </span>Mean Square Error<a class="headerlink" href="#mean-square-error" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>In statistics, the mean squared error (MSE) or mean squared deviation (MSD) of an estimator (of a procedure for estimating an unobserved quantity) measures the average of the squares of the errors,</p>
 <div class="math notranslate nohighlight">
@@ -831,7 +823,7 @@ It measures the mean squared difference between predicted probabilities and the 
 </div>
 </div></section>
 <section id="r-2">
-<h3><span class="section-number">6.2.3. </span><span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#r-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.3. </span><span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#r-2" title="Permalink to this heading">#</a></h3>
 <div align="justify">
 <p>R-squared (coefficient of determination) measures the proportion of the variance in the dependent variable that is predictable from the independent variables, normally ranging from 0 to 1.
 Mathematically, it is defined as follows:</p>
@@ -941,7 +933,6 @@ Thus, forecast evaluators should routinely consider choosing scoring rules from 
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -985,7 +976,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -1028,8 +1019,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

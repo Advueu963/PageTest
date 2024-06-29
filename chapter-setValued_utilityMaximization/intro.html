@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>18. Set-valued prediction based on utility maximization &#8212; My sample book</title>
   
@@ -18,45 +19,49 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-setValued_utilityMaximization/intro';</script>
@@ -72,9 +77,10 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -115,14 +121,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -156,18 +159,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -445,10 +437,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="set-valued-prediction-based-on-utility-maximization">
-<h1><span class="section-number">18. </span>Set-valued prediction based on utility maximization<a class="headerlink" href="#set-valued-prediction-based-on-utility-maximization" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">18. </span>Set-valued prediction based on utility maximization<a class="headerlink" href="#set-valued-prediction-based-on-utility-maximization" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -466,7 +458,7 @@ document.write(`
 <p>In line with classical statistics, but unlike decision theory and machine learning, the setting of conformal prediction does not involve any notion of loss function. In this regard, it differs from methods for set-valued prediction based on utility maximization (or loss minimization), which are primarily used for multi-class classification problems. Similar to conformal prediction, such methods also return a set of classes when the classifier is too uncertain with respect to the class label to predict, but the interpretation of this set is different. Instead of returning a set that contains the true class label with high probability, sets that maximize a set-based utility score are sought. Besides, being based on the conditional distribution <span class="math notranslate nohighlight">\( \prob(y\,|\,\vec{x}_q) \)</span> of the outcome <span class="math notranslate nohighlight">\( y \)</span> given a query <span class="math notranslate nohighlight">\( \vec{x}_q \)</span>, most of these methods capture <em>conditional</em> uncertainty.</p>
 <p>Let <span class="math notranslate nohighlight">\(u(y,\sety)\)</span> be a set-based utility score, where <span class="math notranslate nohighlight">\(y\)</span> denotes the ground truth outcome and <span class="math notranslate nohighlight">\(\sety\)</span> the predicted set. Then, adopting a decision-theoretic perspective, the Bayes-optimal solution <span class="math notranslate nohighlight">\(\sety^{*}_u\)</span> is found by maximizing the following objective:</p>
 <div class="math notranslate nohighlight" id="equation-bayesoptimal">
-<span class="eqno">(18.1)<a class="headerlink" href="#equation-bayesoptimal" title="Link to this equation">#</a></span>\[
+<span class="eqno">(18.1)<a class="headerlink" href="#equation-bayesoptimal" title="Permalink to this equation">#</a></span>\[
 \sety^{*}_u(\vec{x}_q) = \argmax_{\sety \in 2^{\mathcal{Y}}\setminus \{\emptyset\}} \evalue_{p(y\,|\,\vec{x}_q)} \big( u(y,\sety) \big) = \argmax_{\sety \in 2^{\mathcal{Y}}\setminus \{\emptyset\}} \sum_{y \in \mathcal{Y}} u(y,\sety) \, p(y\,|\,\vec{x}_q) \,.
 \]</div>
 <p>Solving <a class="reference internal" href="#equation-bayesoptimal">(18.1)</a> as a brute-force search requires checking all subsets of <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, resulting in an exponential time complexity.
@@ -539,7 +531,7 @@ Assuming we have four classes as in the figure below and we are interested in pr
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/41d04f772f0b0d19b8141d15147fd7fafbc2efc4453d6ce0c8c5600f9a2a8d94.png" src="../_images/41d04f772f0b0d19b8141d15147fd7fafbc2efc4453d6ce0c8c5600f9a2a8d94.png" />
+<img alt="../_images/b1314c4945ce9cf0aec9476b0a94fc792a84dc4fe3e87b5579bb6ae9bf554c11.png" src="../_images/b1314c4945ce9cf0aec9476b0a94fc792a84dc4fe3e87b5579bb6ae9bf554c11.png" />
 </div>
 </div>
 <p>We firstly must train an classification model on the data, here we choose the <a class="reference external" href="https://scikit-learn.org/stable/modules/naive_bayes.html">Gaussian Naive Bayes classifier</a>, through which we construct the conditional probability <span class="math notranslate nohighlight">\(p(y\,|\,\vec{x}_q)\)</span>.</p>
@@ -642,7 +634,7 @@ A more general formulation of <span class="math notranslate nohighlight">\(u(y,\
 <div align="justify">
 <p>However, for many utility scores, the Bayes-optimal prediction can be found more efficiently. Various methods in this direction have been proposed under different names and qualifications of predictions, such as “indeterminate” <span id="id2">Zaffalon [<a class="reference internal" href="../references.html#id2265" title="Marco Zaffalon. The naive credal classifier. Journal of Statistical Planning and Inference, 105(1):5–21, 2002.">2002</a>]</span>, “credal” <span id="id3">Corani and Zaffalon [<a class="reference internal" href="../references.html#id232" title="G. Corani and M. Zaffalon. Learning reliable classifiers from small or incomplete data sets: The naive credal classifier 2. Journal of Machine Learning Research, 9:581–621, 2008.">2008</a>]</span>, “non-deterministic” <span id="id4">Del Coz <em>et al.</em> [<a class="reference internal" href="../references.html#id231" title="J.J. Del Coz, J. Díez, and A. Bahamonde. Learning nondeterministic classifiers. The Journal of Machine Learning Research, 10:2273–2293, 2009.">2009</a>]</span>, and “cautious” <span id="id5">Yang <em>et al.</em> [<a class="reference internal" href="../references.html#id2254" title="G. Yang, S. Destercke, and M. Masson. The costs of indeterminacy: how to determine them? IEEE Transactions on Cybernetics, 47:4316-4327, 2017.">2017</a>]</span>. Although the methods typically differ in the exact shape of the utility function <span class="math notranslate nohighlight">\(u: \mathcal{Y} \times 2^{\mathcal{Y}}\setminus \{\emptyset\} \longrightarrow [0,1]\)</span>, most functions are specific members of the following family:</p>
 <div class="math notranslate nohighlight" id="equation-ufamily">
-<span class="eqno">(18.2)<a class="headerlink" href="#equation-ufamily" title="Link to this equation">#</a></span>\[\begin{split}u(y,\sety) = \left \{ 
+<span class="eqno">(18.2)<a class="headerlink" href="#equation-ufamily" title="Permalink to this equation">#</a></span>\[\begin{split}u(y,\sety) = \left \{ 
 \begin{array}{cl}
 0 &amp;\quad \mbox{if $y \notin \sety$} \ \\
 g(|\sety|)&amp;\quad \mbox{if $y \in \sety$} 
@@ -759,7 +751,7 @@ Prediction set for x_q with Recall-measure:  [1 2 3 4]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/0e3468e65af29caa2688112cadace7fd893b669405727f92f5a7155e7af8feb9.png" src="../_images/0e3468e65af29caa2688112cadace7fd893b669405727f92f5a7155e7af8feb9.png" />
+<img alt="../_images/a5818e525f44cb084c779ebac19c037a71341ef35f0d15d530aae0d2ccaed22d.png" src="../_images/a5818e525f44cb084c779ebac19c037a71341ef35f0d15d530aae0d2ccaed22d.png" />
 </div>
 </div>
 <p>Recall does not build any singleton sets whereas precision only predicts singleton sets.
@@ -831,7 +823,7 @@ Prediction set for x_q with logarithmic function:  [4]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7aedc22ea4a2789681e1da89df9614dac39f40b9e9af09b353d2b65db03ad290.png" src="../_images/7aedc22ea4a2789681e1da89df9614dac39f40b9e9af09b353d2b65db03ad290.png" />
+<img alt="../_images/88f172c19f3d75526e28e1081e859add18dd3576e067fd2620c9ef6fd93c922f.png" src="../_images/88f172c19f3d75526e28e1081e859add18dd3576e067fd2620c9ef6fd93c922f.png" />
 </div>
 </div>
 <div align="justify">
@@ -890,7 +882,7 @@ Prediction set for x_q with low rist-aversity:  [4]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/e6349b32ae12a1cdd104ce52e6ab98f129e6e8d2e0d45e7edc2074b46c9664db.png" src="../_images/e6349b32ae12a1cdd104ce52e6ab98f129e6e8d2e0d45e7edc2074b46c9664db.png" />
+<img alt="../_images/3c07cef7c70c9547bf2789a0f5c1afacbb0d5cc3e29cbb0e2bfbc6d3c1163969.png" src="../_images/3c07cef7c70c9547bf2789a0f5c1afacbb0d5cc3e29cbb0e2bfbc6d3c1163969.png" />
 </div>
 </div>
 <div align="justify">
@@ -952,8 +944,6 @@ Exceptions include <span id="id14">[<a class="reference internal" href="../refer
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
-              
             
           </div>
           <footer class="bd-footer-content">
@@ -973,7 +963,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -1016,8 +1006,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

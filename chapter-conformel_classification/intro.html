@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>16. Conformal prediction for classification &#8212; My sample book</title>
   
@@ -18,45 +19,49 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-conformel_classification/intro';</script>
@@ -73,9 +78,10 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -116,14 +122,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -157,18 +160,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -456,10 +448,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="conformal-prediction-for-classification">
-<h1><span class="section-number">16. </span>Conformal prediction for classification<a class="headerlink" href="#conformal-prediction-for-classification" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">16. </span>Conformal prediction for classification<a class="headerlink" href="#conformal-prediction-for-classification" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -476,7 +468,7 @@ document.write(`
 <p>Conformal prediction (<span id="id1">Balasubramanian <em>et al.</em> [<a class="reference internal" href="../references.html#id1895" title="V. Balasubramanian, S.S. Ho, and V. Vovk, editors. Conformal Prediction for Reliable Machine Learning: Theory, Adaptations and Applications. Morgan Kaufmann, 2014.">2014</a>], Shafer and Vovk [<a class="reference internal" href="../references.html#id1896" title="G. Shafer and V. Vovk. A tutorial on conformal prediction. Journal of Machine Learning Research, pages 371–421, 2008.">2008</a>], Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id1985" title="V. Vovk, A. Gammerman, and G. Shafer. Algorithmic Learning in a Random World. Springer-Verlag, 2003.">2003</a>]</span>) is a framework for reliable prediction that is rooted in classical frequentist statistics, more specifically in hypothesis testing<a class="footnote-reference brackets" href="#revision" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
 Given a sequence of training observations and a new query <span class="math notranslate nohighlight">\(\vec{x}_{N+1}\)</span> (which we denoted by <span class="math notranslate nohighlight">\(\vec{x}_{q}\)</span> before and in the following plot is marked red) with unknown outcome <span class="math notranslate nohighlight">\(y_{N+1}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-cpseq">
-<span class="eqno">(16.1)<a class="headerlink" href="#equation-cpseq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-cpseq" title="Permalink to this equation">#</a></span>\[
 (\vec{x}_1, y_1), \,  (\vec{x}_2, y_2), \ldots ,  (\vec{x}_N, y_N), \, (\vec{x}_{N+1}, \bullet)
 \enspace ,
 \]</div>
@@ -532,7 +524,7 @@ Given a sequence of training observations and a new query <span class="math notr
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/fcce53cd64dd0e2214c75caaf0513f507aa59d66c40f918454ac499ac0c564da.png" src="../_images/fcce53cd64dd0e2214c75caaf0513f507aa59d66c40f918454ac499ac0c564da.png" />
+<img alt="../_images/330a590a227cef37d0ea80ef666e6e4162110ddd683ace3b1039cf17e349076e.png" src="../_images/330a590a227cef37d0ea80ef666e6e4162110ddd683ace3b1039cf17e349076e.png" />
 </div>
 </div>
 <div align="justify">
@@ -681,13 +673,13 @@ Applying this function to the sequence <a class="reference internal" href="#equa
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/f9f2399e0e0f3fa49436cd0574f193c50c78711a863f73c6390cdc3304be1ba2.png" src="../_images/f9f2399e0e0f3fa49436cd0574f193c50c78711a863f73c6390cdc3304be1ba2.png" />
+<img alt="../_images/04019fea6d6cf419d62c3ff06a6335e800ece1aea2dfb9bf774099218fe2f950.png" src="../_images/04019fea6d6cf419d62c3ff06a6335e800ece1aea2dfb9bf774099218fe2f950.png" />
 </div>
 </div>
 <div align="justify">
 <p>Denote by <span class="math notranslate nohighlight">\(\sigma\)</span> the permutation of <span class="math notranslate nohighlight">\(\{1, \ldots , N+1\}\)</span> that sorts the scores in increasing order, i.e., such that <span class="math notranslate nohighlight">\(\alpha_{\sigma(1)} \leq \ldots \leq \alpha_{\sigma(N+1)}\)</span>. Under the assumption that the hypothetical choice of <span class="math notranslate nohighlight">\(y_{N+1}\)</span> is in agreement with the true data-generating process, and that this process has the property of exchangeability<a class="footnote-reference brackets" href="#exchangeability" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> (which is weaker than the assumption of independence and essentially means that the order of observations is irrelevant), every permutation <span class="math notranslate nohighlight">\(\sigma\)</span> has the same probability of occurrence. Consequently, the probability that <span class="math notranslate nohighlight">\(\alpha_{N+1}\)</span> is among the <span class="math notranslate nohighlight">\(\epsilon\)</span>,% highest nonconformity scores should be low. This notion can be captured by the <span class="math notranslate nohighlight">\(p\)</span>-values associated with the candidate <span class="math notranslate nohighlight">\(y\)</span>, defined as</p>
 <div class="math notranslate nohighlight" id="equation-probability-y-highestnonconformity">
-<span class="eqno">(16.2)<a class="headerlink" href="#equation-probability-y-highestnonconformity" title="Link to this equation">#</a></span>\[
+<span class="eqno">(16.2)<a class="headerlink" href="#equation-probability-y-highestnonconformity" title="Permalink to this equation">#</a></span>\[
 p(y)   := \frac{\# \{ i \given \alpha_i \geq \alpha_{N+1} \}}{N+1}
 \]</div>
 </div><div class="cell docutils container">
@@ -767,7 +759,7 @@ The complete <span class="math notranslate nohighlight">\(Y_\epsilon\)</span> ca
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/63bfdf91cc68d94b4d09d2b55950596fc8c1d20d9e1b7c5d149dc311d5ec54b8.png" src="../_images/63bfdf91cc68d94b4d09d2b55950596fc8c1d20d9e1b7c5d149dc311d5ec54b8.png" />
+<img alt="../_images/ddf4d86066bbad0dcfc4bef73bcef043b0cbd7d1567bc7f8c5724a7f01c34679.png" src="../_images/ddf4d86066bbad0dcfc4bef73bcef043b0cbd7d1567bc7f8c5724a7f01c34679.png" />
 </div>
 </div>
 <div align="justify">
@@ -822,7 +814,7 @@ Here we want to illustrate therefore we choose <code class="docutils literal not
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/a4efd61e58d7881c1d8f3ddbcfeb252b24e5585036a52520c91de196d4f4c6fa.png" src="../_images/a4efd61e58d7881c1d8f3ddbcfeb252b24e5585036a52520c91de196d4f4c6fa.png" />
+<img alt="../_images/2282157cd75e5d84d76a12292e5d287ce848a5df1780747ea378dfb351504993.png" src="../_images/2282157cd75e5d84d76a12292e5d287ce848a5df1780747ea378dfb351504993.png" />
 </div>
 </div>
 <div align="justify">
@@ -981,7 +973,7 @@ Prediction set for epsilon = 10%:  set()
 <div align="justify">
 <p>With its main concern of constructing valid prediction regions, conformal prediction differs from most other machine learning methods, which produce point predictions <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, whether equipped with a degree of uncertainty or not. In a sense, conformal prediction can even be seen as being orthogonal: It predefines the degree of uncertainty (level of confidence) and adjusts its prediction correspondingly, rather than the other way around.</p>
 </div><section id="uncertainty-quantification-in-conformal-prediction">
-<h2><span class="section-number">16.1. </span>Uncertainty Quantification in Conformal prediction<a class="headerlink" href="#uncertainty-quantification-in-conformal-prediction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">16.1. </span>Uncertainty Quantification in Conformal prediction<a class="headerlink" href="#uncertainty-quantification-in-conformal-prediction" title="Permalink to this heading">#</a></h2>
 <div align="justify">
 <p>Although conformal prediction is mainly concerned with constructing prediction regions, the scores produced in the course of this construction can also be used for quantifying uncertainty. In this regard, the notions of <em>confidence</em> and <em>credibility</em> have been introduced (<span id="id7">Gammerman and Vovk [<a class="reference internal" href="../references.html#id2174" title="A. Gammerman and V. Vovk. Prediction algorithms and confidence measures based on algorithmic randomness theory. Theoretical Computer Science, 287:209–217, 2002.">2002</a>]</span>): Let <span class="math notranslate nohighlight">\(p_1, \ldots , p_K\)</span> denote the <span class="math notranslate nohighlight">\(p\)</span>-values that correspond, respectively, to the candidate outcomes <span class="math notranslate nohighlight">\(y_1, \ldots , y_K\)</span> in a classification problem.
 In the transductive case the <span class="math notranslate nohighlight">\(p\)</span>-values are directly calculated, while here in the inductive we need to calculate them separately. Let us assume a <span class="math notranslate nohighlight">\(\epsilon=0.05\)</span>.</p>
@@ -1087,23 +1079,21 @@ The last figure depicting a point in between two classes. Thus indicating a cert
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/419c9a7c742041fea397c16007e6b6cde5e28934bf9546945869cd51b8ac4a6b.png" src="../_images/419c9a7c742041fea397c16007e6b6cde5e28934bf9546945869cd51b8ac4a6b.png" />
+<img alt="../_images/90a503b604d079b789188cb855e91ce407fb6b6bba564232361ccacff375a843.png" src="../_images/90a503b604d079b789188cb855e91ce407fb6b6bba564232361ccacff375a843.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="revision" role="doc-footnote">
+<aside class="footnote brackets" id="revision" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
 <p>If this concept is new to you we recommend visiting our site on Hypothesis Testing <a class="reference internal" href="hypothesis-excurs.html"><span class="doc">Excursus: Hypothesis testing</span></a>.</p>
 </aside>
-<aside class="footnote brackets" id="regressioncase" role="doc-footnote">
+<aside class="footnote brackets" id="regressioncase" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
 <p>Obviously, since <span class="math notranslate nohighlight">\(\mathcal{Y} = \mathbb{R}\)</span> is infinite in regression, a hypothesis test cannot be conducted explicitly for each candidate outcome <span class="math notranslate nohighlight">\(y\)</span>.</p>
 </aside>
-<aside class="footnote brackets" id="exchangeability" role="doc-footnote">
+<aside class="footnote brackets" id="exchangeability" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
 <p>A small example for exchangeability can be found here: <a class="reference internal" href="exchangeability-excursus.html"><span class="doc">Excursus: Exchangeability</span></a></p>
-</aside>
 </aside>
 </section>
 <div class="toctree-wrapper compound">
@@ -1167,7 +1157,6 @@ The last figure depicting a point in between two classes. Thus indicating a cert
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -1199,7 +1188,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -1242,8 +1231,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
