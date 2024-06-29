@@ -1574,12 +1574,12 @@ Credal set with minimal Lower Shannon entropy:
 <div align="justify">
 <p>Based on these measures, the following disaggregations of total uncertainty <a class="reference internal" href="#equation-aggregate">(14.3)</a> have been proposed <span id="id14">Abellan <em>et al.</em> [<a class="reference internal" href="../references.html#id45" title="J. Abellan, J. Klir, and S. Moral. Disaggregated total uncertainty measure for credal sets. International Journal of General Systems, 2006.">2006</a>]</span>:
 a</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bca482bf-4768-475e-8486-3780b81043f6">
-<span class="eqno">(14.6)<a class="headerlink" href="#equation-bca482bf-4768-475e-8486-3780b81043f6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7174dd44-f895-44fa-a3bf-79be7780e6b7">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-7174dd44-f895-44fa-a3bf-79be7780e6b7" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = \big(H^*(Q) - \text{GH}(Q) \big)  + \text{GH}(Q)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e36f303b-7d7b-4be7-ae36-92c727bef0e1">
-<span class="eqno">(14.7)<a class="headerlink" href="#equation-e36f303b-7d7b-4be7-ae36-92c727bef0e1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-99ca70f9-aee4-497d-96d9-6434cbba20f1">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-99ca70f9-aee4-497d-96d9-6434cbba20f1" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)
 \end{align}\]</div>
 <p>In both cases, upper entropy serves as a measure of total uncertainty <span class="math notranslate nohighlight">\(U(Q)\)</span>, which is again justified on an axiomatic basis. In the first case, the generalized Hartley measure is used for quantifying epistemic uncertainty, and aleatoric uncertainty is obtained as the difference between total and epistemic uncertainty. In the second case, epistemic uncertainty is specified in terms of the difference between upper and lower entropy.</p>
@@ -1707,8 +1707,8 @@ Max aleatoric uncertainty. Decomposition 2:
 <span id="set-predictions"></span><h2><span class="section-number">14.4. </span>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Credal classifiers are used for “indeterminate” prediction, that is, to produce reliable set-valued predictions that are likely to cover the true outcome. In this regard, the notion of <em>dominance</em> plays an important role: An outcome <span class="math notranslate nohighlight">\(y\)</span> dominates another outcome <span class="math notranslate nohighlight">\(y'\)</span> if <span class="math notranslate nohighlight">\(y\)</span> is more probable than <span class="math notranslate nohighlight">\(y'\)</span> for each distribution in the credal set, that is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c77faf51-580c-4e15-a578-5cfd30516d7d">
-<span class="eqno">(14.8)<a class="headerlink" href="#equation-c77faf51-580c-4e15-a578-5cfd30516d7d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5b2084d9-c7c5-4b0d-87a8-c67841839bea">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-5b2084d9-c7c5-4b0d-87a8-c67841839bea" title="Permalink to this equation">#</a></span>\[\begin{align}
 \gamma(y,y', \vec{x}) :=
 \inf_{h \in C} \frac{p( y | \vec{x}_q, h)}{p(y' | \vec{x}_q, h)}  &gt; 1 \, ,
 \end{align}\]</div>
@@ -1748,8 +1748,8 @@ Max aleatoric uncertainty. Decomposition 2:
 Practically, the computations are based on the interval-valued probabilities
 <span class="math notranslate nohighlight">\([\underline{p}(y | \vec{x}_q), \overline{p}(y || \vec{x}_q)]\)</span>
 assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y}\)</span>, where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-05337aa0-6157-4b60-bcbe-7bc54f93c767">
-<span class="eqno">(14.9)<a class="headerlink" href="#equation-05337aa0-6157-4b60-bcbe-7bc54f93c767" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ca8bc220-e92e-4d1d-9d6e-9a4bd33ddb0e">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-ca8bc220-e92e-4d1d-9d6e-9a4bd33ddb0e" title="Permalink to this equation">#</a></span>\[\begin{align}
 \underline{p}(y | \vec{x}_q) := \inf_{h \in C} p(y | \vec{x}_q, h)\, , \quad \overline{p}(y | \vec{x}_q) := \sup_{h \in C} p(y | \vec{x}_q, h) \, .
 \end{align}\]</div>
 <p>Note that the upper probabilities <span class="math notranslate nohighlight">\(\overline{p}(y | \vec{x}_q)\)</span> are very much in the spirit of the plausibility degrees (\ref{eq:plaus}) (equation in chapter 4.7 not there yet).</p>
@@ -2014,13 +2014,13 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 <h3><span class="section-number">14.4.1. </span>Dominance degrees<a class="headerlink" href="#dominance-degrees" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>Interestingly, uncertainty degrees can be derived on the basis of dominance degrees (\ref{eq:dominance}). For example, the following uncertainty score has been proposed by <span id="id15">Antonucci <em>et al.</em> [<a class="reference internal" href="../references.html#id2266" title="Alessandro Antonucci, Giorgio Corani, and Sandra Gabaglio. Active learning by the naive credal classifier. In Proceedings of the Sixth European Workshop on Probabilistic Graphical Models (PGM), 3–10. 2012.">2012</a>]</span> in the context of uncertainty sampling for active learning:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4ff07670-a1d0-4830-b8e5-8788a66c04e1">
-<span class="eqno">(14.10)<a class="headerlink" href="#equation-4ff07670-a1d0-4830-b8e5-8788a66c04e1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-78d43e42-15d1-47f7-8f4d-67a032f1c76e">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-78d43e42-15d1-47f7-8f4d-67a032f1c76e" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \max \big(\gamma(+1, -1, \vec{x}_q ), \gamma(-1, +1, \vec{x}_q ) \big) \, .
 \end{align}\]</div>
 <p>For data sets with more than two classes the score generalizes as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-423beaef-22ec-4064-9b34-654d910b7661">
-<span class="eqno">(14.11)<a class="headerlink" href="#equation-423beaef-22ec-4064-9b34-654d910b7661" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8478a9f4-8ba2-4301-b768-29f67984c9bf">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-8478a9f4-8ba2-4301-b768-29f67984c9bf" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus \{c'\}} \max[\gamma(c', c''), \gamma(c'', c')]
 \end{align}\]</div>
 </div>
