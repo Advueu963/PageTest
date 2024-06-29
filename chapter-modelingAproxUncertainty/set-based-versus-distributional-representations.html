@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>5.4. Set-based versus distributional representations &#8212; My sample book</title>
   
@@ -19,49 +18,45 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-modelingAproxUncertainty/set-based-versus-distributional-representations';</script>
@@ -78,10 +73,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -122,11 +116,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -160,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -451,12 +459,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="set-based-versus-distributional-representations">
-<h1><span class="section-number">5.4. </span>Set-based versus distributional representations<a class="headerlink" href="#set-based-versus-distributional-representations" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">5.4. </span>Set-based versus distributional representations<a class="headerlink" href="#set-based-versus-distributional-representations" title="Link to this heading">#</a></h1>
 <section id="background-on-uncertainty-modeling">
-<span id="unc"></span><h2><span class="section-number">5.4.1. </span>Background on uncertainty modeling<a class="headerlink" href="#background-on-uncertainty-modeling" title="Permalink to this heading">#</a></h2>
+<span id="unc"></span><h2><span class="section-number">5.4.1. </span>Background on uncertainty modeling<a class="headerlink" href="#background-on-uncertainty-modeling" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>The notion of uncertainty has been studied in various branches of science and scientific disciplines. For a long time, it plays a major role in fields like economics, psychology, and the social sciences, typically in the appearance of applied statistics. Likewise, its importance for artificial intelligence has been recognized very early on<a class="footnote-reference brackets" href="#footnoteidentifier1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, at the latest with the emergence of expert systems, which came along with the need for handling inconsistency, incompleteness, imprecision, and vagueness in knowledge representation <span id="id2">Kruse <em>et al.</em> [<a class="reference internal" href="../references.html#id679" title="R. Kruse, E. Schwecke, and J. Heinsohn. Uncertainty and Vagueness in Knowledge Based Systems. Springer-Verlag, 1991.">1991</a>]</span>. More recently, the phenomenon of uncertainty has also attracted a lot of attention in engineering, where it is studied under the notion of “uncertainty quantification”  <span id="id3">Owhadi <em>et al.</em> [<a class="reference internal" href="../references.html#id678" title="Houman Owhadi, Clint Scovel, Timothy John Sullivan, Mike McKerns, and Michael Ortiz. Optimal uncertainty quantification. Siam Review, 55(2):271–345, 2013.">2013</a>]</span>; interestingly, a distinction between aleatoric and epistemic uncertainty, very much in line with our machine learning perspective, is also made there.</p>
 </div><div align="justify">
@@ -464,12 +472,12 @@ document.write(`
 </div><figure class="align-default" id="calculi">
 <a class="reference internal image-reference" href="../_images/pic-calculi.png"><img alt="calculi" src="../_images/pic-calculi.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Various uncertainty calculi and common frameworks for uncertainty representation <span id="id4">Destercke <em>et al.</em> [<a class="reference internal" href="../references.html#id5" title="S. Destercke, D. Dubois, and E. Chojnacki. Unifying practical uncertainty representations: I. Generalized p-boxes. International Journal of Approximate Reasoning, 49:649–663, 2008.">2008</a>]</span>. Most of these formalisms are generalizations of standard probability theory an arrow denotes an “is more general than” relationship</span><a class="headerlink" href="#calculi" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Various uncertainty calculi and common frameworks for uncertainty representation <span id="id4">Destercke <em>et al.</em> [<a class="reference internal" href="../references.html#id5" title="S. Destercke, D. Dubois, and E. Chojnacki. Unifying practical uncertainty representations: I. Generalized p-boxes. International Journal of Approximate Reasoning, 49:649–663, 2008.">2008</a>]</span>. Most of these formalisms are generalizations of standard probability theory an arrow denotes an “is more general than” relationship</span><a class="headerlink" href="#calculi" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="sets-versus-distributions">
-<h2><span class="section-number">5.4.2. </span>Sets versus distributions<a class="headerlink" href="#sets-versus-distributions" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.4.2. </span>Sets versus distributions<a class="headerlink" href="#sets-versus-distributions" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>A generic way for describing situations of uncertainty is to proceed from an underlying reference set <span class="math notranslate nohighlight">\(\Omega\)</span>, sometimes called the <em>frame of discernment</em> <span id="id5">Shafer [<a class="reference internal" href="../references.html#id855" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">1976</a>]</span>. This set consists of all hypotheses, or pieces of precise information, that ought to be distinguished in the current context.  Thus, the elements <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> are exhaustive and mutually exclusive, and one of them, <span class="math notranslate nohighlight">\(\omega^*\)</span>, corresponds to the truth. For example, <span class="math notranslate nohighlight">\(\Omega = \{ H, T \}\)</span> in the case of coin tossing, <span class="math notranslate nohighlight">\(\Omega = \{ \text{win}, \text{loss}, \text{tie} \}\)</span> in predicting the outcome of a football match, or <span class="math notranslate nohighlight">\(\Omega = \mathbb{R} \times \mathbb{R}_+\)</span> in the estimation of the parameters (expected value and standar deviation) of a normal distribution from data. For ease of exposition and to avoid measure-theoretic complications, we will subsequently assume that <span class="math notranslate nohighlight">\(\Omega\)</span> is a discrete (finite or countable) set.</p>
 </div><div align="justify">
@@ -480,27 +488,27 @@ document.write(`
 </div><div align="justify">
 <p>First, probability distributions need to obey a normalization constraint. In particular, a probability distribution requires the weights to be nonnegative and integrate to 1. A corresponding probability measure on <span class="math notranslate nohighlight">\(\Omega\)</span> is a set-function <span class="math notranslate nohighlight">\(\Prob: \, 2^\Omega \longrightarrow [0,1]\)</span> such that <span class="math notranslate nohighlight">\(\Prob(\emptyset) = 0\)</span>, <span class="math notranslate nohighlight">\(\Prob(\Omega)=1\)</span>, and</p>
 <div class="math notranslate nohighlight" id="equation-addi">
-<span class="eqno">(5.10)<a class="headerlink" href="#equation-addi" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(5.10)<a class="headerlink" href="#equation-addi" title="Link to this equation">#</a></span>\[
 \Prob(A \cup B) = \Prob(A) + \Prob(B) 
 \]</div>
 <p>for all disjoint sets (events) <span class="math notranslate nohighlight">\(A, B \subseteq \Omega\)</span>. With <span class="math notranslate nohighlight">\(\prob(\omega) = \Prob(\{ \omega \})\)</span> for all <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> it follows that <span class="math notranslate nohighlight">\(\Prob(A) = \sum_{\omega \in A} \prob(\omega)\)</span>, and hence <span class="math notranslate nohighlight">\(\sum_{\omega \in \Omega} \prob(\omega)=1\)</span>. Since the set-based approach does not (need to) satify this constraint, it is no longer a special case.</p>
 </div><div align="justify">
 <p>Second, in addition to the question of how information is represented, it is of course important to ask how the information is processed. In this regard, the probabilistic calculus differs fundamentally from constraint-based (set-based) information processing. The characteristic property of probability is its additivity <a class="reference internal" href="#equation-addi">(5.10)</a>, suggesting that the belief in the disjunction (union) of two (disjoint) events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is the sum of the belief in either of them. In contrast to this, the set-based approach is more in line with a logical interpretation and calculus. Interpreting a constraint <span class="math notranslate nohighlight">\(C\)</span> as a logical proposition <span class="math notranslate nohighlight">\((\omega \in C)\)</span>, an event <span class="math notranslate nohighlight">\(A \subseteq \Omega\)</span> is possible as soon as <span class="math notranslate nohighlight">\(A \cap C \neq \emptyset\)</span> and impossible otherwise. Thus, the information <span class="math notranslate nohighlight">\((\omega \in C)\)</span> can be associated with a set-function <span class="math notranslate nohighlight">\(\Pi:\, 2^\Omega \longrightarrow \{ 0, 1 \}\)</span> such that <span class="math notranslate nohighlight">\(\Pi(A) = \llbracket A \cap C \neq \emptyset \rrbracket\)</span>. Obviously, this set-function satisfies <span class="math notranslate nohighlight">\(\Pi(\emptyset) = 0\)</span>, <span class="math notranslate nohighlight">\(\Pi(\Omega) = 1\)</span>, and</p>
 <div class="math notranslate nohighlight" id="equation-maxi">
-<span class="eqno">(5.11)<a class="headerlink" href="#equation-maxi" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(5.11)<a class="headerlink" href="#equation-maxi" title="Link to this equation">#</a></span>\[
 \Pi(A \cup B) = \max \big( \Pi(A) , \Pi(B) \big) 
 \]</div>
 <p>Thus, <span class="math notranslate nohighlight">\(\Pi\)</span> is “maxitive” instead of additive (<span id="id11">Shilkret [<a class="reference internal" href="../references.html#id1839" title="N. Shilkret. Maxitive measure and integration. Nederl. Akad. Wetensch. Proc. Ser. A 74 = Indag. Math., 33:109–116, 1971.">1971</a>]</span>;<span id="id12">Dubois [<a class="reference internal" href="../references.html#id940" title="D. Dubois. Possibility theory and statistical reasoning. Computational Statistics and Data Analysis, 51(1):47–69, 2006.">2006</a>]</span>). Roughly speaking, an event <span class="math notranslate nohighlight">\(A\)</span> is evaluated according to its (logical) consistency with a constraint <span class="math notranslate nohighlight">\(C\)</span>, whereas in probability theory, an event <span class="math notranslate nohighlight">\(A\)</span> is evaluated in terms of its probability of occurrence. The latter is reflected by the probability mass assigned to <span class="math notranslate nohighlight">\(A\)</span>, and requires a comparison of this mass with the mass of other events (since only one outcome <span class="math notranslate nohighlight">\(\omega\)</span> is possible, the elementary events compete with each other). Consequently, the calculus of probability, including rules for combination of information, conditioning, etc., is quite different from the corresponding calculus of constraint-based information processing <span id="id13">Dubois [<a class="reference internal" href="../references.html#id940" title="D. Dubois. Possibility theory and statistical reasoning. Computational Statistics and Data Analysis, 51(1):47–69, 2006.">2006</a>]</span>.</p>
 </div></section>
 <section id="sets-of-distributions">
-<h2><span class="section-number">5.4.3. </span>Sets of distributions<a class="headerlink" href="#sets-of-distributions" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.4.3. </span>Sets of distributions<a class="headerlink" href="#sets-of-distributions" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Given the complementary nature of sets and distributions, and the observation that both have advantages and disadvantages, one may wonder whether the two could not be combined in a meaningful way. Indeed, the argument that a single (probability) distribution is not enough for representing uncertain knowledge is quite prominent in the literature, and many generalized theories of uncertainty can be considered as a combination of that kind (<span id="id14"></span>;<span id="id15">Walley [<a class="reference internal" href="../references.html#id938" title="P. Walley. Statistical Reasoning with Imprecise Probabilities. Chapman and Hall, 1991.">1991</a>]</span>;<span id="id16">Shafer [<a class="reference internal" href="../references.html#id855" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">1976</a>]</span>;<span id="id17">Smets and Kennes [<a class="reference internal" href="../references.html#id1227" title="P. Smets and R. Kennes. The transferable belief model. Artificial Intelligence, 66:191-234, 1994.">1994</a>]</span>).</p>
 <p>Since we are specifically interested in aleatoric and epistemic uncertainty, and since these two types of uncertainty are reasonably captured in terms of sets and probability distributions, respectively, a natural idea is to consider <em>sets of probability distributions</em>. In the literature on imprecise probability, these are also called <a class="reference internal" href="../chapter-credal_sets/intro.html"><span class="doc std std-doc">credal sets</span></a> (<span id="id18">Cozman [<a class="reference internal" href="../references.html#id1726" title="F.G. Cozman. Credal networks. Artificial Intelligence, 120(2):199–233, 2000.">2000</a>]</span>;<span id="id19">Zaffalon [<a class="reference internal" href="../references.html#id1725" title="M. Zaffalon. The naive credal classifier. Journal of Statistical Planning and Inference, 105(1):5–21, 2002.">2002</a>]</span>). An illustration is given in cf. <a class="reference internal" href="#bary"><span class="std std-numref">Fig. 5.6</span></a>, where probability distributions on <span class="math notranslate nohighlight">\(\Omega = \{ a,b,c \}\)</span> are represented as points in a Barycentric coordinate systems. A credal set then corresponds to a subset of such points, suggesting a lack of knowledge about the true distribution but restricting it in terms of a set of possible candidates.</p>
 </div><figure class="align-default" id="bary">
 <a class="reference internal image-reference" href="../_images/pic-bary.png"><img alt="settings" src="../_images/pic-bary.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Probability distributions on <span class="math notranslate nohighlight">\(\Omega = \{ a,b,c \}\)</span> as points in a Barycentric coordinate system: Precise knowledge (left) versus incomplete knowledge (middle) and complete ignorance (right) about the true distribution.</span><a class="headerlink" href="#bary" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Probability distributions on <span class="math notranslate nohighlight">\(\Omega = \{ a,b,c \}\)</span> as points in a Barycentric coordinate system: Precise knowledge (left) versus incomplete knowledge (middle) and complete ignorance (right) about the true distribution.</span><a class="headerlink" href="#bary" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div align="justify">
@@ -520,7 +528,7 @@ document.write(`
 The dual pair of measures <span class="math notranslate nohighlight">\((N, \Pi)\)</span> allows for expressing ignorance in a proper way, mainly because <span class="math notranslate nohighlight">\(A\)</span> can be declared plausible without declaring <span class="math notranslate nohighlight">\(\bar{A}\)</span> implausible. In particular, <span class="math notranslate nohighlight">\(\Pi(A) \equiv 1\)</span> on <span class="math notranslate nohighlight">\(2^\Omega \setminus \emptyset\)</span> models complete ignorance: Everything is fully plausible, and hence nothing is necessary (<span class="math notranslate nohighlight">\(N(A) = 1 - \Pi(\bar{A}) = 0\)</span> for all <span class="math notranslate nohighlight">\(A\)</span>). A probability measure, on the other hand, is self-dual in the sense that <span class="math notranslate nohighlight">\(\Prob(A) = 1 - \Prob(\bar{A})\)</span>. Thus, a probability measure is playing both roles simultaneously, namely the role of the possibility and the role of the necessity measure. Therefore, it is more constrained than a representation <span class="math notranslate nohighlight">\((N, \Pi)\)</span>. In a sense, probability and possibility distributions can be seen as two extremes on the scale of uncertainty representations<a class="footnote-reference brackets" href="#footnoteidentifier3" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
 </div></section>
 <section id="distributions-of-sets">
-<span id="dos"></span><h2><span class="section-number">5.4.4. </span>Distributions of sets<a class="headerlink" href="#distributions-of-sets" title="Permalink to this heading">#</a></h2>
+<span id="dos"></span><h2><span class="section-number">5.4.4. </span>Distributions of sets<a class="headerlink" href="#distributions-of-sets" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Sets and distributions can also be combined the other way around, namely in terms of distributions of sets. Formalisms based on this idea include the calculus of <em>random sets</em> (<span id="id23">Matheron [<a class="reference internal" href="../references.html#id733" title="G. Matheron. Random Sets and Integral Geometry. John Wiley and Sons, 1975.">1975</a>]</span>;<span id="id24">Nguyen [<a class="reference internal" href="../references.html#id1204" title="H.T. Nguyen. On random sets and belief functions. Journal of Mathematical Analysis and Applications, 65:531-542, 1978.">1978</a>]</span>) as well as the Dempster-Shafer theory of evidence <span id="id25">Shafer [<a class="reference internal" href="../references.html#id855" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">1976</a>]</span>.</p>
 <p>In evidence theory, uncertain information is again expressed in terms of a dual pair of measures on <span class="math notranslate nohighlight">\(\Omega\)</span>, a measure of <em>plausibility</em> and a measure of <em>belief</em>. Both can be derived from an underlying <em>mass function</em> or <em>basic belief assignment</em> <span class="math notranslate nohighlight">\(m:\, 2^\Omega \longrightarrow [0,1]\)</span>, for which <span class="math notranslate nohighlight">\(m(\emptyset) = 0\)</span> and <span class="math notranslate nohighlight">\(\sum_{B \subseteq \Omega} m(B) = 1\)</span>. Obviously, <span class="math notranslate nohighlight">\(m\)</span> defines a probability distribution on the subsets of <span class="math notranslate nohighlight">\(\Omega\)</span>. Thus, instead of a single set or constraint <span class="math notranslate nohighlight">\(C\)</span>, like in the set-based approach, we are now dealing with a set of such constraints, each one being assigned a weight <span class="math notranslate nohighlight">\(m(C)\)</span>. Each <span class="math notranslate nohighlight">\(C \subseteq \Omega\)</span> such that <span class="math notranslate nohighlight">\(m(C) &gt; 0\)</span> is called a <em>focal element</em> and represents a single piece of evidence (in favor of <span class="math notranslate nohighlight">\(\omega^* \in C\)</span>). Assigning masses to subsets <span class="math notranslate nohighlight">\(C\)</span> instead of single elements <span class="math notranslate nohighlight">\(\omega\)</span> allows for combining randomness and imprecision.</p>
@@ -535,7 +543,7 @@ The dual pair of measures <span class="math notranslate nohighlight">\((N, \Pi)\
 </div><figure class="align-default" id="contour">
 <a class="reference internal image-reference" href="../_images/pic-contour.png"><img alt="contour" src="../_images/pic-contour.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Possibility distribution as a contour function of a basic belief assignment <span class="math notranslate nohighlight">\(m\)</span> (values assigned to focal sets on the right). In this example, <span class="math notranslate nohighlight">\(\pi(\omega_5)=1\)</span>, because <span class="math notranslate nohighlight">\(\omega_5\)</span> is contained in all focal sets, whereas <span class="math notranslate nohighlight">\(\pi(\omega_3)=0.6\)</span>.</span><a class="headerlink" href="#contour" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Possibility distribution as a contour function of a basic belief assignment <span class="math notranslate nohighlight">\(m\)</span> (values assigned to focal sets on the right). In this example, <span class="math notranslate nohighlight">\(\pi(\omega_5)=1\)</span>, because <span class="math notranslate nohighlight">\(\omega_5\)</span> is contained in all focal sets, whereas <span class="math notranslate nohighlight">\(\pi(\omega_3)=0.6\)</span>.</span><a class="headerlink" href="#contour" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div align="justify">
@@ -548,21 +556,23 @@ L^{n}(\omega; \mathcal{D}) := \frac{L(\omega; \mathcal{D})}{\sup_{\omega' \in \O
 </div><div align="justify">
 <p>The normalized likelihood was originally introduced by <span id="id26">Shafer [<a class="reference internal" href="../references.html#id855" title="G. Shafer. A Mathematical Theory of Evidence. Princeton University Press, 1976.">1976</a>]</span>, and has been justified axiomatically in the context of statistical inference by <span id="id27">Wasserman [<a class="reference internal" href="../references.html#id854" title="L.A. Wasserman. Belief functions and statistical evidence. The Canadian Journal of Statistics, 18(3):183–196, 1990.">1990</a>]</span>. Further arguments in favor of using the relative likelihood as the contour function of a (consonant) plausibility function are provided by <span id="id28">Denoeux [<a class="reference internal" href="../references.html#id1835" title="T. Denoeux. Likelihood-based belief function: justification and some extensions to low-quality data. International Journal of Approximate Reasoning, 55(7):1535–1547, 2014.">2014</a>]</span>, who shows that it can be derived from three basic principles: the likelihood principle, compatibility with Bayes’ rule, and the so-called minimal commitment principle. See also <span id="id29">Dubois <em>et al.</em> [<a class="reference internal" href="../references.html#id944" title="D. Dubois, S. Moral, and H. Prade. A semantics for possibility theory based on likelihoods. Journal of Mathematical Analysis and Applications, 205(2):359–380, 1997.">1997</a>]</span> and <span id="id30">Cattaneo [<a class="reference internal" href="../references.html#id947" title="M. Cattaneo. Likelihood-based statistical decisions. In Proc. 4th Int. Symposium on Imprecise Probabilities and their Applications, 107–116. 2005.">2005</a>]</span> for a discussion of the normalized likelihood in the context of possibility theory.</p>
 </div><hr class="footnotes docutils" />
-<aside class="footnote brackets" id="footnoteidentifier1" role="note">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footnoteidentifier1" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>The “Annual Conference on Uncertainty in Artificial Intelligence” (UAI) was launched in the mid 1980s.</p>
 </aside>
-<aside class="footnote brackets" id="footnoteidentifier2" role="note">
+<aside class="footnote brackets" id="footnoteidentifier2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">2</a><span class="fn-bracket">]</span></span>
 <p>We do not distinguish between the notions of information and knowledge in this paper.</p>
 </aside>
-<aside class="footnote brackets" id="footnoteidentifier4" role="note">
+<aside class="footnote brackets" id="footnoteidentifier4" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id21">3</a><span class="fn-bracket">]</span></span>
 <p>For this reason, possibility measures can also be defined on non-numerical, purely ordinal structures.</p>
 </aside>
-<aside class="footnote brackets" id="footnoteidentifier3" role="note">
+<aside class="footnote brackets" id="footnoteidentifier3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id22">4</a><span class="fn-bracket">]</span></span>
 <p>Strictly speaking, possibilities are not more expressive than probabilities, since possibility distributions cannot model degenerate probability distributions: <span class="math notranslate nohighlight">\(\Pi \neq N\)</span> unless <span class="math notranslate nohighlight">\(\Pi(\{ \omega^* \}) = 1\)</span> for some <span class="math notranslate nohighlight">\(\omega^* \in \Omega\)</span> and <span class="math notranslate nohighlight">\(\Pi(\{ \omega \}) = 0\)</span> otherwise.</p>
+</aside>
 </aside>
 </section>
 </section>
@@ -624,6 +634,7 @@ L^{n}(\omega; \mathcal{D}) := \frac{L(\omega; \mathcal{D})}{\sup_{\omega' \in \O
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -658,7 +669,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -701,8 +712,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

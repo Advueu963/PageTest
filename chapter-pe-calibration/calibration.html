@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>7. Probability Estimation and Calibration &#8212; My sample book</title>
   
@@ -19,49 +18,45 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": ["\\mathbb{N}"], "vec": ["\\boldsymbol{#1}", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "defeq": ["\\mathrel{\\vcenter{\\baselineskip0.5ex \\lineskiplimit0pt \\hbox{\\footnotesize.}\\hbox{\\footnotesize.}}}% ="], "given": ["\\, | \\,"], "cX": ["\\mathcal{X}"], "cY": ["\\mathcal{Y}"], "cH": ["\\mathcal{H}"], "cD": ["\\mathcal{D}"], "hath": ["\\hat{h}"], "haty": ["\\hat{y}"], "hatp": ["\\hat{p}"], "sety": ["\\widehat{Y}"], "argmin": ["\\operatorname*{argmin}"], "argmax": ["\\operatorname*{argmax}"], "db": ["\\set{M}"], "fkt": ["#1(\\cdot)", 1], "chrfkt": ["\\mathbb{I}_{#1}", 1], "kref": ["(\\ref{#1})", 1], "convto": ["(\\rightarrow"], "fft": ["(#1 :  #2 \\rightarrow #3", 3], "with": ["\\,  | \\,"], "sothat": ["\\,  : \\,"], "defi": ["\\stackrel{\\on{df}}{=}"], "set": ["\\mathcal{#1}", 1], "Prob": ["P"], "prob": ["p"], "impl": ["\\Rightarrow"], "on": ["\\operatorname"], "groesser": ["\\raisebox{#1mm}{} \\raisebox{-#1mm}{}", 1], "sgroesser": ["\\groesser{1.20}"], "xleftr": ["\\left( \\groesser{1.35} "], "xleftg": ["\\left\\{ \\groesser{1.35} "], "fftm": ["\\fft{#1}{#2}{#3} \\, ,\\, #4 \\mapsto #5", 5], "gdw": ["\\Leftrightarrow"], "gdwbd": ["\\stackrel{\\on{df}}{\\Leftrightarrow}"], "est": ["{est}"], "epd": ["\\Leftrightarrow_{\\on{def}}"], "fromto": ["\\longrightarrow"], "pref": ["\\succ"], "evalue": ["\\mathbf{E}"], "variance": ["\\mathbf{V}"], "mmp": ["", 1], "llbracket": ["\\lbrack\\lbrack"], "rrbracket": ["\\rbrack\\rbrack"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter-pe-calibration/calibration';</script>
@@ -78,10 +73,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -122,11 +116,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -160,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -455,10 +463,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-estimation-and-calibration">
-<h1><span class="section-number">7. </span>Probability Estimation and Calibration<a class="headerlink" href="#probability-estimation-and-calibration" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">7. </span>Probability Estimation and Calibration<a class="headerlink" href="#probability-estimation-and-calibration" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -484,26 +492,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">venn_abers</span> <span class="kn">import</span> <span class="n">VennAbersCalibrator</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># https://github.com/classifier-calibration/PyCalib/blob/master/examples/xmpl_quickstart.py</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">pycalib.metrics</span> <span class="kn">import</span> <span class="n">conf_ECE</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">pycalib.visualisations</span> <span class="kn">import</span> <span class="n">plot_reliability_diagram</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># from pycalib.models import CalibratedModel</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pycalib&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div align="justify">
 <p>The predictions delivered by corresponding methods are at best “pseudo-probabilities” that are often not very accurate.
 Besides, there are many methods that deliver natural scores,
 intuitively expressing a degree of confidence
-(like the distance from the separating hyperplane in <code class="docutils literal notranslate"><span class="pre">support</span> <span class="pre">vector</span> <span class="pre">machines</span></code>),
+(like the distance from the separating hyperplane in <a class="reference internal" href="#svm"><span class="std std-ref">support vector machines</span></a>),
 but which do not immediately qualify as probabilities either.
 The idea of <em>scaling</em> or <em>calibration methods</em> is to turn such scores into proper,
 well-calibrated probabilities, that is,
@@ -515,7 +509,7 @@ and improvements thereof (<span id="id5">Kull <em>et al.</em> [<a class="referen
 as well as the use of Venn predictors (<span id="id6">Johansson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="U. Johansson, T. Löfström, H. Sundell, H. Linusson, A. Gidenstam, and H. Boström. Venn predictors for well-calibrated probability estimation trees. In Proc. COPA, 7th Symposium on Conformal and Probabilistic Prediction and Applications, 3–14. Maastricht, The Netherlands, 2018.">2018</a>]</span>).
 Calibration is still a topic of ongoing research.</p>
 </div><section id="separating-hyperplane-in-support-vector-machines">
-<h2><span class="section-number">7.1. </span>Separating Hyperplane in Support Vector Machines<a class="headerlink" href="#separating-hyperplane-in-support-vector-machines" title="Permalink to this heading">#</a></h2>
+<span id="svm"></span><h2><span class="section-number">7.1. </span>Separating Hyperplane in Support Vector Machines<a class="headerlink" href="#separating-hyperplane-in-support-vector-machines" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -548,7 +542,7 @@ Calibration is still a topic of ongoing research.</p>
 </div>
 </div>
 <section id="logistic-scaling">
-<h3><span class="section-number">7.1.1. </span>logistic scaling<a class="headerlink" href="#logistic-scaling" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.1.1. </span>logistic scaling<a class="headerlink" href="#logistic-scaling" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>Introduced by <span id="id7">Platt [<a class="reference internal" href="../references.html#id2282" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">1999</a>]</span>, logistic (Platt) scaling was originally a method for calibrating support vector machines.
 It works by finding the parameters of a sigmoid function maximizing the likelihood of the training set.
@@ -587,7 +581,7 @@ transforming the raw scores of the SVM into calibrated probabilities.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/89c4b1d69e7bd35d1444d61ac9bded2e3af09ca8913d2826caa741a0934c905b.png" src="../_images/89c4b1d69e7bd35d1444d61ac9bded2e3af09ca8913d2826caa741a0934c905b.png" />
+<img alt="../_images/57e7898a30db2352f72c06b204319bfd9cdd90af9800e0031f3cca6ed32114ed.png" src="../_images/57e7898a30db2352f72c06b204319bfd9cdd90af9800e0031f3cca6ed32114ed.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -611,7 +605,7 @@ Brier score (Platt Scaling): 0.0496
 <p>The Brier scores indicate that Platt scaling has slightly improved the calibration of the SVM probabilities, as reflected in the lower Brier score for Platt scaling compared to the raw SVM probabilities.</p>
 </div></section>
 <section id="binning">
-<h3><span class="section-number">7.1.2. </span>binning<a class="headerlink" href="#binning" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.1.2. </span>binning<a class="headerlink" href="#binning" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>Binning assigns the same probability estimate to all examples in each bin,
 the ranking of examples inside bins is lost.
@@ -627,7 +621,7 @@ We then estimate the corrected probability that <span class="math notranslate no
 <p>(<span id="id8">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">2001</a>], Zadrozny and Elkan [<a class="reference internal" href="../references.html#id2278" title="Bianca Zadrozny and Charles Elkan. Learning and making decisions when costs and probabilities are both unknown. In Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining, 204–213. 2001.">2001</a>]</span>)</p>
 </div></section>
 <section id="isotonic-regression">
-<h3><span class="section-number">7.1.3. </span>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.1.3. </span>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>A difficulty of the binning method is that we have to choose the number of bins by cross-validation.
 If the dataset is small, or highly unbalanced, cross-validation is not likely to indicate the optimal number of bins.
@@ -688,7 +682,7 @@ we utilize the Isotonic Regression for a comparison on the same dataset.</p>
 </div>
 </section>
 <section id="venn-predictors">
-<h3><span class="section-number">7.1.4. </span>Venn predictors<a class="headerlink" href="#venn-predictors" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.1.4. </span>Venn predictors<a class="headerlink" href="#venn-predictors" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>Introduced by <span id="id11">Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id2280" title="Vladimir Vovk, Glenn Shafer, and Ilia Nouretdinov. Self-calibrating probability forecasting. Advances in neural information processing systems, 2003.">2003</a>]</span>,
 Venn predictors are multi-probabilistic predictors with proven validity properties.
@@ -728,9 +722,6 @@ As an example, if we make a number of probabilistic predictions with the probabi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1000x500 with 0 Axes&gt;
-</pre></div>
-</div>
 <img alt="../_images/f3133e2f4d3c94d7858a2adaec73599ec3f79e5eaa5a2dc4c56563483342f861.png" src="../_images/f3133e2f4d3c94d7858a2adaec73599ec3f79e5eaa5a2dc4c56563483342f861.png" />
 </div>
 </div>
@@ -743,7 +734,7 @@ which was introduced as an approach for associating predictions with confidence 
 </div></section>
 </section>
 <section id="classifier-calibration">
-<h2><span class="section-number">7.2. </span>Classifier Calibration<a class="headerlink" href="#classifier-calibration" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.2. </span>Classifier Calibration<a class="headerlink" href="#classifier-calibration" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>The aim of calibration in binary classification is to take an uncalibrated scoring classifier <span class="math notranslate nohighlight">\(s=f(x)\)</span> and apply a calibration map <span class="math notranslate nohighlight">\(\mu\)</span> on top of it to produce calibrated probabilities <span class="math notranslate nohighlight">\(\mu(f(x))\)</span>.
 Formally, a scoring classifier is perfectly calibrated on a dataset if for each of its output scores <span class="math notranslate nohighlight">\(s\)</span> the proportion of positives within instances with model output score <span class="math notranslate nohighlight">\(s\)</span> is equal to <span class="math notranslate nohighlight">\(s\)</span>.
@@ -837,6 +828,7 @@ e.g., using many more features.</p>
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -875,7 +867,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -918,8 +910,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
