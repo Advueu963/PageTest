@@ -590,7 +590,7 @@ In these mathematical formulas,
 </div><section id="brier-score">
 <span id="bs"></span><h3><span class="section-number">6.1.1. </span>Brier Score<a class="headerlink" href="#brier-score" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>The Brier Score (<span id="id3">Brier [<a class="reference internal" href="../references.html#id2279" title="Glenn W Brier. Verification of forecasts expressed in terms of probability. Monthly weather review, 78(1):1–3, 1950.">1950</a>]</span>)
+<p>The Brier Score (<span id="id3">Brier [<a class="reference internal" href="../references.html#id2278" title="Glenn W Brier. Verification of forecasts expressed in terms of probability. Monthly weather review, 78(1):1–3, 1950.">1950</a>]</span>)
 (Quadratic Score) is a strictly proper scoring rule which measures the accuracy of probabilistic predictions,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -673,7 +673,7 @@ L = -\frac{1}{N} \sum_{i=1}^N \left(y_i \log(p_i) + (1-y_i) \log(1-p_i) \right).
 The receiver operating characteristic (ROC) curve aims to classify the state as either positive or negative based on test results and to find the optimal cut-off value with the best diagnostic performance.
 The ROC curve is also used to evaluate the overall diagnostic performance of a test and to compare the performance of two or more tests.
 The closer the ROC curve is to the upper left corner of the graph, the higher the accuracy of the test because in the upper left corner,
-and vice versa (<span id="id4">Nahm [<a class="reference internal" href="../references.html#id2283" title="Francis Sahngun Nahm. Receiver operating characteristic curve: overview and practical use for clinicians. Korean journal of anesthesiology, 75(1):25, 2022.">2022</a>]</span>) .</p>
+and vice versa (<span id="id4">Nahm [<a class="reference internal" href="../references.html#id2282" title="Francis Sahngun Nahm. Receiver operating characteristic curve: overview and practical use for clinicians. Korean journal of anesthesiology, 75(1):25, 2022.">2022</a>]</span>) .</p>
 </div><div align="justify">
 <p>Now we leverage these score (loss) function to see the performance of the logistic regression.
 For simplicity, we directly show the performance using metric functions imported from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> if there already exists the implementation.</p>
@@ -878,7 +878,7 @@ R^2 Score: 0.5921
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We here calculate the Mean Squared Error (MSE), <span class="math notranslate nohighlight">\(R^2\)</span>, and Continuous Ranked Probability Score (CRPS) for this regression problem because Brier Score and Logarithmic Score are typically used for probabilistic classification models.
-Thus, forecast evaluators should routinely consider choosing scoring rules from these families that are tailored to the domain, as opposed to relying on popular, default scoring rules (<span id="id6">Merkle and Steyvers [<a class="reference internal" href="../references.html#id2276" title="Edgar C Merkle and Mark Steyvers. Choosing a strictly proper scoring rule. Decision Analysis, 10(4):292–304, 2013.">2013</a>]</span>).</p>
+Thus, forecast evaluators should routinely consider choosing scoring rules from these families that are tailored to the domain, as opposed to relying on popular, default scoring rules (<span id="id6">Merkle and Steyvers [<a class="reference internal" href="../references.html#id2275" title="Edgar C Merkle and Mark Steyvers. Choosing a strictly proper scoring rule. Decision Analysis, 10(4):292–304, 2013.">2013</a>]</span>).</p>
 </div>
 </div></section>
 </section>
