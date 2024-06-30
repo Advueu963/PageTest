@@ -448,12 +448,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-hyperplane-in-support-vector-machines">7.1. Separating Hyperplane in Support Vector Machines</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binning">7.1.1. Binning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-scaling">7.1.2. logistic Scaling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">7.1.3. Isotonic Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venn-predictors">7.1.4. Venn Predictors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-scaling">7.1.2. Logistic Scaling</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">7.2. Classifier Calibration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">7.2. Isotonic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venn-predictors">7.2.1. Venn Predictors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">7.3. Classifier Calibration</a></li>
 </ul>
             </nav>
         </div>
@@ -471,8 +473,10 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="kn">import</span> <span class="n">LineCollection</span>
-<span class="kn">from</span> <span class="nn">venn_abers</span> <span class="kn">import</span> <span class="n">VennAbersCalibrator</span>
+<span class="kn">from</span> <span class="nn">matplotlib.gridspec</span> <span class="kn">import</span> <span class="n">GridSpec</span>
+<span class="kn">from</span> <span class="nn">venn_abers</span> <span class="kn">import</span> <span class="n">VennAbersCalibrator</span><span class="p">,</span> <span class="n">VennAbers</span>
 
 <span class="c1"># https://github.com/classifier-calibration/PyCalib/blob/master/examples/xmpl_quickstart.py</span>
 <span class="kn">from</span> <span class="nn">pycalib.metrics</span> <span class="kn">import</span> <span class="n">conf_ECE</span>
@@ -483,9 +487,10 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.isotonic</span> <span class="kn">import</span> <span class="n">IsotonicRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">brier_score_loss</span><span class="p">,</span> <span class="n">roc_auc_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">calibration_curve</span><span class="p">,</span> <span class="n">CalibrationDisplay</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">brier_score_loss</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">calibration_curve</span><span class="p">,</span> <span class="n">CalibrationDisplay</span><span class="p">,</span> <span class="n">CalibratedClassifierCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">check_random_state</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
 <span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
@@ -502,9 +507,9 @@ but which do not immediately qualify as probabilities either.
 The idea of <em>scaling</em> or <em>calibration methods</em> is to turn such scores into proper,
 well-calibrated probabilities, that is,
 to learn a mapping from scores to the unit interval that can be applied to the output of a predictor as a kind of post-processing step (<span id="id1">Flach [<a class="reference internal" href="../references.html#id2186" title="P.A. Flach. Classifier calibration. In Encyclopedia of Machine Learning and Data Mining, pages 210–217. Springer, 2017.">2017</a>]</span>).
-Examples of such methods include binning (<span id="id2">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">2001</a>]</span>),
-isotonic regression (<span id="id3">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">2002</a>]</span>),
-logistic scaling (<span id="id4">Platt [<a class="reference internal" href="../references.html#id2281" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">1999</a>]</span>)
+Examples of such methods include <a class="reference internal" href="#binning"><span class="std std-ref">binning</span></a> (<span id="id2">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">2001</a>]</span>),
+<a class="reference internal" href="#ir"><span class="std std-ref">isotonic regression</span></a> (<span id="id3">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">2002</a>]</span>),
+<a class="reference internal" href="#ls"><span class="std std-ref">logistic scaling</span></a> (<span id="id4">Platt [<a class="reference internal" href="../references.html#id2281" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">1999</a>]</span>)
 and improvements thereof (<span id="id5">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">2017</a>]</span>),
 as well as the use of Venn predictors (<span id="id6">Johansson <em>et al.</em> [<a class="reference internal" href="../references.html#id236" title="U. Johansson, T. Löfström, H. Sundell, H. Linusson, A. Gidenstam, and H. Boström. Venn predictors for well-calibrated probability estimation trees. In Proc. COPA, 7th Symposium on Conformal and Probabilistic Prediction and Applications, 3–14. Maastricht, The Netherlands, 2018.">2018</a>]</span>).
 Calibration is still a topic of ongoing research.</p>
@@ -512,10 +517,7 @@ Calibration is still a topic of ongoing research.</p>
 <span id="svm"></span><h2><span class="section-number">7.1. </span>Separating Hyperplane in Support Vector Machines<a class="headerlink" href="#separating-hyperplane-in-support-vector-machines" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Let us first generate a synthetic binary classification dataset,
-then we create a support vector machine (SVM) with a <code class="docutils literal notranslate"><span class="pre">linear</span></code> kernel and separate the hyperplane in this SVM.
-The solid line denotes the optimal hyperplane (best decision boundary),
-while the space between dashed lines is the margin.
-The data points with black circles are support vectors.</p>
+then we create a support vector machine (SVM) with a <code class="docutils literal notranslate"><span class="pre">linear</span></code> kernel and separate the hyperplane in this SVM.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -548,20 +550,26 @@ The data points with black circles are support vectors.</p>
 <img alt="../_images/5d0c5e152160df86e64d2a89671696f12f1fddfbbeeebebbf85cb5bade968a07.png" src="../_images/5d0c5e152160df86e64d2a89671696f12f1fddfbbeeebebbf85cb5bade968a07.png" />
 </div>
 </div>
-<section id="binning">
-<h3><span class="section-number">7.1.1. </span>Binning<a class="headerlink" href="#binning" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>The solid line denotes the optimal hyperplane (best decision boundary),
+while the space between dashed lines is the margin.
+The data points with black circles are support vectors.</p>
+</div><section id="binning">
+<span id="id7"></span><h3><span class="section-number">7.1.1. </span>Binning<a class="headerlink" href="#binning" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>Binning assigns the same probability estimate to all examples in each bin,
 the ranking of examples inside bins is lost.
-The number of different probability estimates that binning can yield is limited by the number of alternative bins.</p>
-<p>Binning reduces the resolution, i.e. the degree of detail,
+The number of different probability estimates that binning can yield is limited by the number of alternative bins.
+Binning reduces the resolution, i.e., the degree of detail,
 of conditional probability estimates,
 while improving the accuracy of these estimates by reducing both variance and bias compared to uncalibrated estimates.</p>
-<p>If the shape of the mapping function is unknown, we can resort to a non-parametric method such as binning.
-In binning, the training examples are sorted according to their scores and the sorted set is divided into <span class="math notranslate nohighlight">\(b\)</span> subsets of equal size, called bins (<span id="id7">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">2001</a>], Zadrozny and Elkan [<a class="reference internal" href="../references.html#id2277" title="Bianca Zadrozny and Charles Elkan. Learning and making decisions when costs and probabilities are both unknown. In Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining, 204–213. 2001.">2001</a>]</span>).</p>
+<p>If the shape of the mapping function is unknown,
+we can resort to a non-parametric method such as binning.
+In binning, the training examples are sorted according to their scores and the sorted set is divided into different subsets of equal size,
+called bins (<span id="id8">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id113" title="B. Zadrozny and C. Elkan. Obtaining calibrated probability estimates from decision trees and Naive Bayesian classifiers. In Proc. ICML, Int. Conference on Machine Learning, 609–616. 2001.">2001</a>], Zadrozny and Elkan [<a class="reference internal" href="../references.html#id2277" title="Bianca Zadrozny and Charles Elkan. Learning and making decisions when costs and probabilities are both unknown. In Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining, 204–213. 2001.">2001</a>]</span>).</p>
 </div><div align="justify">
-<p>Expected Calibration Error (ECE) and Maximum Calibration Error (MCE) are two common measures for the calibration.</p>
-<p>Specifically,
+<p>Expected Calibration Error (ECE) and Maximum Calibration Error (MCE) are two common measures for the calibration.
+Specifically,
 ECE calculates the weighted average of the absolute differences between the predicted probabilities and the actual outcomes for each bin,
 while MCE identifies the maximum absolute difference between the predicted probabilities and the actual outcomes across all bins.</p>
 <p>The Expected Calibration Error is defined as follows:</p>
@@ -580,7 +588,7 @@ The Maximum Calibration Error can be represented:</p>
 \]</div>
 <p>We can visualize MCE and ECE on reliability diagrams.
 For perfectly (ideally) calibrated classifiers,
-MCE and ECE both equal 0 (<span id="id8">Guo <em>et al.</em> [<a class="reference internal" href="../references.html#id2283" title="Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. On calibration of modern neural networks. In International conference on machine learning, 1321–1330. PMLR, 2017.">2017</a>]</span>).</p>
+MCE and ECE both equal 0 (<span id="id9">Guo <em>et al.</em> [<a class="reference internal" href="../references.html#id2283" title="Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. On calibration of modern neural networks. In International conference on machine learning, 1321–1330. PMLR, 2017.">2017</a>]</span>).</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_ece</span><span class="p">(</span><span class="n">prob_true</span><span class="p">,</span> <span class="n">prob_pred</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">):</span>
@@ -613,7 +621,12 @@ MCE and ECE both equal 0 (<span id="id8">Guo <em>et al.</em> [<a class="referenc
 <p>Let us see the influence of different bins for the calibration.
 We plot below three calibration curves for different numbers of bins (5, 10, and 20).
 ECE and MCE are also leveraged here to get a better evaluation of the effect of binning.</p>
-</div><div class="cell docutils container">
+</div><div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_prob</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
 
@@ -631,11 +644,11 @@ ECE and MCE are also leveraged here to get a better evaluation of the effect of 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bins</span><span class="p">,</span> <span class="n">ece</span><span class="p">,</span> <span class="n">mce</span><span class="p">))</span> <span class="c1"># brier_score, </span>
     
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bins_list</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred</span><span class="p">,</span> <span class="n">prob_true</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bins</span><span class="si">}</span><span class="s1"> bins&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ideally Calibrated&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred</span><span class="p">,</span> <span class="n">prob_true</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bins</span><span class="si">}</span><span class="s1"> bins&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ideally Calibrated&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Predicted Probability&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of Positives&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Calibration Curve with </span><span class="si">{</span><span class="n">bins</span><span class="si">}</span><span class="s1"> Bins</span><span class="se">\n</span><span class="s1"> ECE: </span><span class="si">{</span><span class="n">ece</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">, MCE: </span><span class="si">{</span><span class="n">mce</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># Brier Score: {brier_score:.4f},</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Calibration curve with </span><span class="si">{</span><span class="n">bins</span><span class="si">}</span><span class="s1"> bins</span><span class="se">\n</span><span class="s1"> ECE: </span><span class="si">{</span><span class="n">ece</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">, MCE: </span><span class="si">{</span><span class="n">mce</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># Brier Score: {brier_score:.4f},</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -643,28 +656,29 @@ ECE and MCE are also leveraged here to get a better evaluation of the effect of 
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/24e15dcd0990f483c1c2a315095ba65237333246cd85299d603447b4c0fc6010.png" src="../_images/24e15dcd0990f483c1c2a315095ba65237333246cd85299d603447b4c0fc6010.png" />
+<img alt="../_images/6ec9b029797ac472f58f61f96bde39ceb90ba53a2854a822f6a7650a3a4b264f.png" src="../_images/6ec9b029797ac472f58f61f96bde39ceb90ba53a2854a822f6a7650a3a4b264f.png" />
 </div>
 </div>
 <div align="justify">
 <p>Obviously we can see, with fewer bins (e.g., 5 bins), each bin contains more samples,
 leading to a smoother but less detailed calibration curve.
-This can sometimes obscure finer details of the calibration performance of the model.</p>
-<p>With more bins (e.g., 20 bins), each bin contains fewer samples,
+This can sometimes obscure finer details of the calibration performance of the model.
+With more bins (e.g., 20 bins), each bin contains fewer samples,
 providing a more detailed view of the calibration.
 However, this can introduce more noise,
 especially when some bins have very few samples.</p>
 </div></section>
 <section id="logistic-scaling">
-<h3><span class="section-number">7.1.2. </span>logistic Scaling<a class="headerlink" href="#logistic-scaling" title="Link to this heading">#</a></h3>
+<span id="ls"></span><h3><span class="section-number">7.1.2. </span>Logistic Scaling<a class="headerlink" href="#logistic-scaling" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>Introduced by <span id="id9">Platt [<a class="reference internal" href="../references.html#id2281" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">1999</a>]</span>, logistic (Platt) scaling was originally a method for calibrating support vector machines.
-It works by finding the parameters of a sigmoid function maximizing the likelihood of the training set.
+<p>Introduced by <span id="id10">Platt [<a class="reference internal" href="../references.html#id2281" title="John Platt. Probabilistic outputs for support vector machines and comparison to regularized likelihood methods. In A.J. Smola, P. Bartlett, B. Schoelkopf, and D. Schuurmans, editors, Advances in Large Margin Classifiers, 61–74. Cambridge, MA, 1999. MIT Press.">1999</a>]</span>, logistic (Platt) scaling was originally a method for calibrating support vector machines.
+It works by finding the parameters of a <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code> function maximizing the likelihood of the training set.
 Unlike the other approaches,
 Platt scaling is a parametric approach to calibration.
 The non-probabilistic predictions of a classifier are used as features for a <a class="reference internal" href="../chapter-pe-scoring/scoring.html#logistic"><span class="std std-ref">logistic regression model</span></a>,
-which is trained on the validation set to return probabilities (<span id="id10">Guo <em>et al.</em> [<a class="reference internal" href="../references.html#id2283" title="Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. On calibration of modern neural networks. In International conference on machine learning, 1321–1330. PMLR, 2017.">2017</a>]</span>).
+which is trained on the validation set to return probabilities (<span id="id11">Guo <em>et al.</em> [<a class="reference internal" href="../references.html#id2283" title="Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. On calibration of modern neural networks. In International conference on machine learning, 1321–1330. PMLR, 2017.">2017</a>]</span>).
 We here apply such a logistic regression model to the outputs of the SVM classifier,
 transforming the raw scores of the SVM into calibrated probabilities.</p>
 </div>
@@ -672,7 +686,7 @@ transforming the raw scores of the SVM into calibrated probabilities.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>As lower ECE and MCE scores indicate better calibrations,
-we utilized the binning size <span class="math notranslate nohighlight">\(5\)</span> for the calibration curve in this section.</p>
+we utilized the binning size <span class="math notranslate nohighlight">\(5\)</span> for the calibration curve in this subsection.</p>
 </div>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -684,50 +698,67 @@ we utilized the binning size <span class="math notranslate nohighlight">\(5\)</s
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="n">fraction_of_positives</span><span class="p">,</span> <span class="n">mean_predicted_value</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mean_predicted_value</span><span class="p">,</span> <span class="n">fraction_of_positives</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SVM&quot;</span><span class="p">)</span>
+<span class="n">prob_true_svm</span><span class="p">,</span> <span class="n">prob_pred_svm</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred</span><span class="p">,</span> <span class="n">prob_true</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SVM&quot;</span><span class="p">)</span>
 
-<span class="n">fraction_of_positives_platt</span><span class="p">,</span> <span class="n">mean_predicted_value_platt</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">platt_probs</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">prob_true_platt</span><span class="p">,</span> <span class="n">prob_pred_platt</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">platt_probs</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mean_predicted_value_platt</span><span class="p">,</span> <span class="n">fraction_of_positives_platt</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Platt Scaling&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred_platt</span><span class="p">,</span> <span class="n">prob_true_platt</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Platt Scaling&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;k:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ideally Calibrated&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Mean predicted probability&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fraction of positives&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Calibration Curve&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Calibration curve&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ef1e1aba97e1cec464e1b3d763119c19be0bad49423c3d6a8609cde213fb673c.png" src="../_images/ef1e1aba97e1cec464e1b3d763119c19be0bad49423c3d6a8609cde213fb673c.png" />
+<img alt="../_images/9d59c0aced0338541ef27279430b30d3c5d3cabf8b5b695c1d401e40dc9e6a05.png" src="../_images/9d59c0aced0338541ef27279430b30d3c5d3cabf8b5b695c1d401e40dc9e6a05.png" />
 </div>
 </div>
 <div align="justify">
-<p>Now we calculate the <a class="reference internal" href="../chapter-pe-scoring/scoring.html#bs"><span class="std std-ref">Brier scores</span></a> before and after the logistic scaling.
-The results below indicate that Platt scaling has slightly improved the calibration of the SVM probabilities,
-as reflected in the lower Brier score for Platt scaling compared to the raw SVM probabilities.</p>
+<p>Now we calculate the <a class="reference internal" href="../chapter-pe-scoring/scoring.html#bs"><span class="std std-ref">Brier scores</span></a>, as well as ECE and MCE before and after the logistic scaling.
+The results below indicate that Platt scaling has improved the calibration of the SVM probabilities,
+as reflected in the lower Brier score, ECE, and MCE for Platt scaling compared to the raw SVM probabilities.</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brier_svm</span> <span class="o">=</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
 <span class="n">brier_platt</span> <span class="o">=</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">platt_probs</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Brier score (SVM): </span><span class="si">{</span><span class="n">brier_svm</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Brier score (Platt Scaling): </span><span class="si">{</span><span class="n">brier_platt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ece_svm</span> <span class="o">=</span> <span class="n">calculate_ece</span><span class="p">(</span><span class="n">prob_true_svm</span><span class="p">,</span> <span class="n">prob_pred_svm</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ece_platt</span> <span class="o">=</span> <span class="n">calculate_ece</span><span class="p">(</span><span class="n">prob_true_platt</span><span class="p">,</span> <span class="n">prob_pred_platt</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">mce_svm</span> <span class="o">=</span> <span class="n">calculate_mce</span><span class="p">(</span><span class="n">prob_true_svm</span><span class="p">,</span> <span class="n">prob_pred_svm</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mce_platt</span> <span class="o">=</span> <span class="n">calculate_mce</span><span class="p">(</span><span class="n">prob_true_platt</span><span class="p">,</span> <span class="n">prob_pred_platt</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Metrics&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Brier Score&quot;</span><span class="p">,</span> <span class="s2">&quot;Expected Calibration Error&quot;</span><span class="p">,</span> <span class="s2">&quot;Maximum Calibration Error&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;SVM&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">brier_svm</span><span class="p">,</span> <span class="n">ece_svm</span><span class="p">,</span> <span class="n">mce_svm</span><span class="p">],</span>
+    <span class="s2">&quot;SVM-Platt&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">brier_platt</span><span class="p">,</span> <span class="n">ece_platt</span><span class="p">,</span> <span class="n">mce_platt</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df_results</span><span class="p">[</span><span class="s2">&quot;SVM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_results</span><span class="p">[</span><span class="s2">&quot;SVM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df_results</span><span class="p">[</span><span class="s2">&quot;SVM-Platt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_results</span><span class="p">[</span><span class="s2">&quot;SVM-Platt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_results</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brier score (SVM): 0.0545
-Brier score (Platt Scaling): 0.0485
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                      Metrics     SVM  SVM-Platt
+0                 Brier Score  0.0545     0.0485
+1  Expected Calibration Error  0.2319     0.1308
+2   Maximum Calibration Error  0.5691     0.2484
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+</section>
 <section id="isotonic-regression">
-<h3><span class="section-number">7.1.3. </span>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Link to this heading">#</a></h3>
+<span id="ir"></span><h2><span class="section-number">7.2. </span>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>A difficulty of the binning method is that we have to choose the number of bins by cross-validation.
 If the dataset is small, or highly unbalanced, cross-validation is not likely to indicate the optimal number of bins.
@@ -736,13 +767,13 @@ If the boundaries are such that we average together the labels of examples that 
 the binning method will fail to produce accurate probability estimates.</p>
 <p>Isotonic regression,
 an intermediary approach between sigmoid fitting and binning,
-is also arguably the most common non-parametric form of regression (<span id="id11">Guo <em>et al.</em> [<a class="reference internal" href="../references.html#id2283" title="Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. On calibration of modern neural networks. In International conference on machine learning, 1321–1330. PMLR, 2017.">2017</a>]</span>),
-in which we assume that the function is chosen from the class of all isotonic (i.e. non-decreasing) functions.</p>
-<p>If we assume that the classifier ranks examples correctly,
+is also arguably the most common non-parametric form of regression (<span id="id12">Guo <em>et al.</em> [<a class="reference internal" href="../references.html#id2283" title="Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. On calibration of modern neural networks. In International conference on machine learning, 1321–1330. PMLR, 2017.">2017</a>]</span>),
+in which we assume that the function is chosen from the class of all isotonic (i.e. non-decreasing) functions.
+If we assume that the classifier ranks examples correctly,
 the mapping from scores into probabilities is non-decreasing,
 and we can use isotonic regression to learn this mapping.
-A commonly used algorithm for computing the isotonic regression is pair-adjacent violators (PAV) (<span id="id12">Ayer <em>et al.</em> [<a class="reference internal" href="../references.html#id2276" title="Miriam Ayer, H Daniel Brunk, George M Ewing, William T Reid, and Edward Silverman. An empirical distribution function for sampling with incomplete information. The annals of mathematical statistics, pages 641–647, 1955.">1955</a>]</span>).
-This algorithm finds the stepwise-constant isotonic function that best fits the data according to a mean-squared error criterion (<span id="id13">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">2002</a>]</span>).</p>
+A commonly used algorithm for computing the isotonic regression is pair-adjacent violators (PAV) (<span id="id13">Ayer <em>et al.</em> [<a class="reference internal" href="../references.html#id2276" title="Miriam Ayer, H Daniel Brunk, George M Ewing, William T Reid, and Edward Silverman. An empirical distribution function for sampling with incomplete information. The annals of mathematical statistics, pages 641–647, 1955.">1955</a>]</span>).
+This algorithm finds the stepwise-constant isotonic function that best fits the data according to a mean-squared error criterion (<span id="id14">Zadrozny and Elkan [<a class="reference internal" href="../references.html#id112" title="B. Zadrozny and C. Elkan. Transforming classifier scores into accurate multiclass probability estimates. In Proc. KDD–02, 8th International Conference on Knowledge Discovery and Data Mining, 694–699. Edmonton, Alberta, Canada, 2002.">2002</a>]</span>).</p>
 <p>Building upon the <a class="reference internal" href="../chapter-pe-scoring/scoring.html#linear"><span class="std std-ref">linear regressor</span></a> in the previous chapter,
 we utilize the Isotonic Regression for a comparison on the same dataset.</p>
 </div><div class="cell docutils container">
@@ -754,11 +785,12 @@ we utilize the Isotonic Regression for a comparison on the same dataset.</p>
 
 <span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_pred_lr</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
 
 <span class="n">ir</span> <span class="o">=</span> <span class="n">IsotonicRegression</span><span class="p">(</span><span class="n">out_of_bounds</span><span class="o">=</span><span class="s2">&quot;clip&quot;</span><span class="p">)</span>
-<span class="n">y_</span> <span class="o">=</span> <span class="n">ir</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_pred_ir</span> <span class="o">=</span> <span class="n">ir</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="n">segments</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">y_</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">segments</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">y_pred_ir</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 <span class="n">lc</span> <span class="o">=</span> <span class="n">LineCollection</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">lc</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 <span class="n">lc</span><span class="o">.</span><span class="n">set_linewidths</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
@@ -766,7 +798,7 @@ we utilize the Isotonic Regression for a comparison on the same dataset.</p>
 <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
 <span class="n">ax0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;C4.&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="s2">&quot;C2.-&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred_ir</span><span class="p">,</span> <span class="s2">&quot;C2.-&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]),</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span> 
 <span class="n">ax0</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span>
 <span class="n">ax0</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s2">&quot;Data Points&quot;</span><span class="p">,</span> <span class="s2">&quot;Isotonic Regressor&quot;</span><span class="p">,</span> <span class="s2">&quot;Linear Regressor&quot;</span><span class="p">))</span> <span class="c1"># , loc=&quot;upper left&quot; , &#39;lower right&#39;</span>
@@ -787,11 +819,44 @@ we utilize the Isotonic Regression for a comparison on the same dataset.</p>
 <img alt="../_images/19a68b33e23fe9966c6e903db3f4c105eb13b4d88cbff628217b03b0bee63ce1.png" src="../_images/19a68b33e23fe9966c6e903db3f4c105eb13b4d88cbff628217b03b0bee63ce1.png" />
 </div>
 </div>
-</section>
-<section id="venn-predictors">
-<h3><span class="section-number">7.1.4. </span>Venn Predictors<a class="headerlink" href="#venn-predictors" title="Link to this heading">#</a></h3>
 <div align="justify">
-<p>Introduced by <span id="id14">Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id2279" title="Vladimir Vovk, Glenn Shafer, and Ilia Nouretdinov. Self-calibrating probability forecasting. Advances in neural information processing systems, 2003.">2003</a>]</span>,
+<p>Now we calculate the <a class="reference internal" href="../chapter-pe-scoring/scoring.html#mse"><span class="std std-ref">mean squared error</span></a> for both linear regression and isotonic regression.
+By plotting these calibration curves,
+we can visually assess the calibration of each regression model.
+Points closer to the black dashed line indicate the better calibration.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_pred_lr</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ideally Calibration&#39;</span><span class="p">)</span>
+<span class="c1"># plt.xlabel(&#39;Predicted&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Actual&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Linear regression calibration</span><span class="se">\n</span><span class="s1">MSE: </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_lr</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_pred_ir</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ideally Calibration&#39;</span><span class="p">)</span>
+<span class="c1"># plt.xlabel(&#39;Predicted&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Actual&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Isotonic regression calibration</span><span class="se">\n</span><span class="s1">MSE: </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_ir</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06eae47a5c59ec2ae2ad141f5770f5f8462e5413792b03e64fd10d11a0b5f78b.png" src="../_images/06eae47a5c59ec2ae2ad141f5770f5f8462e5413792b03e64fd10d11a0b5f78b.png" />
+</div>
+</div>
+<section id="venn-predictors">
+<h3><span class="section-number">7.2.1. </span>Venn Predictors<a class="headerlink" href="#venn-predictors" title="Link to this heading">#</a></h3>
+<div align="justify">
+<p>Introduced by <span id="id15">Vovk <em>et al.</em> [<a class="reference internal" href="../references.html#id2279" title="Vladimir Vovk, Glenn Shafer, and Ilia Nouretdinov. Self-calibrating probability forecasting. Advances in neural information processing systems, 2003.">2003</a>]</span>,
 Venn predictors are multi-probabilistic predictors with proven validity properties.
 The impossibility result described earlier for probabilistic prediction is circumvented in two ways:</p>
 <ol class="arabic simple">
@@ -802,15 +867,47 @@ As an example, if we make a number of probabilistic predictions with the probabi
 </ol>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
-<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">p_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">nb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">nb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">nb_isotonic</span> <span class="o">=</span> <span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">nb</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;isotonic&#39;</span><span class="p">)</span>
+<span class="n">nb_isotonic</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">nb_sigmoid</span> <span class="o">=</span> <span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">nb</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<span class="n">nb_sigmoid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">nb_vennabers</span> <span class="o">=</span>  <span class="n">VennAbersCalibrator</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">nb</span><span class="p">,</span> <span class="n">inductive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">nb_vennabers</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">disp</span> <span class="o">=</span> <span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">prob_nb</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">prob_isotonic</span> <span class="o">=</span> <span class="n">nb_isotonic</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">prob_sigmoid</span> <span class="o">=</span> <span class="n">nb_sigmoid</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">prob_vennabers</span> <span class="o">=</span> <span class="n">nb_vennabers</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">prob_true</span><span class="p">,</span> <span class="n">prob_pred</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_nb</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred</span><span class="p">,</span> <span class="n">prob_true</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GaussianNB&#39;</span><span class="p">)</span>
+<span class="n">prob_true</span><span class="p">,</span> <span class="n">prob_pred</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_isotonic</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred</span><span class="p">,</span> <span class="n">prob_true</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GaussianNB-Isotonic&#39;</span><span class="p">)</span>
+<span class="n">prob_true</span><span class="p">,</span> <span class="n">prob_pred</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_sigmoid</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred</span><span class="p">,</span> <span class="n">prob_true</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GaussianNB-Platt&#39;</span><span class="p">)</span>
+<span class="n">prob_true</span><span class="p">,</span> <span class="n">prob_pred</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_vennabers</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_pred</span><span class="p">,</span> <span class="n">prob_true</span><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GaussianNB-VennAbers&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calibration curves&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean predicted probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of positives&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># lr = LogisticRegression()</span>
+<span class="c1"># lr.fit(X_train, y_train)</span>
+<span class="c1"># p_pred = lr.predict_proba(X_test)[:, 1]</span>
+
+<span class="c1"># disp = CalibrationDisplay.from_estimator(lr, X_test, y_test)</span>
+<span class="c1"># plt.show()</span>
 
 <span class="c1"># vac = VennAbersCalibrator()</span>
 <span class="c1"># vac.fit(X_train, y_train)</span>
@@ -829,19 +926,56 @@ As an example, if we make a number of probabilistic predictions with the probabi
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f3133e2f4d3c94d7858a2adaec73599ec3f79e5eaa5a2dc4c56563483342f861.png" src="../_images/f3133e2f4d3c94d7858a2adaec73599ec3f79e5eaa5a2dc4c56563483342f861.png" />
+<img alt="../_images/7c39646f7f26dcae326505bb211c6c1b38b431ffa41a73b3e1e4fc847cb721a4.png" src="../_images/7c39646f7f26dcae326505bb211c6c1b38b431ffa41a73b3e1e4fc847cb721a4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">prob_nb</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GaussianNB&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean predicted probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">prob_isotonic</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GaussianNB-Isotonic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean predicted probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">prob_sigmoid</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GaussianNB-Platt&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean predicted probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">prob_vennabers</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GaussianNB-VennAbers&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean predicted probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/99d30c47926f79e60f0d4e1409cb8950677f75d738d20c691dd323b3a677164c.png" src="../_images/99d30c47926f79e60f0d4e1409cb8950677f75d738d20c691dd323b3a677164c.png" />
 </div>
 </div>
 <div align="justify">
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Venn predictors are related to the more well-known Conformal Prediction (CP) framework,
-which was introduced as an approach for associating predictions with confidence measures (<span id="id15">Saunders <em>et al.</em> [<a class="reference internal" href="../references.html#id2280" title="Craig Saunders, Alex Gammerman, and Volodya Vovk. Transduction with confidence and credibility. In Thomas Dean, editor, Proceedings of the Sixteenth International Joint Conference on Artificial Intelligence, IJCAI 99, Stockholm, Sweden, July 31 - August 6, 1999. 2 Volumes, 1450 pages, 722–726. Morgan Kaufmann, 1999. URL: http://ijcai.org/Proceedings/99-2/Papers/010.pdf.">1999</a>]</span>).</p>
+which was introduced as an approach for associating predictions with confidence measures (<span id="id16">Saunders <em>et al.</em> [<a class="reference internal" href="../references.html#id2280" title="Craig Saunders, Alex Gammerman, and Volodya Vovk. Transduction with confidence and credibility. In Thomas Dean, editor, Proceedings of the Sixteenth International Joint Conference on Artificial Intelligence, IJCAI 99, Stockholm, Sweden, July 31 - August 6, 1999. 2 Volumes, 1450 pages, 722–726. Morgan Kaufmann, 1999. URL: http://ijcai.org/Proceedings/99-2/Papers/010.pdf.">1999</a>]</span>).</p>
 </div>
 </div></section>
 </section>
 <section id="classifier-calibration">
-<h2><span class="section-number">7.2. </span>Classifier Calibration<a class="headerlink" href="#classifier-calibration" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.3. </span>Classifier Calibration<a class="headerlink" href="#classifier-calibration" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>The aim of calibration in binary classification is to take an uncalibrated scoring classifier <span class="math notranslate nohighlight">\(s=f(x)\)</span> and apply a calibration map <span class="math notranslate nohighlight">\(\mu\)</span> on top of it to produce calibrated probabilities <span class="math notranslate nohighlight">\(\mu(f(x))\)</span>.
 Formally, a scoring classifier is perfectly calibrated on a dataset if for each of its output scores <span class="math notranslate nohighlight">\(s\)</span> the proportion of positives within instances with model output score <span class="math notranslate nohighlight">\(s\)</span> is equal to <span class="math notranslate nohighlight">\(s\)</span>.
@@ -863,7 +997,7 @@ For any fixed model <span class="math notranslate nohighlight">\(f\)</span> ther
 That calibration map can be defined as <span class="math notranslate nohighlight">\(\mu(s_i) = \mathbb{E}[Y\vert f(X)=s_i]\)</span>.
 However, usually we do not want to learn perfect calibration maps on the training data,
 because these would overfit and would be far from being calibrated on the test data.</p>
-<p>(<span id="id16">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">2017</a>]</span>)</p>
+<p>(<span id="id17">Kull <em>et al.</em> [<a class="reference internal" href="../references.html#id2185" title="M. Kull, T. de Menezes, S. Filho, and P.A. Flach. Beta calibration: a well-founded and easily implemented improvement on logistic calibration for binary classifiers. In Proc. AISTATS, 20th International Conference on Artificial Intelligence and Statistics, 623–631. Fort Lauderdale, FL, USA, 2017.">2017</a>]</span>)</p>
 </div><div align="justify">
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -874,7 +1008,7 @@ e.g., using many more features.</p>
 </div>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/calibration.html">https://scikit-learn.org/stable/modules/calibration.html</a></p>
 <p><a class="reference external" href="https://arxiv.org/pdf/2112.10327">https://arxiv.org/pdf/2112.10327</a></p>
-<p>(<span id="id17">Silva Filho <em>et al.</em> [<a class="reference internal" href="../references.html#id2274" title="Telmo Silva Filho, Hao Song, Miquel Perello-Nieto, Raul Santos-Rodriguez, Meelis Kull, and Peter Flach. Classifier calibration: a survey on how to assess and improve predicted class probabilities. Machine Learning, 112(9):3211–3260, 2023.">2023</a>]</span>)</p>
+<p>(<span id="id18">Silva Filho <em>et al.</em> [<a class="reference internal" href="../references.html#id2274" title="Telmo Silva Filho, Hao Song, Miquel Perello-Nieto, Raul Santos-Rodriguez, Meelis Kull, and Peter Flach. Classifier calibration: a survey on how to assess and improve predicted class probabilities. Machine Learning, 112(9):3211–3260, 2023.">2023</a>]</span>)</p>
 </section>
 </section>
 
@@ -944,12 +1078,14 @@ e.g., using many more features.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-hyperplane-in-support-vector-machines">7.1. Separating Hyperplane in Support Vector Machines</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binning">7.1.1. Binning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-scaling">7.1.2. logistic Scaling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">7.1.3. Isotonic Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venn-predictors">7.1.4. Venn Predictors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-scaling">7.1.2. Logistic Scaling</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">7.2. Classifier Calibration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isotonic-regression">7.2. Isotonic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venn-predictors">7.2.1. Venn Predictors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">7.3. Classifier Calibration</a></li>
 </ul>
   </nav></div>
 
