@@ -539,7 +539,7 @@ Assuming we have four classes as in the figure below and we are interested in pr
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/41d04f772f0b0d19b8141d15147fd7fafbc2efc4453d6ce0c8c5600f9a2a8d94.png" src="../_images/41d04f772f0b0d19b8141d15147fd7fafbc2efc4453d6ce0c8c5600f9a2a8d94.png" />
+<img alt="../_images/4a549a94bfef99cbfcff21d49f722194bf183343b6731a1835ade4f19ed5e5c3.png" src="../_images/4a549a94bfef99cbfcff21d49f722194bf183343b6731a1835ade4f19ed5e5c3.png" />
 </div>
 </div>
 <p>We firstly must train an classification model on the data, here we choose the <a class="reference external" href="https://scikit-learn.org/stable/modules/naive_bayes.html">Gaussian Naive Bayes classifier</a>, through which we construct the conditional probability <span class="math notranslate nohighlight">\(p(y\,|\,\vec{x}_q)\)</span>.</p>
@@ -695,7 +695,7 @@ Prediction set for x_q with Recall-measure:  [1 2 3 4]
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Patch</span>
 
 
-<span class="k">def</span> <span class="nf">plot_measure_contour</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">measure</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>    
+<span class="k">def</span> <span class="nf">plot_measure_contour</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">measure</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span> 
     <span class="c1"># create all the points we will calculate the prediction set sizes</span>
     <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
@@ -713,18 +713,11 @@ Prediction set for x_q with Recall-measure:  [1 2 3 4]
     
         
     <span class="c1"># Build the Discrete Color Map</span>
-    <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s2">&quot;gist_rainbow&quot;</span><span class="p">]</span>  <span class="c1"># define the colormap</span>
-    <span class="c1"># extract all colors from cmap</span>
-    <span class="n">cmaplist</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)]</span>
-
-    <span class="c1"># create the new map</span>
-    <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
-        <span class="s1">&#39;Custom cmap&#39;</span><span class="p">,</span> <span class="n">cmaplist</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
-
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s2">&quot;tab10&quot;</span><span class="p">]</span>  <span class="c1"># define the colormap</span>
  
     <span class="c1"># define the bins and normalize</span>
     <span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">))</span>
  
     <span class="c1"># plot the data points</span>
     <span class="n">plot_synthetic_data</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">x_q</span><span class="p">,</span><span class="n">title</span><span class="p">)</span>
@@ -759,7 +752,7 @@ Prediction set for x_q with Recall-measure:  [1 2 3 4]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/0e3468e65af29caa2688112cadace7fd893b669405727f92f5a7155e7af8feb9.png" src="../_images/0e3468e65af29caa2688112cadace7fd893b669405727f92f5a7155e7af8feb9.png" />
+<img alt="../_images/84297391c08053b5ba99a06b8c5fad79982f3c13f35385ed3a750c6b516e2754.png" src="../_images/84297391c08053b5ba99a06b8c5fad79982f3c13f35385ed3a750c6b516e2754.png" />
 </div>
 </div>
 <p>Recall does not build any singleton sets whereas precision only predicts singleton sets.
@@ -831,7 +824,7 @@ Prediction set for x_q with logarithmic function:  [4]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7aedc22ea4a2789681e1da89df9614dac39f40b9e9af09b353d2b65db03ad290.png" src="../_images/7aedc22ea4a2789681e1da89df9614dac39f40b9e9af09b353d2b65db03ad290.png" />
+<img alt="../_images/27cd07cf7019d3e408382d19a41e17e645e0014e6a0edf4d463fd39072d8ebe2.png" src="../_images/27cd07cf7019d3e408382d19a41e17e645e0014e6a0edf4d463fd39072d8ebe2.png" />
 </div>
 </div>
 <div align="justify">
@@ -890,7 +883,7 @@ Prediction set for x_q with low rist-aversity:  [4]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/e6349b32ae12a1cdd104ce52e6ab98f129e6e8d2e0d45e7edc2074b46c9664db.png" src="../_images/e6349b32ae12a1cdd104ce52e6ab98f129e6e8d2e0d45e7edc2074b46c9664db.png" />
+<img alt="../_images/7ed6694b7599d2a23903d942a0639a4978b6fbd0dbefa6f4fdce074e155d1921.png" src="../_images/7ed6694b7599d2a23903d942a0639a4978b6fbd0dbefa6f4fdce074e155d1921.png" />
 </div>
 </div>
 <div align="justify">

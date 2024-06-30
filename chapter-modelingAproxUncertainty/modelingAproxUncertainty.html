@@ -485,7 +485,15 @@ document.write(`
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING (pytensor.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">import</span> <span class="nn">aesara.tensor</span> <span class="k">as</span> <span class="nn">at</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">aesara</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;aesara&#39;
 </pre></div>
 </div>
 </div>
@@ -621,7 +629,7 @@ Y = Y(\vec{x}_q) := \{ h(\vec{x}_q) \vert h \in \mathcal{V} \} = \{ y \vert \pi(
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/af3f9c179287110fec9ed5d53c58e114ae9913d9bb2c588575d5d7757fa0a8ae.png" src="../_images/af3f9c179287110fec9ed5d53c58e114ae9913d9bb2c588575d5d7757fa0a8ae.png" />
+<img alt="../_images/b6d3dc2bb6d8b1109290931b01f59216ab01d8e6985cfb142b4364389f5d057f.png" src="../_images/b6d3dc2bb6d8b1109290931b01f59216ab01d8e6985cfb142b4364389f5d057f.png" />
 </div>
 </div>
 <div align="justify">
@@ -733,7 +741,7 @@ Y = Y(\vec{x}_q) := \{ h(\vec{x}_q) \vert h \in \mathcal{V} \} = \{ y \vert \pi(
 [{&#39;temp_range&#39;: (25, 50), &#39;humidity_range&#39;: (0, 70)}, {&#39;temp_range&#39;: (20, 60), &#39;humidity_range&#39;: (45, 75)}]
 </pre></div>
 </div>
-<img alt="../_images/888a0de6f3aaff2bf728fc0d9f0f10e0cec9fc9f7712c6a1dd06ce688497547d.png" src="../_images/888a0de6f3aaff2bf728fc0d9f0f10e0cec9fc9f7712c6a1dd06ce688497547d.png" />
+<img alt="../_images/f232aa0da07858b3256e772a5f7e9ca6e8bcee6a3bc258d08e6359d95f47a5e6.png" src="../_images/f232aa0da07858b3256e772a5f7e9ca6e8bcee6a3bc258d08e6359d95f47a5e6.png" />
 </div>
 </div>
 <div align="justify">
@@ -795,7 +803,7 @@ Y = Y(\vec{x}_q) := \{ h(\vec{x}_q) \vert h \in \mathcal{V} \} = \{ y \vert \pi(
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The possibility for two classes(rainy or sunny) is: [0, 1]
 </pre></div>
 </div>
-<img alt="../_images/b663df8f64e1f0d64b7b64481a558a122f814ba9760e90ccc42dad2770ceff8b.png" src="../_images/b663df8f64e1f0d64b7b64481a558a122f814ba9760e90ccc42dad2770ceff8b.png" />
+<img alt="../_images/f2782b146a847526c9d8107ad82a454d1555668ecccf549decbcf24af098a471.png" src="../_images/f2782b146a847526c9d8107ad82a454d1555668ecccf549decbcf24af098a471.png" />
 </div>
 </div>
 <div align="justify">
@@ -889,7 +897,7 @@ h^{map} := \argmax_{h \in \cH} p( h \vert \cD)
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/faa8d0ec274b5b5274315d3e2a7b6c77f0a0e2eafce40d443894b89517ed39ee.png" src="../_images/faa8d0ec274b5b5274315d3e2a7b6c77f0a0e2eafce40d443894b89517ed39ee.png" />
+<img alt="../_images/f12ff3093130d1c9177575e6fd04fe044dbbe46cea7e2a5b91e32dd2e923f069.png" src="../_images/f12ff3093130d1c9177575e6fd04fe044dbbe46cea7e2a5b91e32dd2e923f069.png" />
 </div>
 </div>
 <div align="justify">
@@ -919,66 +927,16 @@ h^{map} := \argmax_{h \in \cH} p( h \vert \cD)
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/wery/Library/Python/3.9/lib/python/site-packages/multipledispatch/dispatcher.py:27: AmbiguityWarning: 
-Ambiguities exist in dispatched function _unify
-
-The following signatures may result in ambiguous behavior:
-	[object, ConstrainedVar, Mapping], [ConstrainedVar, Var, Mapping]
-	[object, ConstrainedVar, Mapping], [ConstrainedVar, object, Mapping]
-	[object, ConstrainedVar, Mapping], [ConstrainedVar, object, Mapping]
-	[object, ConstrainedVar, Mapping], [ConstrainedVar, Var, Mapping]
-
-
-Consider making the following additions:
-
-@dispatch(ConstrainedVar, ConstrainedVar, Mapping)
-def _unify(...)
-
-@dispatch(ConstrainedVar, ConstrainedVar, Mapping)
-def _unify(...)
-
-@dispatch(ConstrainedVar, ConstrainedVar, Mapping)
-def _unify(...)
-
-@dispatch(ConstrainedVar, ConstrainedVar, Mapping)
-def _unify(...)
-  warn(warning_text(dispatcher.name, ambiguities), AmbiguityWarning)
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, Intercept, Slope]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initializing NUTS using jitter+adapt_diag...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [sigma, Intercept, Slope]
-</pre></div>
-</div>
-<div class="output text_html">
-<style>
-    /* Turns off some styling */
-    progress {
-        /* gets rid of default border in Firefox and Opera. */
-        border: none;
-        /* Needs to be in here for Safari polyfill so background images work as expected. */
-        background-size: auto;
-    }
-    progress:not([value]), progress:not([value])::-webkit-progress-bar {
-        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
-    }
-    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-        background: #F44336;
-    }
-</style>
-</div><div class="output text_html">
-    <div>
-      <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      100.00% [8000/8000 00:02&lt;00:00 Sampling 4 chains, 0 divergences]
-    </div>
-    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f1a6ce8b206f4adca7dc8b65d7e6b0cc", "version_major": 2, "version_minor": 0}</script><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+</pre>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 </div>
@@ -1000,7 +958,7 @@ def _unify(...)
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/72bf64b0de334da615bfce993da99b8977fb2ad0b0ee6a330869c4f49ed07ee9.png" src="../_images/72bf64b0de334da615bfce993da99b8977fb2ad0b0ee6a330869c4f49ed07ee9.png" />
+<img alt="../_images/0ec55868b5d67bd3ba230566ad8829b9e7296c5940275dc58e58491812a9c29d.png" src="../_images/0ec55868b5d67bd3ba230566ad8829b9e7296c5940275dc58e58491812a9c29d.png" />
 </div>
 </div>
 <div align="justify">

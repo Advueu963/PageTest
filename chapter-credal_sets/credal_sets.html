@@ -782,7 +782,7 @@ Prior credal_set:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/d30aaacb844a451617f8c09b77e5b0084de4d38000b00c6e64268649b32a7b68.png" src="../_images/d30aaacb844a451617f8c09b77e5b0084de4d38000b00c6e64268649b32a7b68.png" />
+<img alt="../_images/e20526f608414fb495ff2309381455aa2936ce952f06da47323db63e9e5bf73a.png" src="../_images/e20526f608414fb495ff2309381455aa2936ce952f06da47323db63e9e5bf73a.png" />
 </div>
 </div>
 <div align="justify">
@@ -903,7 +903,7 @@ Naive Bayes prediction for first query:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c0b014359e25f5e2a8b59b02e102d388becd2c6889cb9528369f5ba72bd70840.png" src="../_images/c0b014359e25f5e2a8b59b02e102d388becd2c6889cb9528369f5ba72bd70840.png" />
+<img alt="../_images/48e4ac74d1255a6a9d4cb6a426228965f50434988234b0287af323eba7291923.png" src="../_images/48e4ac74d1255a6a9d4cb6a426228965f50434988234b0287af323eba7291923.png" />
 </div>
 </div>
 </section>
@@ -941,7 +941,7 @@ Naive Bayes prediction for first query:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c867978045b2ffb020c7cc1f8aef6959cc132a815d7b387c1dffe558163eafa0.png" src="../_images/c867978045b2ffb020c7cc1f8aef6959cc132a815d7b387c1dffe558163eafa0.png" />
+<img alt="../_images/b509b7f64059622859a45a109b31818e6732eb43be28a1694a50a39abafb662c.png" src="../_images/b509b7f64059622859a45a109b31818e6732eb43be28a1694a50a39abafb662c.png" />
 </div>
 </div>
 <div align="justify">
@@ -1041,7 +1041,8 @@ Naive Bayes prediction for first query:
 	<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">plot_differnces_in_boundary</span><span class="p">(</span><span class="n">classifiers</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
-
+	<span class="n">number_of_classes</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># parameter used for the colors</span>
+ 
 	<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 	<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
     
@@ -1056,18 +1057,11 @@ Naive Bayes prediction for first query:
 	<span class="n">nvotes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pr</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">))])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
 	
     <span class="c1"># Build the Discrete Color Map</span>
-	<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s2">&quot;gist_rainbow&quot;</span><span class="p">]</span>  <span class="c1"># define the colormap</span>
-    <span class="c1"># extract all colors from cmap</span>
-	<span class="n">cmaplist</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)]</span>
-
-    <span class="c1"># create the new map</span>
-	<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
-        <span class="s1">&#39;Custom cmap&#39;</span><span class="p">,</span> <span class="n">cmaplist</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
-
+	<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s2">&quot;tab10&quot;</span><span class="p">]</span>  <span class="c1"># define the colormap</span>
  
     <span class="c1"># define the bins and normalize</span>
-	<span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-	<span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+	<span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_classes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">number_of_classes</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+	<span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">number_of_classes</span><span class="p">)</span> <span class="c1"># second parameter indicates the c</span>
 
 	<span class="n">contour</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nvotes</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
 
@@ -1122,7 +1116,7 @@ Naive Bayes prediction for first query:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/58098a9b223b278fe423faa33dc4789d2d279324abf548150fcd8e74b207b350.png" src="../_images/58098a9b223b278fe423faa33dc4789d2d279324abf548150fcd8e74b207b350.png" />
+<img alt="../_images/1ed68a019a9b1fbf14b06502cfc0550b267879b7b2aa256a24659fd1469f5989.png" src="../_images/1ed68a019a9b1fbf14b06502cfc0550b267879b7b2aa256a24659fd1469f5989.png" />
 </div>
 </div>
 <div align="justify">
@@ -1138,7 +1132,7 @@ Naive Bayes prediction for first query:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/62dea0d63367e1c8747a0d34f405a8eb31ac2542dab98214794028f123ef25ab.png" src="../_images/62dea0d63367e1c8747a0d34f405a8eb31ac2542dab98214794028f123ef25ab.png" />
+<img alt="../_images/b9de5651e123fe00c1f7a7bd33908bb3bd7a8c249e11ac4c047386db987e0118.png" src="../_images/b9de5651e123fe00c1f7a7bd33908bb3bd7a8c249e11ac4c047386db987e0118.png" />
 </div>
 </div>
 <div align="justify">
@@ -1180,7 +1174,7 @@ H(A) = \log( |A|)  \, ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/668d4c78b0b842bca0c3b7d2591bf4de6837091eca9d38f4a0a2b7ca731957d4.png" src="../_images/668d4c78b0b842bca0c3b7d2591bf4de6837091eca9d38f4a0a2b7ca731957d4.png" />
+<img alt="../_images/6d3d2dbf51fe8b16a388f2c0669547f9279a8fb3a38488a8abff1f9f40e5c484.png" src="../_images/6d3d2dbf51fe8b16a388f2c0669547f9279a8fb3a38488a8abff1f9f40e5c484.png" />
 </div>
 </div>
 <div align="justify">
@@ -1366,7 +1360,7 @@ Comparing the result with the visualizations we created before shows the measure
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0fe7ee75dbc99d3878c33bb6433eb6a07bc05527c5ad5433a0c3ec9f34b4cb1f.png" src="../_images/0fe7ee75dbc99d3878c33bb6433eb6a07bc05527c5ad5433a0c3ec9f34b4cb1f.png" />
+<img alt="../_images/e1c081824dc392c7989d8296692dd3714ef0b2165b322aa3262fe2ad3ac46b37.png" src="../_images/e1c081824dc392c7989d8296692dd3714ef0b2165b322aa3262fe2ad3ac46b37.png" />
 </div>
 </div>
 <div align="justify">
@@ -1411,7 +1405,7 @@ Comparing the result with the visualizations we created before shows the measure
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/77172ddc37ec06b534cd86695acec5e3494aaf67907f4ccc76443a1698763eaa.png" src="../_images/77172ddc37ec06b534cd86695acec5e3494aaf67907f4ccc76443a1698763eaa.png" />
+<img alt="../_images/f35754bb7220a4937bcdcb025c2ae9e1a323b1d0e8d2d7a3936e9a82516ac435.png" src="../_images/f35754bb7220a4937bcdcb025c2ae9e1a323b1d0e8d2d7a3936e9a82516ac435.png" />
 </div>
 </div>
 </section>
@@ -1501,7 +1495,7 @@ Credal set with minimal Upper Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/088f071d9a240e495c8cdfc2a444acc77bfe87d26ac300cac86860a7d9700351.png" src="../_images/088f071d9a240e495c8cdfc2a444acc77bfe87d26ac300cac86860a7d9700351.png" />
+<img alt="../_images/d8f8d9ad0880616bcc23fa4628af94e968438bc88ccb198bb555a2ec41aeb459.png" src="../_images/d8f8d9ad0880616bcc23fa4628af94e968438bc88ccb198bb555a2ec41aeb459.png" />
 </div>
 </div>
 <p>Again we also look at the wine credal sets with the highest and lowest uncertainty:</p>
@@ -1515,7 +1509,7 @@ Credal set with minimal Upper Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a61e18bd10d3d802ba244f6ee7ecbf8fa59b9c351a15bfd4ea05f51d2378e9fc.png" src="../_images/a61e18bd10d3d802ba244f6ee7ecbf8fa59b9c351a15bfd4ea05f51d2378e9fc.png" />
+<img alt="../_images/821d540c02ab4f9d5b77cbbd0fd7c52e38fb5897f679e43ad85c7726d4acc820.png" src="../_images/821d540c02ab4f9d5b77cbbd0fd7c52e38fb5897f679e43ad85c7726d4acc820.png" />
 </div>
 </div>
 <p>We do the same for the Lower Shannon Entropy:</p>
@@ -1551,7 +1545,7 @@ Credal set with minimal Lower Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7bb0b0972a883fba7b33db3863c761648d5a9f712416060de85dca752123ec1e.png" src="../_images/7bb0b0972a883fba7b33db3863c761648d5a9f712416060de85dca752123ec1e.png" />
+<img alt="../_images/3e309f7885d17edb5ee670e80b789ad3c885c7704c2ea1ef5c7f8e83f1c42e76.png" src="../_images/3e309f7885d17edb5ee670e80b789ad3c885c7704c2ea1ef5c7f8e83f1c42e76.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1564,7 +1558,7 @@ Credal set with minimal Lower Shannon entropy:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e4e711952f6ba19fa0fb6561c75a8300a1fd916a742cd440247ce1dded635a4e.png" src="../_images/e4e711952f6ba19fa0fb6561c75a8300a1fd916a742cd440247ce1dded635a4e.png" />
+<img alt="../_images/12c280fabccbca27bd7a2d0ab073b596d4529da3fcb2aa4d09a81fa67d865d4f.png" src="../_images/12c280fabccbca27bd7a2d0ab073b596d4529da3fcb2aa4d09a81fa67d865d4f.png" />
 </div>
 </div>
 </section>
@@ -1574,12 +1568,12 @@ Credal set with minimal Lower Shannon entropy:
 <div align="justify">
 <p>Based on these measures, the following disaggregations of total uncertainty <a class="reference internal" href="#equation-aggregate">(14.3)</a> have been proposed <span id="id14">Abellan <em>et al.</em> [<a class="reference internal" href="../references.html#id45" title="J. Abellan, J. Klir, and S. Moral. Disaggregated total uncertainty measure for credal sets. International Journal of General Systems, 2006.">2006</a>]</span>:
 a</p>
-<div class="amsmath math notranslate nohighlight" id="equation-16cc19da-8c87-460e-9649-11a9bf77dbd7">
-<span class="eqno">(14.6)<a class="headerlink" href="#equation-16cc19da-8c87-460e-9649-11a9bf77dbd7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-35bcdd8a-8657-4031-abc2-0c99b823812e">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-35bcdd8a-8657-4031-abc2-0c99b823812e" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = \big(H^*(Q) - \text{GH}(Q) \big)  + \text{GH}(Q)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-3b508850-310e-4d6c-b318-d7c07f2026d7">
-<span class="eqno">(14.7)<a class="headerlink" href="#equation-3b508850-310e-4d6c-b318-d7c07f2026d7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7d577cbd-ad2e-4f55-bbb8-17c2c3baa6c5">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-7d577cbd-ad2e-4f55-bbb8-17c2c3baa6c5" title="Permalink to this equation">#</a></span>\[\begin{align}
 H^*(Q) = H_*(Q)  + \big(H^*(Q) - H_*(Q) \big)
 \end{align}\]</div>
 <p>In both cases, upper entropy serves as a measure of total uncertainty <span class="math notranslate nohighlight">\(U(Q)\)</span>, which is again justified on an axiomatic basis. In the first case, the generalized Hartley measure is used for quantifying epistemic uncertainty, and aleatoric uncertainty is obtained as the difference between total and epistemic uncertainty. In the second case, epistemic uncertainty is specified in terms of the difference between upper and lower entropy.</p>
@@ -1689,7 +1683,7 @@ Max aleatoric uncertainty. Decomposition 2:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/190ffa6f6ee534dc0007933fcff6419d91b0bf86d74926f89b17a26b4c6b6022.png" src="../_images/190ffa6f6ee534dc0007933fcff6419d91b0bf86d74926f89b17a26b4c6b6022.png" />
+<img alt="../_images/e2de8b96c7ad9c2f89ed95bdaf130a61d6e51e01c1027965a1db7b91cce9b5a2.png" src="../_images/e2de8b96c7ad9c2f89ed95bdaf130a61d6e51e01c1027965a1db7b91cce9b5a2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1699,7 +1693,7 @@ Max aleatoric uncertainty. Decomposition 2:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/745ec517163d7fa80cd88e98578a156b65f3303932eef0d40e2be7007250e84c.png" src="../_images/745ec517163d7fa80cd88e98578a156b65f3303932eef0d40e2be7007250e84c.png" />
+<img alt="../_images/a1381fe2c99843b114fb51df00a677dd19a0692633f198ee61580d6d34142641.png" src="../_images/a1381fe2c99843b114fb51df00a677dd19a0692633f198ee61580d6d34142641.png" />
 </div>
 </div>
 </section>
@@ -1707,8 +1701,8 @@ Max aleatoric uncertainty. Decomposition 2:
 <span id="set-predictions"></span><h2><span class="section-number">14.4. </span>Set-valued prediction<a class="headerlink" href="#set-valued-prediction" title="Link to this heading">#</a></h2>
 <div align="justify">
 <p>Credal classifiers are used for “indeterminate” prediction, that is, to produce reliable set-valued predictions that are likely to cover the true outcome. In this regard, the notion of <em>dominance</em> plays an important role: An outcome <span class="math notranslate nohighlight">\(y\)</span> dominates another outcome <span class="math notranslate nohighlight">\(y'\)</span> if <span class="math notranslate nohighlight">\(y\)</span> is more probable than <span class="math notranslate nohighlight">\(y'\)</span> for each distribution in the credal set, that is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7be0703d-137a-49b9-ae63-93e0f51b7adb">
-<span class="eqno">(14.8)<a class="headerlink" href="#equation-7be0703d-137a-49b9-ae63-93e0f51b7adb" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-82af5364-9b8d-44ea-a4c2-31b8e960fa9c">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-82af5364-9b8d-44ea-a4c2-31b8e960fa9c" title="Permalink to this equation">#</a></span>\[\begin{align}
 \gamma(y,y', \vec{x}) :=
 \inf_{h \in C} \frac{p( y | \vec{x}_q, h)}{p(y' | \vec{x}_q, h)}  &gt; 1 \, ,
 \end{align}\]</div>
@@ -1748,8 +1742,8 @@ Max aleatoric uncertainty. Decomposition 2:
 Practically, the computations are based on the interval-valued probabilities
 <span class="math notranslate nohighlight">\([\underline{p}(y | \vec{x}_q), \overline{p}(y || \vec{x}_q)]\)</span>
 assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y}\)</span>, where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-176b67dd-475a-48aa-8af6-89fb8717b576">
-<span class="eqno">(14.9)<a class="headerlink" href="#equation-176b67dd-475a-48aa-8af6-89fb8717b576" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2a679d35-0d64-4dab-8267-804f4f2bf659">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-2a679d35-0d64-4dab-8267-804f4f2bf659" title="Permalink to this equation">#</a></span>\[\begin{align}
 \underline{p}(y | \vec{x}_q) := \inf_{h \in C} p(y | \vec{x}_q, h)\, , \quad \overline{p}(y | \vec{x}_q) := \sup_{h \in C} p(y | \vec{x}_q, h) \, .
 \end{align}\]</div>
 <p>Note that the upper probabilities <span class="math notranslate nohighlight">\(\overline{p}(y | \vec{x}_q)\)</span> are very much in the spirit of the plausibility degrees (\ref{eq:plaus}) (equation in chapter 4.7 not there yet).</p>
@@ -1880,6 +1874,7 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 	<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
  
 <span class="k">def</span> <span class="nf">plot_cardinality</span><span class="p">(</span><span class="n">classifiers</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+	<span class="n">number_of_classes</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># parameter used for the colors</span>
 
 	<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 	<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
@@ -1919,21 +1914,21 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 	<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 
 	<span class="n">plot_differnces_in_boundary</span><span class="p">(</span><span class="n">classifiers</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span>
-	
- 
+	 
     <span class="c1"># Build the Discrete Color Map</span>
-	<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s2">&quot;turbo&quot;</span><span class="p">]</span>  <span class="c1"># define the colormap</span>
-    <span class="c1"># extract all colors from cmap</span>
-	<span class="n">cmaplist</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)]</span>
+	<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s2">&quot;tab10&quot;</span><span class="p">]</span> <span class="c1"># define the colormap. As 3 colors are already used for the plot_differnces_in_boundary we use the next 3 colors</span>
 
+ 
+    <span class="c1"># extract all colors from cmap</span>
+	<span class="n">cmaplist</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span> <span class="c1"># take the next 3 unused colors from the cmap. The first 3 are used n plot_differnces_in_boundary</span>
+ 
     <span class="c1"># create the new map</span>
 	<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
-        <span class="s1">&#39;Custom cmap&#39;</span><span class="p">,</span> <span class="n">cmaplist</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
-
- 
+        <span class="s1">&#39;Custom cmap&#39;</span><span class="p">,</span> <span class="n">cmaplist</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> 
+    
     <span class="c1"># define the bins and normalize</span>
-	<span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-	<span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+	<span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_classes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">number_of_classes</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+	<span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">number_of_classes</span><span class="p">)</span>
 
 	<span class="c1"># Create a legend</span>
 	<span class="n">legend_labels</span> <span class="o">=</span> <span class="p">{</span>
@@ -1970,7 +1965,7 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 100)
 </pre></div>
 </div>
-<img alt="../_images/21231ebe42438c85663530f66731129884e6e972cc02c765f08503e11adef7f6.png" src="../_images/21231ebe42438c85663530f66731129884e6e972cc02c765f08503e11adef7f6.png" />
+<img alt="../_images/21b43049c2123a3b6baf5c9b84c251831731f334057c4ece2d95e2a586797b8f.png" src="../_images/21b43049c2123a3b6baf5c9b84c251831731f334057c4ece2d95e2a586797b8f.png" />
 </div>
 </div>
 <div align="justify">
@@ -2007,20 +2002,20 @@ assigned to each class <span class="math notranslate nohighlight">\(y \in \set{Y
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bf901a59b4250f156a8abd966041cf351779d7496ff6e7f4d70a8e17074009fe.png" src="../_images/bf901a59b4250f156a8abd966041cf351779d7496ff6e7f4d70a8e17074009fe.png" />
+<img alt="../_images/e6bcdc219247453f8a2f2bb8ec024ad76f2c72dc5b95df6e4a85b9884ab455c8.png" src="../_images/e6bcdc219247453f8a2f2bb8ec024ad76f2c72dc5b95df6e4a85b9884ab455c8.png" />
 </div>
 </div>
 <section id="dominance-degrees">
 <h3><span class="section-number">14.4.1. </span>Dominance degrees<a class="headerlink" href="#dominance-degrees" title="Link to this heading">#</a></h3>
 <div align="justify">
 <p>Interestingly, uncertainty degrees can be derived on the basis of dominance degrees (\ref{eq:dominance}). For example, the following uncertainty score has been proposed by <span id="id15">Antonucci <em>et al.</em> [<a class="reference internal" href="../references.html#id2265" title="Alessandro Antonucci, Giorgio Corani, and Sandra Gabaglio. Active learning by the naive credal classifier. In Proceedings of the Sixth European Workshop on Probabilistic Graphical Models (PGM), 3–10. 2012.">2012</a>]</span> in the context of uncertainty sampling for active learning:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-531e8869-7209-4724-b761-fa5a045d4115">
-<span class="eqno">(14.10)<a class="headerlink" href="#equation-531e8869-7209-4724-b761-fa5a045d4115" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-77770802-6ae6-425b-970c-5f8a1199ab0e">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-77770802-6ae6-425b-970c-5f8a1199ab0e" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \max \big(\gamma(+1, -1, \vec{x}_q ), \gamma(-1, +1, \vec{x}_q ) \big) \, .
 \end{align}\]</div>
 <p>For data sets with more than two classes the score generalizes as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b79864e9-16d7-4af6-992d-32e10605c46f">
-<span class="eqno">(14.11)<a class="headerlink" href="#equation-b79864e9-16d7-4af6-992d-32e10605c46f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-44e23603-0ff3-4961-bed1-a4c7ae834048">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-44e23603-0ff3-4961-bed1-a4c7ae834048" title="Permalink to this equation">#</a></span>\[\begin{align}
 s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus \{c'\}} \max[\gamma(c', c''), \gamma(c'', c')]
 \end{align}\]</div>
 </div>
@@ -2111,7 +2106,7 @@ s(\vec{x}_q) := - \sum_{c' \in \mathcal{C}} \sum_{c'' \in \mathcal{C} \setminus 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/f897667963135d9cc306b036858be7d9c815f5fa0022cf63fcb8093dbeb0c4c5.png" src="../_images/f897667963135d9cc306b036858be7d9c815f5fa0022cf63fcb8093dbeb0c4c5.png" />
+<img alt="../_images/f9e864fbb435a854ef17768a80396741bba56ee7105cae2f54e9998eb9d9f969.png" src="../_images/f9e864fbb435a854ef17768a80396741bba56ee7105cae2f54e9998eb9d9f969.png" />
 </div>
 </div>
 <div align="justify">
