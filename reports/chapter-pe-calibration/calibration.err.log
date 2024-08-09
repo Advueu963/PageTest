@@ -1,0 +1,61 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+nb_isotonic = CalibratedClassifierCV(estimator=nb, cv=5, method='isotonic')
+nb_isotonic.fit(X_train, y_train)
+nb_sigmoid = CalibratedClassifierCV(estimator=nb, cv=5, method='sigmoid')
+nb_sigmoid.fit(X_train, y_train)
+nb_vennabers =  VennAbersCalibrator(estimator=nb, inductive=False, n_splits=5, precision=4)
+nb_vennabers.fit(X_train, y_train)
+
+prob_nb = nb.predict_proba(X_test)[:, 1]
+prob_isotonic = nb_isotonic.predict_proba(X_test)[:, 1]
+prob_sigmoid = nb_sigmoid.predict_proba(X_test)[:, 1]
+prob_vennabers = nb_vennabers.predict_proba(X_test)[:, 1]
+------------------
+
+----- stderr -----
+/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/venn_abers/venn_abers.py:104: RuntimeWarning: All-NaN slice encountered
+  if np.sum(np.isnan(np.nanmin(grads))) == 0:
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[16], line 11[0m
+[1;32m      9[0m prob_isotonic [38;5;241m=[39m nb_isotonic[38;5;241m.[39mpredict_proba(X_test)[:, [38;5;241m1[39m]
+[1;32m     10[0m prob_sigmoid [38;5;241m=[39m nb_sigmoid[38;5;241m.[39mpredict_proba(X_test)[:, [38;5;241m1[39m]
+[0;32m---> 11[0m prob_vennabers [38;5;241m=[39m [43mnb_vennabers[49m[38;5;241;43m.[39;49m[43mpredict_proba[49m[43m([49m[43mX_test[49m[43m)[49m[:, [38;5;241m1[39m]
+
+File [0;32m/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/venn_abers/venn_abers.py:990[0m, in [0;36mVennAbersCalibrator.predict_proba[0;34m(self, _x_test, p_cal, y_cal, p_test, loss, p0_p1_output, va_type)[0m
+[1;32m    988[0m         p_prime, p0_p1 [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mva_calibrator[38;5;241m.[39mpredict_proba(_x_test, loss[38;5;241m=[39mloss, p0_p1_output[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m    989[0m     [38;5;28;01melse[39;00m:
+[0;32m--> 990[0m         p_prime [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mva_calibrator[49m[38;5;241;43m.[39;49m[43mpredict_proba[49m[43m([49m[43m_x_test[49m[43m,[49m[43m [49m[43mloss[49m[38;5;241;43m=[39;49m[43mloss[49m[43m)[49m
+[1;32m    992[0m [38;5;28;01mif[39;00m p0_p1_output:
+[1;32m    993[0m     [38;5;28;01mreturn[39;00m p_prime, p0_p1
+
+File [0;32m/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/venn_abers/venn_abers.py:718[0m, in [0;36mVennAbersMultiClass.predict_proba[0;34m(self, _x_test, loss, p0_p1_output)[0m
+[1;32m    716[0m [38;5;28;01melse[39;00m:
+[1;32m    717[0m     [38;5;28;01mfor[39;00m i, va_estimator [38;5;129;01min[39;00m [38;5;28menumerate[39m([38;5;28mself[39m[38;5;241m.[39mmulticlass_va_estimators):
+[0;32m--> 718[0m         _p_prime, _p0_p1 [38;5;241m=[39m va_estimator[38;5;241m.[39mpredict_proba(_x_test, loss[38;5;241m=[39mloss)
+[1;32m    719[0m         [38;5;28mself[39m[38;5;241m.[39mmulticlass_probs[38;5;241m.[39mappend(_p_prime)
+[1;32m    721[0m p_prime [38;5;241m=[39m np[38;5;241m.[39mzeros(([38;5;28mlen[39m(_x_test), [38;5;28mself[39m[38;5;241m.[39mn_classes))
+
+[0;31mValueError[0m: too many values to unpack (expected 2)
+
